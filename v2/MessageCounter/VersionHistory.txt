@@ -1,0 +1,53 @@
+MessageCounter 1.1.1 [Jan 2013]
+ - [ADDED]		Initial Code Setup
+ - [CHANGED]	Fetch the number of messages in inbox
+ - [ADDED]		Using AeAppsLibrary for common code
+
+MessageCounter 1.2.20 [Jan 2013]
+ - [ADDED]
+ - [FIXED]		Null pointer caused by null contactId
+ - [CHANGED]	Reverted to BaseAdapter as base class for the list
+ 
+MessageCounter 1.2.28 [Jan 2013]
+ - [FIXED]		Multiple bug fixes
+ - [CHANGED]	Added methods in ContactManager to fetch contactId from rawContactId
+ 
+MessageCounter 1.2.30 [Jan 2013]
+ - [ADDED]		Sort message sender's list based on count (postponed - sorted map causing problems)
+ 
+MessageCounter 1.2.40 [Jan 2013]
+ - [ADDED]		Menu options and About app page
+ - [ADDED]		Content and layout for About page
+ 
+MessageCounter 1.2.50 [Feb 2013]
+ - [ADDED]		SimpleGraphView for message counts
+ - [ADDED]		Lables for SimpleGraphViews
+ - [CHANGED]	Application view set to portrait
+ - [ADDED]		Removed the ToggleButton to switch views and instead using a ViewFlipper
+ - [ADDED]		Fix for exception in Chart view if there are no messages
+ - [CHANGED]	Change in Layout
+ 
+MessageCounter 1.2.53 [Feb 2013]
+ - [FIXED]		Contact images for contacts without images
+ - [FIXED]		Errors in calcualtion of Message Counts for chart
+ 
+MessageCounter 1.2.58 [Feb 2013]
+ - [ADDED]		QuickContactBadge instead of Contact Image
+ - [ADDED]		MaxRowsCount for Chart
+ - [ADDED]		Color themes for the chart in library
+ - [FIXED]		Correction for message count calculation
+ - [ADDED]		Inbox as well as all message count
+ - [CHANGED]	Sorted the list in the chart based on the value
+ 
+ ------------------------------------
+ 
+MessageCounter 2.0.57 [May 2013]
+ - [CHANGED]	Min SDK Version is 11, for ViewPager and Fragment Support
+ - [ADDED]		Using Fragments instead of ViewFlipper
+ - [CHANGED]	MainActivity so as to hold data for fragments
+ - [ADDED]		Fragments for Chart and List
+ - [ADDED]		List View is now Sorted based on messages sent by each user 
+ - [CHANGED]	Circular Progress bar style
+ - [REMOVED]	Removed Progressbars from fragments
+ - [CHANGED]	Added Progress Dialog in MainActivity 
+ - [ADDED]		Added Apache Licence, Version 2.0

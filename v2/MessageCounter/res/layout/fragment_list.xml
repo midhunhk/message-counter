@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/allMessageCountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/empty_text"
+        tools:context=".MainActivity" />
+
+    <TextView
+        android:id="@+id/inboxMessageCountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/allMessageCountText"
+        android:text="@string/empty_text"
+        tools:context=".MainActivity" />
+
+    <TextView
+        android:id="@+id/pageTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inboxMessageCountText"
+        android:text="@string/title_list_page"
+        tools:context=".MainActivity" />
+
+    <!-- The List Container -->
+
+    <LinearLayout
+        android:id="@+id/listContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pageTitleText" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@android:id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dip"
+            android:text="@string/empty_list" />
+    </LinearLayout>
+
+</RelativeLayout>
