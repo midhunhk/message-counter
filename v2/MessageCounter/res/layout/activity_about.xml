@@ -9,10 +9,10 @@
         android:id="@+id/appIconImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dip"
         android:layout_gravity="center"
-        android:src="@drawable/ic_launcher"
-        android:contentDescription="@string/empty_text" />
+        android:layout_margin="2dip"
+        android:contentDescription="@string/empty_text"
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
         android:layout_gravity="center"
         android:layout_margin="2dip"
         android:text="@string/app_version" />
-    
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,15 +34,25 @@
         android:layout_margin="2dip"
         android:text="@string/app_developer_info" />
 
-    <!-- Add a line here -->
-    
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:layout_margin="2dip"
+        android:background="@android:color/darker_gray" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="2dip"
         android:text="@string/app_desc" />
-    
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:layout_margin="2dip"
+        android:background="@android:color/darker_gray" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
