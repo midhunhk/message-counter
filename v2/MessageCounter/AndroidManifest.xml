@@ -1,9 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter.activities"
-    android:versionCode="57"
-    android:versionName="2.0.57" >
+    android:versionCode="64"
+    android:versionName="2.0.64" >
 
-    <!-- Min SDK Version is Honeycomb -->
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />

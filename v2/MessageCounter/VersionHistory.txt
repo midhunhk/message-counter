@@ -51,3 +51,13 @@ MessageCounter 2.0.57 [May 2013]
  - [REMOVED]	Removed Progressbars from fragments
  - [CHANGED]	Added Progress Dialog in MainActivity 
  - [ADDED]		Added Apache Licence, Version 2.0
+ 
+MessageCounter 2.0.64 [July 2013]
+ - [OPTIMIZED]	General Optimizations 
+ - [ADDED]		Added license popup
+ - [FIXED]		No data shown on orientation change
+ - [ADDED]		Added title with count of top message senders for the chart fragment
+ - [ADDED]		Added an imporved icon for the launcher
+ - [ADDED]		Minor styles for total message count
+ - [CHANGED]	Reworded some strings to make it better
+ - [REMOVED]	Removed some debug log statements
