@@ -50,6 +50,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	private Context					mContext;
 	private LinearLayout			graphContainer;
 	private TextView				emptyText;
+	private TextView				titleText;
 	private int						inboxMessageCount;
 	private List<ContactMessageVo>	contactMessageList;
 	private static final int		MAX_ROWS_IN_CHART	= 8;
@@ -62,7 +63,8 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		inboxMessageCount = mReader.getSmsManagerInstance().getMessagesCount(SMSManager.SMS_URI_INBOX);
 
 		graphContainer = (LinearLayout) layout.findViewById(R.id.graphContainer);
-		emptyText = (TextView) layout.findViewById(R.id.emptyChart);  
+		emptyText = (TextView) layout.findViewById(R.id.emptyChart);
+		titleText = (TextView) layout.findViewById(R.id.chartTitle);
 		return layout;
 	}
 
@@ -81,11 +83,12 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	@Override
 	public void onDataReady(Object data) {
 		// We can hide the progressbar at this point
-		if(emptyText != null)
+		if (emptyText != null)
 			emptyText.setVisibility(View.GONE);
 		// Try to convert the data into a list
 		contactMessageList = (List<ContactMessageVo>) data;
 		if (contactMessageList != null && inboxMessageCount > 0) {
+			titleText.setText(getResources().getString(R.string.str_chart_title, MAX_ROWS_IN_CHART));
 			GraphData graphData = MessageCounterUtils.getMessageCountDegrees(contactMessageList, inboxMessageCount,
 					MAX_ROWS_IN_CHART);
 			// Create a new SimpleGraphView and add it to the graphContainer
