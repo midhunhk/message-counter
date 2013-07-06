@@ -32,7 +32,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,6 +42,7 @@ import android.widget.TextView;
 
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.managers.SMSManager;
+import com.ae.apps.common.utils.DialogUtils;
 import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
@@ -73,22 +73,19 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	ViewPager							mViewPager;
 
 	private boolean						isDataReady;
-	private List<MessageDataConsumer>	consumers;
 	private Handler						handler;
 	private ContactManager				mContactManager;
 	private SMSManager					mSmsManager;
 	private ProgressDialog				loadingDialog;
-	private static String				TAG	= "MessageCounter.Main";
+	private List<MessageDataConsumer>	consumers = new ArrayList<MessageDataConsumer>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Log.d(TAG, "Create Contact Manager");
 		mContactManager = new ContactManager(getContentResolver());
 
-		Log.d(TAG, "Create SMS Manager");
 		mSmsManager = new SMSManager(getBaseContext());
 
 		getActionBar().setDisplayHomeAsUpEnabled(false);
@@ -128,11 +125,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 		// Create the handler in the main thread
 		handler = new Handler();
-		consumers = new ArrayList<MessageDataConsumer>();
 
 		// initialize the data
 		isDataReady = false;
-		Log.d(TAG, "Initialize the data");
 
 		// Do the read and parse operations in a new thread
 		new Thread(new Runnable() {
@@ -145,7 +140,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				final List<ContactMessageVo> contactMessageList = new ArrayList<ContactMessageVo>();
 
 				// Get a collection of message senders and message count and sort it
-				Log.d(TAG, "Get unique senders");
 				Map<String, Integer> messageSendersMap = mSmsManager.getUniqueSenders();
 				Map<String, Integer> sortedValuesMap = MessageCounterUtils.sortThisMap(messageSendersMap);
 
@@ -203,7 +197,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		case R.id.menu_about:
 			startActivity(new Intent(this, AboutActivity.class));
 			return true;
-		
+		case R.id.menu_license:
+			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,
+					android.R.string.ok);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
