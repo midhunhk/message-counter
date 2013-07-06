@@ -37,7 +37,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dip"
-        android:layout_margin="2dip"
+        android:layout_margin="5dip"
         android:background="@android:color/darker_gray" />
 
     <TextView
@@ -50,7 +50,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dip"
-        android:layout_margin="2dip"
+        android:layout_margin="5dip"
         android:background="@android:color/darker_gray" />
 
     <TextView
