@@ -5,9 +5,9 @@
     <string name="title_section1">List</string>
     
     <string name="app_name">MessageCounter</string>
-    <string name="app_version">Version 2.0.64 (July 2013)</string>
-    <string name="app_desc">Message Counter displays the number of messages in your inbox, message counts from each sender in your contact list.</string>
-	<string name="app_disclaim">Disclaimer: This app is created for educational purposes and as such has no guarantee nor support. Since undocumented Android APIs are used, this app may not work on all devices.</string>
+    <string name="app_version">Version 2.0.68 (July 2013)</string>
+    <string name="app_desc">Message Counter displays the number of messages in your inbox, message counts from your contacts.</string>
+	<string name="app_disclaim">Disclaimer: This app is created for educational purposes and as such has no guarantee or support. Since undocumented Android APIs are used, this app may not work as expected on all devices.</string>
 	<string name="app_developer_info">Designed &amp; developed at ae labs</string>
 	
 	<string name="title_activity_main">Message Counter!</string>

@@ -59,7 +59,7 @@ public class MessageCounterUtils {
 	 */
 	public static GraphData getMessageCountDegrees(List<ContactMessageVo> messageVos, int totalMessagesCount,
 			int maxRowsForChart) {
-		float messageCount = 0;
+		int messageCount = 0;
 		float tempCounter = 0;
 
 		// Create a copy of the source list and sort it
@@ -99,7 +99,7 @@ public class MessageCounterUtils {
 		// Calculate the data for the others row
 		float balanceMessageCount = totalMessagesCount - tempCounter;
 		// Show it only if necessary
-		if (balanceMessageCount > 0 && sortedList.size() > maxRowsForChart) {
+		if (balanceMessageCount > 0){ // && sortedList.size() > maxRowsForChart) {
 			percentInDegrees = 360f * balanceMessageCount / totalMessagesCount;
 			messageCountMap.put("Others (" + (int) balanceMessageCount + ")", percentInDegrees);
 		}

@@ -61,3 +61,8 @@ MessageCounter 2.0.64 [July 2013]
  - [ADDED]		Minor styles for total message count
  - [CHANGED]	Reworded some strings to make it better
  - [REMOVED]	Removed some debug log statements
+
+MessageCounter 2.0.68 [July 2013]
+ - [CHANGED]	Change in the way contact info is read from sms table in the library
+ - [CHANGED]	Minor optimizations for Chart Display page
+ - [FIXED]		Fixed a chart value calculation error

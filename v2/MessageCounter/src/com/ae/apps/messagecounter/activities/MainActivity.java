@@ -77,7 +77,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private ContactManager				mContactManager;
 	private SMSManager					mSmsManager;
 	private ProgressDialog				loadingDialog;
-	private List<MessageDataConsumer>	consumers = new ArrayList<MessageDataConsumer>();
+	private List<MessageDataConsumer>	consumers	= new ArrayList<MessageDataConsumer>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -119,14 +119,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
 
-		// Show a progress dialog
+		// Start to show a progress dialog
 		loadingDialog = ProgressDialog.show(this, getResources().getString(R.string.title_loading), getResources()
 				.getString(R.string.message_loading));
 
 		// Create the handler in the main thread
 		handler = new Handler();
 
-		// initialize the data
+		// the data is not yet ready
 		isDataReady = false;
 
 		// Do the read and parse operations in a new thread
@@ -146,22 +146,24 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				// Collate the ContactVo, photo bitmap and message count and create the data for the list
 				String contactId = null;
 				Integer messageCount = null;
-				Set<String> rawContactIdskeySet = sortedValuesMap.keySet();
-				for (String rawContactId : rawContactIdskeySet) {
-					messageCount = messageSendersMap.get(rawContactId);
-					// Get the contactId corresponding to this rawContactId
-					contactId = String.valueOf(mContactManager.getContactIdFromRawContactId(rawContactId));
-					contactVo = mContactManager.getContactInfo(contactId);
+				Set<String> addressesKeySet = sortedValuesMap.keySet();
+				for (String address : addressesKeySet) {
+					// contactId will be null if we are not able to find a corresponding contact
+					contactId = mContactManager.getContactIdFromAddress(address);
+					if (contactId != null) {
+						messageCount = messageSendersMap.get(address);
+						contactVo = mContactManager.getContactInfo(contactId);
 
-					// Create a new ContactMessageVo Map object and add to the list
-					contactMessageVo = new ContactMessageVo();
-					contactMessageVo.setContactVo(contactVo);
-					if (messageCount != null) {
-						contactMessageVo.setMessageCount(messageCount);
+						// Create a new ContactMessageVo Map object and add to the list
+						contactMessageVo = new ContactMessageVo();
+						contactMessageVo.setContactVo(contactVo);
+						if (messageCount != null) {
+							contactMessageVo.setMessageCount(messageCount);
+						}
+						contactMessageVo.setPhoto(mContactManager.getContactPhoto(contactId));
+
+						contactMessageList.add(contactMessageVo);
 					}
-					contactMessageVo.setPhoto(mContactManager.getContactPhoto(contactId));
-
-					contactMessageList.add(contactMessageVo);
 				}
 
 				// We finally have the data with us

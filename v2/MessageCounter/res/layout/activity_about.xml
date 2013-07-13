@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="2dip"
+        android:layout_margin="3dip"
         android:contentDescription="@string/empty_text"
         android:src="@drawable/ic_launcher" />
 
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="2dip"
+        android:layout_margin="3dip"
         android:text="@string/app_version" />
 
     <TextView
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="2dip"
+        android:layout_margin="3dip"
         android:text="@string/app_desc" />
 
     <View
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="2dip"
+        android:layout_margin="3dip"
         android:text="@string/app_disclaim" />
 
 </LinearLayout>
