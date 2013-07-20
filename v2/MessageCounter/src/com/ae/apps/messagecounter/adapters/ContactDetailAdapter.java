@@ -30,7 +30,7 @@ import android.widget.BaseAdapter;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
-import com.ae.apps.messagecounter.activities.R;
+import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 
 /**
@@ -102,7 +102,7 @@ public class ContactDetailAdapter extends BaseAdapter {
 					holder.badge.setImageBitmap(bitmap);
 				} else {
 					// If not able to get the profile icon, show a default one
-					holder.badge.setImageResource(R.drawable.default_profile_image);
+					holder.badge.setImageResource(R.drawable.ic_contact_picture);
 				}
 
 			} catch (Exception e) {

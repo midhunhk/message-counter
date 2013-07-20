@@ -31,7 +31,7 @@ import android.widget.TextView;
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.views.ColorThemes;
 import com.ae.apps.common.views.SimpleGraphView;
-import com.ae.apps.messagecounter.activities.R;
+import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;

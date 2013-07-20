@@ -19,7 +19,6 @@ package com.ae.apps.messagecounter.activities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -43,7 +42,7 @@ import android.widget.TextView;
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.utils.DialogUtils;
-import com.ae.apps.common.vo.ContactVo;
+import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.fragments.MessageChartFragment;
@@ -134,42 +133,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 			@Override
 			public void run() {
-				// Get the contact ids for which there are sms es
-				ContactVo contactVo = null;
-				ContactMessageVo contactMessageVo = null;
-				final List<ContactMessageVo> contactMessageList = new ArrayList<ContactMessageVo>();
-
-				// Get a collection of message senders and message count and sort it
+				// Get the mapping of address and message count
 				Map<String, Integer> messageSendersMap = mSmsManager.getUniqueSenders();
+				// Convert to mapping of contact and message count
+				messageSendersMap = MessageCounterUtils.convertAddressToContact(mContactManager, messageSendersMap);
+				// Sorting the map based on message count
 				Map<String, Integer> sortedValuesMap = MessageCounterUtils.sortThisMap(messageSendersMap);
-
-				// Collate the ContactVo, photo bitmap and message count and create the data for the list
-				String contactId = null;
-				Integer messageCount = null;
-				Set<String> addressesKeySet = sortedValuesMap.keySet();
-				for (String address : addressesKeySet) {
-					// contactId will be null if we are not able to find a corresponding contact
-					contactId = mContactManager.getContactIdFromAddress(address);
-					if (contactId != null) {
-						messageCount = messageSendersMap.get(address);
-						contactVo = mContactManager.getContactInfo(contactId);
-
-						// Create a new ContactMessageVo Map object and add to the list
-						contactMessageVo = new ContactMessageVo();
-						contactMessageVo.setContactVo(contactVo);
-						if (messageCount != null) {
-							contactMessageVo.setMessageCount(messageCount);
-						}
-						contactMessageVo.setPhoto(mContactManager.getContactPhoto(contactId));
-
-						contactMessageList.add(contactMessageVo);
-					}
-				}
-
-				// We finally have the data with us
-				final List<ContactMessageVo> data = contactMessageList;
+				// Convert this data to a list of ContactMessageVos
+				final List<ContactMessageVo> data = MessageCounterUtils.getContactMessageList(mContactManager,
+						sortedValuesMap, messageSendersMap);
 				isDataReady = true;
-
 				// Dismiss the loading dialog
 				loadingDialog.dismiss();
 

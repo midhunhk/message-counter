@@ -21,8 +21,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
+import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
 import com.ae.apps.common.utils.ValueComparator;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
@@ -99,7 +101,7 @@ public class MessageCounterUtils {
 		// Calculate the data for the others row
 		float balanceMessageCount = totalMessagesCount - tempCounter;
 		// Show it only if necessary
-		if (balanceMessageCount > 0){ // && sortedList.size() > maxRowsForChart) {
+		if (balanceMessageCount > 0) { // && sortedList.size() > maxRowsForChart) {
 			percentInDegrees = 360f * balanceMessageCount / totalMessagesCount;
 			messageCountMap.put("Others (" + (int) balanceMessageCount + ")", percentInDegrees);
 		}
@@ -121,5 +123,49 @@ public class MessageCounterUtils {
 		data.setValueInDegrees(values);
 
 		return data;
+	}
+
+	public static List<ContactMessageVo> getContactMessageList(ContactManager manager,
+			Map<String, Integer> sortedMessageMap, Map<String, Integer> messageMap) {
+		// Collate the ContactVo, photo bitmap and message count and create the data for the list
+		Integer messageCount = null;
+		ContactMessageVo contactMessageVo = null;
+		Set<String> contactIdsKeySet = sortedMessageMap.keySet();
+		List<ContactMessageVo> contactMessageList = new ArrayList<ContactMessageVo>();
+		for (String contactId : contactIdsKeySet) {
+			messageCount = messageMap.get(contactId);
+			if (messageCount != null) {
+				// Time to create a new ContactMessageVo object with the data that we have
+				contactMessageVo = new ContactMessageVo();
+				contactMessageVo.setContactVo(manager.getContactInfo(contactId));
+				contactMessageVo.setMessageCount(messageCount);
+				contactMessageVo.setPhoto(manager.getContactPhoto(contactId));
+				contactMessageList.add(contactMessageVo);
+			}
+		}
+		return contactMessageList;
+	}
+
+	public static Map<String, Integer> convertAddressToContact(ContactManager manager,
+			Map<String, Integer> messageSendersMap) {
+		// mapping of contactId with message count
+		Map<String, Integer> contactsMap = new HashMap<String, Integer>();
+
+		String contactId = null;
+		Integer messageCount = null;
+		Set<String> addressesKeySet = messageSendersMap.keySet();
+		for (String address : addressesKeySet) {
+			contactId = manager.getContactIdFromAddress(address);
+			// contactId will be null for address not in contact list
+			if (contactId != null) {
+				messageCount = messageSendersMap.get(address);
+				if (contactsMap.containsKey(contactId)) {
+					// If contactId already exists, update the message count
+					messageCount = messageCount + contactsMap.get(contactId);
+				}
+				contactsMap.put(contactId, messageCount);
+			}
+		}
+		return contactsMap;
 	}
 }

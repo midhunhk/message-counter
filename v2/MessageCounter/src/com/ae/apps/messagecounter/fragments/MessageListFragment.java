@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ae.apps.common.managers.SMSManager;
-import com.ae.apps.messagecounter.activities.R;
+import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.adapters.ContactDetailAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
