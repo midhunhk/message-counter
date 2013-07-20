@@ -16,6 +16,8 @@
 
 package com.ae.apps.messagecounter.activities;
 
+import com.ae.apps.messagecounter.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 

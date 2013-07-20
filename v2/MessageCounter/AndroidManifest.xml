@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ae.apps.messagecounter.activities"
-    android:versionCode="68"
-    android:versionName="2.0.68" >
+    package="com.ae.apps.messagecounter"
+    android:versionCode="80"
+    android:versionName="2.0.80" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.ae.apps.messagecounter.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="AboutActivity" >
-        </activity>
+        <activity android:name=".activities.AboutActivity"></activity>
+        
     </application>
 
 </manifest>

@@ -66,3 +66,9 @@ MessageCounter 2.0.68 [July 2013]
  - [CHANGED]	Change in the way contact info is read from sms table in the library
  - [CHANGED]	Minor optimizations for Chart Display page
  - [FIXED]		Fixed a chart value calculation error
+ 
+MessageCounter 2.0.80 [July 2013]
+ - [FIXED]		Project naming in AppStore
+ - [FIXED]		Messages from same contact using multiple address was duplicated in the list
+ - [CHANGED]	Changed the default contact image to that of the platform
+ - [OPTIMIZED]	Optimizations
