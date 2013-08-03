@@ -36,7 +36,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</string>
 
-    <string name="str_chart_title">Voici le top %s des expéditeurs de messages</string>
+    <string name="str_chart_title">Top des expéditeurs de messages</string>
     <string name="str_other_senders">D\'autres peuvent inclure des messages provenant de numéros qui ne sont pas enregistrés dans vos contacts et messages de réseaux mobiles ou des institutions financières.</string>
     
 </resources>

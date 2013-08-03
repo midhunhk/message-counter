@@ -66,7 +66,6 @@ public class ContactDetailAdapter extends BaseAdapter {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.contact_detail_row, null);
 			holder = new ViewHolder();
-			// holder.photo = (ImageView) convertView.findViewById(R.id.contactImage);
 			holder.badge = (QuickContactBadge) convertView.findViewById(R.id.badge_medium);
 			holder.contactName = (TextView) convertView.findViewById(R.id.contactNameText);
 			holder.timesContacted = (TextView) convertView.findViewById(R.id.contactMessageCountText);

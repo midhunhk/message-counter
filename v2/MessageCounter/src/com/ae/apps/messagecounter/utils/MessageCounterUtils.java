@@ -21,12 +21,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
 import com.ae.apps.common.utils.ValueComparator;
+import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.vo.GraphData;
 
@@ -125,6 +127,54 @@ public class MessageCounterUtils {
 		return data;
 	}
 
+	/**
+	 * Mock names, too lazy to read from resources
+	 */
+	private static String	mockNames[]	= { "John Doe", "Jane Yardlay", "Alexander P", "Thomas Mathew",
+			"Alex Courtous", "Catherine J" };
+
+	/**
+	 * A mock implementation for giving mock results
+	 * 
+	 * @return
+	 */
+	public static List<ContactMessageVo> getMockContactMessageList() {
+		Random random = new Random();
+		int startSeed = 280;
+		int prevRandom = 0;
+		int currRandom = 0;
+		ContactVo contactVo = null;
+		ContactMessageVo messageVo = null;
+		List<ContactMessageVo> mockedList = new ArrayList<ContactMessageVo>();
+		for (String name : mockNames) {
+			contactVo = new ContactVo();
+			contactVo.setName(name);
+			messageVo = new ContactMessageVo();
+			messageVo.setContactVo(contactVo);
+			if (prevRandom == 0) {
+				currRandom = startSeed;
+			} else {
+				currRandom = random.nextInt(startSeed);
+			}
+			if (currRandom > prevRandom) {
+				currRandom = (int) (currRandom * 0.75);
+			}
+			messageVo.setMessageCount(currRandom);
+			prevRandom = currRandom;
+			startSeed -= 2;
+			mockedList.add(messageVo);
+		}
+		return mockedList;
+	}
+
+	/**
+	 * Returns a list of ContactMessageVos
+	 * 
+	 * @param manager
+	 * @param sortedMessageMap
+	 * @param messageMap
+	 * @return
+	 */
 	public static List<ContactMessageVo> getContactMessageList(ContactManager manager,
 			Map<String, Integer> sortedMessageMap, Map<String, Integer> messageMap) {
 		// Collate the ContactVo, photo bitmap and message count and create the data for the list
@@ -135,7 +185,7 @@ public class MessageCounterUtils {
 		for (String contactId : contactIdsKeySet) {
 			messageCount = messageMap.get(contactId);
 			if (messageCount != null) {
-				// Time to create a new ContactMessageVo object with the data that we have
+				// create a new ContactMessageVo object with the data that we have
 				contactMessageVo = new ContactMessageVo();
 				contactMessageVo.setContactVo(manager.getContactInfo(contactId));
 				contactMessageVo.setMessageCount(messageCount);
@@ -146,6 +196,13 @@ public class MessageCounterUtils {
 		return contactMessageList;
 	}
 
+	/**
+	 * Returns a mapping of address and total message count
+	 * 
+	 * @param manager
+	 * @param messageSendersMap
+	 * @return
+	 */
 	public static Map<String, Integer> convertAddressToContact(ContactManager manager,
 			Map<String, Integer> messageSendersMap) {
 		// mapping of contactId with message count

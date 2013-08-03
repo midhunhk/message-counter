@@ -44,16 +44,15 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 
 	private MessageDataReader		mReader;
 	private ContactDetailAdapter	adapter;
-	private TextView				allMessageCountText;
-	private TextView				inboxMessageCountText;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Create the layout and find the elements
 		View layout = inflater.inflate(R.layout.fragment_list, null);
 
-		allMessageCountText = (TextView) layout.findViewById(R.id.allMessageCountText);
-		inboxMessageCountText = (TextView) layout.findViewById(R.id.inboxMessageCountText);
+		TextView allMessageCountText = (TextView) layout.findViewById(R.id.allMessageCountText);
+		TextView inboxMessageCountText = (TextView) layout.findViewById(R.id.inboxMessageCountText);
+		TextView sentMessageCountText = (TextView) layout.findViewById(R.id.sentMessageCountText);
 
 		// Create an empty list for the adapter
 		List<ContactMessageVo> data = new ArrayList<ContactMessageVo>();
@@ -62,11 +61,13 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		adapter = new ContactDetailAdapter(getActivity().getBaseContext(), data);
 		setListAdapter(adapter);
 
-		// Set the total messages count
-		int allMessageCount = mReader.getSmsManagerInstance().getMessagesCount(SMSManager.SMS_URI_ALL);
-		int inboxMessageCount = mReader.getSmsManagerInstance().getMessagesCount(SMSManager.SMS_URI_INBOX);
+		// Set the messages count
+		int allMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_ALL);
+		int sentMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_SENT);
+		int inboxMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_INBOX);
 
 		allMessageCountText.setText(getResources().getString(R.string.message_count_all, allMessageCount));
+		sentMessageCountText.setText(getResources().getString(R.string.message_count_sent, sentMessageCount));
 		inboxMessageCountText.setText(getResources().getString(R.string.message_count_inbox, inboxMessageCount));
 
 		return layout;

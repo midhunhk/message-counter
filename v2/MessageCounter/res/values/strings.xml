@@ -4,8 +4,8 @@
     <string name="title_section1">List</string>
     
     <string name="app_name">MessageCounter</string>
-    <string name="app_version">Version 2.0.80 (July 2013)</string>
-    <string name="app_desc">Message Counter displays the number of messages in your inbox, message counts from your contacts.</string>
+    <string name="app_version">Version 2.0.94 (August 2013)</string>
+    <string name="app_desc">Message Counter displays the number of messages in your inbox, message counts from your contacts. Source Code at (https://github.com/midhunhk/message-counter)</string>
 	<string name="app_disclaim">Disclaimer: This app is created for educational purposes and as such has no guarantee or support. Since undocumented Android APIs are used, this app may not work as expected on all devices.</string>
 	<string name="app_developer_info">Designed &amp; developed at ae labs</string>
 	
@@ -16,12 +16,14 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_about">About</string>
     <string name="menu_license">License</string>
+    <string name="menu_share">Share this App</string>
     
     <string name="empty_text"></string>
     <string name="empty_list">No messages found</string>
     
     <string name="message_count_inbox">%s messages received</string>
-    <string name="message_count_all">%s Messages in total</string>
+    <string name="message_count_sent">%s messages sent</string>
+    <string name="message_count_all">%s messages in total</string>
     <string name="message_loading">Loading data, please wait.</string>
     
     <string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,5 +36,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</string>
 
-    <string name="str_chart_title">Showing the top %s message senders</string>
+    <string name="str_chart_title">Top message senders</string>
+    <string name="str_other_senders">(Others) text may include messages from numbers who are not saved in your contacts and messages from mobile networks or financial institutions.</string>
+    
+    <!-- Configuration - not to be translated -->
+    <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter</string>
 </resources>

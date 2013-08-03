@@ -37,7 +37,7 @@ MessageCounter 1.2.58 [Feb 2013]
  - [ADDED]		Color themes for the chart in library
  - [FIXED]		Correction for message count calculation
  - [ADDED]		Inbox as well as all message count
- - [CHANGED]	Sorted the list in the chart based on the value
+ - [CHANGED]	Sorted the list in the chart based on the count
  
  ------------------------------------
  
@@ -69,6 +69,20 @@ MessageCounter 2.0.68 [July 2013]
  
 MessageCounter 2.0.80 [July 2013]
  - [FIXED]		Project naming in AppStore
- - [FIXED]		Messages from same contact using multiple address was duplicated in the list
+ - [FIXED]		Messages from same contact using multiple address was duplicated
  - [CHANGED]	Changed the default contact image to that of the platform
  - [OPTIMIZED]	Optimizations
+ 
+MessageCounter 2.0.84 [July 2013]
+ - [ADDED]		Sent message count
+ - [OPTIMIZED]	Optimizations
+ 
+MessageCounter 2.0.94 [July 2013]
+ - [FIXED]		Fix for Chart Size issues
+ - [ADDED]		Text describing Other Senders in Chart Page
+ - [ADDED]		Share app added in the menu 
+ - [ADDED]		Experimental support for French language
+ - [ADDED]		Section Heading styles for section headings
+  
+ // TODO
+ // Cache the data computation between orientation changes

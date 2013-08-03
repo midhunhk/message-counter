@@ -16,8 +16,6 @@
 
 package com.ae.apps.messagecounter.data;
 
-import com.ae.apps.common.managers.ContactManager;
-import com.ae.apps.common.managers.SMSManager;
 
 /**
  * Interface that defines a reader that processes the data
@@ -35,16 +33,11 @@ public interface MessageDataReader {
 	void registerForData(MessageDataConsumer consumer);
 
 	/**
-	 * Returns an instance of SMS Manager
+	 * Returns the total count of a type of message
 	 * 
+	 * @param type
 	 * @return
 	 */
-	SMSManager getSmsManagerInstance();
+	int getMessageCount(String type);
 
-	/**
-	 * Returns an instance of Contact Manager
-	 * 
-	 * @return
-	 */
-	ContactManager getContactManagerInstance();
 }

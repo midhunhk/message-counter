@@ -11,19 +11,26 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:padding="5dp"
         android:background="#BEBEBE"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="5dp" >
 
         <TextView
-            android:id="@+id/allMessageCountText"
+            android:id="@+id/inboxMessageCountText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/empty_text"
             tools:context=".MainActivity" />
 
         <TextView
-            android:id="@+id/inboxMessageCountText"
+            android:id="@+id/sentMessageCountText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_text"
+            tools:context=".MainActivity" />
+
+        <TextView
+            android:id="@+id/allMessageCountText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/empty_text"
@@ -35,8 +42,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/messageInfo"
-        android:text="@string/title_list_page"
         android:paddingLeft="4dip"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:text="@string/title_list_page"
         tools:context=".MainActivity" />
 
     <!-- The List Container -->

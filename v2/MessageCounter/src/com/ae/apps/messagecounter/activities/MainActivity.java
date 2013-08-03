@@ -17,6 +17,7 @@
 package com.ae.apps.messagecounter.activities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,19 +74,24 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 	private boolean						isDataReady;
 	private Handler						handler;
-	private ContactManager				mContactManager;
-	private SMSManager					mSmsManager;
 	private ProgressDialog				loadingDialog;
-	private List<MessageDataConsumer>	consumers	= new ArrayList<MessageDataConsumer>();
+	private Map<String, Integer>		messageCountsCache	= new HashMap<String, Integer>();
+	private List<MessageDataConsumer>	consumers			= new ArrayList<MessageDataConsumer>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// getActionBar().setBackgroundDrawable(new ColorDrawable(Color.RED));
 
-		mContactManager = new ContactManager(getContentResolver());
+		final SMSManager smsManager = new SMSManager(getBaseContext());
+		final ContactManager contactManager = new ContactManager(getContentResolver());
 
-		mSmsManager = new SMSManager(getBaseContext());
+		// Cache the message counts
+		messageCountsCache.put(SMSManager.SMS_URI_ALL, smsManager.getMessagesCount(SMSManager.SMS_URI_ALL));
+		messageCountsCache.put(SMSManager.SMS_URI_SENT, smsManager.getMessagesCount(SMSManager.SMS_URI_SENT));
+		messageCountsCache.put(SMSManager.SMS_URI_INBOX, smsManager.getMessagesCount(SMSManager.SMS_URI_INBOX));
 
 		getActionBar().setDisplayHomeAsUpEnabled(false);
 		// Create the adapter that will return a fragment for each of the three primary sections
@@ -133,15 +139,22 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 			@Override
 			public void run() {
-				// Get the mapping of address and message count
-				Map<String, Integer> messageSendersMap = mSmsManager.getUniqueSenders();
-				// Convert to mapping of contact and message count
-				messageSendersMap = MessageCounterUtils.convertAddressToContact(mContactManager, messageSendersMap);
-				// Sorting the map based on message count
-				Map<String, Integer> sortedValuesMap = MessageCounterUtils.sortThisMap(messageSendersMap);
-				// Convert this data to a list of ContactMessageVos
-				final List<ContactMessageVo> data = MessageCounterUtils.getContactMessageList(mContactManager,
-						sortedValuesMap, messageSendersMap);
+				final List<ContactMessageVo> data;
+				boolean isMockedRun = false;
+				if (isMockedRun) {
+					// We are doing a mock run
+					data = MessageCounterUtils.getMockContactMessageList();
+				} else {
+					// Get the mapping of address and message count
+					Map<String, Integer> messageSendersMap = smsManager.getUniqueSenders();
+					// Convert to mapping of contact and message count
+					messageSendersMap = MessageCounterUtils.convertAddressToContact(contactManager, messageSendersMap);
+					// Sorting the map based on message count
+					Map<String, Integer> sortedValuesMap = MessageCounterUtils.sortThisMap(messageSendersMap);
+					// Convert this data to a list of ContactMessageVos
+					data = MessageCounterUtils
+							.getContactMessageList(contactManager, sortedValuesMap, messageSendersMap);
+				}
 				isDataReady = true;
 				// Dismiss the loading dialog
 				loadingDialog.dismiss();
@@ -170,11 +183,21 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_about:
+			// Show the about activity
 			startActivity(new Intent(this, AboutActivity.class));
 			return true;
 		case R.id.menu_license:
+			// Show the license dialog
 			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,
 					android.R.string.ok);
+			return true;
+		case R.id.menu_share_app:
+			// Throw an intent so the user can share this app
+			Intent shareIntent = new Intent();
+			shareIntent.setAction(Intent.ACTION_SEND);
+			shareIntent.setType("text/plain");
+			shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
+			startActivity(shareIntent);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -269,12 +292,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	}
 
 	@Override
-	public SMSManager getSmsManagerInstance() {
-		return mSmsManager;
+	public int getMessageCount(String type) {
+		if (messageCountsCache != null) {
+			return messageCountsCache.get(type);
+		}
+		return 0;
 	}
 
-	@Override
-	public ContactManager getContactManagerInstance() {
-		return mContactManager;
-	}
 }
