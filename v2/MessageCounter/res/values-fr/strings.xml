@@ -1,0 +1,42 @@
+<resources>
+
+    <string name="title_section2">Graphique</string>
+    <string name="title_section1">liste</string>
+    
+    <string name="app_name">du compteur de messages</string>
+    <string name="app_version">Version 2.0.94 (Août 2013)</string>
+    <string name="app_desc">Compteur de messages affiche le nombre de messages dans votre boîte de réception, le message compte parmi vos contacts.</string>
+	<string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
+	<string name="app_developer_info">Conçu et développé au ae labs</string>
+	
+	<string name="title_activity_main">du compteur de messages</string>
+	<string name="title_list_page">Messages reçus à partir de Contacts</string>
+	<string name="title_loading">chargement</string>
+    
+    <string name="menu_settings">réglages</string>
+    <string name="menu_about">sur</string>
+    <string name="menu_license">License</string>
+    <string name="menu_share">Partagez cette appli</string>
+    
+    <string name="empty_text"></string>
+    <string name="empty_list">Aucun message trouvé</string>
+    
+    <string name="message_count_inbox">%s messages reçus</string>
+    <string name="message_count_sent">%s les messages envoyés</string>
+    <string name="message_count_all">%s Messages au total</string>
+    <string name="message_loading">Chargement des données, veuillez patienter.</string>
+    
+    <string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at\n\n
+http://www.apache.org/licenses/LICENSE-2.0\n\n
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</string>
+
+    <string name="str_chart_title">Voici le top %s des expéditeurs de messages</string>
+    <string name="str_other_senders">D\'autres peuvent inclure des messages provenant de numéros qui ne sont pas enregistrés dans vos contacts et messages de réseaux mobiles ou des institutions financières.</string>
+    
+</resources>
