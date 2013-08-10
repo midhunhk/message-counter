@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter"
-    android:versionCode="94"
-    android:versionName="2.0.94" >
+    android:versionCode="96"
+    android:versionName="2.0.96" >
 
     <uses-sdk
         android:minSdkVersion="11"

@@ -82,7 +82,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		// getActionBar().setBackgroundDrawable(new ColorDrawable(Color.RED));
 
 		final SMSManager smsManager = new SMSManager(getBaseContext());
@@ -93,35 +93,42 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		messageCountsCache.put(SMSManager.SMS_URI_SENT, smsManager.getMessagesCount(SMSManager.SMS_URI_SENT));
 		messageCountsCache.put(SMSManager.SMS_URI_INBOX, smsManager.getMessagesCount(SMSManager.SMS_URI_INBOX));
 
-		getActionBar().setDisplayHomeAsUpEnabled(false);
-		// Create the adapter that will return a fragment for each of the three primary sections
-		// of the app.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setDisplayHomeAsUpEnabled(false);
 
-		// Set up the ViewPager with the sections adapter.
+		// The mViewPager object should be null when running on tablets
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
+		if (mViewPager != null) {
+			// Create the adapter that will return a fragment for each of the three primary sections
+			// of the app.
+			mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-		// When swiping between different sections, select the corresponding tab.
-		// We can also use ActionBar.Tab#select() to do this if we have a reference to the
-		// Tab.
-		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-			@Override
-			public void onPageSelected(int position) {
-				actionBar.setSelectedNavigationItem(position);
+			// Set up the tabbed navigation on rge action bar.
+			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+			// Set up the ViewPager with the sections adapter.
+			mViewPager.setAdapter(mSectionsPagerAdapter);
+
+			// When swiping between different sections, select the corresponding tab.
+			// We can also use ActionBar.Tab#select() to do this if we have a reference to the
+			// Tab.
+			mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+				@Override
+				public void onPageSelected(int position) {
+					actionBar.setSelectedNavigationItem(position);
+				}
+			});
+
+			// For each of the sections in the app, add a tab to the action bar.
+			for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+				// Create a tab with text corresponding to the page title defined by the adapter.
+				// Also specify this Activity object, which implements the TabListener interface, as the
+				// listener for when this tab is selected.
+				actionBar
+						.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 			}
-		});
-
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-			// Create a tab with text corresponding to the page title defined by the adapter.
-			// Also specify this Activity object, which implements the TabListener interface, as the
-			// listener for when this tab is selected.
-			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
+		} else {
+			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		}
 
 		// Start to show a progress dialog
@@ -294,7 +301,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	@Override
 	public int getMessageCount(String type) {
 		if (messageCountsCache != null) {
-			return messageCountsCache.get(type);
+			if (messageCountsCache.containsKey(type))
+				return messageCountsCache.get(type);
 		}
 		return 0;
 	}

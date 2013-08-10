@@ -83,6 +83,10 @@ MessageCounter 2.0.94 [July 2013]
  - [ADDED]		Share app added in the menu 
  - [ADDED]		Experimental support for French language
  - [ADDED]		Section Heading styles for section headings
-  
- // TODO
+ 
+MessageCounter 2.0.96 [August 2013]
+ - [CHANGED]	Color theme for chart
+ - [CHANGED]	Chart starts from 12'O clock position
+ - [CHANGED]	Start of Test in chart getting clipped  
+
  // Cache the data computation between orientation changes

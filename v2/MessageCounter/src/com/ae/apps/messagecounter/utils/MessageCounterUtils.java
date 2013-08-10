@@ -140,7 +140,7 @@ public class MessageCounterUtils {
 	 */
 	public static List<ContactMessageVo> getMockContactMessageList() {
 		Random random = new Random();
-		int startSeed = 280;
+		int startSeed = 180;
 		int prevRandom = 0;
 		int currRandom = 0;
 		ContactVo contactVo = null;

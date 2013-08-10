@@ -2,6 +2,7 @@
 
     <item
         android:id="@+id/menu_share_app"
+        android:showAsAction="ifRoom"
         android:title="@string/menu_share"/>
     
     <item

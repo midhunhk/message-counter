@@ -29,11 +29,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ae.apps.common.managers.SMSManager;
-import com.ae.apps.common.views.ColorThemes;
 import com.ae.apps.common.views.SimpleGraphView;
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
+import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.vo.GraphData;
@@ -89,7 +89,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 					MAX_ROWS_IN_CHART);
 			// Create a new SimpleGraphView and add it to the graphContainer
 			graphContainer.addView(new SimpleGraphView(mContext, graphData.getValueInDegrees(), graphData.getLabels(),
-					ColorThemes.LAVENDER_CLOUDS));
+					AppConstants.CHART_COLORFUL));
 		}
 	}
 }
