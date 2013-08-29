@@ -89,4 +89,10 @@ MessageCounter 2.0.96 [August 2013]
  - [CHANGED]	Chart starts from 12'O clock position
  - [CHANGED]	Start of Test in chart getting clipped  
 
+MessageCounter 2.0.99 [August 2013]
+ - [CHANGED]	Built against API 18
+ - [CHANGED]	Colors in chart
+ - [ADDED]		Share this app
+ - [ADDED]		Support for large screens	
+ 
  // Cache the data computation between orientation changes
