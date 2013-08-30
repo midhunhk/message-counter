@@ -16,4 +16,6 @@ Features:
 
 Available on the Play Store at https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter
 
-This project requires the ae_apps_library project (https://github.com/midhunhk/ae_apps_library) for functioning.
+This project requires the ae_apps_library project (https://github.com/midhunhk/ae_apps_library).
+
+GitHub Page http://midhunhk.github.io/message-counter
