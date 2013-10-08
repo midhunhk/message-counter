@@ -14,6 +14,11 @@ Features:
 - Uses the Holo Theme
 - No ads
 
+<a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
+  <img alt="Android app on Google Play"
+       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+</a>
+
 Available on the Play Store at https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter
 
 This project requires the ae_apps_library project (https://github.com/midhunhk/ae_apps_library).
