@@ -95,4 +95,7 @@ MessageCounter 2.0.99 [August 2013]
  - [ADDED]		Share this app
  - [ADDED]		Support for large screens	
  
+MessageCounter 2.0.102 [November 2013]
+ - [ADDED]		Support for Spanish language 
+ 
  // Cache the data computation between orientation changes

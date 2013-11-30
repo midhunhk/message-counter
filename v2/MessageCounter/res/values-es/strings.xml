@@ -1,0 +1,44 @@
+<resources>
+
+	<string name="title_section2">gráfico</string>
+	<string name="title_section1">lista</string>
+
+	<string name="app_name">Contador de Mensajes</string>
+	<string name="app_version">versión 2.0.102 (noviembre 2013)</string>
+	<string name="app_desc">Contador de mensajes muestra el número de mensajes en la bandeja de entrada de mensajes cuenta de sus contactos. Código Fuente en (https://github.com/midhunhk/message-counter)</string>
+	<string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
+	<string name="app_developer_info">diseñado &amp; desarrollado por ae labs</string>
+
+	<string name="title_activity_main">Contador de Mensajes!</string>
+	<string name="title_list_page">Los mensajes de Bandeja de entrada de Contactos</string>
+	<string name="title_loading">sobreprima</string>
+
+	<string name="menu_settings">Configuración</string>
+	<string name="menu_about">acerca de</string>
+	<string name="menu_license">licencia</string>
+	<string name="menu_share">Comparte esta aplicación</string>
+
+	<string name="empty_text"/>
+	<string name="empty_list">No se han encontrado mensajes de</string>
+
+	<string name="message_count_inbox">%s mensajes recibidos</string>
+	<string name="message_count_sent">%s mensajes enviados</string>
+	<string name="message_count_all">%s mensajes de en total</string>
+	<string name="message_loading">Cargando datos, por favor espere.</string>
+
+	<string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at\n\n
+http://www.apache.org/licenses/LICENSE-2.0\n\n
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</string>
+
+	<string name="str_chart_title">Top los remitentes de mensajes</string>
+	<string name="str_other_senders">(otros) texto puede incluir mensajes de números que no están guardados en tus contactos y mensajes de redes móviles o en las entidades financieras.</string>
+
+	<!-- Configuration - not to be translated -->
+	<string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter</string>
+</resources>
