@@ -69,7 +69,10 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		allMessageCountText.setText(getResources().getString(R.string.message_count_all, allMessageCount));
 		sentMessageCountText.setText(getResources().getString(R.string.message_count_sent, sentMessageCount));
 		inboxMessageCountText.setText(getResources().getString(R.string.message_count_inbox, inboxMessageCount));
-
+		
+		if(mReader != null){
+			mReader.registerForData(this);
+		}
 		return layout;
 	}
 
@@ -89,7 +92,7 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 	@Override
 	public void onDataReady(Object objData) {
 		List<ContactMessageVo> temp = (List<ContactMessageVo>) objData;
-		if (temp != null) {
+		if (temp != null && adapter != null) {
 			adapter.updateList(temp);
 		}
 	}

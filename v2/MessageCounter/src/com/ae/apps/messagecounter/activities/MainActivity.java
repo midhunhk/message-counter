@@ -64,6 +64,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	private boolean						isDataReady;
 	private Handler						handler;
 	private ProgressDialog				loadingDialog;
+	private List<ContactMessageVo>		contactMessageList;
 	private Map<String, Integer>		messageCountsCache	= new HashMap<String, Integer>();
 	private List<MessageDataConsumer>	consumers			= new ArrayList<MessageDataConsumer>();
 
@@ -125,6 +126,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 							.getContactMessageList(contactManager, sortedValuesMap, messageSendersMap);
 				}
 				isDataReady = true;
+				contactMessageList = data;
 				// Dismiss the loading dialog
 				loadingDialog.dismiss();
 
@@ -151,6 +153,9 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.menu_about:
+			startActivity(new Intent(this, AboutActivity.class));
+			return true;
 		case R.id.menu_license:
 			// Show the license dialog
 			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,
@@ -177,7 +182,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 		consumers.add(consumer);
 		// if data is ready, invoke the data ready method
 		if (isDataReady) {
-			consumer.onDataReady(null);
+			consumer.onDataReady(contactMessageList);
 		}
 	}
 

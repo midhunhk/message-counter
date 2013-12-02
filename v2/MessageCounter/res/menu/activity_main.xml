@@ -8,5 +8,8 @@
     <item
         android:id="@+id/menu_license"
         android:title="@string/menu_license"/>
+    <item
+        android:id="@+id/menu_about"
+        android:title="@string/menu_about"/>
 
 </menu>

@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.ae.apps.messagecounter.fragments;
+package com.ae.apps.messagecounter.activities;
 
 import com.ae.apps.messagecounter.R;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-public class AboutFragment extends Fragment {
+public class AboutActivity extends Activity {
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.activity_about, null);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_about);
 	}
-
 }
