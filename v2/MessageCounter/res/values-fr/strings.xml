@@ -1,10 +1,11 @@
 <resources>
 
     <string name="title_section2">Graphique</string>
-    <string name="title_section1">liste</string>
+    <string name="title_section1">Liste</string>
+    <string name="title_section3">Sur</string>
     
     <string name="app_name">du compteur de messages</string>
-    <string name="app_version">Version 2.0.102 (Août 2013)</string>
+    <string name="app_version">Version 2.1.10 (Août 2013)</string>
     <string name="app_desc">Compteur de messages affiche le nombre de messages dans votre boîte de réception, le message compte parmi vos contacts.</string>
 	<string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
 	<string name="app_developer_info">Conçu et développé au ae labs</string>
