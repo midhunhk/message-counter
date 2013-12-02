@@ -97,5 +97,6 @@ MessageCounter 2.0.99 [August 2013]
  
 MessageCounter 2.0.102 [November 2013]
  - [ADDED]		Support for Spanish language 
+ - [ADDED]		Share icon in actionbar
  
  // Cache the data computation between orientation changes

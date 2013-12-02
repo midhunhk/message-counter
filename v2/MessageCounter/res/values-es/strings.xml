@@ -39,6 +39,4 @@ limitations under the License.</string>
 	<string name="str_chart_title">Top los remitentes de mensajes</string>
 	<string name="str_other_senders">(otros) texto puede incluir mensajes de números que no están guardados en tus contactos y mensajes de redes móviles o en las entidades financieras.</string>
 
-	<!-- Configuration - not to be translated -->
-	<string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter</string>
 </resources>
