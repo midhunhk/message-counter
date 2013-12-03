@@ -26,6 +26,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -63,10 +65,13 @@ public class ContactDetailAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
+			Animation fadeInAnimation = AnimationUtils.loadAnimation(context, R.animator.fade_in);
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.contact_detail_row, null);
+			QuickContactBadge badge = (QuickContactBadge) convertView.findViewById(R.id.badge_medium);
+			badge.startAnimation(fadeInAnimation);
 			holder = new ViewHolder();
-			holder.badge = (QuickContactBadge) convertView.findViewById(R.id.badge_medium);
+			holder.badge = badge;
 			holder.contactName = (TextView) convertView.findViewById(R.id.contactNameText);
 			holder.timesContacted = (TextView) convertView.findViewById(R.id.contactMessageCountText);
 
