@@ -45,10 +45,12 @@ public class ContactDetailAdapter extends BaseAdapter {
 
 	private Context					context;
 	private List<ContactMessageVo>	list;
+	private Animation				fadeInAnimation;
 
 	public ContactDetailAdapter(Context context, List<ContactMessageVo> objects) {
 		this.context = context;
 		this.list = objects;
+		fadeInAnimation = AnimationUtils.loadAnimation(context, R.animator.fade_in);
 	}
 
 	/**
@@ -65,7 +67,6 @@ public class ContactDetailAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			Animation fadeInAnimation = AnimationUtils.loadAnimation(context, R.animator.fade_in);
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.contact_detail_row, null);
 			QuickContactBadge badge = (QuickContactBadge) convertView.findViewById(R.id.badge_medium);
