@@ -5,7 +5,7 @@
 	<string name="title_section3">Acerca de</string>
 
 	<string name="app_name">Contador de Mensajes</string>
-	<string name="app_version">versión 2.1.10 (Decembre 2013)</string>
+	<string name="app_version">versión 2.1.20 (Decembre 2013)</string>
 	<string name="app_desc">Contador de mensajes muestra el número de mensajes en la bandeja de entrada de mensajes cuenta de sus contactos. Código Fuente en (https://github.com/midhunhk/message-counter)</string>
 	<string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
 	<string name="app_developer_info">diseñado &amp; desarrollado por ae labs</string>

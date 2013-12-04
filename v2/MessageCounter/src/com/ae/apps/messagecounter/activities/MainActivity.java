@@ -153,9 +153,9 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.menu_about:
+		/*case R.id.menu_about:
 			startActivity(new Intent(this, AboutActivity.class));
-			return true;
+			return true;*/
 		case R.id.menu_license:
 			// Show the license dialog
 			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,

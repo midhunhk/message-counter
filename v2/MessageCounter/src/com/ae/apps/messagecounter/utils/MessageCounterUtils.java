@@ -62,7 +62,7 @@ public class MessageCounterUtils {
 	 * @return
 	 */
 	public static GraphData getMessageCountDegrees(List<ContactMessageVo> messageVos, int totalMessagesCount,
-			int maxRowsForChart) {
+			int maxRowsForChart, boolean skipOthersCount) {
 		int messageCount = 0;
 		float tempCounter = 0;
 
@@ -82,6 +82,15 @@ public class MessageCounterUtils {
 		int loopLimit = sortedList.size();
 		if (maxRowsForChart > 1 && loopLimit > maxRowsForChart) {
 			loopLimit = maxRowsForChart - 1;
+		}
+		
+		int messageCountFromRealContacts = 0;
+		for(ContactMessageVo contactMessageVo:sortedList){
+			messageCountFromRealContacts += contactMessageVo.getMessageCount();
+		}
+		
+		if(skipOthersCount){
+			totalMessagesCount = messageCountFromRealContacts;
 		}
 
 		for (int index = 0; index < loopLimit; index++) {

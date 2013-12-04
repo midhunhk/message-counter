@@ -25,8 +25,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -88,7 +86,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		if (contactMessageList != null && inboxMessageCount > 0) {
 			titleText.setText(getResources().getString(R.string.str_chart_title));
 			GraphData graphData = MessageCounterUtils.getMessageCountDegrees(contactMessageList, inboxMessageCount,
-					MAX_ROWS_IN_CHART);
+					MAX_ROWS_IN_CHART, false);
 			//Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
 			// Create a new SimpleGraphView and add it to the graphContainer
 			View graphView = new SimpleGraphView(mContext, graphData.getValueInDegrees(), graphData.getLabels(),

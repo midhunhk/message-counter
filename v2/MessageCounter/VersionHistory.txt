@@ -99,8 +99,12 @@ MessageCounter 2.0.102 [November 2013]
  - [ADDED]		Support for Spanish language 
  - [ADDED]		Share icon in actionbar
 
-MessageCounter 2.1.10 [December 2013]
+MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	Supports API 8 and above
  - [CHANGED]	ViewPager implementation to support more devices
  - [CHANGED]	Layout Improvements
- // Cache the data computation between orientation changes
+ - [ADDED]		Minor animations
+ - [CHANGED]	About page moved as a fragment from menu
+ - [OPTIMIZED]	Operations
+ 
+ - [CHANGED]	Disabled orientation change

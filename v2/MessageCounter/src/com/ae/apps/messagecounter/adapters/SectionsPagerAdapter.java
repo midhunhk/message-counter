@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.fragments.AboutFragment;
 import com.ae.apps.messagecounter.fragments.DummySectionFragment;
 import com.ae.apps.messagecounter.fragments.MessageChartFragment;
 import com.ae.apps.messagecounter.fragments.MessageListFragment;
@@ -47,6 +48,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 			fragment = new MessageListFragment();
 		} else if (i == 1) {
 			fragment = new MessageChartFragment();
+		} else if (i == 2) {
+			fragment = new AboutFragment();
 		} else {
 			Bundle args = new Bundle();
 			fragment = new DummySectionFragment();
@@ -58,7 +61,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
-		return 2;
+		return 3;
 	}
 
 	@Override
@@ -68,6 +71,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 			return context.getString(R.string.title_section1).toUpperCase();
 		case 1:
 			return context.getString(R.string.title_section2).toUpperCase();
+		case 2:
+			return context.getString(R.string.title_section3).toUpperCase();
 		}
 		return null;
 	}

@@ -25,6 +25,8 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.ae.apps.common.managers.SMSManager;
@@ -35,7 +37,7 @@ import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 
 /**
- * Fragment that displays the data as a list
+ * Fragment that displays the message count details as a list
  * 
  * @author Midhun
  * 
@@ -44,15 +46,26 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 
 	private MessageDataReader		mReader;
 	private ContactDetailAdapter	adapter;
+	private View					messageInfoLyout;
+	private TextView				pageTitleText;
+	private boolean					loadAnimationDone;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		setRetainInstance(true);
 		// Create the layout and find the elements
 		View layout = inflater.inflate(R.layout.fragment_list, null);
 
 		TextView allMessageCountText = (TextView) layout.findViewById(R.id.allMessageCountText);
 		TextView inboxMessageCountText = (TextView) layout.findViewById(R.id.inboxMessageCountText);
 		TextView sentMessageCountText = (TextView) layout.findViewById(R.id.sentMessageCountText);
+
+		pageTitleText = (TextView) layout.findViewById(R.id.pageTitleText);
+		messageInfoLyout = (View) layout.findViewById(R.id.messageInfo);
+		if (loadAnimationDone == false) {
+			pageTitleText.setVisibility(View.INVISIBLE);
+			messageInfoLyout.setVisibility(View.INVISIBLE);
+		}
 
 		// Create an empty list for the adapter
 		List<ContactMessageVo> data = new ArrayList<ContactMessageVo>();
@@ -69,10 +82,12 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		allMessageCountText.setText(getResources().getString(R.string.message_count_all, allMessageCount));
 		sentMessageCountText.setText(getResources().getString(R.string.message_count_sent, sentMessageCount));
 		inboxMessageCountText.setText(getResources().getString(R.string.message_count_inbox, inboxMessageCount));
-		
-		if(mReader != null){
+
+		// Wait till the data is loaded and get a callback once its ready
+		if (mReader != null) {
 			mReader.registerForData(this);
 		}
+
 		return layout;
 	}
 
@@ -80,7 +95,7 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		try {
-			// Register for data
+			// Register for a callback when the data is ready
 			mReader = (MessageDataReader) activity;
 			mReader.registerForData(this);
 		} catch (ClassCastException e) {
@@ -88,12 +103,25 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		}
 	}
 
+	/**
+	 * The callback method that will be invoked when the data is ready
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onDataReady(Object objData) {
 		List<ContactMessageVo> temp = (List<ContactMessageVo>) objData;
 		if (temp != null && adapter != null) {
 			adapter.updateList(temp);
+
+			if (loadAnimationDone == false) {
+				loadAnimationDone = true;
+				// Make some hidden views visible and do some animation
+				Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity().getBaseContext(),
+						R.animator.slide_in);
+				messageInfoLyout.setVisibility(View.VISIBLE);
+				pageTitleText.setVisibility(View.VISIBLE);
+				messageInfoLyout.startAnimation(slideInAnimation);
+			}
 		}
 	}
 }
