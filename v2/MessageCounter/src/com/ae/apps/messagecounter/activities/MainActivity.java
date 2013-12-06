@@ -85,15 +85,13 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 
 		// The mViewPager object should be null when running on tablets
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		if (mViewPager != null) {
-			// Create the adapter that will return a fragment for each of the three primary sections
-			// of the app.
-			mSectionsPagerAdapter = new SectionsPagerAdapter(getBaseContext(), getSupportFragmentManager());
+		// This adapter that will return a fragment for each of the three primary sections
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getBaseContext(), getSupportFragmentManager());
 
-			// Set up the ViewPager with the sections adapter.
-			mViewPager.setAdapter(mSectionsPagerAdapter);
-		}
-
+		// Set up the ViewPager with the sections adapter.
+		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager.setCurrentItem(1);
+		
 		// Start to show a progress dialog
 		loadingDialog = ProgressDialog.show(this, getResources().getString(R.string.title_loading), getResources()
 				.getString(R.string.message_loading));
@@ -153,9 +151,9 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		/*case R.id.menu_about:
-			startActivity(new Intent(this, AboutActivity.class));
-			return true;*/
+		/*
+		 * case R.id.menu_about: startActivity(new Intent(this, AboutActivity.class)); return true;
+		 */
 		case R.id.menu_license:
 			// Show the license dialog
 			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,

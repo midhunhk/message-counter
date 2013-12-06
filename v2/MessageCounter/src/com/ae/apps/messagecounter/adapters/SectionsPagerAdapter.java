@@ -45,9 +45,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int i) {
 		Fragment fragment = null;
 		if (i == 0) {
-			fragment = new MessageListFragment();
-		} else if (i == 1) {
 			fragment = new MessageChartFragment();
+		} else if (i == 1) {
+			fragment = new MessageListFragment();
 		} else if (i == 2) {
 			fragment = new AboutFragment();
 		} else {
@@ -68,9 +68,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 	public CharSequence getPageTitle(int position) {
 		switch (position) {
 		case 0:
-			return context.getString(R.string.title_section1).toUpperCase();
-		case 1:
 			return context.getString(R.string.title_section2).toUpperCase();
+		case 1:
+			return context.getString(R.string.title_section1).toUpperCase();
 		case 2:
 			return context.getString(R.string.title_section3).toUpperCase();
 		}

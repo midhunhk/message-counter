@@ -107,4 +107,7 @@ MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	About page moved as a fragment from menu
  - [OPTIMIZED]	Operations
  
+ MessageCounter 2.1.22 [December 2013]
  - [CHANGED]	Disabled orientation change
+ - [CHANGED]	Simplified message counts at a glnce
+ - [CHANGED]	Reordered pages

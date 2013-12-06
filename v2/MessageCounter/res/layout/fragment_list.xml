@@ -12,26 +12,26 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:background="#BEBEBE"
-        android:orientation="vertical"
-        android:padding="5dp" >
+        android:orientation="horizontal"
+        android:padding="8dp" >
 
         <TextView
             android:id="@+id/inboxMessageCountText"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/empty_text"
             tools:context=".MainActivity" />
 
         <TextView
             android:id="@+id/sentMessageCountText"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/empty_text"
             tools:context=".MainActivity" />
 
         <TextView
             android:id="@+id/allMessageCountText"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/empty_text"
             tools:context=".MainActivity" />
@@ -39,11 +39,11 @@
 
     <TextView
         android:id="@+id/pageTitleText"
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/messageInfo"
         android:paddingLeft="4dip"
-        style="?android:attr/listSeparatorTextViewStyle"
         android:text="@string/title_list_page"
         tools:context=".MainActivity" />
 
@@ -53,7 +53,10 @@
         android:id="@+id/listContainer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pageTitleText" >
+        android:layout_below="@+id/pageTitleText"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical" >
 
         <ListView
             android:id="@android:id/list"
@@ -64,8 +67,9 @@
             android:id="@android:id/empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="2dip"
-            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:text="@string/empty_list" />
     </LinearLayout>
 

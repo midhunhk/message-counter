@@ -56,6 +56,8 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		setRetainInstance(true);
+		
 		View layout = inflater.inflate(R.layout.fragment_chart, null);
 		mContext = getActivity().getBaseContext();
 		// Get the message count in the inbox
@@ -63,6 +65,8 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		// Find the Graph Container
 		graphContainer = (LinearLayout) layout.findViewById(R.id.graphContainer);
 		titleText = (TextView) layout.findViewById(R.id.chartTitle);
+		
+		mReader.registerForData(this);
 		return layout;
 	}
 
@@ -71,7 +75,6 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		super.onAttach(activity);
 		try {
 			mReader = (MessageDataReader) activity;
-			mReader.registerForData(this);
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString() + " must implement OnCheckStatusListener");
 		}

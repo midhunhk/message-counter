@@ -84,9 +84,7 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		inboxMessageCountText.setText(getResources().getString(R.string.message_count_inbox, inboxMessageCount));
 
 		// Wait till the data is loaded and get a callback once its ready
-		if (mReader != null) {
-			mReader.registerForData(this);
-		}
+		mReader.registerForData(this);
 
 		return layout;
 	}
@@ -97,7 +95,6 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		try {
 			// Register for a callback when the data is ready
 			mReader = (MessageDataReader) activity;
-			mReader.registerForData(this);
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString() + " must implement OnCheckStatusListener");
 		}

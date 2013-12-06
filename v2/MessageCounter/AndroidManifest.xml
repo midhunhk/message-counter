@@ -32,14 +32,16 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ae.apps.messagecounter.activities.AboutActivity" />
+        <activity android:name="com.ae.apps.messagecounter.activities.AboutActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
