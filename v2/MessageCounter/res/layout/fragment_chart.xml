@@ -7,23 +7,24 @@
 
     <TextView
         android:id="@+id/chartTitle"
-        android:layout_margin="5dp"
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_margin="5dp"
         android:text="@string/empty_list" />
 
     <LinearLayout
         android:id="@+id/graphContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dip" />
-    
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        android:orientation="vertical" />
+
     <TextView
-        android:layout_margin="5dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/HighlightedTextArea"
         android:text="@string/str_other_senders" />
 
 </LinearLayout>

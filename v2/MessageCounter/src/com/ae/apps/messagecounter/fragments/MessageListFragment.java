@@ -79,9 +79,9 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		int sentMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_SENT);
 		int inboxMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_INBOX);
 
-		allMessageCountText.setText(getResources().getString(R.string.message_count_all, allMessageCount));
-		sentMessageCountText.setText(getResources().getString(R.string.message_count_sent, sentMessageCount));
-		inboxMessageCountText.setText(getResources().getString(R.string.message_count_inbox, inboxMessageCount));
+		allMessageCountText.setText(" " + getResources().getString(R.string.message_count_all, allMessageCount));
+		sentMessageCountText.setText(" " + getResources().getString(R.string.message_count_sent, sentMessageCount));
+		inboxMessageCountText.setText(" " + getResources().getString(R.string.message_count_inbox, inboxMessageCount));
 
 		// Wait till the data is loaded and get a callback once its ready
 		mReader.registerForData(this);

@@ -34,24 +34,19 @@
         android:layout_margin="2dip"
         android:text="@string/app_developer_info" />
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dip"
-        android:layout_margin="5dip"
-        android:background="@android:color/darker_gray" />
-
     <TextView
+        style="@style/HighlightedTextArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="3dip"
         android:text="@string/app_desc" />
 
-    <View
+    <!--
+         <View
         android:layout_width="wrap_content"
         android:layout_height="1dip"
         android:layout_margin="5dip"
         android:background="@android:color/darker_gray" />
+    -->
 
     <TextView
         android:layout_width="wrap_content"
