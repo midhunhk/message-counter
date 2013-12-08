@@ -13,7 +13,7 @@ MessageCounter 1.2.28 [Jan 2013]
  - [CHANGED]	Added methods in ContactManager to fetch contactId from rawContactId
  
 MessageCounter 1.2.30 [Jan 2013]
- - [ADDED]		Sort message sender's list based on count (postponed - sorted map causing problems)
+ - [ADDED]		Sort message sender's list based on count
  
 MessageCounter 1.2.40 [Jan 2013]
  - [ADDED]		Menu options and About app page
@@ -39,10 +39,12 @@ MessageCounter 1.2.58 [Feb 2013]
  - [ADDED]		Inbox as well as all message count
  - [CHANGED]	Sorted the list in the chart based on the count
  
- ------------------------------------
+------------------------------------
+	Version 2.0
+------------------------------------
  
 MessageCounter 2.0.57 [May 2013]
- - [CHANGED]	Min SDK Version is 11, for ViewPager and Fragment Support
+ - [CHANGED]	Min SDK Version is 11, for ViewPager
  - [ADDED]		Using Fragments instead of ViewFlipper
  - [CHANGED]	MainActivity so as to hold data for fragments
  - [ADDED]		Fragments for Chart and List
@@ -68,9 +70,9 @@ MessageCounter 2.0.68 [July 2013]
  - [FIXED]		Fixed a chart value calculation error
  
 MessageCounter 2.0.80 [July 2013]
- - [FIXED]		Project naming in AppStore
+ - [FIXED]		Project's name for AppStore
  - [FIXED]		Messages from same contact using multiple address was duplicated
- - [CHANGED]	Changed the default contact image to that of the platform
+ - [CHANGED]	Changed the default contact image to platform default
  - [OPTIMIZED]	Optimizations
  
 MessageCounter 2.0.84 [July 2013]
@@ -99,7 +101,9 @@ MessageCounter 2.0.102 [November 2013]
  - [ADDED]		Support for Spanish language 
  - [ADDED]		Share icon in actionbar
 
-Version 2.1
+------------------------------------
+	Version 2.1
+------------------------------------
 
 MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	Supports API 8 and above
