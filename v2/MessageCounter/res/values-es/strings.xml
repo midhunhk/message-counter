@@ -5,7 +5,7 @@
 	<string name="title_section3">Acerca de</string>
 
 	<string name="app_name">Contador de Mensajes</string>
-	<string name="app_version">versión 2.1.25 (diciembre 2013)</string>
+	<string name="app_version">versión 2.1.28 (diciembre 2013)</string>
 	<string name="app_desc">Contador de mensajes muestra los mensajes de la bandeja de entrada de estadísticas y el número de mensajes de cada uno de sus contactos. Código fuente de este proyecto está disponible en GitHub.</string>
 	<string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
 	<string name="app_developer_info">diseñado &amp; desarrollado por ae labs</string>
@@ -22,8 +22,9 @@
 	<string name="empty_text"/>
 	<string name="empty_list">No se han encontrado mensajes de</string>
 
-	<string name="message_count_inbox">%s recibidos + </string>
-	<string name="message_count_sent">%s enviados = </string>
+	<string name="message_count_inbox">%s recibidos</string>
+	<string name="message_count_sent">%s enviados</string>
+	<string name="message_count_draft"> %s draft</string>
 	<string name="message_count_all">%s en total</string>
 	<string name="message_loading">Cargando datos, por favor espere.</string>
 

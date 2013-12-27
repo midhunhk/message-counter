@@ -56,9 +56,7 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		// Create the layout and find the elements
 		View layout = inflater.inflate(R.layout.fragment_list, null);
 
-		TextView allMessageCountText = (TextView) layout.findViewById(R.id.allMessageCountText);
-		TextView inboxMessageCountText = (TextView) layout.findViewById(R.id.inboxMessageCountText);
-		TextView sentMessageCountText = (TextView) layout.findViewById(R.id.sentMessageCountText);
+		TextView messageCountGlanceText = (TextView) layout.findViewById(R.id.messageCountAtGlanceText);
 
 		pageTitleText = (TextView) layout.findViewById(R.id.pageTitleText);
 		messageInfoLyout = (View) layout.findViewById(R.id.messageInfo);
@@ -78,10 +76,17 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		int allMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_ALL);
 		int sentMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_SENT);
 		int inboxMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_INBOX);
+		int draftMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_DRAFTS);
 
-		allMessageCountText.setText(" " + getResources().getString(R.string.message_count_all, allMessageCount));
-		sentMessageCountText.setText(" " + getResources().getString(R.string.message_count_sent, sentMessageCount));
-		inboxMessageCountText.setText(" " + getResources().getString(R.string.message_count_inbox, inboxMessageCount));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getResources().getString(R.string.message_count_sent, sentMessageCount))
+			.append(" + " + getResources().getString(R.string.message_count_inbox, inboxMessageCount));
+		if (draftMessageCount > 0) {
+			builder.append(" + " + getResources().getString(R.string.message_count_draft, draftMessageCount));
+		}
+		builder.append(" = " + getResources().getString(R.string.message_count_all, allMessageCount));
+
+		messageCountGlanceText.setText(builder.toString());
 
 		// Wait till the data is loaded and get a callback once its ready
 		mReader.registerForData(this);
@@ -115,6 +120,8 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 				// Make some hidden views visible and do some animation
 				Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity().getBaseContext(),
 						R.animator.slide_in);
+				// add a small delay before starting the animation
+				slideInAnimation.setStartOffset(500);
 				messageInfoLyout.setVisibility(View.VISIBLE);
 				pageTitleText.setVisibility(View.VISIBLE);
 				messageInfoLyout.startAnimation(slideInAnimation);

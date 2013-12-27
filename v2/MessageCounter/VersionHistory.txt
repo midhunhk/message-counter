@@ -118,3 +118,8 @@ MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	Simplified message counts at a glance
  - [OPTIMIZED]	Code and layout
  - [CHANGED]	Text block highlight color
+ 
+ MessageCounter 2.1.28 [December 2013]
+  - [CHANGED]	Animation durtions
+  - [ADDED]		Display draft messages
+  - [CHANGED]	Message counts at a glance
