@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter"
-    android:versionCode="128"
+    android:versionCode="130"
     android:versionName="2.1" >
 
     <uses-sdk
@@ -40,6 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.SettingsActivity" />
     </application>
 
 </manifest>

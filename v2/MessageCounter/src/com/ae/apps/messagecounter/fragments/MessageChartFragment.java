@@ -21,10 +21,13 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,14 +53,16 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	private Context					mContext;
 	private LinearLayout			graphContainer;
 	private TextView				titleText;
+	private TextView				otherSendersText;
 	private int						inboxMessageCount;
 	private List<ContactMessageVo>	contactMessageList;
+	private boolean					mCachedSettingsValue;
 	private static final int		MAX_ROWS_IN_CHART	= 8;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setRetainInstance(true);
-		
+
 		View layout = inflater.inflate(R.layout.fragment_chart, null);
 		mContext = getActivity().getBaseContext();
 		// Get the message count in the inbox
@@ -65,7 +70,8 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		// Find the Graph Container
 		graphContainer = (LinearLayout) layout.findViewById(R.id.graphContainer);
 		titleText = (TextView) layout.findViewById(R.id.chartTitle);
-		
+		otherSendersText = (TextView) layout.findViewById(R.id.otherSendersText);
+
 		mReader.registerForData(this);
 		return layout;
 	}
@@ -87,15 +93,65 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		// Try to convert the data into a list
 		contactMessageList = (List<ContactMessageVo>) data;
 		if (contactMessageList != null && inboxMessageCount > 0) {
-			titleText.setText(getResources().getString(R.string.str_chart_title));
-			GraphData graphData = MessageCounterUtils.getMessageCountDegrees(contactMessageList, inboxMessageCount,
-					MAX_ROWS_IN_CHART, false);
-			//Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
-			// Create a new SimpleGraphView and add it to the graphContainer
-			View graphView = new SimpleGraphView(mContext, graphData.getValueInDegrees(), graphData.getLabels(),
-					AppConstants.CHART_COLORFUL);
-			//graphView.startAnimation(fadeInAnimation);
-			graphContainer.addView(graphView);
+			updateMessagesChart();
 		}
 	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		// Save the current preference value
+		mCachedSettingsValue = getIncludeNonContactMessagesPref();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		// If the cached value is different from the current prefernce value,
+		if (mCachedSettingsValue != getIncludeNonContactMessagesPref() && contactMessageList != null) {
+			updateMessagesChart();
+		}
+	}
+
+	private void updateMessagesChart() {
+		titleText.setText(getResources().getString(R.string.str_chart_title));
+
+		// Get the preference value for including message counts from non contacts
+		boolean includeNonContactMessages = getIncludeNonContactMessagesPref();
+
+		// Do we need to show the other senders text?
+		if (includeNonContactMessages) {
+			otherSendersText.setVisibility(View.INVISIBLE);
+		} else {
+			otherSendersText.setVisibility(View.VISIBLE);
+		}
+
+		GraphData graphData = MessageCounterUtils.getMessageCountDegrees(contactMessageList, inboxMessageCount,
+				MAX_ROWS_IN_CHART, includeNonContactMessages);
+		View graphView = new SimpleGraphView(mContext, graphData.getValueInDegrees(), graphData.getLabels(),
+				AppConstants.CHART_COLORFUL);
+
+		// If we are updating, remove the previous graphView
+		if (graphContainer.getChildCount() > 0) {
+			graphContainer.removeAllViews();
+		}
+
+		// Create a new SimpleGraphView and add it to the graphContainer
+		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
+		fadeInAnimation.setStartOffset(150);
+		graphView.startAnimation(fadeInAnimation);
+		graphContainer.addView(graphView);
+
+	}
+
+	/**
+	 * Returns the current value for hide past messages
+	 * 
+	 * @return
+	 */
+	private boolean getIncludeNonContactMessagesPref() {
+		return PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()).getBoolean(
+				"pref_key_hide_non_contact_messages", false);
+	}
+
 }

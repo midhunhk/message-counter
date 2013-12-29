@@ -168,6 +168,10 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 			shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
 			startActivity(shareIntent);
 			return true;
+		case R.id.menu_settings:
+			// Display the preference screen
+			startActivity(new Intent(this, SettingsActivity.class));
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

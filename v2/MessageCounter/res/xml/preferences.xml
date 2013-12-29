@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/str_pref_messages">
+        <CheckBoxPreference
+            android:key="pref_key_hide_non_contact_messages"
+            android:summaryOff="@string/str_pref_show_non_contact_message_count"
+            android:summaryOn="@string/str_pref_hide_non_contact_message_count"
+            android:title="@string/str_pref_non_contact_messages" />
+    </PreferenceCategory>
+    
+</PreferenceScreen>

@@ -123,3 +123,6 @@ MessageCounter 2.1.20 [December 2013]
   - [CHANGED]	Animation durtions
   - [ADDED]		Display draft messages
   - [CHANGED]	Message counts at a glance
+  
+ MessageCounter 2.1.30 [December 2013]
+ - [ADDED]		Preference screen and message from non contact preference

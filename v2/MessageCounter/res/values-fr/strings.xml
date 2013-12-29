@@ -24,7 +24,7 @@
     
     <string name="message_count_inbox">%s reçus</string>
     <string name="message_count_sent">%s envoyés</string>
-    <string name="message_count_draft"> %s draft</string>
+    <string name="message_count_draft"> %s brouillons</string>
     <string name="message_count_all">%s au total</string>
     <string name="message_loading">Chargement des données, veuillez patienter.</string>
     
