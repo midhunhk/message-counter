@@ -5,7 +5,7 @@
 	<string name="title_section3">Acerca de</string>
 
 	<string name="app_name">Contador de Mensajes</string>
-	<string name="app_version">versión 2.1.28 (diciembre 2013)</string>
+	<string name="app_version">versión 2.1.30 (diciembre 2013)</string>
 	<string name="app_desc">Contador de mensajes muestra los mensajes de la bandeja de entrada de estadísticas y el número de mensajes de cada uno de sus contactos. Código fuente de este proyecto está disponible en GitHub.</string>
 	<string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
 	<string name="app_developer_info">diseñado &amp; desarrollado por ae labs</string>
@@ -41,4 +41,9 @@ limitations under the License.</string>
 	<string name="str_chart_title">Top los remitentes de mensajes</string>
 	<string name="str_other_senders">(Otros) de texto puede incluir mensajes de números que no están guardados en tus contactos que pueden incluir las redes móviles o instituciones financieras.</string>
 
+	<!-- Strings for Preference -->
+    <string name="str_pref_messages">Mensajes</string>
+    <string name="str_pref_non_contact_messages">Mensajes sin contacto</string>
+    <string name="str_pref_show_non_contact_message_count">Incluir mensajes de los no contactos</string>
+    <string name="str_pref_hide_non_contact_message_count">Excluir mensajes de los no contactos</string>
 </resources>

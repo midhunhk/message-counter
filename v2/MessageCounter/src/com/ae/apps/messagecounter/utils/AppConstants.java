@@ -17,17 +17,24 @@
 package com.ae.apps.messagecounter.utils;
 
 /**
- * Defines the constants for the application
+ * The constants used in the application
  * 
  * @author Midhun
  * 
  */
 public interface AppConstants {
 
-	/**
-	 * A colorful set of colors preferably can be usd for a chart
-	 */
-	public static final int[]	CHART_COLORFUL	= { 0xFFB2C938, 0xff3BA9B8, 0xffFF9910, 0xffC74C47, 0xff5B1A69,
-			0xffA83AAE, 0xffF870BD, 0xff7AD1C4, 0xff419DDB }; 
-	/* 0xffFFD302, yellow*/
+	/* Colorful set of colors that can be used for a chart */
+	int[]	CHART_COLORFUL						= { 0xFFB2C938, 0xff3BA9B8, 0xffFF9910, 0xffC74C47, 0xff5B1A69,
+			0xffA83AAE, 0xffF870BD, 0xff7AD1C4, 0xff419DDB };
+
+	/* 0xffFFD302, yellow */
+
+	/* The delay before starting the service */
+	long	SERVICE_START_DELAY					= 10 * 1000;
+	int		MAX_ROWS_IN_CHART					= 8;
+
+	/* Preference keys */
+	String	PREF_KEY_HIDE_NON_CONTACT_MESSAGES	= "pref_key_hide_non_contact_messages";
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Midhun Harikumar
+ * Copyright 2014 Midhun Harikumar
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,17 @@
 package com.ae.apps.messagecounter.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ae.apps.messagecounter.R;
-import com.ae.apps.messagecounter.fragments.AboutFragment;
-import com.ae.apps.messagecounter.fragments.DummySectionFragment;
 import com.ae.apps.messagecounter.fragments.MessageChartFragment;
 import com.ae.apps.messagecounter.fragments.MessageListFragment;
+import com.ae.apps.messagecounter.fragments.SentCountFragment;
 
 /**
- * The Pager Adapter that we will use
+ * The Pager Adapter for the pager menu used in this app
  * 
  * @author midhun
  * 
@@ -48,14 +46,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 			fragment = new MessageChartFragment();
 		} else if (i == 1) {
 			fragment = new MessageListFragment();
-		} else if (i == 2) {
-			fragment = new AboutFragment();
 		} else {
-			Bundle args = new Bundle();
-			fragment = new DummySectionFragment();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, i + 1);
-			fragment.setArguments(args);
-		}
+			fragment = new SentCountFragment(); //new AboutFragment();
+		} 
 		return fragment;
 	}
 

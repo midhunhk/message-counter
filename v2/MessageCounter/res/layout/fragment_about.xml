@@ -3,50 +3,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="6dip" >
+    android:padding="@dimen/padding_small" >
 
-    <ImageView
-        android:id="@+id/appIconImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="3dip"
-        android:contentDescription="@string/empty_text"
-        android:src="@drawable/ic_launcher" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name" />
+        <ImageView
+            android:id="@+id/appIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="start"
+            android:layout_margin="4dip"
+            android:contentDescription="@string/empty_text"
+            android:padding="4dip"
+            android:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="3dip"
-        android:text="@string/app_version" />
+        <TextView
+            android:id="@+id/appVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="2dip"
+            android:layout_toRightOf="@+id/appIcon"
+            android:text="@string/app_name"
+            android:textStyle="bold" />
 
-    <TextView
+        <TextView
+            android:id="@+id/appDeveloper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appVersion"
+            android:layout_gravity="start"
+            android:layout_margin="2dip"
+            android:layout_toRightOf="@+id/appIcon"
+            android:text="@string/app_version" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appDeveloper"
+            android:layout_gravity="start"
+            android:layout_margin="2dip"
+            android:layout_toRightOf="@+id/appIcon"
+            android:text="@string/app_developer_info" />
+    </RelativeLayout>
+
+    <View
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="2dip"
-        android:text="@string/app_developer_info" />
+        android:layout_height="10dip"
+        android:layout_margin="5dip"
+        android:layerType="software"
+        android:background="@drawable/dashed_line" />
 
     <TextView
         style="@style/HighlightedTextArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_desc" />
-
-    <!--
-         <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dip"
-        android:layout_margin="5dip"
-        android:background="@android:color/darker_gray" />
-    -->
 
     <TextView
         android:layout_width="wrap_content"

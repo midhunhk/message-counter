@@ -126,3 +126,14 @@ MessageCounter 2.1.20 [December 2013]
   
  MessageCounter 2.1.30 [December 2013]
  - [ADDED]		Preference screen and message from non contact preference
+ - [ADDED]		Filter out non contact messages from chart screen
+ 
+------------------------------------
+	Version 2.2
+------------------------------------
+
+MessageCounter 2.2.10 [January 2014]
+ - [CHANGED]	App Icon and color scheme
+ - [CHANGED]	About screen layout
+ - [ADDED]		Sent SMS Counter
+ 

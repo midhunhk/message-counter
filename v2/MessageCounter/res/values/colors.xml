@@ -4,5 +4,11 @@
     <color name="default_blue">#33b5e5</color>
     <color name="lavender">#E82D9E</color>
     <color name="light_blue">#80D1F2</color>
+    
+    <color name="grey">#9a9a9a</color>
+    
+    <!-- app theme colors -->
+    <color name="app_theme_light">#CA00CA</color>
+    <color name="app_theme_dark">#660066</color>
 
 </resources>

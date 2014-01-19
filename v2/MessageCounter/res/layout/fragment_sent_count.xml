@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_medium" >
+
+    <!-- enabled layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:text="Messages Sent" />
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:padding="@dimen/padding_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This Cycle"
+            android:textSize="16sp"
+           android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/countProgressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="18sp"
+            android:text="100 / 150" />
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/countProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:indeterminate="false"
+        android:minHeight="@dimen/progress_bar_height"
+        android:maxHeight="@dimen/progress_bar_height"
+        android:progressDrawable="@drawable/progress_bar"
+        android:max="100"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

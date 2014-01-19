@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="5dip" >
+    android:padding="@dimen/padding_small">
 
     <TextView
         android:id="@+id/chartTitle"

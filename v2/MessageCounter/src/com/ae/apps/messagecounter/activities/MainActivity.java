@@ -37,6 +37,7 @@ import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.adapters.SectionsPagerAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
+import com.ae.apps.messagecounter.services.SMSObserverService;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 
@@ -72,6 +73,9 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		// Start observer service for observing when SMS are sent
+		startService(new Intent(this, SMSObserverService.class));
 
 		// getActionBar().setBackgroundDrawable(new ColorDrawable(Color.RED));
 

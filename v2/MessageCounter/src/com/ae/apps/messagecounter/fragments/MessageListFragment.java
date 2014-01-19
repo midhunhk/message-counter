@@ -119,7 +119,7 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 				loadAnimationDone = true;
 				// Make some hidden views visible and do some animation
 				Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity().getBaseContext(),
-						R.animator.slide_in);
+						R.animator.slide_in_top);
 				// add a small delay before starting the animation
 				slideInAnimation.setStartOffset(500);
 				messageInfoLyout.setVisibility(View.VISIBLE);

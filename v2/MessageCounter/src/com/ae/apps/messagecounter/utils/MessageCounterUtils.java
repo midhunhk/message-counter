@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Midhun Harikumar
+ * Copyright 2014 Midhun Harikumar
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 
 package com.ae.apps.messagecounter.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -39,6 +42,8 @@ import com.ae.apps.messagecounter.vo.GraphData;
  * 
  */
 public class MessageCounterUtils {
+
+	private static SimpleDateFormat	DATE_INDEX_FORMAT	= new SimpleDateFormat("yyMMdd", Locale.getDefault());
 
 	/**
 	 * Sorts a map using the value rather than key
@@ -83,13 +88,13 @@ public class MessageCounterUtils {
 		if (maxRowsForChart > 1 && loopLimit > maxRowsForChart) {
 			loopLimit = maxRowsForChart - 1;
 		}
-		
+
 		int messageCountFromRealContacts = 0;
-		for(ContactMessageVo contactMessageVo:sortedList){
+		for (ContactMessageVo contactMessageVo : sortedList) {
 			messageCountFromRealContacts += contactMessageVo.getMessageCount();
 		}
-		
-		if(skipOthersCount){
+
+		if (skipOthersCount) {
 			totalMessagesCount = messageCountFromRealContacts;
 		}
 
@@ -233,5 +238,15 @@ public class MessageCounterUtils {
 			}
 		}
 		return contactsMap;
+	}
+
+	/**
+	 * Returns the index from the a given date
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static long getIndexFromDate(Date date) {
+		return Long.parseLong(DATE_INDEX_FORMAT.format(date));
 	}
 }
