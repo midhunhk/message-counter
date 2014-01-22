@@ -142,4 +142,4 @@ MessageCounter 3.0.20 [January 2014]
  - [ADDED]		Sent SMS Counter
  - [CHANGED]	Updated App Icon and color scheme to holo blue
  - [ADDED]		ShareActionProvider in ActionBar
- - [ADDED]		ActionBar logo
+ - [ADDED]		New\Different ActionBar logo
