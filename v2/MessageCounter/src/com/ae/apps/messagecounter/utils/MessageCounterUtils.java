@@ -44,6 +44,7 @@ import com.ae.apps.messagecounter.vo.GraphData;
 public class MessageCounterUtils {
 
 	private static SimpleDateFormat	DATE_INDEX_FORMAT	= new SimpleDateFormat("yyMMdd", Locale.getDefault());
+	private static SimpleDateFormat DATE_DISPLAY_FORMAT = new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
 
 	/**
 	 * Sorts a map using the value rather than key
@@ -248,5 +249,9 @@ public class MessageCounterUtils {
 	 */
 	public static long getIndexFromDate(Date date) {
 		return Long.parseLong(DATE_INDEX_FORMAT.format(date));
+	}
+
+	public static CharSequence getDisplayDateString(Date cycleStartDate) {
+		return DATE_DISPLAY_FORMAT.format(cycleStartDate);
 	}
 }

@@ -52,16 +52,25 @@
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="10dip"
-        android:layout_margin="5dip"
-        android:layerType="software"
-        android:background="@drawable/dashed_line" />
+        android:layout_height="1dip"
+        android:layout_margin="4dip"
+        android:background="@color/app_theme_dark"
+        android:layerType="software" />
 
     <TextView
         style="@style/HighlightedTextArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/app_desc" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dip"
+        android:layout_margin="4dip"
+        android:background="@color/app_theme_dark"
+        android:layerType="software" />
 
     <TextView
         android:layout_width="wrap_content"

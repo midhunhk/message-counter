@@ -1,3 +1,7 @@
+------------------------------------
+	Version 1.1
+------------------------------------
+
 MessageCounter 1.1.1 [Jan 2013]
  - [ADDED]		Initial Code Setup
  - [CHANGED]	Fetch the number of messages in inbox
@@ -129,11 +133,13 @@ MessageCounter 2.1.20 [December 2013]
  - [ADDED]		Filter out non contact messages from chart screen
  
 ------------------------------------
-	Version 2.2
+	Version 3.0
 ------------------------------------
 
-MessageCounter 2.2.10 [January 2014]
- - [CHANGED]	App Icon and color scheme
+MessageCounter 3.0.20 [January 2014]
+ - [CHANGED]	App Icon and color scheme to holo violet
  - [CHANGED]	About screen layout
  - [ADDED]		Sent SMS Counter
- 
+ - [CHANGED]	Updated App Icon and color scheme to holo blue
+ - [ADDED]		ShareActionProvider in ActionBar
+ - [ADDED]		ActionBar logo

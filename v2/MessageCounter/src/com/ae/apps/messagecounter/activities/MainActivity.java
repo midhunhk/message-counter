@@ -25,8 +25,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -42,38 +44,28 @@ import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 
 /**
- * Main Activity for the project
+ * Main Activity and one entry point to this application
  * 
  * @author Midhun
  * 
  */
-public class MainActivity extends FragmentActivity implements MessageDataReader {
+public class MainActivity extends ActionBarActivity implements MessageDataReader {
 
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the sections. We use a
-	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which will keep every loaded fragment in memory.
-	 * If this becomes too memory intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
-	SectionsPagerAdapter				mSectionsPagerAdapter;
-
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-	ViewPager							mViewPager;
-
+	private SectionsPagerAdapter		mSectionsPagerAdapter;
+	private ViewPager					mViewPager;
 	private boolean						isDataReady;
 	private Handler						handler;
 	private ProgressDialog				loadingDialog;
+	private ShareActionProvider			mShareActionProvider;
 	private List<ContactMessageVo>		contactMessageList;
-	private Map<String, Integer>		messageCountsCache	= new HashMap<String, Integer>();
+	private final Map<String, Integer>	messageCountsCache	= new HashMap<String, Integer>();
 	private List<MessageDataConsumer>	consumers			= new ArrayList<MessageDataConsumer>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		// Start observer service for observing when SMS are sent
 		startService(new Intent(this, SMSObserverService.class));
 
@@ -96,7 +88,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		mViewPager.setCurrentItem(1);
-		
+
 		// Start to show a progress dialog
 		loadingDialog = ProgressDialog.show(this, getResources().getString(R.string.title_loading), getResources()
 				.getString(R.string.message_loading));
@@ -150,15 +142,23 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
+
+		// The below code is for ShareActionProvider compatability
+		MenuItem shareMenu = menu.findItem(R.id.menu_share_app);
+		mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareMenu);
+
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
+		mShareActionProvider.setShareIntent(shareIntent);
+
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		/*
-		 * case R.id.menu_about: startActivity(new Intent(this, AboutActivity.class)); return true;
-		 */
 		case R.id.menu_license:
 			// Show the license dialog
 			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,
@@ -170,12 +170,18 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 			shareIntent.setAction(Intent.ACTION_SEND);
 			shareIntent.setType("text/plain");
 			shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
-			startActivity(shareIntent);
+			// startActivity(shareIntent);
+			// Use the ShareActionProvider
+			mShareActionProvider.setShareIntent(shareIntent);
 			return true;
 		case R.id.menu_settings:
 			// Display the preference screen
 			startActivity(new Intent(this, SettingsActivity.class));
 			return true;
+		case R.id.menu_about:
+			// Show the about screen
+			startActivity(new Intent(this, AboutActivity.class));
+			return false;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

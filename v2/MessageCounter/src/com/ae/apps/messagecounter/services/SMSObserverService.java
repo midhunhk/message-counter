@@ -38,7 +38,7 @@ public class SMSObserverService extends Service {
 	public void onCreate() {
 		Uri smsUri = Uri.parse(SMSManager.SMS_URI_ALL);
 		// The observer will receive a handler created in the UI thread
-		SMSObserver observer = new SMSObserver(new Handler(), this.getContentResolver(), smsUri);
+		SMSObserver observer = new SMSObserver(new Handler(), this.getBaseContext(), smsUri);
 
 		Log.d("SMSObserverService", "registering content observer");
 		// Register the content observer

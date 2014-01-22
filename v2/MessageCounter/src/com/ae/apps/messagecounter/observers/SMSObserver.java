@@ -1,13 +1,17 @@
 package com.ae.apps.messagecounter.observers;
 
 import java.util.Calendar;
+import java.util.Date;
 
-import android.content.ContentResolver;
+import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Log;
+
+import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
+import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 
 /**
  * This class will observe the SMS content provider for any changes
@@ -17,42 +21,36 @@ import android.util.Log;
  */
 public class SMSObserver extends ContentObserver {
 
-	private ContentResolver	mContentResolver	= null;
-	private Uri				observableUri		= null;
+	private Uri		observableUri	= null;
+	private Context	mContext		= null;
 
-	public SMSObserver(Handler handler, ContentResolver contentResolver, Uri uriToObserve) {
+	public SMSObserver(Handler handler, Context context, Uri uriToObserve) {
 		super(handler);
-		mContentResolver = contentResolver;
+		mContext = context;
 		observableUri = uriToObserve;
 	}
 
 	@Override
 	public void onChange(boolean selfChange) {
 		super.onChange(selfChange);
-		Cursor cursor = mContentResolver.query(observableUri, null, null, null, null);
+		Cursor cursor = mContext.getContentResolver().query(observableUri, null, null, null, null);
 		if (cursor.moveToNext()) {
 			String protocol = cursor.getString(cursor.getColumnIndex("protocol"));
-			/*
-			 * String address = cursor.getString(cursor.getColumnIndex("address")); String person =
-			 * cursor.getString(cursor.getColumnIndex("person")); String status =
-			 * cursor.getString(cursor.getColumnIndex("status")); String type =
-			 * cursor.getString(cursor.getColumnIndex("type")); String dateSent =
-			 * cursor.getString(cursor.getColumnIndex("date_sent"));
-			 */
 
-			Log.d("SMSObserver", "Protocol is " + protocol);
-			/*
-			 * Log.d("SMSObserver", "address is " + address); Log.d("SMSObserver", "person is " + person);
-			 * Log.d("SMSObserver", "status is " + status); Log.d("SMSObserver", "type is " + type);
-			 * Log.d("SMSObserver", "dateSent is " + dateSent);
-			 */
 			// protocol will be null for sent messages
 			if (protocol == null) {
-				// Message is sent just now
-				// TODO : Update the database with this time
-				Log.d("SendSMSObserver", " An SMS was sent at " + Calendar.getInstance().getTime().getTime());
+				// A Message was sent just now
+				Date date = Calendar.getInstance().getTime();
+				CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
+				long today = MessageCounterUtils.getIndexFromDate(date);
+
+				// Add an entry into the database
+				counterDataBase.addMessageSentCounter(today);
+				counterDataBase.close();
+				Log.d("SendSMSObserver", " An SMS was sent at " + date.getTime());
 			}
 		}
+		cursor.close();
 	}
 
 }

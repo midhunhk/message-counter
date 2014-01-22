@@ -33,8 +33,12 @@ public interface AppConstants {
 	/* The delay before starting the service */
 	long	SERVICE_START_DELAY					= 10 * 1000;
 	int		MAX_ROWS_IN_CHART					= 8;
+	int		DEFAULT_MESSAGE_LIMIT				= 100;
 
 	/* Preference keys */
 	String	PREF_KEY_HIDE_NON_CONTACT_MESSAGES	= "pref_key_hide_non_contact_messages";
+	String	PREF_KEY_CYCLE_START_DATE			= "pref_key_cycle_start_date";
+	String	PREF_KEY_MESSAGE_LIMIT_VALUE		= "pref_key_message_limit_value";
+	String	PREF_KEY_ENABLE_SENT_COUNT			= "pref_key_enable_sent_message_count";
 
 }

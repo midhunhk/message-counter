@@ -6,9 +6,13 @@
     <color name="light_blue">#80D1F2</color>
     
     <color name="grey">#9a9a9a</color>
+    <color name="white">#ffffff</color>
     
     <!-- app theme colors -->
-    <color name="app_theme_light">#CA00CA</color>
-    <color name="app_theme_dark">#660066</color>
+    <color name="app_theme_light">#33b5e5</color>
+    <color name="app_theme_dark">#0E6785</color>
+    
+    <color name="app_theme_light_22">#CA00CA</color>
+    <color name="app_theme_dark_22">#660066</color>
 
 </resources>
