@@ -136,10 +136,17 @@ MessageCounter 2.1.20 [December 2013]
 	Version 3.0
 ------------------------------------
 
-MessageCounter 3.0.20 [January 2014]
+MessageCounter 3.0.30 [January 2014]
  - [CHANGED]	App Icon and color scheme to holo violet
  - [CHANGED]	About screen layout
  - [ADDED]		Sent SMS Counter
  - [CHANGED]	Updated App Icon and color scheme to holo blue
  - [ADDED]		ShareActionProvider in ActionBar
- - [ADDED]		New\Different ActionBar logo
+ - [ADDED]		Different ActionBar logo
+ - [ADDED]		Toggle count stat page content when enabled or disabled
+ 
+ // TODO
+ Translations
+ Cleanup and verify db code
+ animations for counter fragment
+ last cycle stats

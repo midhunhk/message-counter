@@ -52,6 +52,7 @@ public class SentCountFragment extends Fragment {
 	private SharedPreferences	mPreferences			= null;
 	private TextView			mProgressText			= null;
 	private TextView			mCycleStartText			= null;
+	private TextView			mCycleEndText			= null;
 	private boolean				mCachedPreferenceValue;
 
 	@Override
@@ -67,11 +68,17 @@ public class SentCountFragment extends Fragment {
 		mSentCounterLayout = layout.findViewById(R.id.sentCounterLayout);
 		mStartCountingLayout = layout.findViewById(R.id.startCountingLayout);
 		mCycleStartText = (TextView) layout.findViewById(R.id.currentCycleStartDateText);
+		mCycleEndText = (TextView) layout.findViewById(R.id.currentCycleEndDateText);
 
+		// See which layout to be shown to the user
+		toggleLayoutContent();
+
+		return layout;
+	}
+
+	private void toggleLayoutContent() {
 		boolean enabled = mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
-
 		if (enabled == false) {
-			// limit not set
 			mSentCounterLayout.setVisibility(View.GONE);
 			mStartCountingLayout.setVisibility(View.VISIBLE);
 		} else {
@@ -79,20 +86,19 @@ public class SentCountFragment extends Fragment {
 			mSentCounterLayout.setVisibility(View.VISIBLE);
 			mStartCountingLayout.setVisibility(View.GONE);
 		}
-
-		return layout;
 	}
 
 	private void showSentCountDetails() {
 		// Create the db adapter and start reading from it
-		int cycleStart = Integer.valueOf(mPreferences.getString(AppConstants.PREF_KEY_CYCLE_START_DATE, "1"));
 		CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
 
 		// Lets find the cycle start date
+		int cycleStart = Integer.valueOf(mPreferences.getString(AppConstants.PREF_KEY_CYCLE_START_DATE, "1"));
 		Date cycleStartDate = getCurrentCycleStartDate(cycleStart);
 		mCycleStartText.setText(MessageCounterUtils.getDisplayDateString(cycleStartDate));
+		mCycleEndText.setText(MessageCounterUtils.getDisplayDateString(getCurrentCycleEndDate(cycleStartDate)));
 
-		// and now the sent messages count
+		// and now the sent messages count from the start date
 		int count = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
 
 		// Get the limit the user has specified, handle empty values as well
@@ -128,11 +134,29 @@ public class SentCountFragment extends Fragment {
 		return calendar.getTime();
 	}
 
+	/**
+	 * By default, cycle duration will be a month
+	 * 
+	 * @param startDate
+	 * @return
+	 */
+	private Date getCurrentCycleEndDate(Date startDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(startDate);
+		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) - 1);
+		return calendar.getTime();
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		boolean enabled = getCountMessagesEnabledPref();
-		showSentCountDetails();
+
+		// If the pref is changed, then we should probably change the content
+		if (enabled != mCachedPreferenceValue) {
+			toggleLayoutContent();
+		}
 
 		// If enabled pref is changed and enabled, we might need to start the service
 		if ((enabled != mCachedPreferenceValue) && enabled) {
