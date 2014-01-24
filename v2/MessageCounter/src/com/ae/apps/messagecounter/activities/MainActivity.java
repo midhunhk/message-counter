@@ -25,10 +25,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.MenuItemCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -49,14 +47,14 @@ import com.ae.apps.messagecounter.vo.ContactMessageVo;
  * @author Midhun
  * 
  */
-public class MainActivity extends ActionBarActivity implements MessageDataReader {
+public class MainActivity extends FragmentActivity implements MessageDataReader {
 
 	private SectionsPagerAdapter		mSectionsPagerAdapter;
 	private ViewPager					mViewPager;
 	private boolean						isDataReady;
 	private Handler						handler;
 	private ProgressDialog				loadingDialog;
-	private ShareActionProvider			mShareActionProvider;
+	// private ShareActionProvider mShareActionProvider;
 	private List<ContactMessageVo>		contactMessageList;
 	private final Map<String, Integer>	messageCountsCache	= new HashMap<String, Integer>();
 	private List<MessageDataConsumer>	consumers			= new ArrayList<MessageDataConsumer>();
@@ -144,14 +142,9 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 
 		// The below code is for ShareActionProvider compatability
-		MenuItem shareMenu = menu.findItem(R.id.menu_share_app);
-		mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareMenu);
-
-		Intent shareIntent = new Intent();
-		shareIntent.setAction(Intent.ACTION_SEND);
-		shareIntent.setType("text/plain");
-		shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
-		mShareActionProvider.setShareIntent(shareIntent);
+		// MenuItem shareMenu = menu.findItem(R.id.menu_share_app);
+		// mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareMenu);
+		// mShareActionProvider.setShareIntent(shareIntent);
 
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -164,6 +157,9 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,
 					android.R.string.ok);
 			return true;
+		case R.id.menu_share_app:
+			// Share this app
+			startActivity(getShareIntent());
 		case R.id.menu_settings:
 			// Display the preference screen
 			startActivity(new Intent(this, SettingsActivity.class));
@@ -196,6 +192,14 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 				return messageCountsCache.get(type);
 		}
 		return 0;
+	}
+
+	private Intent getShareIntent() {
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
+		return shareIntent;
 	}
 
 }

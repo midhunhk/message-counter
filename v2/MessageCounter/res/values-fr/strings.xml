@@ -50,13 +50,13 @@ limitations under the License.</string>
     <!-- changes for v2.2 -->
     <string name="str_messages_sent">messages envoyés</string>
     <string name="str_this_cycle">ce cycle</string>
-    <string name="str_sent_today">envoyé aujourd'hui</string>
+    <string name="str_sent_today">envoyé aujourd\'hui</string>
     <string name="str_cycle_start_date">Cycle date de début</string>
     <string name="str_cycle_end_date">Date de fin de cycle</string>
     <string name="str_enable_sent_count">Pour garder une trace des messages envoyés compter, vous pouvez activer cette fonctionnalité dans les paramètres et de fournir les limites</string>
     
     <string name="str_pref_sent_message_count">Nombre de messages envoyés</string>
-    <string name="str_pref_sent_message_desc">Un service d'information sera utilisée pour contrôler les messages envoyés</string>
+    <string name="str_pref_sent_message_desc">Un service d\'information sera utilisée pour contrôler les messages envoyés</string>
     <string name="str_pref_cycle_start_desc">Cycle date de début</string>
     <string name="str_pref_message_limit">messages limites</string>
     <string name="str_pref_message_limit_desc">Limitez les messages qui peuvent être envoyés dans un cycle. Par défaut est 100</string>
