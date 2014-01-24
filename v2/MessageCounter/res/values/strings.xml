@@ -49,4 +49,20 @@ limitations under the License.</string>
     <string name="str_pref_non_contact_messages">Non contact messages</string>
     <string name="str_pref_show_non_contact_message_count">Include messages from non contacts</string>
     <string name="str_pref_hide_non_contact_message_count">Exclude messages from non contacts</string>
+
+    <!-- changes for v2.2 -->
+    <string name="str_messages_sent">Messages Sent</string>
+    <string name="str_this_cycle">This Cycle</string>
+    <string name="str_sent_today">Sent today</string>
+    <string name="str_cycle_start_date">Cycle start date</string>
+    <string name="str_cycle_end_date">Cycle end date</string>
+    <string name="str_enable_sent_count">For keeping track of sent messages count, you can enable this feature in settings and provide the limits</string>
+    
+    <string name="str_pref_sent_message_count">Sent Message Count</string>
+    <string name="str_pref_sent_message_desc">A background service will be used to monitor sent messages</string>
+    <string name="str_pref_cycle_start_desc">The start date for each cycle</string>
+    <string name="str_pref_message_limit">Message limit</string>
+    <string name="str_pref_message_limit_desc">Limit for messages that can be sent in a cycle. Default is 100</string>
+    
+    
 </resources>

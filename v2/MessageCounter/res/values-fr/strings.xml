@@ -1,12 +1,12 @@
 <resources>
 
-    <string name="title_section2">Graphique</string>
     <string name="title_section1">Liste</string>
-    <string name="title_section3">Sur</string>
+    <string name="title_section2">Graphique</string>
+    <string name="title_section3">Compteur</string>
     
     <string name="app_name">du compteur de messages</string>
-    <string name="app_version">Version 2.1.30 (décembre 2013)</string>
-    <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub</string>
+    <string name="app_version">Version 2.2.50 (janvier 2014)</string>
+    <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>
 	<string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
 	<string name="app_developer_info">Conçu et développé au ae labs</string>
 	
@@ -46,4 +46,18 @@ limitations under the License.</string>
     <string name="str_pref_non_contact_messages">Messages non de contact</string>
     <string name="str_pref_show_non_contact_message_count">Inclure des messages de non contacts</string>
     <string name="str_pref_hide_non_contact_message_count">Exclure des messages de non contacts</string>
+    
+    <!-- changes for v2.2 -->
+    <string name="str_messages_sent">messages envoyés</string>
+    <string name="str_this_cycle">ce cycle</string>
+    <string name="str_sent_today">envoyé aujourd'hui</string>
+    <string name="str_cycle_start_date">Cycle date de début</string>
+    <string name="str_cycle_end_date">Date de fin de cycle</string>
+    <string name="str_enable_sent_count">Pour garder une trace des messages envoyés compter, vous pouvez activer cette fonctionnalité dans les paramètres et de fournir les limites</string>
+    
+    <string name="str_pref_sent_message_count">Nombre de messages envoyés</string>
+    <string name="str_pref_sent_message_desc">Un service d'information sera utilisée pour contrôler les messages envoyés</string>
+    <string name="str_pref_cycle_start_desc">Cycle date de début</string>
+    <string name="str_pref_message_limit">messages limites</string>
+    <string name="str_pref_message_limit_desc">Limitez les messages qui peuvent être envoyés dans un cycle. Par défaut est 100</string>
 </resources>

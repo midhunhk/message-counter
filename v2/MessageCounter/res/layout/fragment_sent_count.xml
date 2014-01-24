@@ -10,7 +10,7 @@
         style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Messages Sent" />
+        android:text="@string/str_messages_sent" />
 
     <!-- enabled layout -->
 
@@ -18,7 +18,6 @@
         android:id="@+id/sentCounterLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -32,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="This Cycle"
+                android:text="@string/str_this_cycle"
                 android:textSize="16sp" />
 
             <TextView
@@ -58,6 +57,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_medium"
             android:padding="@dimen/padding_small" >
 
@@ -65,7 +65,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Cycle start date"
+                android:text="@string/str_sent_today"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/countSentTodayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/empty_text"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:padding="@dimen/padding_small" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/str_cycle_start_date"
                 android:textSize="16sp" />
 
             <TextView
@@ -87,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Cycle end date"
+                android:text="@string/str_cycle_end_date"
                 android:textSize="16sp" />
 
             <TextView
@@ -104,13 +126,13 @@
         android:id="@+id/startCountingLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/margin_medium"
         android:drawableLeft="@android:drawable/ic_menu_preferences"
         android:drawablePadding="@dimen/padding_medium"
         android:padding="@dimen/padding_medium"
-        android:textSize="16sp"
-        android:layout_gravity="center_vertical"
-        android:text="To keep track of sent messages count, enable and set the details in settings" >
+        android:text="@string/str_enable_sent_count"
+        android:textSize="16sp" >
     </TextView>
 
 </LinearLayout>

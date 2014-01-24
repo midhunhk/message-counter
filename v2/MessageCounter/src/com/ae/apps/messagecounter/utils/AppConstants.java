@@ -34,6 +34,7 @@ public interface AppConstants {
 	long	SERVICE_START_DELAY					= 10 * 1000;
 	int		MAX_ROWS_IN_CHART					= 8;
 	int		DEFAULT_MESSAGE_LIMIT				= 100;
+	String	DEFAULT_CYCLE_START_DATE			= "1";
 
 	/* Preference keys */
 	String	PREF_KEY_HIDE_NON_CONTACT_MESSAGES	= "pref_key_hide_non_contact_messages";

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <!-- enable or disable non contact messages count -->
     <PreferenceCategory android:title="@string/str_pref_messages" >
         <CheckBoxPreference
             android:key="pref_key_hide_non_contact_messages"
@@ -9,12 +10,13 @@
             android:title="@string/str_pref_non_contact_messages" />
     </PreferenceCategory>
     
-    <PreferenceCategory android:title="Sent Message Count" >
+    <!-- preferences for sent message counter -->
+    <PreferenceCategory android:title="@string/str_pref_sent_message_count" >
         <CheckBoxPreference 
             android:key="pref_key_enable_sent_message_count"
             android:disableDependentsState="false"
             android:title="Count Sent Messages"
-            android:summary="A service will be used to monitor sent messages" />
+            android:summary="@string/str_pref_sent_message_desc" />
 
         <ListPreference
             android:key="pref_key_cycle_start_date"
@@ -22,16 +24,16 @@
             android:entryValues="@array/pick_day_values"
             android:dependency="pref_key_enable_sent_message_count"
             android:defaultValue="1"
-            android:title="Cycle Start Date"
-            android:summary="The start date for the cycle" />
+            android:title="@string/str_cycle_start_date"
+            android:summary="@string/str_pref_cycle_start_desc" />
 
         <EditTextPreference
             android:key="pref_key_message_limit_value"
             android:inputType="number"
             android:defaultValue="100"
             android:dependency="pref_key_enable_sent_message_count"
-            android:title="Message limit"
-            android:summary="Default Value: 100" />
+            android:title="@string/str_pref_message_limit"
+            android:summary="@string/str_pref_message_limit_desc" />
     </PreferenceCategory>
 
 </PreferenceScreen>

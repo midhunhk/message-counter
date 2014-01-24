@@ -51,6 +51,7 @@ public class SentCountFragment extends Fragment {
 	private ProgressBar			mProgressBar			= null;
 	private SharedPreferences	mPreferences			= null;
 	private TextView			mProgressText			= null;
+	private TextView			mSentTodayText			= null;
 	private TextView			mCycleStartText			= null;
 	private TextView			mCycleEndText			= null;
 	private boolean				mCachedPreferenceValue;
@@ -64,6 +65,7 @@ public class SentCountFragment extends Fragment {
 
 		// Find ui elements
 		mProgressText = (TextView) layout.findViewById(R.id.countProgressText);
+		mSentTodayText = (TextView) layout.findViewById(R.id.countSentTodayText);
 		mProgressBar = (ProgressBar) layout.findViewById(R.id.countProgressBar);
 		mSentCounterLayout = layout.findViewById(R.id.sentCounterLayout);
 		mStartCountingLayout = layout.findViewById(R.id.startCountingLayout);
@@ -88,15 +90,25 @@ public class SentCountFragment extends Fragment {
 		}
 	}
 
+	/**
+	 * This method sets up the data that needs to be displyed if we have to show the content
+	 */
 	private void showSentCountDetails() {
 		// Create the db adapter and start reading from it
 		CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
 
 		// Lets find the cycle start date
-		int cycleStart = Integer.valueOf(mPreferences.getString(AppConstants.PREF_KEY_CYCLE_START_DATE, "1"));
+		int cycleStart = Integer.valueOf(mPreferences.getString(AppConstants.PREF_KEY_CYCLE_START_DATE,
+				AppConstants.DEFAULT_CYCLE_START_DATE));
+
 		Date cycleStartDate = getCurrentCycleStartDate(cycleStart);
 		mCycleStartText.setText(MessageCounterUtils.getDisplayDateString(cycleStartDate));
 		mCycleEndText.setText(MessageCounterUtils.getDisplayDateString(getCurrentCycleEndDate(cycleStartDate)));
+		Date today = Calendar.getInstance().getTime();
+
+		// Find the no of messages sent today
+		int sentTodayCount = counterDataBase.getCountValueForDay(MessageCounterUtils.getIndexFromDate(today));
+		mSentTodayText.setText(sentTodayCount + "");
 
 		// and now the sent messages count from the start date
 		int count = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
@@ -153,7 +165,7 @@ public class SentCountFragment extends Fragment {
 		super.onResume();
 		boolean enabled = getCountMessagesEnabledPref();
 
-		// If the pref is changed, then we should probably change the content
+		// If the pref is changed, then we should probably toggle the content displayed
 		if (enabled != mCachedPreferenceValue) {
 			toggleLayoutContent();
 		}
@@ -167,6 +179,7 @@ public class SentCountFragment extends Fragment {
 	@Override
 	public void onPause() {
 		super.onPause();
+		// we cache the preference value so that we can check if this was changed in settings
 		mCachedPreferenceValue = getCountMessagesEnabledPref();
 	}
 
