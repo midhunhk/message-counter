@@ -133,10 +133,10 @@ MessageCounter 2.1.20 [December 2013]
  - [ADDED]		Filter out non contact messages from chart screen
  
 ------------------------------------
-	Version 3.0
+	Version 2.2
 ------------------------------------
 
-MessageCounter 3.0.30 [January 2014]
+MessageCounter 2.2.50 [January 2014]
  - [CHANGED]	App Icon and color scheme to holo violet
  - [CHANGED]	About screen layout
  - [ADDED]		Sent SMS Counter

@@ -22,17 +22,18 @@ import android.database.Cursor;
 import com.ae.apps.common.db.DataBaseHelper;
 
 /**
- * Access to the repository
+ * Class that helps ccess the database
  * 
  * @author Midhun
  * 
  */
 public class CounterDataBaseAdapter extends DataBaseHelper {
 
-	private static String			DATABASE_NAME			= "db_message_counter";
 	private static final int		DATABASE_VERSION		= 1;
+	private static String			DATABASE_NAME			= "db_message_counter";
 	private static final String		TABLE_COUNTER			= "tbl_sms_counter";
 
+	/* Table keys */
 	public static final String		KEY_DATE				= "date_index";
 	public static final String		KEY_COUNT				= "sent_count";
 
@@ -45,12 +46,17 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
 
 	private static final String[]	CREATE_TABLES_SQL		= new String[] { COUNTER_TABLE_CREATE };
 
+	/**
+	 * Create an instance of CounterDataBaseAdapter
+	 * 
+	 * @param context
+	 */
 	public CounterDataBaseAdapter(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION, CREATE_TABLES_SQL);
 	}
 
 	/**
-	 * Fetch all the rows
+	 * Fetch all the data
 	 * 
 	 * @return
 	 */
@@ -58,6 +64,12 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
 		return query(TABLE_COUNTER, DATA_PROJECTION, null, null, null, null, null);
 	}
 
+	/**
+	 * Returns the count for a specific day
+	 * 
+	 * @param dateIndex
+	 * @return
+	 */
 	public int getCountValueForDay(long dateIndex) {
 		int returnValue = 0;
 		String[] args = { dateIndex + "" };
@@ -74,8 +86,10 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
 	}
 
 	/**
+	 * Add a count for this dateIndex. If a row is found, the count value is incremented. If not found, a new row will
+	 * be inserted with the value 1
 	 * 
-	 * @param 
+	 * @param
 	 * @return
 	 */
 	public long addMessageSentCounter(long dateIndex) {
@@ -100,6 +114,7 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
 	}
 
 	/**
+	 * Returns the sum of messages sent since a startDay
 	 * 
 	 * @param startDateIndex
 	 * @return

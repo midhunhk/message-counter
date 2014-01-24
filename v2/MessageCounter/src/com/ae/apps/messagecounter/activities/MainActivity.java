@@ -164,16 +164,6 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,
 					android.R.string.ok);
 			return true;
-		case R.id.menu_share_app:
-			// Throw an intent so the user can share this app
-			Intent shareIntent = new Intent();
-			shareIntent.setAction(Intent.ACTION_SEND);
-			shareIntent.setType("text/plain");
-			shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
-			// startActivity(shareIntent);
-			// Use the ShareActionProvider
-			mShareActionProvider.setShareIntent(shareIntent);
-			return true;
 		case R.id.menu_settings:
 			// Display the preference screen
 			startActivity(new Intent(this, SettingsActivity.class));
