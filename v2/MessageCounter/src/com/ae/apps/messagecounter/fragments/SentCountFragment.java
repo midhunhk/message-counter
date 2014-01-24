@@ -28,6 +28,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -108,6 +110,9 @@ public class SentCountFragment extends Fragment {
 
 		// Find the no of messages sent today
 		int sentTodayCount = counterDataBase.getCountValueForDay(MessageCounterUtils.getIndexFromDate(today));
+		if (sentTodayCount == -1) {
+			sentTodayCount = 0;
+		}
 		mSentTodayText.setText(sentTodayCount + "");
 
 		// and now the sent messages count from the start date
@@ -123,6 +128,7 @@ public class SentCountFragment extends Fragment {
 			limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
 		}
 
+		// set the correct values for the progressbar
 		if (limit > 0) {
 			mProgressBar.setMax(limit);
 			if (count >= limit) {
@@ -135,6 +141,11 @@ public class SentCountFragment extends Fragment {
 		}
 		// Close the db connection
 		counterDataBase.close();
+
+		// Some basic animations
+		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
+		fadeInAnimation.setStartOffset(150);
+		mSentCounterLayout.startAnimation(fadeInAnimation);
 	}
 
 	private Date getCurrentCycleStartDate(int cycleStart) {

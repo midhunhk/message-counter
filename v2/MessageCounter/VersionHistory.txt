@@ -144,6 +144,7 @@ MessageCounter 2.2.50 [January 2014]
  - [ADDED]		ShareActionProvider in ActionBar
  - [ADDED]		Different ActionBar logo
  - [ADDED]		Toggle count stat page content when enabled or disabled
+ - [FIXED]		-1 messages sent
  
  // TODO
  Translations

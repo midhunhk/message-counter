@@ -160,6 +160,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 		case R.id.menu_share_app:
 			// Share this app
 			startActivity(getShareIntent());
+			return true;
 		case R.id.menu_settings:
 			// Display the preference screen
 			startActivity(new Intent(this, SettingsActivity.class));
