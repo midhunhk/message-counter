@@ -75,12 +75,14 @@ public class SentCountFragment extends Fragment {
 		mCycleEndText = (TextView) layout.findViewById(R.id.currentCycleEndDateText);
 
 		// See which layout to be shown to the user
-		toggleLayoutContent();
+		updateLayout();
+
+		cacheEnabledPref();
 
 		return layout;
 	}
 
-	private void toggleLayoutContent() {
+	private void updateLayout() {
 		boolean enabled = mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
 		if (enabled == false) {
 			mSentCounterLayout.setVisibility(View.GONE);
@@ -104,8 +106,9 @@ public class SentCountFragment extends Fragment {
 				AppConstants.DEFAULT_CYCLE_START_DATE));
 
 		Date cycleStartDate = getCurrentCycleStartDate(cycleStart);
+		Date cycleEndDate = MessageCounterUtils.getCycleEndDate(cycleStartDate);
 		mCycleStartText.setText(MessageCounterUtils.getDisplayDateString(cycleStartDate));
-		mCycleEndText.setText(MessageCounterUtils.getDisplayDateString(getCurrentCycleEndDate(cycleStartDate)));
+		mCycleEndText.setText(MessageCounterUtils.getDisplayDateString(cycleEndDate));
 		Date today = Calendar.getInstance().getTime();
 
 		// Find the no of messages sent today
@@ -151,38 +154,20 @@ public class SentCountFragment extends Fragment {
 	private Date getCurrentCycleStartDate(int cycleStart) {
 		Calendar calendar = Calendar.getInstance();
 		if (calendar.get(Calendar.DATE) < cycleStart) {
-			calendar.set(Calendar.MONTH, -1);
+			calendar.add(Calendar.MONTH, -1);
 		}
 		calendar.set(Calendar.DATE, cycleStart);
-		return calendar.getTime();
-	}
-
-	/**
-	 * By default, cycle duration will be a month
-	 * 
-	 * @param startDate
-	 * @return
-	 */
-	private Date getCurrentCycleEndDate(Date startDate) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(startDate);
-		calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
-		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) - 1);
 		return calendar.getTime();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+		updateLayout();
+
 		boolean enabled = getCountMessagesEnabledPref();
-
-		// If the pref is changed, then we should probably toggle the content displayed
-		if (enabled != mCachedPreferenceValue) {
-			toggleLayoutContent();
-		}
-
-		// If enabled pref is changed and enabled, we might need to start the service
-		if ((enabled != mCachedPreferenceValue) && enabled) {
+		// If ecount messages is enabled, we should prolly start the service
+		if (enabled != mCachedPreferenceValue && enabled) {
 			mContext.startService(new Intent(mContext, SMSObserverService.class));
 		}
 	}
@@ -190,6 +175,10 @@ public class SentCountFragment extends Fragment {
 	@Override
 	public void onPause() {
 		super.onPause();
+		cacheEnabledPref();
+	}
+
+	private void cacheEnabledPref() {
 		// we cache the preference value so that we can check if this was changed in settings
 		mCachedPreferenceValue = getCountMessagesEnabledPref();
 	}

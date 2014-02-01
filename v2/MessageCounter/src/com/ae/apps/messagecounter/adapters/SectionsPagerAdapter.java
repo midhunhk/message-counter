@@ -32,23 +32,29 @@ import com.ae.apps.messagecounter.fragments.SentCountFragment;
  * 
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-	private Context	context;
+	private final Context	context;
+	private final Fragment	mChartFragment;
+	private final Fragment	mListFragment;
+	private final Fragment	mSentCountFragment;
 
 	public SectionsPagerAdapter(Context context, FragmentManager fm) {
 		super(fm);
 		this.context = context;
+		mChartFragment = new MessageChartFragment();
+		mListFragment = new MessageListFragment();
+		mSentCountFragment = new SentCountFragment();
 	}
 
 	@Override
 	public Fragment getItem(int i) {
 		Fragment fragment = null;
 		if (i == 0) {
-			fragment = new MessageChartFragment();
+			fragment = mChartFragment;
 		} else if (i == 1) {
-			fragment = new MessageListFragment();
+			fragment = mListFragment;
 		} else {
-			fragment = new SentCountFragment(); //new AboutFragment();
-		} 
+			fragment = mSentCountFragment;
+		}
 		return fragment;
 	}
 

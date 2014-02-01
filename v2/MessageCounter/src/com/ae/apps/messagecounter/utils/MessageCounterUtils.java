@@ -18,6 +18,7 @@ package com.ae.apps.messagecounter.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ import com.ae.apps.messagecounter.vo.GraphData;
 public class MessageCounterUtils {
 
 	private static SimpleDateFormat	DATE_INDEX_FORMAT	= new SimpleDateFormat("yyMMdd", Locale.getDefault());
-	private static SimpleDateFormat DATE_DISPLAY_FORMAT = new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
+	private static SimpleDateFormat	DATE_DISPLAY_FORMAT	= new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
 
 	/**
 	 * Sorts a map using the value rather than key
@@ -103,9 +104,9 @@ public class MessageCounterUtils {
 			messageVo = sortedList.get(index);
 			messageCount = messageVo.getMessageCount();
 			if (messageVo.getContactVo() != null && messageVo.getContactVo().getName() != null) {
-				contactName = messageVo.getContactVo().getName() + " (" + (int) messageCount + ")";
+				contactName = messageVo.getContactVo().getName() + " (" + messageCount + ")";
 			} else {
-				contactName = "Contact " + index + " (" + (int) messageCount + ")";
+				contactName = "Contact " + index + " (" + messageCount + ")";
 			}
 
 			// convert to degree
@@ -253,5 +254,19 @@ public class MessageCounterUtils {
 
 	public static CharSequence getDisplayDateString(Date cycleStartDate) {
 		return DATE_DISPLAY_FORMAT.format(cycleStartDate);
+	}
+
+	/**
+	 * Returns the cycle end date. By default, cycle duration will be a month
+	 * 
+	 * @param startDate
+	 * @return
+	 */
+	public static Date getCycleEndDate(Date startDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(startDate);
+		calendar.add(Calendar.MONTH, +1);
+		calendar.add(Calendar.DATE, -1);
+		return calendar.getTime();
 	}
 }

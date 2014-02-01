@@ -34,21 +34,38 @@ import com.ae.apps.messagecounter.observers.SMSObserver;
  */
 public class SMSObserverService extends Service {
 
-	@Override
-	public void onCreate() {
-		Uri smsUri = Uri.parse(SMSManager.SMS_URI_ALL);
-		// The observer will receive a handler created in the UI thread
-		SMSObserver observer = new SMSObserver(new Handler(), this.getBaseContext(), smsUri);
-
-		Log.d("SMSObserverService", "registering content observer");
-		// Register the content observer
-		this.getContentResolver().registerContentObserver(smsUri, true, observer);
-	}
+	private SMSObserver	mObserver;
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// Request the OS to restart this service if killed due to low memory when possible
+		Log.d("SMSObserverService", "onStartCommand");
 		return Service.START_STICKY;
+	}
+
+	@Override
+	public void onCreate() {
+		Log.d("SMSObserverService", "onCreate");
+		// The observer will receive a handler created in the UI thread
+		if (mObserver == null) {
+			Uri smsUri = Uri.parse(SMSManager.SMS_URI_ALL);
+			mObserver = new SMSObserver(new Handler(), this.getBaseContext(), smsUri);
+
+			Log.d("SMSObserverService", "registering content observer");
+			// Register the content observer
+			this.getContentResolver().registerContentObserver(smsUri, true, mObserver);
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		Log.d("SMSObserverService", "onDestroy");
+		if (mObserver != null) {
+			// We should unregester when the service is killed
+			Log.d("SMSObserverService", "unregistering content observe on service destroy");
+			this.getContentResolver().unregisterContentObserver(mObserver);
+		}
 	}
 
 	@Override
