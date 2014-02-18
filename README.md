@@ -1,6 +1,8 @@
 Message Counter
 ===============
-http://midhunhk.github.io/message-counter
+<img alt="app icon" src="https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-frc1/t1/p206x206/1623349_492913894078406_217528190_n.png"/>
+
+Github Page - http://midhunhk.github.io/message-counter
 
 The Message Counter App for Android API 11 (Honeycomb) and above. "Message Counter" is an Android app that displays the number of messages sent from each contact.
 
