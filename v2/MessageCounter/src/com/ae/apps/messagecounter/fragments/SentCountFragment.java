@@ -102,10 +102,7 @@ public class SentCountFragment extends Fragment {
 		CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
 
 		// Lets find the cycle start date
-		int cycleStart = Integer.valueOf(mPreferences.getString(AppConstants.PREF_KEY_CYCLE_START_DATE,
-				AppConstants.DEFAULT_CYCLE_START_DATE));
-
-		Date cycleStartDate = getCurrentCycleStartDate(cycleStart);
+		Date cycleStartDate = MessageCounterUtils.getCycleStartDate(mPreferences);
 		Date cycleEndDate = MessageCounterUtils.getCycleEndDate(cycleStartDate);
 		mCycleStartText.setText(MessageCounterUtils.getDisplayDateString(cycleStartDate));
 		mCycleEndText.setText(MessageCounterUtils.getDisplayDateString(cycleEndDate));
@@ -121,15 +118,8 @@ public class SentCountFragment extends Fragment {
 		// and now the sent messages count from the start date
 		int count = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
 
-		// Get the limit the user has specified, handle empty values as well
-		String rawVal = mPreferences.getString(AppConstants.PREF_KEY_MESSAGE_LIMIT_VALUE, "-1");
-		int limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
-		try {
-			limit = Integer.valueOf(rawVal);
-		} catch (NumberFormatException e) {
-			// we default to 100 if user left the setting empty
-			limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
-		}
+		// Get the limit the user has specified
+		int limit = MessageCounterUtils.getMessageLimitValue(mPreferences);
 
 		// set the correct values for the progressbar
 		if (limit > 0) {
@@ -149,15 +139,6 @@ public class SentCountFragment extends Fragment {
 		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
 		fadeInAnimation.setStartOffset(150);
 		mSentCounterLayout.startAnimation(fadeInAnimation);
-	}
-
-	private Date getCurrentCycleStartDate(int cycleStart) {
-		Calendar calendar = Calendar.getInstance();
-		if (calendar.get(Calendar.DATE) < cycleStart) {
-			calendar.add(Calendar.MONTH, -1);
-		}
-		calendar.set(Calendar.DATE, cycleStart);
-		return calendar.getTime();
 	}
 
 	@Override

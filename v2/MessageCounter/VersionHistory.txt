@@ -136,7 +136,7 @@ MessageCounter 2.1.20 [December 2013]
 	Version 2.2
 ------------------------------------
 
-MessageCounter 2.2.50 [January 2014]
+ MessageCounter 2.2.50 [January 2014]
  - [CHANGED]	App Icon and color scheme to holo violet
  - [CHANGED]	About screen layout
  - [ADDED]		Sent SMS Counter
@@ -145,6 +145,14 @@ MessageCounter 2.2.50 [January 2014]
  - [ADDED]		Different ActionBar logo
  - [ADDED]		Toggle count stat page content when enabled or disabled
  - [FIXED]		-1 messages sent
+ 
+ MessageCounter 2.2.67 [February 2014]
+ - [FIXED]		Bugs in Sent Message counter
+ 
+ MessageCounter 2.2.74 [March 2014]
+ - [ADDED]		Notifiction on reaching cycle limit
+ - [CHANGED]	Sent messages count ui tweaks
+ - [CHANGED]	Unobstructed loading screen
  
  // TODO
  Translations

@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,8 +51,6 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	private ViewPager					mViewPager;
 	private boolean						isDataReady;
 	private Handler						handler;
-	private ProgressDialog				loadingDialog;
-	// private ShareActionProvider mShareActionProvider;
 	private List<ContactMessageVo>		contactMessageList;
 	private final Map<String, Integer>	messageCountsCache	= new HashMap<String, Integer>();
 	private List<MessageDataConsumer>	consumers			= new ArrayList<MessageDataConsumer>();
@@ -74,16 +71,13 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 
 		// The mViewPager object should be null when running on tablets
 		mViewPager = (ViewPager) findViewById(R.id.pager);
+
 		// This adapter that will return a fragment for each of the three primary sections
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getBaseContext(), getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		mViewPager.setCurrentItem(1);
-
-		// Start to show a progress dialog
-		loadingDialog = ProgressDialog.show(this, getResources().getString(R.string.title_loading), getResources()
-				.getString(R.string.message_loading));
 
 		// Create the handler in the main thread
 		handler = new Handler();
@@ -99,7 +93,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 				final List<ContactMessageVo> data;
 				boolean isMockedRun = false;
 				if (isMockedRun) {
-					// We are doing a mock run
+					// We are doing a mock run, most probably to take screenshots
 					data = MessageCounterUtils.getMockContactMessageList();
 				} else {
 					// Get the mapping of address and message count
@@ -114,8 +108,6 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 				}
 				isDataReady = true;
 				contactMessageList = data;
-				// Dismiss the loading dialog
-				loadingDialog.dismiss();
 
 				handler.post(new Runnable() {
 
@@ -174,6 +166,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 			consumers = new ArrayList<MessageDataConsumer>();
 		}
 		consumers.add(consumer);
+
 		// if data is ready, invoke the data ready method
 		if (isDataReady) {
 			consumer.onDataReady(contactMessageList);

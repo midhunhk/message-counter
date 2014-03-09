@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ae.apps.common.managers.SMSManager;
@@ -49,17 +50,20 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 	private View					messageInfoLyout;
 	private TextView				pageTitleText;
 	private boolean					loadAnimationDone;
+	private ProgressBar				mProgressBar;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setRetainInstance(true);
+
 		// Create the layout and find the elements
 		View layout = inflater.inflate(R.layout.fragment_list, null);
+		mProgressBar = (ProgressBar) layout.findViewById(R.id.loadingProgressBar);
 
 		TextView messageCountGlanceText = (TextView) layout.findViewById(R.id.messageCountAtGlanceText);
 
 		pageTitleText = (TextView) layout.findViewById(R.id.pageTitleText);
-		messageInfoLyout = (View) layout.findViewById(R.id.messageInfo);
+		messageInfoLyout = layout.findViewById(R.id.messageInfo);
 		if (loadAnimationDone == false) {
 			pageTitleText.setVisibility(View.INVISIBLE);
 			messageInfoLyout.setVisibility(View.INVISIBLE);
@@ -79,8 +83,8 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		int draftMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_DRAFTS);
 
 		StringBuilder builder = new StringBuilder();
-		builder.append(getResources().getString(R.string.message_count_sent, sentMessageCount))
-			.append(" + " + getResources().getString(R.string.message_count_inbox, inboxMessageCount));
+		builder.append(getResources().getString(R.string.message_count_sent, sentMessageCount)).append(
+				" + " + getResources().getString(R.string.message_count_inbox, inboxMessageCount));
 		if (draftMessageCount > 0) {
 			builder.append(" + " + getResources().getString(R.string.message_count_draft, draftMessageCount));
 		}
@@ -117,6 +121,9 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 
 			if (loadAnimationDone == false) {
 				loadAnimationDone = true;
+
+				mProgressBar.setVisibility(View.INVISIBLE);
+
 				// Make some hidden views visible and do some animation
 				Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity().getBaseContext(),
 						R.animator.slide_in_top);

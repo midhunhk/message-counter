@@ -34,6 +34,12 @@
             android:dependency="pref_key_enable_sent_message_count"
             android:title="@string/str_pref_message_limit"
             android:summary="@string/str_pref_message_limit_desc" />
+        
+        <CheckBoxPreference 
+            android:key="pref_key_enable_notification"
+            android:dependency="pref_key_enable_sent_message_count"
+            android:title="Notify on crossing limit"
+            android:summary="@string/str_pref_sent_message_desc" />
     </PreferenceCategory>
 
 </PreferenceScreen>

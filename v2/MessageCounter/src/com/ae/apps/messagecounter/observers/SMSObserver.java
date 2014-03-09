@@ -3,14 +3,24 @@ package com.ae.apps.messagecounter.observers;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.activities.MainActivity;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
+import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 
 /**
@@ -47,11 +57,47 @@ public class SMSObserver extends ContentObserver {
 			if (protocol == null && isNewMessage) {
 				// A Message was sent just now
 				Date date = Calendar.getInstance().getTime();
+
+				// Lets open a database connection and add an entry
 				CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
 				long today = MessageCounterUtils.getIndexFromDate(date);
 
 				// Add an entry into the database
 				counterDataBase.addMessageSentCounter(today);
+
+				// TODO : 2.2.7 feature; testing pending
+				// if sentcount limit and notification on reaching the limit are enabled, we will show a notification
+				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+				boolean sentCountlimitEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
+				boolean notifEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_NOTIFICATION, false);
+				if (sentCountlimitEnabled && notifEnabled) {
+					Date currentCycleStartDate = MessageCounterUtils.getCycleStartDate(preferences);
+					long dateIndex = MessageCounterUtils.getIndexFromDate(currentCycleStartDate);
+					int userLimit = MessageCounterUtils.getMessageLimitValue(preferences);
+					int currentCount = counterDataBase.getTotalSentCountSinceDate(dateIndex);
+					if (currentCount == userLimit) {
+						// Show a notification to the user here "message for this cycle has reached limit"
+						Intent resultIntent = new Intent(mContext, MainActivity.class);
+						PendingIntent resultPendingIntent = PendingIntent
+								.getActivity(mContext, AppConstants.NOTIFICATION_REQUEST_CODE, resultIntent, 
+										PendingIntent.FLAG_UPDATE_CURRENT);
+						Notification notification = new NotificationCompat.Builder(mContext)
+								.setContentIntent(resultPendingIntent)
+								.setContentTitle("SMS Limit Reached!")
+								.setContentText("You have reached the send SMS limit for this cycle")
+								.setNumber(userLimit)
+								.setSmallIcon(R.drawable.ic_app_icon)
+								.setAutoCancel(true)
+								.build();
+						
+						// Get an instance of the notification manager service
+						NotificationManager notificationManager = (NotificationManager) mContext
+								.getSystemService(Context.NOTIFICATION_SERVICE);
+						notificationManager.notify(0, notification);
+					}
+				}
+
+				// Close the connection to the database
 				counterDataBase.close();
 
 				// Store this message id incase we get multiple callbacks for the same id

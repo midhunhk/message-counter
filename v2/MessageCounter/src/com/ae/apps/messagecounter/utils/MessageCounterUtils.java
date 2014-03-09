@@ -29,6 +29,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
+import android.content.SharedPreferences;
+
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
 import com.ae.apps.common.utils.ValueComparator;
@@ -267,6 +269,28 @@ public class MessageCounterUtils {
 		calendar.setTime(startDate);
 		calendar.add(Calendar.MONTH, +1);
 		calendar.add(Calendar.DATE, -1);
+		return calendar.getTime();
+	}
+
+	public static int getMessageLimitValue(SharedPreferences preferences) {
+		String rawVal = preferences.getString(AppConstants.PREF_KEY_MESSAGE_LIMIT_VALUE, "-1");
+		int limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
+		try {
+			limit = Integer.valueOf(rawVal);
+		} catch (NumberFormatException e) {
+			limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
+		}
+		return limit;
+	}
+
+	public static Date getCycleStartDate(SharedPreferences preferences) {
+		int cycleStart = Integer.valueOf(preferences.getString(AppConstants.PREF_KEY_CYCLE_START_DATE,
+				AppConstants.DEFAULT_CYCLE_START_DATE));
+		Calendar calendar = Calendar.getInstance();
+		if (calendar.get(Calendar.DATE) < cycleStart) {
+			calendar.add(Calendar.MONTH, -1);
+		}
+		calendar.set(Calendar.DATE, cycleStart);
 		return calendar.getTime();
 	}
 }
