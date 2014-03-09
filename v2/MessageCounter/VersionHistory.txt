@@ -155,7 +155,5 @@ MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	Unobstructed loading screen
  
  // TODO
- Translations
- Cleanup and verify db code
  animations for counter fragment
  last cycle stats
