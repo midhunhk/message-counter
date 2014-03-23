@@ -5,14 +5,13 @@
     <string name="title_section3">Compteur</string>
     
     <string name="app_name">du compteur de messages</string>
-    <string name="app_version">Version 2.2.67 (janvier 2014)</string>
+    <string name="app_version">Version 2.2.74 (mars 2014)</string>
     <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>
 	<string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
 	<string name="app_developer_info">Conçu et développé au ae labs</string>
 	
 	<string name="title_activity_main">du compteur de messages</string>
 	<string name="title_list_page">Messages reçus à partir de Contacts</string>
-	<string name="title_loading">chargement</string>
     
     <string name="menu_settings">réglages</string>
     <string name="menu_about">sur</string>
@@ -26,7 +25,6 @@
     <string name="message_count_sent">%s envoyés</string>
     <string name="message_count_draft"> %s brouillons</string>
     <string name="message_count_all">%s au total</string>
-    <string name="message_loading">Chargement des données, veuillez patienter.</string>
     
     <string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -53,6 +51,7 @@ limitations under the License.</string>
     <string name="str_sent_today">envoyé aujourd\'hui</string>
     <string name="str_cycle_start_date">Cycle date de début</string>
     <string name="str_cycle_end_date">Date de fin de cycle</string>
+    <string name="str_sent_count">Compter les messages envoyés</string>
     <string name="str_enable_sent_count">Pour garder une trace des messages envoyés compter, vous pouvez activer cette fonctionnalité dans les paramètres et de fournir les limites</string>
     
     <string name="str_pref_sent_message_count">Nombre de messages envoyés</string>
@@ -60,4 +59,10 @@ limitations under the License.</string>
     <string name="str_pref_cycle_start_desc">Cycle date de début</string>
     <string name="str_pref_message_limit">messages limites</string>
     <string name="str_pref_message_limit_desc">Limitez les messages qui peuvent être envoyés dans un cycle. Par défaut est 100</string>
+    
+    <!-- added for 2.2.7 -->
+    <string name="str_notify_on_limit">Notifier en arrivant à la limite</string>
+    <string name="str_enble_notify_on_limit">Notifier en arrivant à envoyer limite de SMS pour ce cycle</string>
+    <string name="str_sms_limit_notif_title">SMS limite atteinte</string>
+    <string name="str_sms_limit_notif_text">Envoyer limite de SMS atteint pour ce cycle</string>
 </resources>

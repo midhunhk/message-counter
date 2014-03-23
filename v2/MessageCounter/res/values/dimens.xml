@@ -5,7 +5,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="margin_medium">8dp</dimen>
     
-	<dimen name="padding_micro">2dip</dimen>
     <dimen name="padding_small">4dip</dimen>
     <dimen name="padding_medium">8dip</dimen>
     

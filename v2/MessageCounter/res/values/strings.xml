@@ -12,7 +12,6 @@
 	
 	<string name="title_activity_main">Message Counter</string>
 	<string name="title_list_page">Inbox Messages from Contacts</string>
-	<string name="title_loading">Loading</string>
     
     <string name="menu_settings">Settings</string>
     <string name="menu_about">About</string>
@@ -26,7 +25,6 @@
     <string name="message_count_sent"> %s sent</string>
     <string name="message_count_draft"> %s draft</string>
     <string name="message_count_all"> %s in total.</string>
-    <string name="message_loading">Loading data, please wait.</string>
     
     <string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -50,7 +48,7 @@ limitations under the License.</string>
     <string name="str_pref_show_non_contact_message_count">Include messages from non contacts</string>
     <string name="str_pref_hide_non_contact_message_count">Exclude messages from non contacts</string>
 
-    <!-- changes for v2.2 -->
+    <!-- added for v2.2 -->
     <string name="str_messages_sent">Messages Sent</string>
     <string name="str_this_cycle">This Cycle</string>
     <string name="str_sent_today">Sent today</string>
@@ -58,8 +56,6 @@ limitations under the License.</string>
     <string name="str_cycle_end_date">Cycle end date</string>
     <string name="str_sent_count">Count Sent Messages</string>
     <string name="str_enable_sent_count">For keeping track of sent messages count, you can enable this feature in settings and provide the limits</string>
-    <string name="str_notify_on_limit">Notify on crossing limit</string>
-    <string name="str_enble_notify_on_limit">Notify when send SMS limit for this cycle is reached</string>
     
     <string name="str_pref_sent_message_count">Sent Message Count</string>
     <string name="str_pref_sent_message_desc">A background service will be used to monitor sent messages</string>
@@ -67,8 +63,10 @@ limitations under the License.</string>
     <string name="str_pref_message_limit">Message limit</string>
     <string name="str_pref_message_limit_desc">Limit for messages that can be sent in a cycle. Default is 100</string>
     
-    <!-- change for 2.2.7 -->
-    <string name="str_sms_limit_notif_title">SMS Limit Reached!</string>
-    <string name="str_sms_limit_notif_text">You have reached the send SMS limit for this cycle</string>
+    <!-- added for 2.2.7 -->
+    <string name="str_notify_on_limit">Notify on reaching limit</string>
+    <string name="str_enble_notify_on_limit">Notify on reaching send SMS limit for this cycle</string>
+    <string name="str_sms_limit_notif_title">SMS Limit Reached</string>
+    <string name="str_sms_limit_notif_text">Send SMS limit reached for this cycle</string>
     
 </resources>
