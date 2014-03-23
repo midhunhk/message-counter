@@ -65,8 +65,8 @@ limitations under the License.</string>
     
     <!-- added for 2.2.7 -->
     <string name="str_notify_on_limit">Notify on reaching limit</string>
-    <string name="str_enble_notify_on_limit">Notify on reaching send SMS limit for this cycle</string>
+    <string name="str_enble_notify_on_limit">Notify on reaching SMS send limit</string>
     <string name="str_sms_limit_notif_title">SMS Limit Reached</string>
-    <string name="str_sms_limit_notif_text">Send SMS limit reached for this cycle</string>
+    <string name="str_sms_limit_notif_text">SMS limit reached for this cycle</string>
     
 </resources>
