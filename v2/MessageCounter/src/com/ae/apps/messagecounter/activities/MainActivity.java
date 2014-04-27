@@ -47,8 +47,6 @@ import com.ae.apps.messagecounter.vo.ContactMessageVo;
  */
 public class MainActivity extends FragmentActivity implements MessageDataReader {
 
-	private SectionsPagerAdapter		mSectionsPagerAdapter;
-	private ViewPager					mViewPager;
 	private boolean						isDataReady;
 	private Handler						handler;
 	private List<ContactMessageVo>		contactMessageList;
@@ -70,14 +68,14 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 		messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
 
 		// The mViewPager object should be null when running on tablets
-		mViewPager = (ViewPager) findViewById(R.id.pager);
+		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
 		// This adapter that will return a fragment for each of the three primary sections
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getBaseContext(), getSupportFragmentManager());
+		SectionsPagerAdapter pagerAdapter = new SectionsPagerAdapter(getBaseContext(), getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-		mViewPager.setCurrentItem(1);
+		viewPager.setAdapter(pagerAdapter);
+		viewPager.setCurrentItem(1);
 
 		// Create the handler in the main thread
 		handler = new Handler();

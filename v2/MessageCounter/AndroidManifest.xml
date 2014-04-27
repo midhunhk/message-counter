@@ -8,23 +8,19 @@
         android:targetSdkVersion="18" />
 
     <!-- Declare the permissions required -->
-    <uses-permission
-        android:name="android.permission.READ_SMS"
-        android:required="true" />
-    <uses-permission
-        android:name="android.permission.READ_CONTACTS"
-        android:required="true" />
+    <uses-permission android:name="android.permission.READ_SMS" android:required="true" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" android:required="true" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- screen support -->
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:xlargeScreens="true" />
 
-    <uses-feature
-        android:name="android.hardware.telephony"
-        android:required="true" />
+    <!-- declare features -->
+    <uses-feature android:name="android.hardware.telephony" android:required="true" />
 
     <application
         android:allowBackup="false"
