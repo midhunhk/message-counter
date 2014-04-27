@@ -56,6 +56,7 @@ public class SentCountFragment extends Fragment {
 	private TextView			mSentTodayText			= null;
 	private TextView			mCycleStartText			= null;
 	private TextView			mCycleEndText			= null;
+	private TextView			mPrevCycleSentText		= null;
 	private boolean				mCachedPreferenceValue;
 
 	@Override
@@ -73,6 +74,7 @@ public class SentCountFragment extends Fragment {
 		mStartCountingLayout = layout.findViewById(R.id.startCountingLayout);
 		mCycleStartText = (TextView) layout.findViewById(R.id.currentCycleStartDateText);
 		mCycleEndText = (TextView) layout.findViewById(R.id.currentCycleEndDateText);
+		mPrevCycleSentText = (TextView) layout.findViewById(R.id.prevCycleSentCountText);
 
 		// See which layout to be shown to the user
 		updateLayout();
@@ -133,8 +135,10 @@ public class SentCountFragment extends Fragment {
 			mProgressText.setText(count + " / " + limit);
 		}
 
+		// Show the previous cycle sent count
 		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
 		int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
+		mPrevCycleSentText.setText(lastCycleCount + "");
 
 		// Close the db connection
 		counterDataBase.close();

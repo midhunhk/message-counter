@@ -120,8 +120,32 @@
                 android:text="@string/empty_text"
                 android:textSize="18sp" />
         </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:padding="@dimen/padding_small" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Sent in last cycle"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/prevCycleSentCountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/empty_text"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        
     </LinearLayout>
 
+    <!-- When Message Counting is not enabled, we display this informative Text -->
     <TextView
         android:id="@+id/startCountingLayout"
         android:layout_width="match_parent"
