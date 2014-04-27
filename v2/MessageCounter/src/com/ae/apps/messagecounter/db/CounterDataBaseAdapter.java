@@ -132,4 +132,24 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
 		return count;
 	}
 
+	/**
+	 * Returns the sum of message sent between two dates
+	 * 
+	 * @param startDateIndex
+	 * @param endDateIndex
+	 * @return
+	 */
+	public int getTotalSentCountBetween(long startDateIndex, long endDateIndex) {
+		int count = 0;
+		String[] selectionArgs = { startDateIndex + "", endDateIndex + "" };
+		Cursor cursor = rawQuery("SELECT SUM(" + KEY_COUNT + ") FROM " + TABLE_COUNTER + " WHERE " + KEY_DATE
+				+ " BETWEEN ? AND ?", selectionArgs);
+		if (cursor.moveToFirst()) {
+			count = cursor.getInt(0);
+		}
+		cursor.close();
+
+		return count;
+	}
+
 }

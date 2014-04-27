@@ -132,6 +132,10 @@ public class SentCountFragment extends Fragment {
 			}
 			mProgressText.setText(count + " / " + limit);
 		}
+
+		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
+		int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
+
 		// Close the db connection
 		counterDataBase.close();
 

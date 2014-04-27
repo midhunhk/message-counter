@@ -35,6 +35,7 @@ import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
 import com.ae.apps.common.utils.ValueComparator;
 import com.ae.apps.common.vo.ContactVo;
+import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.vo.GraphData;
 
@@ -46,6 +47,7 @@ import com.ae.apps.messagecounter.vo.GraphData;
  */
 public class MessageCounterUtils {
 
+	private static final String		NO_LIMIT_SET		= "-1";
 	private static SimpleDateFormat	DATE_INDEX_FORMAT	= new SimpleDateFormat("yyMMdd", Locale.getDefault());
 	private static SimpleDateFormat	DATE_DISPLAY_FORMAT	= new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
 
@@ -148,11 +150,16 @@ public class MessageCounterUtils {
 	/**
 	 * Mock names, too lazy to read from resources
 	 */
-	private static String	mockNames[]	= { "John Doe", "Jane Yardlay", "Alexander P", "Thomas Mathew",
-			"Alex Courtous", "Catherine J" };
+	private static String	mockNamesEN[]	= { "John Doe", "Jane Yardlay", "Alex", "Tommy", "Alex Courtous",
+			"Catherine", "James"			};
+
+	/*
+	 * private static String mockNamesES[] = { "Alexandro", "Jane Yardlay", "Alexander P", "Thomas Mathew",
+	 * "Alex Courtous", "Catherine J" };
+	 */
 
 	/**
-	 * A mock implementation for giving mock results
+	 * A mock implementation for giving mock results. Used for screenshots
 	 * 
 	 * @return
 	 */
@@ -164,7 +171,7 @@ public class MessageCounterUtils {
 		ContactVo contactVo = null;
 		ContactMessageVo messageVo = null;
 		List<ContactMessageVo> mockedList = new ArrayList<ContactMessageVo>();
-		for (String name : mockNames) {
+		for (String name : mockNamesEN) {
 			contactVo = new ContactVo();
 			contactVo.setName(name);
 			messageVo = new ContactMessageVo();
@@ -272,8 +279,21 @@ public class MessageCounterUtils {
 		return calendar.getTime();
 	}
 
+	/**
+	 * Returns the previous cycle start date
+	 * 
+	 * @param startDate
+	 * @return
+	 */
+	public static Date getPrevCycleStartDate(Date startDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(startDate);
+		calendar.add(Calendar.MONTH, -1);
+		return calendar.getTime();
+	}
+
 	public static int getMessageLimitValue(SharedPreferences preferences) {
-		String rawVal = preferences.getString(AppConstants.PREF_KEY_MESSAGE_LIMIT_VALUE, "-1");
+		String rawVal = preferences.getString(AppConstants.PREF_KEY_MESSAGE_LIMIT_VALUE, NO_LIMIT_SET);
 		int limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
 		try {
 			limit = Integer.valueOf(rawVal);
@@ -292,5 +312,12 @@ public class MessageCounterUtils {
 		}
 		calendar.set(Calendar.DATE, cycleStart);
 		return calendar.getTime();
+	}
+
+	public static int getCycleSentCount(CounterDataBaseAdapter counterDataBase, Date cycleStartDate) {
+		Date cycleEndDate = MessageCounterUtils.getCycleEndDate(cycleStartDate);
+		long cycleStartIndex = MessageCounterUtils.getIndexFromDate(cycleStartDate);
+		long cycleEndIndex = MessageCounterUtils.getIndexFromDate(cycleEndDate);
+		return counterDataBase.getTotalSentCountBetween(cycleStartIndex, cycleEndIndex);
 	}
 }
