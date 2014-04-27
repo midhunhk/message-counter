@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -76,6 +77,9 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 		// Set up the ViewPager with the sections adapter.
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(1);
+
+		PagerTabStrip tabStrip = (PagerTabStrip) findViewById(R.id.pager_strip);
+		tabStrip.setTabIndicatorColorResource(R.color.app_theme_dark);
 
 		// Create the handler in the main thread
 		handler = new Handler();

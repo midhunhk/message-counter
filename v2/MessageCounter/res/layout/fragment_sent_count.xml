@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Sent in last cycle"
+                android:text="Previous cycle"
                 android:textSize="16sp" />
 
             <TextView
@@ -142,6 +142,17 @@
                 android:text="@string/empty_text"
                 android:textSize="18sp" />
         </RelativeLayout>
+        
+        <ProgressBar
+            android:id="@+id/prevCountProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:max="100"
+            android:maxHeight="@dimen/progress_bar_height"
+            android:minHeight="@dimen/progress_bar_height"
+            android:progressDrawable="@drawable/progress_bar" />
         
     </LinearLayout>
 

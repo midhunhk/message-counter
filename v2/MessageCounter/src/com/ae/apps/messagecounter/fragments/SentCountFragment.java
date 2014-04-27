@@ -57,6 +57,7 @@ public class SentCountFragment extends Fragment {
 	private TextView			mCycleStartText			= null;
 	private TextView			mCycleEndText			= null;
 	private TextView			mPrevCycleSentText		= null;
+	private ProgressBar			mPrevCountProgressBar	= null;
 	private boolean				mCachedPreferenceValue;
 
 	@Override
@@ -75,6 +76,7 @@ public class SentCountFragment extends Fragment {
 		mCycleStartText = (TextView) layout.findViewById(R.id.currentCycleStartDateText);
 		mCycleEndText = (TextView) layout.findViewById(R.id.currentCycleEndDateText);
 		mPrevCycleSentText = (TextView) layout.findViewById(R.id.prevCycleSentCountText);
+		mPrevCountProgressBar = (ProgressBar) layout.findViewById(R.id.prevCountProgressBar);
 
 		// See which layout to be shown to the user
 		updateLayout();
@@ -124,21 +126,13 @@ public class SentCountFragment extends Fragment {
 		int limit = MessageCounterUtils.getMessageLimitValue(mPreferences);
 
 		// set the correct values for the progressbar
-		if (limit > 0) {
-			mProgressBar.setMax(limit);
-			if (count >= limit) {
-				// Don't want progress to be greater than limit
-				mProgressBar.setProgress(limit);
-			} else {
-				mProgressBar.setProgress(count);
-			}
-			mProgressText.setText(count + " / " + limit);
-		}
+		setProgressInfo(count, limit, mProgressBar, mProgressText);
 
 		// Show the previous cycle sent count
 		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
 		int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
 		mPrevCycleSentText.setText(lastCycleCount + "");
+		setProgressInfo(lastCycleCount, limit, mPrevCountProgressBar, mPrevCycleSentText);
 
 		// Close the db connection
 		counterDataBase.close();
@@ -147,6 +141,19 @@ public class SentCountFragment extends Fragment {
 		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
 		fadeInAnimation.setStartOffset(150);
 		mSentCounterLayout.startAnimation(fadeInAnimation);
+	}
+
+	public void setProgressInfo(int count, int limit, ProgressBar progressBar, TextView progressText) {
+		if (limit > 0) {
+			progressBar.setMax(limit);
+			if (count >= limit) {
+				// Don't want progress to be greater than limit
+				progressBar.setProgress(limit);
+			} else {
+				progressBar.setProgress(count);
+			}
+			progressText.setText(count + " / " + limit);
+		}
 	}
 
 	@Override
