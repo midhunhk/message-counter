@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="grey">#9a9a9a</color>
-    <color name="white">#ffffff</color>
+    <color name="grey">#ACACAC</color>
+    <color name="white">#FFFFFF</color>
     
     <!-- app theme colors -->
-    <color name="app_theme_light">#33b5e5</color>
+    <color name="app_theme_light">#33B5E5</color>
     <color name="app_theme_dark">#0E6785</color>
 
     <!-- 

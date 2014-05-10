@@ -2,22 +2,10 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:id="@android:id/background">
-        <shape>
-            <corners android:radius="@dimen/progress_bar_radius"/>
-            <gradient
-                android:endColor="@color/grey"
-                android:startColor="@color/grey" />
-        </shape>
+        <color android:color="@color/grey"/>
     </item>
     <item android:id="@android:id/progress">
-        <clip>
-            <shape>
-                <corners android:radius="@dimen/progress_bar_radius"/>
-                <gradient
-                    android:endColor="@color/app_theme_light"
-                    android:startColor="@color/app_theme_dark" />
-            </shape>
-        </clip>
+        <color android:color="@color/app_theme_light"/>
     </item>
 
 </layer-list>
