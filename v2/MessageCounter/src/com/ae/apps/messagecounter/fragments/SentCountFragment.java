@@ -54,8 +54,8 @@ public class SentCountFragment extends Fragment {
 	private SharedPreferences	mPreferences			= null;
 	private TextView			mProgressText			= null;
 	private TextView			mSentTodayText			= null;
-	private TextView			mCycleStartText			= null;
-	private TextView			mCycleEndText			= null;
+	private TextView			mCycleDurationText		= null;
+	private TextView			mPrevCycleDurationText	= null;
 	private TextView			mPrevCycleSentText		= null;
 	private ProgressBar			mPrevCountProgressBar	= null;
 	private boolean				mCachedPreferenceValue;
@@ -73,9 +73,9 @@ public class SentCountFragment extends Fragment {
 		mProgressBar = (ProgressBar) layout.findViewById(R.id.countProgressBar);
 		mSentCounterLayout = layout.findViewById(R.id.sentCounterLayout);
 		mStartCountingLayout = layout.findViewById(R.id.startCountingLayout);
-		mCycleStartText = (TextView) layout.findViewById(R.id.currentCycleStartDateText);
-		mCycleEndText = (TextView) layout.findViewById(R.id.currentCycleEndDateText);
+		mCycleDurationText = (TextView) layout.findViewById(R.id.cycleDurationText);
 		mPrevCycleSentText = (TextView) layout.findViewById(R.id.prevCycleSentCountText);
+		mPrevCycleDurationText = (TextView) layout.findViewById(R.id.prevCycleDurationText);
 		mPrevCountProgressBar = (ProgressBar) layout.findViewById(R.id.prevCountProgressBar);
 
 		// See which layout to be shown to the user
@@ -108,8 +108,8 @@ public class SentCountFragment extends Fragment {
 		// Lets find the cycle start date
 		Date cycleStartDate = MessageCounterUtils.getCycleStartDate(mPreferences);
 		Date cycleEndDate = MessageCounterUtils.getCycleEndDate(cycleStartDate);
-		mCycleStartText.setText(MessageCounterUtils.getDisplayDateString(cycleStartDate));
-		mCycleEndText.setText(MessageCounterUtils.getDisplayDateString(cycleEndDate));
+
+		mCycleDurationText.setText(MessageCounterUtils.getDurationDateString(cycleStartDate, cycleEndDate));
 		Date today = Calendar.getInstance().getTime();
 
 		// Find the no of messages sent today
@@ -128,10 +128,12 @@ public class SentCountFragment extends Fragment {
 		// set the correct values for the progressbar
 		setProgressInfo(count, limit, mProgressBar, mProgressText);
 
-		// Show the previous cycle sent count
+		// Show the previous cycle details
 		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
 		int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
 		mPrevCycleSentText.setText(lastCycleCount + "");
+		mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate, cycleStartDate));
+
 		setProgressInfo(lastCycleCount, limit, mPrevCountProgressBar, mPrevCycleSentText);
 
 		// Close the db connection

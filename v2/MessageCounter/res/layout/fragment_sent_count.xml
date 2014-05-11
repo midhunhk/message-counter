@@ -5,13 +5,6 @@
     android:orientation="vertical"
     android:padding="@dimen/padding_medium" >
 
-    <TextView
-        android:id="@+id/messagesSentTitle"
-        style="?android:attr/listSeparatorTextViewStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/str_messages_sent" />
-
     <!-- enabled layout -->
 
     <LinearLayout
@@ -19,7 +12,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:text="@string/str_current_cycle"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:textSize="16sp" />
+        
+        <TextView
+            android:id="@+id/cycleDurationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:text="@string/empty_text"
+            android:textSize="16sp" />
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:padding="@dimen/padding_small" >
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="@string/str_sent_today"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/countSentTodayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/empty_text"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+        
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,6 +75,7 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/empty_text"
                 android:textSize="18sp" />
+
         </RelativeLayout>
 
         <ProgressBar
@@ -54,76 +89,27 @@
             android:minHeight="@dimen/progress_bar_height"
             android:progressDrawable="@drawable/progress_bar" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_medium"
+            android:padding="@dimen/padding_small"
             android:layout_marginTop="@dimen/margin_medium"
-            android:padding="@dimen/padding_small" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/str_sent_today"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/countSentTodayText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/empty_text"
-                android:textSize="18sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:padding="@dimen/padding_small" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/str_cycle_start_date"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/currentCycleStartDateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/empty_text"
-                android:textSize="18sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:padding="@dimen/padding_small" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/str_cycle_end_date"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/currentCycleEndDateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/empty_text"
-                android:textSize="18sp" />
-        </RelativeLayout>
+            android:text="@string/str_previous_cycle"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:textSize="16sp" />
         
+        <TextView
+            android:id="@+id/prevCycleDurationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:text="@string/empty_text"
+            android:textSize="16sp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginBottom="@dimen/margin_medium"
             android:padding="@dimen/padding_small" >
 
@@ -131,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Previous cycle"
+                android:text="@string/str_messages_sent"
                 android:textSize="16sp" />
 
             <TextView
@@ -141,8 +127,9 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/empty_text"
                 android:textSize="18sp" />
+
         </RelativeLayout>
-        
+
         <ProgressBar
             android:id="@+id/prevCountProgressBar"
             style="?android:attr/progressBarStyleHorizontal"
@@ -153,10 +140,10 @@
             android:maxHeight="@dimen/progress_bar_height"
             android:minHeight="@dimen/progress_bar_height"
             android:progressDrawable="@drawable/progress_bar" />
-        
     </LinearLayout>
 
     <!-- When Message Counting is not enabled, we display this informative Text -->
+
     <TextView
         android:id="@+id/startCountingLayout"
         android:layout_width="match_parent"

@@ -320,4 +320,16 @@ public class MessageCounterUtils {
 		long cycleEndIndex = MessageCounterUtils.getIndexFromDate(cycleEndDate);
 		return counterDataBase.getTotalSentCountBetween(cycleStartIndex, cycleEndIndex);
 	}
+
+	/**
+	 * Returns the dates in a startDate - endDate format
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public static String getDurationDateString(Date startDate, Date endDate) {
+		return MessageCounterUtils.getDisplayDateString(startDate) + " - "
+				+ MessageCounterUtils.getDisplayDateString(endDate);
+	}
 }

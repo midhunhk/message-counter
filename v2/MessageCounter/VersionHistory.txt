@@ -154,10 +154,8 @@ MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	Sent messages count ui tweaks
  - [CHANGED]	Unobstructed loading screen
  
- MessageCounter 2.2.80 [April 2014]
+ MessageCounter 2.2.85 [May 2014] 
  - [CHANGED]	Using Pager Tab Strip
- 
- 
- // TODO
- animations for counter fragment
- last cycle stats
+ - [ADDED] 		Previous cycle stats
+ - [CHANGED]	Sent Messages screen layout
+ - [CHANGED]	Simplified UI
