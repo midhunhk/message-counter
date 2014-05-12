@@ -328,7 +328,8 @@ public class MessageCounterUtils {
 	 * @param endDate
 	 * @return
 	 */
-	public static String getDurationDateString(Date startDate, Date endDate) {
+	public static String getDurationDateString(Date startDate) {
+		Date endDate = MessageCounterUtils.getCycleEndDate(startDate);
 		return MessageCounterUtils.getDisplayDateString(startDate) + " - "
 				+ MessageCounterUtils.getDisplayDateString(endDate);
 	}

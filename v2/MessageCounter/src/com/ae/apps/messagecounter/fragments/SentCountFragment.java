@@ -64,7 +64,8 @@ public class SentCountFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View layout = inflater.inflate(R.layout.fragment_sent_count, null);
 		mContext = getActivity().getBaseContext();
-		// get the
+
+		// get the preferences for the app
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
 		// Find ui elements
@@ -81,13 +82,14 @@ public class SentCountFragment extends Fragment {
 		// See which layout to be shown to the user
 		updateLayout();
 
+		// Cache the enabled preference value
 		cacheEnabledPref();
 
 		return layout;
 	}
 
 	private void updateLayout() {
-		boolean enabled = mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
+		boolean enabled = getCountMessagesEnabledPref();
 		if (enabled == false) {
 			mSentCounterLayout.setVisibility(View.GONE);
 			mStartCountingLayout.setVisibility(View.VISIBLE);
@@ -102,14 +104,13 @@ public class SentCountFragment extends Fragment {
 	 * This method sets up the data that needs to be displyed if we have to show the content
 	 */
 	private void showSentCountDetails() {
-		// Create the db adapter and start reading from it
+		// Create a db adapter and start reading from it
 		CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
 
 		// Lets find the cycle start date
 		Date cycleStartDate = MessageCounterUtils.getCycleStartDate(mPreferences);
-		Date cycleEndDate = MessageCounterUtils.getCycleEndDate(cycleStartDate);
 
-		mCycleDurationText.setText(MessageCounterUtils.getDurationDateString(cycleStartDate, cycleEndDate));
+		mCycleDurationText.setText(MessageCounterUtils.getDurationDateString(cycleStartDate));
 		Date today = Calendar.getInstance().getTime();
 
 		// Find the no of messages sent today
@@ -132,7 +133,7 @@ public class SentCountFragment extends Fragment {
 		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
 		int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
 		mPrevCycleSentText.setText(lastCycleCount + "");
-		mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate, cycleStartDate));
+		mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate));
 
 		setProgressInfo(lastCycleCount, limit, mPrevCountProgressBar, mPrevCycleSentText);
 
