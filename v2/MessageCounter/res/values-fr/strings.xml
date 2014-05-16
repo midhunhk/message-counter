@@ -46,18 +46,17 @@ limitations under the License.</string>
     <string name="str_pref_hide_non_contact_message_count">Exclure des messages de non contacts</string>
     
     <!-- changes for v2.2 -->
-    <string name="str_messages_sent">messages envoyés</string>
-    <string name="str_this_cycle">ce cycle</string>
-    <string name="str_sent_today">envoyé aujourd\'hui</string>
+    <string name="str_messages_sent">Messages envoyés</string>
+    <string name="str_this_cycle">Ce cycle</string>
+    <string name="str_sent_today">Envoyé aujourd\'hui</string>
     <string name="str_cycle_start_date">Cycle date de début</string>
-    <string name="str_cycle_end_date">Date de fin de cycle</string>
     <string name="str_sent_count">Compter les messages envoyés</string>
     <string name="str_enable_sent_count">Pour garder une trace des messages envoyés compter, vous pouvez activer cette fonctionnalité dans les paramètres et de fournir les limites</string>
     
     <string name="str_pref_sent_message_count">Nombre de messages envoyés</string>
     <string name="str_pref_sent_message_desc">Un service d\'information sera utilisée pour contrôler les messages envoyés</string>
     <string name="str_pref_cycle_start_desc">Cycle date de début</string>
-    <string name="str_pref_message_limit">messages limites</string>
+    <string name="str_pref_message_limit">Messages Limites</string>
     <string name="str_pref_message_limit_desc">Limitez les messages qui peuvent être envoyés dans un cycle. Par défaut est 100</string>
     
     <!-- added for 2.2.7 -->
@@ -65,4 +64,6 @@ limitations under the License.</string>
     <string name="str_enble_notify_on_limit">Notifier en arrivant à envoyer limite de SMS pour ce cycle</string>
     <string name="str_sms_limit_notif_title">SMS limite atteinte</string>
     <string name="str_sms_limit_notif_text">Envoyer limite de SMS atteint pour ce cycle</string>
+    <string name="str_current_cycle">Cycle actuel</string>
+    <string name="str_previous_cycle">Cycle précédent</string>
 </resources>
