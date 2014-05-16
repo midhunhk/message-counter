@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="margin_medium">8dp</dimen>
     
     <dimen name="padding_small">4dip</dimen>
     <dimen name="padding_medium">8dip</dimen>
     
     <dimen name="progress_bar_height">22dip</dimen>
-    <dimen name="progress_bar_radius">5dip</dimen>
 
 </resources>
