@@ -25,17 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
 import com.ae.apps.common.utils.ValueComparator;
-import com.ae.apps.common.vo.ContactVo;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.vo.GraphData;
@@ -146,63 +143,6 @@ public class MessageCounterUtils {
 		data.setValueInDegrees(values);
 
 		return data;
-	}
-
-	/**
-	 * Mock names, TODO read from resources
-	 */
-	private static String	mockNamesEN[]	= { "Elliot Hobbs", "Aidan Parry", "Daisy Forster", "Luis Gibson", "Martin J. Fox",
-			"Catherine", "James"			};
-	private static String	mockNamesES[]	= { "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
-			"Germana Mena Ruvalcaba", "Sotero Jimínez Razo", "Olimpia Campos Curiel", "Folco Vega Girón",
-			"Aidee Padrón Cazares"			};
-	private static String	mockNamesFR[]	= { "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
-		"Germana Mena Ruvalcaba", "Sotero Jimínez Razo", "Olimpia Campos Curiel", "Folco Vega Girón",
-		"Aidee Padrón Cazares"			};
-	 
-
-	/**
-	 * A mock implementation for giving mock results. Used for screenshots
-	 * 
-	 * @return
-	 */
-	public static List<ContactMessageVo> getMockContactMessageList(Resources resource) {
-		Random random = new Random();
-		int startSeed = 180;
-		int prevRandom = 0;
-		int currRandom = 0;
-		ContactVo contactVo = null;
-		ContactMessageVo messageVo = null;
-		List<ContactMessageVo> mockedList = new ArrayList<ContactMessageVo>();
-		
-		String[] mockNames = mockNamesEN;
-		if(Boolean.parseBoolean("false")){
-			// Supply different set of mock names based on current locale
-			//Locale current = resource.getConfiguration().locale;
-			//Locale.getDefault().getLanguage();
-			mockNames = mockNamesES;
-			mockNames = mockNamesFR;
-		}
-		
-		for (String name : mockNames) {
-			contactVo = new ContactVo();
-			contactVo.setName(name);
-			messageVo = new ContactMessageVo();
-			messageVo.setContactVo(contactVo);
-			if (prevRandom == 0) {
-				currRandom = startSeed;
-			} else {
-				currRandom = random.nextInt(startSeed);
-			}
-			if (currRandom > prevRandom) {
-				currRandom = (int) (currRandom * 0.75);
-			}
-			messageVo.setMessageCount(currRandom);
-			prevRandom = currRandom;
-			startSeed -= 2;
-			mockedList.add(messageVo);
-		}
-		return mockedList;
 	}
 
 	/**

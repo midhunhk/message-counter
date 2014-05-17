@@ -38,6 +38,7 @@ import com.ae.apps.messagecounter.adapters.SectionsPagerAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
+import com.ae.apps.messagecounter.utils.MockDataUtils;
 import com.ae.apps.messagecounter.vo.ContactMessageVo;
 
 /**
@@ -93,10 +94,10 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 			@Override
 			public void run() {
 				final List<ContactMessageVo> data;
-				boolean isMockedRun = false;
+				boolean isMockedRun = true;
 				if (isMockedRun) {
 					// We are doing a mock run, most probably to take screenshots
-					data = MessageCounterUtils.getMockContactMessageList(getResources());
+					data = MockDataUtils.getMockContactMessageList(getResources());
 				} else {
 					// Get the mapping of address and message count
 					Map<String, Integer> messageSendersMap = smsManager.getUniqueSenders();
