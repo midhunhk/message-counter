@@ -10,12 +10,12 @@
 	<string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
 	<string name="app_developer_info">diseñado &amp; desarrollado por ae labs</string>
 
-	<string name="title_activity_main">Contador de Mensajes!</string>
+	<string name="title_activity_main">Contador de Mensajes</string>
 	<string name="title_list_page">Los mensajes de Bandeja de entrada de Contactos</string>
 
 	<string name="menu_settings">Configuración</string>
-	<string name="menu_about">acerca de</string>
-	<string name="menu_license">licencia</string>
+	<string name="menu_about">Acerca de</string>
+	<string name="menu_license">Licencia</string>
 	<string name="menu_share">Comparte esta aplicación</string>
 
 	<string name="empty_text"/>
