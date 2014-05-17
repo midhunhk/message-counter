@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- margins -->
     <dimen name="margin_medium">8dp</dimen>
     
+    <!-- paddings -->
     <dimen name="padding_small">4dip</dimen>
     <dimen name="padding_medium">8dip</dimen>
+    <dimen name="padding_large">12dip</dimen>
     
+    <!-- progress bar size -->
     <dimen name="progress_bar_height">22dip</dimen>
 
 </resources>
