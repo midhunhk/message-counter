@@ -29,9 +29,8 @@ public class MockDataUtils {
 	private static String		mockNamesES[]	= { "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
 			"Germana Ruvalcaba", "Sotero Jimínez Razo", "Olimpia Campos Curiel", "Folco Vega Girón",
 			"Aidee Padrón Cazares"				};
-	private static String		mockNamesFR[]	= { "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
-			"Germana Mena Ruvalcaba", "Sotero Jimínez Razo", "Olimpia Campos Curiel", "Folco Vega Girón",
-			"Aidee Padrón Cazares"				};
+	private static String		mockNamesFR[]	= { "Lyle Coulombe", "Saber Rivière", "Algernon Monjeau",
+			"Emmeline Lamy", "Sylvie Mouet", "Carolos Bourgeau", "Cécile Fresne", "Loring Deslauriers" };
 
 	/**
 	 * A mock implementation for giving mock results. Used mainly for screenshots
