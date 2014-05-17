@@ -30,6 +30,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
@@ -148,22 +149,24 @@ public class MessageCounterUtils {
 	}
 
 	/**
-	 * Mock names, too lazy to read from resources
+	 * Mock names, TODO read from resources
 	 */
-	private static String	mockNamesEN[]	= { "John Doe", "Jane Yardlay", "Alex", "Tommy", "Alex Courtous",
+	private static String	mockNamesEN[]	= { "Elliot Hobbs", "Aidan Parry", "Daisy Forster", "Luis Gibson", "Martin J. Fox",
 			"Catherine", "James"			};
-
-	/*
-	 * private static String mockNamesES[] = { "Alexandro", "Jane Yardlay", "Alexander P", "Thomas Mathew",
-	 * "Alex Courtous", "Catherine J" };
-	 */
+	private static String	mockNamesES[]	= { "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
+			"Germana Mena Ruvalcaba", "Sotero Jimínez Razo", "Olimpia Campos Curiel", "Folco Vega Girón",
+			"Aidee Padrón Cazares"			};
+	private static String	mockNamesFR[]	= { "Bicor Adomo Abrego", "Fortuna Granado Fonseca",
+		"Germana Mena Ruvalcaba", "Sotero Jimínez Razo", "Olimpia Campos Curiel", "Folco Vega Girón",
+		"Aidee Padrón Cazares"			};
+	 
 
 	/**
 	 * A mock implementation for giving mock results. Used for screenshots
 	 * 
 	 * @return
 	 */
-	public static List<ContactMessageVo> getMockContactMessageList() {
+	public static List<ContactMessageVo> getMockContactMessageList(Resources resource) {
 		Random random = new Random();
 		int startSeed = 180;
 		int prevRandom = 0;
@@ -171,7 +174,17 @@ public class MessageCounterUtils {
 		ContactVo contactVo = null;
 		ContactMessageVo messageVo = null;
 		List<ContactMessageVo> mockedList = new ArrayList<ContactMessageVo>();
-		for (String name : mockNamesEN) {
+		
+		String[] mockNames = mockNamesEN;
+		if(Boolean.parseBoolean("false")){
+			// Supply different set of mock names based on current locale
+			//Locale current = resource.getConfiguration().locale;
+			//Locale.getDefault().getLanguage();
+			mockNames = mockNamesES;
+			mockNames = mockNamesFR;
+		}
+		
+		for (String name : mockNames) {
 			contactVo = new ContactVo();
 			contactVo.setName(name);
 			messageVo = new ContactMessageVo();
