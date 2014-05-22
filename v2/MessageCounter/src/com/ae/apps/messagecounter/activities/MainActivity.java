@@ -94,7 +94,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 			@Override
 			public void run() {
 				final List<ContactMessageVo> data;
-				boolean isMockedRun = true;
+				boolean isMockedRun = false;
 				if (isMockedRun) {
 					// We are doing a mock run, most probably to take screenshots
 					data = MockDataUtils.getMockContactMessageList(getResources());

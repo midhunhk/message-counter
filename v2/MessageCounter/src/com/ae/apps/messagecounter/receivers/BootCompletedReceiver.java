@@ -16,13 +16,15 @@
 
 package com.ae.apps.messagecounter.receivers;
 
-import com.ae.apps.messagecounter.services.SMSObserverService;
-import com.ae.apps.messagecounter.utils.AppConstants;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.ae.apps.messagecounter.services.SMSObserverService;
+import com.ae.apps.messagecounter.utils.AppConstants;
 
 /**
  * This Receiver should be invoked on boot complete, so that we can start the SMSObserverService
@@ -36,7 +38,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(final Context context, Intent intent) {
-		
+
 		// We can't wait on the main thread as it would be blocked if we wait for too long
 		new Thread(new Runnable() {
 
@@ -49,8 +51,14 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 				} catch (InterruptedException e) {
 					Log.e(TAG, e.getMessage());
 				}
-				Log.d(TAG, "Starting service now");
-				context.startService(new Intent(context, SMSObserverService.class));
+
+				// We need to check if the sent count is enabled before starting the service
+				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+				if (preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false)) {
+					// Run the service
+					Log.d(TAG, "Starting service now");
+					context.startService(new Intent(context, SMSObserverService.class));
+				}
 			}
 		}).start();
 	}
