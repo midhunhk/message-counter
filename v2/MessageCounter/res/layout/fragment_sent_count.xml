@@ -14,12 +14,12 @@
         android:orientation="vertical" >
         
         <TextView
+            style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
             android:text="@string/str_current_cycle"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
         
         <TextView
             android:id="@+id/cycleDurationText"
@@ -90,13 +90,13 @@
             android:progressDrawable="@drawable/progress_bar" />
 
         <TextView
+            style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
             android:layout_marginTop="@dimen/margin_medium"
+            android:padding="@dimen/padding_small"
             android:text="@string/str_previous_cycle"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
         
         <TextView
             android:id="@+id/prevCycleDurationText"
@@ -143,13 +143,12 @@
     </LinearLayout>
 
     <!-- When Message Counting is not enabled, we display this informative Text -->
-
     <TextView
         android:id="@+id/startCountingLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_extra_large"
         android:drawableLeft="@android:drawable/ic_menu_preferences"
         android:drawablePadding="@dimen/padding_medium"
         android:padding="@dimen/padding_medium"

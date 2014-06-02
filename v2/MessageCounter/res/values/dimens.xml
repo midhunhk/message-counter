@@ -3,6 +3,7 @@
 
     <!-- margins -->
     <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_extra_large">32dp</dimen>
     
     <!-- paddings -->
     <dimen name="padding_small">4dip</dimen>
