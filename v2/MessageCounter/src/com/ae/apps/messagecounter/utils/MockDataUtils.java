@@ -51,11 +51,11 @@ public class MockDataUtils {
 		String locale = Locale.getDefault().getLanguage();
 		if (LOCALE_ES.equalsIgnoreCase(locale)) {
 			mockNames = mockNamesES;
-
 		} else if (LOCALE_FR.equalsIgnoreCase(locale)) {
 			mockNames = mockNamesFR;
 		}
 
+		// Some important calcualtions are about to happen
 		for (String name : mockNames) {
 			contactVo = new ContactVo();
 			contactVo.setName(name);

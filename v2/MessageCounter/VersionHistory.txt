@@ -160,5 +160,5 @@ MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	Sent Messages screen layout
  - [CHANGED]	Simplified UI
  
- MessageCounter 2.2.90 [May 2014]
+ MessageCounter 2.2.90 [June 2014]
  - [FIXED]		Service was not started after app update
