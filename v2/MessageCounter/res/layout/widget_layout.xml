@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/margin_small"
     android:id="@+id/appWidget"
+    android:background="#aad2d2d2"
     android:orientation="vertical" >
 
     <TextView
