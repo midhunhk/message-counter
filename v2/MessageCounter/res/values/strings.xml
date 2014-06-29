@@ -70,4 +70,7 @@ limitations under the License.</string>
     <string name="str_current_cycle">Current Cycle</string>
     <string name="str_previous_cycle">Previous cycle</string>
     
+    <!-- zero is zero in all languages -->
+    <string name="str_zero" translatable="false">0</string>
+    
 </resources>
