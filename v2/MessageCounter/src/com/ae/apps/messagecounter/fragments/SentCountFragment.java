@@ -16,7 +16,6 @@
 
 package com.ae.apps.messagecounter.fragments;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
@@ -34,10 +33,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ae.apps.messagecounter.R;
-import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
+import com.ae.apps.messagecounter.managers.SentCountDataManager;
 import com.ae.apps.messagecounter.services.SMSObserverService;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
+import com.ae.apps.messagecounter.vo.SentCountDetailsVo;
 
 /**
  * This fragment hosts the sent messages counter interface
@@ -104,41 +104,29 @@ public class SentCountFragment extends Fragment {
 	 * This method sets up the data that needs to be displyed if we have to show the content
 	 */
 	private void showSentCountDetails() {
-		// Create a db adapter and start reading from it
-		CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
-
 		// Lets find the cycle start date
 		Date cycleStartDate = MessageCounterUtils.getCycleStartDate(mPreferences);
 
 		mCycleDurationText.setText(MessageCounterUtils.getDurationDateString(cycleStartDate));
-		Date today = Calendar.getInstance().getTime();
 
-		// Find the no of messages sent today
-		int sentTodayCount = counterDataBase.getCountValueForDay(MessageCounterUtils.getIndexFromDate(today));
-		if (sentTodayCount == -1) {
-			sentTodayCount = 0;
-		}
-		mSentTodayText.setText(sentTodayCount + "");
+		// Get the sent count details from the database
+		SentCountDataManager dataManager = new SentCountDataManager();
+		SentCountDetailsVo detailsVo = dataManager.getSentCountData(mContext);
 
-		// and now the sent messages count from the start date
-		int count = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
+		// set no of messages sent today
+		mSentTodayText.setText(detailsVo.getSentToday() + "");
 
-		// Get the limit the user has specified
-		int limit = MessageCounterUtils.getMessageLimitValue(mPreferences);
-
-		// set the correct values for the progressbar
-		setProgressInfo(count, limit, mProgressBar, mProgressText);
+		// set the progressbar
+		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText);
 
 		// Show the previous cycle details
+		int lastCycle = detailsVo.getSentLastCycle();
 		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
-		int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
-		mPrevCycleSentText.setText(lastCycleCount + "");
+		mPrevCycleSentText.setText(lastCycle + "");
 		mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate));
 
-		setProgressInfo(lastCycleCount, limit, mPrevCountProgressBar, mPrevCycleSentText);
-
-		// Close the db connection
-		counterDataBase.close();
+		// set the progressbar for the last cycle
+		setProgressInfo(lastCycle, detailsVo.getCycleLimit(), mPrevCountProgressBar, mPrevCycleSentText);
 
 		// Some basic animations
 		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);

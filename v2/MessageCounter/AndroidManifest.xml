@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter"
-    android:versionCode="270"
+    android:versionCode="280"
     android:versionName="2.2" >
 
     <uses-sdk
@@ -63,7 +63,9 @@
             </intent-filter>
         </receiver>
         
-        <receiver android:name=".widget.SentCountWidgetProvider">
+        <receiver android:name=".receivers.WidgetUpdateReceiver"
+            android:icon="@drawable/ic_app_icon"
+            android:label="@string/app_name">
             <intent-filter >
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>

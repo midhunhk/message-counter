@@ -14,11 +14,11 @@
         android:orientation="vertical" >
         
         <TextView
-            android:fontFamily="sans-serif-light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_small"
             android:text="@string/str_current_cycle"
+            style="?android:attr/listSeparatorTextViewStyle"
             android:textSize="14sp" />
         
         <TextView
@@ -32,8 +32,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_small"
             android:padding="@dimen/padding_small" >
 
             <TextView
@@ -57,7 +56,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_medium"
             android:padding="@dimen/padding_small" >
 
@@ -109,8 +107,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginBottom="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_small"
             android:padding="@dimen/padding_small" >
 
             <TextView
@@ -149,7 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/margin_extra_large"
-        android:drawableLeft="@android:drawable/ic_menu_preferences"
+        android:drawableLeft="@drawable/ic_action_settings"
         android:drawablePadding="@dimen/padding_medium"
         android:padding="@dimen/padding_medium"
         android:text="@string/str_enable_sent_count"

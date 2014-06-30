@@ -16,6 +16,7 @@
             android:layout_alignParentLeft="true"
             android:layout_gravity="start"
             android:layout_margin="4dip"
+            android:layout_marginLeft="0dp"
             android:contentDescription="@string/empty_text"
             android:padding="4dip"
             android:src="@drawable/ic_launcher" />
@@ -58,13 +59,19 @@
         android:layerType="software" />
 
     <TextView
-        style="@style/HighlightedTextArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
         android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/app_desc" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dip"
+        android:text="@string/app_source_code" />
+    
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dip"
@@ -78,5 +85,6 @@
         android:layout_gravity="center"
         android:layout_margin="3dip"
         android:text="@string/app_disclaim" />
+    
 
 </LinearLayout>
