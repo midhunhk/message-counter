@@ -4,19 +4,23 @@ Message Counter
 
 Github Page - http://midhunhk.github.io/message-counter
 
-The Message Counter App for Android API 11 (Honeycomb) and above. "Message Counter" is an Android app that displays the number of messages sent from each contact.
+The Message Counter is an app for Android API 8 (Froyo) and above. 
+"Message Counter" counts the number of
+- SMS sent in a cycle
+- messages received from each contact
 
-Although the initial version was pretty basic and took only a few days to complete, it wasn't optimal and the User Interface was non intuitive. So a completely redesigned and rewritten app with the same aim is presented here.
+Although the initial version was pretty basic and took only a few days to complete, it wasn't optimal and the User Interface was non intuitive. The current version is completely redesigned and rewritten from scratch.
 
 Features:
-- Set limit and track the number of messages sent in a cycle
 - Shows the number of SMS messages in inbox, sent and total.
+- Shows number of SMS sent per each cycle
+- Notify when SMS limit per cycle is reached
 - Sorted list of contact and message count from them
 - Shortcut to contact details using quick contact badge
-- A pie chart view of the top message senders
+- A chart view of the top message senders
 - Follows latest Android design patterns
-- Uses the Holo Theme
-- No ads
+- Design based on Holo Theme
+- No Advertisements
 
 <a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
   <img alt="Android app on Google Play"
