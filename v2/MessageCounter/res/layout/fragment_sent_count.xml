@@ -48,8 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="@string/empty_text"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"/>
 
         </RelativeLayout>
         

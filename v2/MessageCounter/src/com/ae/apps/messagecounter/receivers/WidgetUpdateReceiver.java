@@ -37,16 +37,17 @@ import com.ae.apps.messagecounter.vo.SentCountDetailsVo;
  */
 public class WidgetUpdateReceiver extends AppWidgetProvider {
 
-	private static final String	TAG	= "WidgetUpdateReceiver";
+	private static final String	METHOD_SET_TEXT	= "setText";
+	private static final String	TAG				= "WidgetUpdateReceiver";
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-		int appWidgetId = 0;
 		RemoteViews remoteView = null;
 		Intent intent = new Intent(context, MainActivity.class);
 		intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
 		// Get data from database here
@@ -58,19 +59,16 @@ public class WidgetUpdateReceiver extends AppWidgetProvider {
 
 		// update the app widgets
 		for (int i = 0; i < appWidgetIds.length; i++) {
-			appWidgetId = appWidgetIds[i];
-			intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-
 			remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
 			// update data here
-			remoteView.setCharSequence(R.id.widgetSentTodayText, "setText", "" + detailsVo.getSentToday());
-			remoteView.setCharSequence(R.id.widgetSentInCycleText, "setText", detailsVo.getSentCycle() + " / "
+			remoteView.setCharSequence(R.id.widgetSentTodayText, METHOD_SET_TEXT, "" + detailsVo.getSentToday());
+			remoteView.setCharSequence(R.id.widgetSentInCycleText, METHOD_SET_TEXT, detailsVo.getSentCycle() + " / "
 					+ detailsVo.getCycleLimit());
 
 			remoteView.setOnClickPendingIntent(R.id.appWidget, pendingIntent);
 
-			appWidgetManager.updateAppWidget(appWidgetId, remoteView);
+			appWidgetManager.updateAppWidget(appWidgetIds[i], remoteView);
 		}
 	}
 

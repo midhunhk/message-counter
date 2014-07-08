@@ -172,3 +172,4 @@ MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	Settings icon
  - [CHANGED]	Settings menu to actionbar
  - [CHANGED]	UI Tweaks
+ - [ADDED]		Widget update broadcast when sending message
