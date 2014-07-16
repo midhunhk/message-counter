@@ -28,7 +28,7 @@ import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 
 /**
- * This class will observe the SMS content provider for any changes
+ * This class will observe the a content provider for changes
  * 
  * @author Midhun
  * 
@@ -93,9 +93,13 @@ public class SMSObserver extends ContentObserver {
 								.getActivity(mContext, AppConstants.NOTIFICATION_REQUEST_CODE, resultIntent,
 										PendingIntent.FLAG_UPDATE_CURRENT);
 						Notification notification = new NotificationCompat.Builder(mContext)
-								.setContentIntent(resultPendingIntent).setContentTitle(notificationTitle)
-								.setContentText(notificationText).setNumber(userLimit)
-								.setSmallIcon(R.drawable.ic_app_icon).setAutoCancel(true).build();
+								.setContentIntent(resultPendingIntent)
+								.setContentTitle(notificationTitle)
+								.setContentText(notificationText)
+								.setNumber(userLimit)
+								.setSmallIcon(R.drawable.ic_app_icon)
+								.setAutoCancel(true)
+								.build();
 
 						// Get an instance of the notification manager service
 						NotificationManager notificationManager = (NotificationManager) mContext
@@ -113,7 +117,7 @@ public class SMSObserver extends ContentObserver {
 				Log.d("SendSMSObserver", " An SMS was sent at " + date.getTime() + " with id " + messageId);
 				mLastMessageId = messageId;
 
-				// Send a broadcast to update the widgets here
+				// Send a broadcast to update our widgets
 				sendWidgetUpdateBroadcast();
 			}
 		}
