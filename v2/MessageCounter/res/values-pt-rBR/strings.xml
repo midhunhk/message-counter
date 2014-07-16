@@ -8,6 +8,7 @@
 	<string name="app_version">versão 2.3.10 (Julho 2014)</string>
 	<string name="app_desc">Mensagem Contador exibe mensagens da caixa de entrada estatísticas e número de mensagens de cada um dos seus contatos. Este projeto de código \'s fonte está disponível no GitHub.</string>
 	<string name="app_disclaim">Disclaimer: Este aplicativo é criado para fins educativos e como tal tem nenhuma garantia ou apoio. Desde APIs do Android sem documentos são utilizados, este aplicativo pode não funcionar como esperado em todos os dispositivos.</string>
+	<string name="app_source_code">This project\'s source code is available at GitHub</string>
 	<string name="app_developer_info">Desenhado e desenvolvido em ae labs</string>
 
 	<string name="title_activity_main">Mensagem Contador</string>
@@ -66,5 +67,10 @@ limitations under the License.</string>
 	<string name="str_sms_limit_notif_text">Limite SMS alcançado para este ciclo</string>
 	<string name="str_current_cycle">Ciclo atual</string>
 	<string name="str_previous_cycle">Ciclo Anterior</string>
+	
+	<!-- strings for widgets v2.3 -->
+    <string name="str_messages_sent_caps">MENSAGENS ENVIDAS</string>
+    <string name="str_today">HOJE</string>
+    <string name="str_cycle">CICLO</string>
 
 </resources>
