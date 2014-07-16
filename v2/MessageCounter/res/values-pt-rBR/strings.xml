@@ -1,0 +1,70 @@
+<resources>
+
+	<string name="title_section1">Lista</string>
+	<string name="title_section2">Gráfico</string>
+	<string name="title_section3">Contador</string>
+
+	<string name="app_name">Mensagem Contador</string>
+	<string name="app_version">versão 2.3.10 (Julho 2014)</string>
+	<string name="app_desc">Mensagem Contador exibe mensagens da caixa de entrada estatísticas e número de mensagens de cada um dos seus contatos. Este projeto de código \'s fonte está disponível no GitHub.</string>
+	<string name="app_disclaim">Disclaimer: Este aplicativo é criado para fins educativos e como tal tem nenhuma garantia ou apoio. Desde APIs do Android sem documentos são utilizados, este aplicativo pode não funcionar como esperado em todos os dispositivos.</string>
+	<string name="app_developer_info">Desenhado e desenvolvido em ae labs</string>
+
+	<string name="title_activity_main">Mensagem Contador</string>
+	<string name="title_list_page">Mensagens recebidas</string>
+
+	<string name="menu_settings">Configurações</string>
+	<string name="menu_about">Sobre</string>
+	<string name="menu_license">Licença</string>
+	<string name="menu_share">Compartilhe este aplicativo</string>
+
+	<string name="empty_text"/>
+	<string name="empty_list">Nenhuma mensagem encontrada</string>
+
+	<string name="message_count_inbox">%s recebido</string>
+	<string name="message_count_sent"> %s enviado</string>
+	<string name="message_count_draft"> %s rascunho</string>
+	<string name="message_count_all"> %s no total.</string>
+
+	<string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at\n\n
+http://www.apache.org/licenses/LICENSE-2.0\n\n
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</string>
+
+	<string name="str_chart_title">Remetentes de mensagens Top</string>
+	<string name="str_other_senders">Outros texto inclui mensagens de números que não são salvos em seus contatos, como as redes móveis ou instituições financeiras.</string>
+
+	<!-- Strings for Preference -->
+	<string name="str_pref_messages">Mensagens</string>
+	<string name="str_pref_non_contact_messages">Mensagens sem contato</string>
+	<string name="str_pref_show_non_contact_message_count">Incluir mensagens de contatos não</string>
+	<string name="str_pref_hide_non_contact_message_count">Excluir mensagens de contatos não</string>
+
+	<!-- added for v2.2 -->
+	<string name="str_messages_sent">As mensagens enviadas</string>
+	<string name="str_this_cycle">este ciclo</string>
+	<string name="str_sent_today">As mensagens enviadas hoje</string>
+	<string name="str_cycle_start_date">Ciclo data de início</string>
+	<string name="str_sent_count">Contagem mensagens enviadas</string>
+	<string name="str_enable_sent_count">Para manter o controle de mensagens enviadas contar, você pode ativar esse recurso nas configurações e fornecer os limites</string>
+
+	<string name="str_pref_sent_message_count">Enviado Contagem Mensagem</string>
+	<string name="str_pref_sent_message_desc">Um serviço de fundo será utilizado para monitorizar as mensagens enviadas</string>
+	<string name="str_pref_cycle_start_desc">A data de início de cada ciclo</string>
+	<string name="str_pref_message_limit">Limite de mensagens</string>
+	<string name="str_pref_message_limit_desc">Limite para mensagens que podem ser enviados em um ciclo. O padrão é 100</string>
+
+	<!-- added for 2.2.7 -->
+	<string name="str_notify_on_limit">Notificar-me por atingir limite</string>
+	<string name="str_enble_notify_on_limit">Notificar-me por atingir limite de envio de SMS</string>
+	<string name="str_sms_limit_notif_title">Limite SMS Atingido</string>
+	<string name="str_sms_limit_notif_text">Limite SMS alcançado para este ciclo</string>
+	<string name="str_current_cycle">Ciclo atual</string>
+	<string name="str_previous_cycle">Ciclo Anterior</string>
+
+</resources>
