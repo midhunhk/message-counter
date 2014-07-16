@@ -21,7 +21,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.util.TimingLogger;
 import android.widget.RemoteViews;
 
 import com.ae.apps.messagecounter.R;
@@ -44,6 +44,9 @@ public class WidgetUpdateReceiver extends AppWidgetProvider {
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 
+		TimingLogger logger = new TimingLogger(TAG, "onUpdate");
+		logger.addSplit("method start");
+
 		RemoteViews remoteView = null;
 		Intent intent = new Intent(context, MainActivity.class);
 		intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -52,10 +55,9 @@ public class WidgetUpdateReceiver extends AppWidgetProvider {
 
 		// Get data from database here
 		SentCountDataManager dataManager = new SentCountDataManager();
-		long start = System.currentTimeMillis();
+		logger.addSplit("get data from databse");
 		SentCountDetailsVo detailsVo = dataManager.getSentCountData(context);
-		long diff = System.currentTimeMillis() - start;
-		Log.d(TAG, diff + " ms");
+		logger.addSplit("read done, updating widgets");
 
 		// update the app widgets
 		for (int i = 0; i < appWidgetIds.length; i++) {
@@ -70,6 +72,9 @@ public class WidgetUpdateReceiver extends AppWidgetProvider {
 
 			appWidgetManager.updateAppWidget(appWidgetIds[i], remoteView);
 		}
+
+		logger.addSplit("complete");
+		logger.dumpToLog();
 	}
 
 }
