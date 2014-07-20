@@ -167,7 +167,7 @@ MessageCounter 2.1.20 [December 2013]
 	Version 2.3
 ------------------------------------
 
- MessageCounter 2.3.10 [July 2014]
+ MessageCounter 2.3.12 [July 2014]
  - [ADDED]		Widget for messages sent
  - [CHANGED]	Settings icon
  - [CHANGED]	Settings menu to actionbar
