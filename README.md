@@ -21,7 +21,7 @@ Features:
 - Shortcut to contact details using quick contact badge
 - A chart view of the top message senders
 - Follows latest Android design patterns
-- Design based on Holo Theme
+- Widgets!
 - No Advertisements
 
 <a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
