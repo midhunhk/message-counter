@@ -30,7 +30,7 @@ import com.ae.apps.messagecounter.managers.SentCountDataManager;
 import com.ae.apps.messagecounter.vo.SentCountDetailsVo;
 
 /**
- * Update the data for the widgets
+ * Update the data for all the widgets
  * 
  * @author Midhun
  * 
@@ -73,6 +73,7 @@ public class WidgetUpdateReceiver extends AppWidgetProvider {
 			appWidgetManager.updateAppWidget(appWidgetIds[i], remoteView);
 		}
 
+		// Logging for debug purposes
 		logger.addSplit("complete");
 		logger.dumpToLog();
 	}
