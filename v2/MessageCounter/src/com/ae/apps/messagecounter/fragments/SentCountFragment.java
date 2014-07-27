@@ -18,15 +18,18 @@ package com.ae.apps.messagecounter.fragments;
 
 import java.util.Date;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
@@ -47,6 +50,7 @@ import com.ae.apps.messagecounter.vo.SentCountDetailsVo;
  */
 public class SentCountFragment extends Fragment {
 
+	private static final String	PROGRESS_VALUE			= "progress";
 	private Context				mContext				= null;
 	private View				mSentCounterLayout		= null;
 	private View				mStartCountingLayout	= null;
@@ -117,7 +121,7 @@ public class SentCountFragment extends Fragment {
 		mSentTodayText.setText(detailsVo.getSentToday() + "");
 
 		// set the progressbar
-		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText);
+		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText, 500);
 
 		// Show the previous cycle details
 		int lastCycle = detailsVo.getSentLastCycle();
@@ -126,7 +130,7 @@ public class SentCountFragment extends Fragment {
 		mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate));
 
 		// set the progressbar for the last cycle
-		setProgressInfo(lastCycle, detailsVo.getCycleLimit(), mPrevCountProgressBar, mPrevCycleSentText);
+		setProgressInfo(lastCycle, detailsVo.getCycleLimit(), mPrevCountProgressBar, mPrevCycleSentText, 800);
 
 		// Some basic animations
 		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
@@ -134,16 +138,37 @@ public class SentCountFragment extends Fragment {
 		mSentCounterLayout.startAnimation(fadeInAnimation);
 	}
 
-	public void setProgressInfo(int count, int limit, ProgressBar progressBar, TextView progressText) {
+	private void setProgressInfo(int count, int limit, ProgressBar progressBar, TextView progressText, long animDelay) {
 		if (limit > 0) {
 			progressBar.setMax(limit);
+			int progress = count;
 			if (count >= limit) {
 				// Don't want progress to be greater than limit
-				progressBar.setProgress(limit);
-			} else {
-				progressBar.setProgress(count);
+				progress = limit;
 			}
+			setProgressWithAnimation(progressBar, progress, animDelay);
 			progressText.setText(count + " / " + limit);
+		}
+	}
+
+	/**
+	 * Sets the progress value to a progressbar, with animation if the OS supports it
+	 * 
+	 * @param progressBar
+	 * @param progress
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private static void setProgressWithAnimation(ProgressBar progressBar, int progress, long animDelay) {
+		// We try to add animation for newer APIs here
+		if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.HONEYCOMB) {
+			android.animation.ObjectAnimator animation = android.animation.ObjectAnimator.ofInt(progressBar,
+					PROGRESS_VALUE, 0, progress);
+			animation.setDuration(100);
+			animation.setStartDelay(animDelay);
+			animation.setInterpolator(new AccelerateDecelerateInterpolator());
+			animation.start();
+		} else {
+			progressBar.setProgress(progress);
 		}
 	}
 

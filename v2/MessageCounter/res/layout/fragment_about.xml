@@ -72,6 +72,13 @@
         android:layout_margin="3dip"
         android:text="@string/app_source_code" />
     
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="3dip"
+        android:text="@string/github_source_visible_url" />
+    
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dip"
