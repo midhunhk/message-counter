@@ -47,12 +47,14 @@ public class MockDataUtils {
 		List<ContactMessageVo> mockedList = new ArrayList<ContactMessageVo>();
 
 		// Supply different set of mock names based on current locale, default is EN
-		String[] mockNames = mockNamesEN;
+		String[] mockNames = null;
 		String locale = Locale.getDefault().getLanguage();
 		if (LOCALE_ES.equalsIgnoreCase(locale)) {
 			mockNames = mockNamesES;
 		} else if (LOCALE_FR.equalsIgnoreCase(locale)) {
 			mockNames = mockNamesFR;
+		} else {
+			mockNames = mockNamesEN;
 		}
 
 		// Some important calcualtions are about to happen
