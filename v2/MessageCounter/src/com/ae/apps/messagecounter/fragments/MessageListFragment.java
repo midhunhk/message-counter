@@ -125,13 +125,15 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 				mProgressBar.setVisibility(View.INVISIBLE);
 
 				// Make some hidden views visible and do some animation
-				Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity().getBaseContext(),
-						R.animator.slide_in_top);
-				// add a small delay before starting the animation
-				slideInAnimation.setStartOffset(500);
-				messageInfoLyout.setVisibility(View.VISIBLE);
-				pageTitleText.setVisibility(View.VISIBLE);
-				messageInfoLyout.startAnimation(slideInAnimation);
+				if(null != getActivity().getBaseContext()){
+					Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity().getBaseContext(),
+							R.animator.slide_in_top);
+					// add a small delay before starting the animation
+					slideInAnimation.setStartOffset(500);
+					messageInfoLyout.setVisibility(View.VISIBLE);
+					pageTitleText.setVisibility(View.VISIBLE);
+					messageInfoLyout.startAnimation(slideInAnimation);
+				}
 			}
 		}
 	}
