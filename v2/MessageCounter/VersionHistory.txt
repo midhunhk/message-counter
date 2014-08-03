@@ -174,5 +174,6 @@ MessageCounter 2.1.20 [December 2013]
  - [CHANGED]	UI Tweaks
  - [ADDED]		Widget update broadcast when sending message
  
- MessageCounter 2.3.14 [July 2014]
+ MessageCounter 2.3.16 [July 2014]
  - [ADDED]		Animation for progressbar
+ - [FIXED]		Minor bug Fixes
