@@ -23,6 +23,13 @@ Features:
 - Follows latest Android design patterns
 - Widgets!
 - No Advertisements
+ 
+License
+=======
+This application source code is open sourced under the Apache License Version 2.0.
+
+App Store
+=========
 
 <a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
   <img alt="Android app on Google Play"
