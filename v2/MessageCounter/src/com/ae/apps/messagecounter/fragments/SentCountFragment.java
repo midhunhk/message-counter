@@ -121,7 +121,7 @@ public class SentCountFragment extends Fragment {
 		mSentTodayText.setText(detailsVo.getSentToday() + "");
 
 		// set the progressbar
-		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText, 500);
+		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText, 0);
 
 		// Show the previous cycle details
 		int lastCycle = detailsVo.getSentLastCycle();
@@ -130,7 +130,7 @@ public class SentCountFragment extends Fragment {
 		mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate));
 
 		// set the progressbar for the last cycle
-		setProgressInfo(lastCycle, detailsVo.getCycleLimit(), mPrevCountProgressBar, mPrevCycleSentText, 800);
+		setProgressInfo(lastCycle, detailsVo.getCycleLimit(), mPrevCountProgressBar, mPrevCycleSentText, 0);
 
 		// Some basic animations
 		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
@@ -141,12 +141,17 @@ public class SentCountFragment extends Fragment {
 	private void setProgressInfo(int count, int limit, ProgressBar progressBar, TextView progressText, long animDelay) {
 		if (limit > 0) {
 			progressBar.setMax(limit);
+			progressBar.setProgress(0);
 			int progress = count;
 			if (count >= limit) {
 				// Don't want progress to be greater than limit
 				progress = limit;
 			}
-			setProgressWithAnimation(progressBar, progress, animDelay);
+			if (animDelay == 0) {
+				progressBar.setProgress(progress);
+			} else {
+				setProgressWithAnimation(progressBar, progress, animDelay);
+			}
 			progressText.setText(count + " / " + limit);
 		}
 	}

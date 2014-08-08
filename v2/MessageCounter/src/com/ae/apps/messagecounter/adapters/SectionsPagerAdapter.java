@@ -51,9 +51,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		if (i == 0) {
 			fragment = mChartFragment;
 		} else if (i == 1) {
-			fragment = mListFragment;
-		} else {
 			fragment = mSentCountFragment;
+		} else {
+			fragment = mListFragment;
 		}
 		return fragment;
 	}
@@ -69,9 +69,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			return context.getString(R.string.title_section2).toUpperCase();
 		case 1:
-			return context.getString(R.string.title_section1).toUpperCase();
-		case 2:
 			return context.getString(R.string.title_section3).toUpperCase();
+		case 2:
+			return context.getString(R.string.title_section1).toUpperCase();
 		}
 		return null;
 	}

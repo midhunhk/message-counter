@@ -175,5 +175,7 @@ MessageCounter 2.1.20 [December 2013]
  - [ADDED]		Widget update broadcast when sending message
  
  MessageCounter 2.3.16 [July 2014]
+ - [FIXED]		Minor bug Fixes for Xperia and HTC devices
+ - [CHANGED]	Counter fragment is main frgment
+   
  - [ADDED]		Animation for progressbar
- - [FIXED]		Minor bug Fixes
