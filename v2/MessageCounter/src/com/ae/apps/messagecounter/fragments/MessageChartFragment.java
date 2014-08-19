@@ -106,19 +106,19 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	@Override
 	public void onResume() {
 		super.onResume();
-		// If the cached value is different from the current prefernce value,
-		if (mCachedSettingsValue != getIncludeNonContactMessagesPref() && mContactMessageList != null) {
+		// Update the chart if the cached value is different from the current preference value,
+		// i18n values are taken from parent activity's context, 
+		// IllegalStateException will be thrown if this Fragment is not currently added to it
+		if (mCachedSettingsValue != getIncludeNonContactMessagesPref() 
+				&& mContactMessageList != null
+				&& isAdded()) {
 			updateMessagesChart();
 		}
 	}
 
 	private void updateMessagesChart() {
-		// i18n values are taken from parent activity, IllegalStateException is thrown if 
-		// this Fragment is not currently added to it
-		if(isAdded()){
-			mTitleText.setText(getResources().getString(R.string.str_chart_title));
-		}
-
+		mTitleText.setText(getResources().getString(R.string.str_chart_title));
+		
 		// Get the preference value for including message counts from non contacts
 		boolean includeNonContactMessages = getIncludeNonContactMessagesPref();
 
