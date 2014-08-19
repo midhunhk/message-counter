@@ -113,7 +113,11 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	}
 
 	private void updateMessagesChart() {
-		mTitleText.setText(getResources().getString(R.string.str_chart_title));
+		// i18n values are taken from parent activity, IllegalStateException is thrown if 
+		// this Fragment is not currently added to it
+		if(isAdded()){
+			mTitleText.setText(getResources().getString(R.string.str_chart_title));
+		}
 
 		// Get the preference value for including message counts from non contacts
 		boolean includeNonContactMessages = getIncludeNonContactMessagesPref();
