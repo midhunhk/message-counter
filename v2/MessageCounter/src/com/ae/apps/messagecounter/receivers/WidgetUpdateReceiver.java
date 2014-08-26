@@ -59,14 +59,17 @@ public class WidgetUpdateReceiver extends AppWidgetProvider {
 		SentCountDetailsVo detailsVo = dataManager.getSentCountData(context);
 		logger.addSplit("read done, updating widgets");
 
-		// update the app widgets
+		// If not set in the settings, cycleLimit would be -1
+		int cycleLimit = (detailsVo.getCycleLimit() > 0) ? detailsVo.getCycleLimit() : 0;
+
+		// update all the app widgets
 		for (int i = 0; i < appWidgetIds.length; i++) {
 			remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
 			// update data here
 			remoteView.setCharSequence(R.id.widgetSentTodayText, METHOD_SET_TEXT, "" + detailsVo.getSentToday());
 			remoteView.setCharSequence(R.id.widgetSentInCycleText, METHOD_SET_TEXT, detailsVo.getSentCycle() + " / "
-					+ detailsVo.getCycleLimit());
+					+ cycleLimit);
 
 			remoteView.setOnClickPendingIntent(R.id.appWidget, pendingIntent);
 

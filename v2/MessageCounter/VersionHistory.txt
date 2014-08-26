@@ -178,8 +178,9 @@ MessageCounter 2.1.20 [December 2013]
  - [FIXED]		Minor bug Fixes for Xperia and HTC devices
  - [CHANGED]	Counter fragment is main frgment
 
- MessageCounter 2.3.18 [August 2014]
+ MessageCounter 2.3.20 [August 2014]
  - [FIXED]		Minor bug Fixes as reported
+ - [FIXED]		Fixed cycle limit -1 in widget
  
  --
  - [ADDED]		Animation for progressbar
