@@ -73,42 +73,7 @@ public class SMSObserver extends ContentObserver {
 				counterDataBase.addMessageSentCounter(today);
 
 				// if sentcount limit and notify on reching the limit are enabled, we shall show a notification
-				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-				boolean sentCountlimitEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
-				boolean notifEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_NOTIFICATION, false);
-				if (sentCountlimitEnabled && notifEnabled) {
-					Date currentCycleStartDate = MessageCounterUtils.getCycleStartDate(preferences);
-					long dateIndex = MessageCounterUtils.getIndexFromDate(currentCycleStartDate);
-					int userLimit = MessageCounterUtils.getMessageLimitValue(preferences);
-					int currentCount = counterDataBase.getTotalSentCountSinceDate(dateIndex);
-					if (currentCount == userLimit) {
-						// Get some resources for the notification
-						Resources resources = mContext.getResources();
-						String notificationTitle = resources.getString(R.string.str_sms_limit_notif_title);
-						String notificationText = resources.getString(R.string.str_sms_limit_notif_text);
-
-						// Crete the intent for running this app when user clicks on the notification
-						Intent resultIntent = new Intent(mContext, MainActivity.class);
-						PendingIntent resultPendingIntent = PendingIntent
-								.getActivity(mContext, AppConstants.NOTIFICATION_REQUEST_CODE, resultIntent,
-										PendingIntent.FLAG_UPDATE_CURRENT);
-						Notification notification = new NotificationCompat.Builder(mContext)
-								.setContentIntent(resultPendingIntent)
-								.setContentTitle(notificationTitle)
-								.setContentText(notificationText)
-								.setNumber(userLimit)
-								.setSmallIcon(R.drawable.ic_app_icon)
-								.setAutoCancel(true)
-								.build();
-
-						// Get an instance of the notification manager service
-						NotificationManager notificationManager = (NotificationManager) mContext
-								.getSystemService(Context.NOTIFICATION_SERVICE);
-
-						// Show a notification to the user here "send message for this cycle has reached limit"
-						notificationManager.notify(0, notification);
-					}
-				}
+				showMessageLimitNotification(counterDataBase);
 
 				// Close the connection to the database
 				counterDataBase.close();
@@ -122,6 +87,45 @@ public class SMSObserver extends ContentObserver {
 			}
 		}
 		cursor.close();
+	}
+
+	private void showMessageLimitNotification(CounterDataBaseAdapter counterDataBase) {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+		boolean sentCountlimitEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
+		boolean notifEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_NOTIFICATION, false);
+		if (sentCountlimitEnabled && notifEnabled) {
+			Date currentCycleStartDate = MessageCounterUtils.getCycleStartDate(preferences);
+			long dateIndex = MessageCounterUtils.getIndexFromDate(currentCycleStartDate);
+			int userLimit = MessageCounterUtils.getMessageLimitValue(preferences);
+			int currentCount = counterDataBase.getTotalSentCountSinceDate(dateIndex);
+			if (currentCount == userLimit) {
+				// Get some resources for the notification
+				Resources resources = mContext.getResources();
+				String notificationTitle = resources.getString(R.string.str_sms_limit_notif_title);
+				String notificationText = resources.getString(R.string.str_sms_limit_notif_text);
+
+				// Crete the intent for running this app when user clicks on the notification
+				Intent resultIntent = new Intent(mContext, MainActivity.class);
+				PendingIntent resultPendingIntent = PendingIntent
+						.getActivity(mContext, AppConstants.NOTIFICATION_REQUEST_CODE, resultIntent,
+								PendingIntent.FLAG_UPDATE_CURRENT);
+				Notification notification = new NotificationCompat.Builder(mContext)
+						.setContentIntent(resultPendingIntent)
+						.setContentTitle(notificationTitle)
+						.setContentText(notificationText)
+						.setNumber(userLimit)
+						.setSmallIcon(R.drawable.ic_app_icon)
+						.setAutoCancel(true)
+						.build();
+
+				// Get an instance of the notification manager service
+				NotificationManager notificationManager = (NotificationManager) mContext
+						.getSystemService(Context.NOTIFICATION_SERVICE);
+
+				// Show a notification to the user here "send message for this cycle has reached limit"
+				notificationManager.notify(0, notification);
+			}
+		}
 	}
 
 	private void sendWidgetUpdateBroadcast() {

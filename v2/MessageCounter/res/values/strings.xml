@@ -5,7 +5,7 @@
     <string name="title_section3">Counter</string>
     
     <string name="app_name">Message Counter</string>
-    <string name="app_version">Version 2.3.20 (August 2014) SilverMoon</string>
+    <string name="app_version">Version 2.3.20 (August 2014) Silver Moon</string>
     <string name="app_desc">Message Counter displays messages inbox statistics and number of messages from each of your contacts.</string>
 	<string name="app_disclaim">Disclaimer: This app is created for educational purposes and as such has no guarantee or support. Since undocumented Android APIs are used, this app may not work as expected on all devices.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
