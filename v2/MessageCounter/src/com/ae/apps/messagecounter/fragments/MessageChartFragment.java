@@ -107,18 +107,21 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	public void onResume() {
 		super.onResume();
 		// Update the chart if the cached value is different from the current preference value,
-		// i18n values are taken from parent activity's context, 
+		// i18n values are taken from parent activity's context,
 		// IllegalStateException will be thrown if this Fragment is not currently added to it
-		if (mCachedSettingsValue != getIncludeNonContactMessagesPref() 
-				&& mContactMessageList != null
-				&& isAdded()) {
+		if (mCachedSettingsValue != getIncludeNonContactMessagesPref() && mContactMessageList != null && isAdded()) {
 			updateMessagesChart();
 		}
 	}
 
 	private void updateMessagesChart() {
-		mTitleText.setText(getResources().getString(R.string.str_chart_title));
-		
+		try {
+			// Reports of IllegalStateExceptions are received
+			mTitleText.setText(getResources().getString(R.string.str_chart_title));
+		} catch (IllegalStateException e) {
+			// may be log this later
+		}
+
 		// Get the preference value for including message counts from non contacts
 		boolean includeNonContactMessages = getIncludeNonContactMessagesPref();
 
@@ -152,8 +155,16 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	 * @return
 	 */
 	private boolean getIncludeNonContactMessagesPref() {
-		return PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext()).getBoolean(
-				AppConstants.PREF_KEY_HIDE_NON_CONTACT_MESSAGES, false);
+		boolean includeNonContactMessagePref = false;
+		try {
+			// reports of an exception being thrown here in some cases
+			includeNonContactMessagePref = PreferenceManager
+					.getDefaultSharedPreferences(getActivity().getBaseContext()).getBoolean(
+							AppConstants.PREF_KEY_HIDE_NON_CONTACT_MESSAGES, false);
+		} catch (Exception e) {
+			// log this also later
+		}
+		return includeNonContactMessagePref;
 	}
 
 }
