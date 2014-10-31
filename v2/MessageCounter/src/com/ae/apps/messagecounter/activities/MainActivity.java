@@ -59,10 +59,11 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 
 		final SMSManager smsManager = new SMSManager(getBaseContext());
 		final ContactManager contactManager = new ContactManager(getContentResolver());
-
+		
 		// Cache the message counts
 		messageCountsCache.put(SMSManager.SMS_URI_ALL, smsManager.getMessagesCount(SMSManager.SMS_URI_ALL));
 		messageCountsCache.put(SMSManager.SMS_URI_SENT, smsManager.getMessagesCount(SMSManager.SMS_URI_SENT));

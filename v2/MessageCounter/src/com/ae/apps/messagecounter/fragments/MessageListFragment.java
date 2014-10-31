@@ -126,7 +126,7 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 				mProgressBar.setVisibility(View.INVISIBLE);
 
 				// Make some hidden views visible with some animation
-				if (null != getActivity().getBaseContext()) {
+				if (null != getActivity() && null != getActivity().getBaseContext()) {
 					Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity().getBaseContext(),
 							R.animator.slide_in_top);
 					// add a small delay before starting the animation
