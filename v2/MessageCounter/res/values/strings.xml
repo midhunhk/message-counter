@@ -12,7 +12,7 @@
 	<string name="app_developer_info">Designed &amp; developed at ae labs</string>
 	
 	<string name="title_activity_main">Message Counter</string>
-	<string name="title_list_page">Messages Received</string>
+	<string name="title_list_page">MESSAGES RECEIVED</string>
     
     <string name="menu_settings">Settings</string>
     <string name="menu_about">About</string>
@@ -71,8 +71,8 @@ limitations under the License.</string>
     <string name="str_enble_notify_on_limit">Notify on reaching SMS send limit</string>
     <string name="str_sms_limit_notif_title">SMS Limit Reached</string>
     <string name="str_sms_limit_notif_text">SMS limit reached for this cycle</string>
-    <string name="str_current_cycle">Current Cycle</string>
-    <string name="str_previous_cycle">Previous cycle</string>
+    <string name="str_current_cycle">CURRENT CYCLE</string>
+    <string name="str_previous_cycle">PREVIOUS CYCLE</string>
     
     
     <!-- strings for widgets v2.3 -->

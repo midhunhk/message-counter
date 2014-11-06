@@ -59,7 +59,6 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 
 		final SMSManager smsManager = new SMSManager(getBaseContext());
 		final ContactManager contactManager = new ContactManager(getContentResolver());
@@ -81,7 +80,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 		viewPager.setCurrentItem(1);
 
 		PagerTabStrip tabStrip = (PagerTabStrip) findViewById(R.id.pager_strip);
-		tabStrip.setTabIndicatorColorResource(R.color.app_theme_dark);
+		tabStrip.setTabIndicatorColorResource(R.color.app_theme_accent);
 
 		// Create the handler in the main thread
 		handler = new Handler();
@@ -130,11 +129,6 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
-
-		// The below code is for ShareActionProvider compatability
-		// MenuItem shareMenu = menu.findItem(R.id.menu_share_app);
-		// mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareMenu);
-		// mShareActionProvider.setShareIntent(shareIntent);
 
 		return super.onCreateOptionsMenu(menu);
 	}

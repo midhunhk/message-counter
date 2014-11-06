@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/padding_large" >
+    android:padding="@dimen/padding_small" >
 
     <!-- enabled layout -->
 
@@ -12,133 +12,252 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:text="@string/str_current_cycle"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:textSize="14sp" />
-        
-        <TextView
-            android:id="@+id/cycleDurationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:text="@string/empty_text"
-            android:textSize="14sp" />
-        
-        <RelativeLayout
+
+        <!-- Hero Card -->
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:padding="@dimen/padding_small" >
+            android:layout_marginTop="@dimen/card_margin"
+            android:padding="@dimen/card_padding" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/str_sent_today"
-                android:textSize="14sp" />
+                android:layout_margin="@dimen/card_margin"
+                android:orientation="vertical"
+                android:padding="@dimen/card_padding" >
 
-            <TextView
-                android:id="@+id/countSentTodayText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/empty_text"
-                android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:text="@string/str_messages_sent_caps"
+                    android:textSize="@dimen/card_title"
+                    android:textStyle="bold" />
 
-        </RelativeLayout>
-        
-        <RelativeLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:text="@string/str_today"
+                        android:textSize="@dimen/item_title"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:text="@string/str_cycle"
+                        android:textSize="@dimen/item_title"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/widgetSentTodayText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:text="@string/str_zero"
+                        android:textColor="@color/app_theme_accent"
+                        android:textSize="@dimen/hero_text" />
+
+                    <TextView
+                        android:id="@+id/widgetSentInCycleText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_weight="1"
+                        android:text="@string/str_zero"
+                        android:textColor="@color/app_theme_accent"
+                        android:textSize="@dimen/hero_text" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <!-- current cycle -->
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:padding="@dimen/padding_small" >
+            android:layout_marginTop="@dimen/card_margin"
+            android:padding="@dimen/card_padding" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/str_this_cycle"
-                android:textSize="14sp" />
+                android:layout_margin="@dimen/card_margin"
+                android:orientation="vertical"
+                android:padding="@dimen/card_padding" >
 
-            <TextView
-                android:id="@+id/countProgressText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/empty_text"
-                android:textSize="18sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_small"
+                        android:text="@string/str_current_cycle"
+                        android:textSize="@dimen/card_title"
+                        android:textStyle="bold" />
 
-        <ProgressBar
-            android:id="@+id/countProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
+                    <TextView
+                        android:id="@+id/cycleDurationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/padding_small"
+                        android:text="@string/empty_text" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:padding="@dimen/padding_small" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/str_sent_today"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/countSentTodayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/empty_text"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:padding="@dimen/padding_small" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/str_this_cycle"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/countProgressText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/empty_text"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/countProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:maxHeight="@dimen/progress_bar_height"
+                    android:minHeight="@dimen/progress_bar_height"
+                    android:progressDrawable="@drawable/progress_bar" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <!-- prev cycle -->
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:indeterminate="false"
-            android:max="100"
-            android:maxHeight="@dimen/progress_bar_height"
-            android:minHeight="@dimen/progress_bar_height"
-            android:progressDrawable="@drawable/progress_bar" />
+            android:layout_marginTop="@dimen/card_margin"
+            android:padding="@dimen/card_padding" >
 
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:padding="@dimen/padding_small"
-            android:text="@string/str_previous_cycle"
-            android:textSize="14sp" />
-        
-        <TextView
-            android:id="@+id/prevCycleDurationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:text="@string/empty_text"
-            android:textSize="14sp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:padding="@dimen/padding_small" >
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/str_messages_sent"
-                android:textSize="14sp" />
+                android:layout_margin="@dimen/card_margin"
+                android:orientation="vertical"
+                android:padding="@dimen/card_padding" >
 
-            <TextView
-                android:id="@+id/prevCycleSentCountText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/empty_text"
-                android:textSize="18sp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_small"
+                        android:text="@string/str_previous_cycle"
+                        android:textSize="@dimen/card_title"
+                        android:textStyle="bold" />
 
-        <ProgressBar
-            android:id="@+id/prevCountProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:indeterminate="false"
-            android:max="100"
-            android:maxHeight="@dimen/progress_bar_height"
-            android:minHeight="@dimen/progress_bar_height"
-            android:progressDrawable="@drawable/progress_bar" />
+                    <TextView
+                        android:id="@+id/prevCycleDurationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/padding_small"
+                        android:text="@string/empty_text" />
+                </RelativeLayout>
+                
+                
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:padding="@dimen/padding_small" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/str_messages_sent"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/prevCycleSentCountText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/empty_text"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/prevCountProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:maxHeight="@dimen/progress_bar_height"
+                    android:minHeight="@dimen/progress_bar_height"
+                    android:progressDrawable="@drawable/progress_bar" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 
     <!-- When Message Counting is not enabled, we display this informative Text -->
+
     <TextView
         android:id="@+id/startCountingLayout"
         android:layout_width="match_parent"

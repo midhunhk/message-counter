@@ -47,7 +47,8 @@ public class MessageCounterUtils {
 
 	private static final String		NO_LIMIT_SET		= "-1";
 	private static SimpleDateFormat	DATE_INDEX_FORMAT	= new SimpleDateFormat("yyMMdd", Locale.getDefault());
-	private static SimpleDateFormat	DATE_DISPLAY_FORMAT	= new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
+	// private static SimpleDateFormat	DATE_DISPLAY_FORMAT	= new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
+	private static SimpleDateFormat	DATE_DISPLAY_FORMAT	= new SimpleDateFormat("dd MMM", Locale.getDefault());
 
 	/**
 	 * Sorts a map using the value rather than key

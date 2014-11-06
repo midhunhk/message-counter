@@ -20,8 +20,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +27,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.QuickContactBadge;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ae.apps.messagecounter.R;
@@ -69,10 +67,12 @@ public class ContactDetailAdapter extends BaseAdapter {
 		if (convertView == null) {
 			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.contact_detail_row, null);
-			QuickContactBadge badge = (QuickContactBadge) convertView.findViewById(R.id.badge_medium);
-			badge.startAnimation(fadeInAnimation);
+			// QuickContactBadge badge = (QuickContactBadge) convertView.findViewById(R.id.badge_medium);
+			ImageView userProfile = (ImageView) convertView.findViewById(R.id.userProfileImage);
+			userProfile.startAnimation(fadeInAnimation);
 			holder = new ViewHolder();
-			holder.badge = badge;
+			// holder.badge = badge;
+			holder.userProfile = userProfile;
 			holder.contactName = (TextView) convertView.findViewById(R.id.contactNameText);
 			holder.timesContacted = (TextView) convertView.findViewById(R.id.contactMessageCountText);
 
@@ -81,13 +81,13 @@ public class ContactDetailAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		String contactId = "";
+		// String contactId = "";
 		ContactMessageVo contactMessageVo = (ContactMessageVo) getItem(position);
 		if (contactMessageVo != null && contactMessageVo.getContactVo() != null) {
-			contactId = contactMessageVo.getContactVo().getId();
+			// contactId = contactMessageVo.getContactVo().getId();
 			String name = contactMessageVo.getContactVo().getName();
 			if (name == null) {
-				holder.contactName.setText("-noname-");
+				holder.contactName.setText("Contact");
 			} else {
 				holder.contactName.setText(name);
 			}
@@ -100,14 +100,14 @@ public class ContactDetailAdapter extends BaseAdapter {
 
 			try {
 				// Set an image for the contact picture from the contact
-				Uri contactUri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactId);
-				holder.badge.assignContactUri(contactUri);
+				// Uri contactUri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactId);
+				// holder.badge.assignContactUri(contactUri);
 				Bitmap bitmap = contactMessageVo.getPhoto();
 				if (bitmap != null) {
-					holder.badge.setImageBitmap(bitmap);
+					holder.userProfile.setImageBitmap(bitmap);
 				} else {
 					// If not able to get the profile icon, show a default one
-					holder.badge.setImageResource(R.drawable.ic_contact_picture);
+					holder.userProfile.setImageResource(R.drawable.ic_contact_picture);
 				}
 
 			} catch (Exception e) {
@@ -134,7 +134,8 @@ public class ContactDetailAdapter extends BaseAdapter {
 	}
 
 	class ViewHolder {
-		QuickContactBadge	badge;
+		//QuickContactBadge	badge;
+		ImageView 			userProfile;
 		TextView			contactName;
 		TextView			timesContacted;
 	}
