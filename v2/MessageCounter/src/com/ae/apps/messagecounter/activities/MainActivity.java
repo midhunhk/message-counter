@@ -96,7 +96,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 				final List<ContactMessageVo> data;
 				boolean isMockedRun = false;
 				if (isMockedRun) {
-					// We are doing a mock run, most probably to take screenshots
+					// We are doing a mock run, most probably to take some screenshots
 					data = MockContactDataUtils.getMockContactMessageList(getResources());
 				} else {
 					// Get the mapping of address and message count
