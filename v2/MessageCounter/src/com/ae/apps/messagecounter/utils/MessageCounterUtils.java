@@ -33,8 +33,8 @@ import android.content.SharedPreferences;
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
 import com.ae.apps.common.utils.ValueComparator;
+import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
-import com.ae.apps.messagecounter.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.vo.GraphData;
 
 /**

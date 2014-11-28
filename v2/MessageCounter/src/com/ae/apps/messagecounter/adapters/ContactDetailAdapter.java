@@ -30,8 +30,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
-import com.ae.apps.messagecounter.vo.ContactMessageVo;
 
 /**
  * Custom Adapter for showing the contact details

@@ -31,11 +31,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ae.apps.common.managers.SMSManager;
+import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.adapters.ContactDetailAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
-import com.ae.apps.messagecounter.vo.ContactMessageVo;
 
 /**
  * Fragment that displays the message count details as a list
