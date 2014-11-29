@@ -29,63 +29,70 @@
                 android:padding="@dimen/card_padding" >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_small"
                     android:text="@string/str_messages_sent_caps"
                     android:textSize="@dimen/card_title"
                     android:textStyle="bold" />
 
+                <!-- start -->
+
                 <LinearLayout
+                    android:baselineAligned="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_small"
                         android:layout_weight="1"
-                        android:text="@string/str_today"
-                        android:textSize="@dimen/item_title"
-                        android:textStyle="bold" />
+                        android:orientation="vertical" >
 
-                    <TextView
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/str_today"
+                            android:textSize="@dimen/item_title"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/widgetSentTodayText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/str_zero"
+                            android:textColor="@color/app_theme_accent"
+                            android:textSize="@dimen/hero_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_small"
                         android:layout_weight="1"
-                        android:text="@string/str_cycle"
-                        android:textSize="@dimen/item_title"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:orientation="vertical" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/str_cycle"
+                            android:textSize="@dimen/item_title"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/widgetSentTodayText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_small"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:text="@string/str_zero"
-                        android:textColor="@color/app_theme_accent"
-                        android:textSize="@dimen/hero_text" />
+                        <TextView
+                            android:id="@+id/widgetSentInCycleText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/str_zero"
+                            android:textColor="@color/app_theme_accent"
+                            android:textSize="@dimen/hero_text" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/widgetSentInCycleText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_small"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_weight="1"
-                        android:text="@string/str_zero"
-                        android:textColor="@color/app_theme_accent"
-                        android:textSize="@dimen/hero_text" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -107,7 +114,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -122,6 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:padding="@dimen/padding_small"
                         android:text="@string/empty_text" />
                 </RelativeLayout>
@@ -135,6 +143,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:text="@string/str_sent_today"
                         android:textSize="14sp" />
@@ -144,6 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:text="@string/empty_text"
                         android:textSize="18sp" />
                 </RelativeLayout>
@@ -157,6 +167,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:text="@string/str_this_cycle"
                         android:textSize="14sp" />
@@ -166,6 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:text="@string/empty_text"
                         android:textSize="18sp" />
                 </RelativeLayout>
@@ -200,7 +212,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -215,11 +227,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:padding="@dimen/padding_small"
                         android:text="@string/empty_text" />
                 </RelativeLayout>
-                
-                
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -229,6 +241,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:text="@string/str_messages_sent"
                         android:textSize="14sp" />
@@ -238,6 +251,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:text="@string/empty_text"
                         android:textSize="18sp" />
                 </RelativeLayout>
@@ -265,6 +279,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/margin_extra_large"
         android:drawableLeft="@drawable/ic_action_settings"
+        android:drawableStart="@drawable/ic_action_settings"
         android:drawablePadding="@dimen/padding_medium"
         android:padding="@dimen/padding_medium"
         android:text="@string/str_enable_sent_count"
