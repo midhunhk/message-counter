@@ -11,6 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/card_margin"
+        android:minWidth="20dp"
+        android:minHeight="20dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
         android:contentDescription="@string/empty_text"/>
 
     <TextView
@@ -18,8 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
+        android:layout_marginStart="5dip"
         android:layout_toRightOf="@+id/userProfileImage"
-        android:padding="5dip"
+        android:layout_toEndOf="@+id/userProfileImage"
+        android:padding="@dimen/card_padding"
         android:textIsSelectable="true"
         android:textSize="16sp" />
 
@@ -28,7 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:padding="2dip"
+        android:layout_alignParentEnd="true"
+        android:padding="@dimen/card_padding"
         android:textIsSelectable="false"
         android:textSize="20sp" />
 

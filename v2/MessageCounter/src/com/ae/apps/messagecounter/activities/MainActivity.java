@@ -28,6 +28,7 @@ import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -48,7 +49,7 @@ import com.ae.apps.messagecounter.utils.MessageCounterUtils;
  * @author Midhun
  * 
  */
-public class MainActivity extends ActionBarActivity implements MessageDataReader {
+public class MainActivity extends ActionBarActivity implements MessageDataReader, OnMenuItemClickListener {
 
 	private boolean						isDataReady;
 	private Handler						handler;
@@ -128,6 +129,10 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 				});
 			}
 		}).start();
+		
+		// Inflate and handle menu clicks
+		toolbar.inflateMenu(R.menu.activity_main);
+		toolbar.setOnMenuItemClickListener(this);
 	}
 
 	@Override
@@ -190,6 +195,11 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 		shareIntent.setType("text/plain");
 		shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
 		return shareIntent;
+	}
+
+	@Override
+	public boolean onMenuItemClick(MenuItem item) {
+		return onOptionsItemSelected(item);
 	}
 
 }

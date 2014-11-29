@@ -22,7 +22,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/str_today"
             android:textColor="@color/white" />
 
@@ -30,7 +32,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/str_cycle"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -44,7 +48,9 @@
             android:id="@+id/widgetSentTodayText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_weight="1"
             android:text="@string/str_zero" />
@@ -52,9 +58,11 @@
         <TextView
             android:id="@+id/widgetSentInCycleText"
             android:layout_width="0dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_small"
             android:layout_weight="1"
             android:text="@string/str_zero" />
     </LinearLayout>

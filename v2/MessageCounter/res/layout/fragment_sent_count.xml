@@ -59,7 +59,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/widgetSentTodayText"
+                            android:id="@+id/heroSentTodayText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -84,7 +84,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/widgetSentInCycleText"
+                            android:id="@+id/heroSentInCycleText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"

@@ -6,6 +6,7 @@
     tools:context=".MainActivity"
     tools:ignore="MergeRootFrame" >
 
+    <!-- The toolbar -->
     <android.support.v7.widget.Toolbar
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         app:popupTheme="@style/Theme.AppCompat.Light"
         android:background="@color/app_theme_light" />
 
+    <!-- The ViewPager -->
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
@@ -26,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            android:textColor="@color/white"
             android:background="@color/app_theme_light"
             android:padding="@dimen/padding_small" />
     </android.support.v4.view.ViewPager>

@@ -61,6 +61,8 @@ public class SentCountFragment extends Fragment {
 	private TextView			mCycleDurationText		= null;
 	private TextView			mPrevCycleDurationText	= null;
 	private TextView			mPrevCycleSentText		= null;
+	private TextView			mHeroSentTodayText		= null;
+	private TextView			mHeroSentInCycleText	= null;
 	private ProgressBar			mPrevCountProgressBar	= null;
 	private boolean				mCachedPreferenceValue;
 
@@ -82,6 +84,8 @@ public class SentCountFragment extends Fragment {
 		mPrevCycleSentText = (TextView) layout.findViewById(R.id.prevCycleSentCountText);
 		mPrevCycleDurationText = (TextView) layout.findViewById(R.id.prevCycleDurationText);
 		mPrevCountProgressBar = (ProgressBar) layout.findViewById(R.id.prevCountProgressBar);
+		mHeroSentTodayText = (TextView) layout.findViewById(R.id.heroSentTodayText);
+		mHeroSentInCycleText = (TextView) layout.findViewById(R.id.heroSentInCycleText);
 
 		// See which layout to be shown to the user
 		updateLayout();
@@ -117,8 +121,10 @@ public class SentCountFragment extends Fragment {
 		SentCountDataManager dataManager = new SentCountDataManager();
 		SentCountDetailsVo detailsVo = dataManager.getSentCountData(mContext);
 
-		// set no of messages sent today
-		mSentTodayText.setText(detailsVo.getSentToday() + "");
+		// set no of messages sent today and in this cycle
+		mSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
+		mHeroSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
+		mHeroSentInCycleText.setText(String.valueOf(detailsVo.getSentCycle()));
 
 		// set the progressbar
 		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText, 0);
@@ -126,7 +132,7 @@ public class SentCountFragment extends Fragment {
 		// Show the previous cycle details
 		int lastCycle = detailsVo.getSentLastCycle();
 		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
-		mPrevCycleSentText.setText(lastCycle + "");
+		mPrevCycleSentText.setText(String.valueOf(lastCycle));
 		mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate));
 
 		// set the progressbar for the last cycle
