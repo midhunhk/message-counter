@@ -25,8 +25,8 @@
     <application
         android:allowBackup="false"
         android:label="@string/app_name"
-        android:icon="@drawable/ic_app_icon"
-        android:theme="@style/AppTheme" >
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/MessageCounterTheme" >
 
         <!-- Activities -->
         <activity

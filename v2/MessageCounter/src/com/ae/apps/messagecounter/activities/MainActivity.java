@@ -24,9 +24,10 @@ import java.util.Map;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -47,7 +48,7 @@ import com.ae.apps.messagecounter.utils.MessageCounterUtils;
  * @author Midhun
  * 
  */
-public class MainActivity extends FragmentActivity implements MessageDataReader {
+public class MainActivity extends ActionBarActivity implements MessageDataReader {
 
 	private boolean						isDataReady;
 	private Handler						handler;
@@ -69,6 +70,9 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 		messageCountsCache.put(SMSManager.SMS_URI_INBOX, smsManager.getMessagesCount(SMSManager.SMS_URI_INBOX));
 		messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
 
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		
 		// The mViewPager object should be null when running on tablets
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -165,7 +169,7 @@ public class MainActivity extends FragmentActivity implements MessageDataReader 
 		}
 		consumers.add(consumer);
 
-		// if data is ready, invoke the data ready method
+		// if data is ready, perform the call back as per the contract
 		if (isDataReady) {
 			consumer.onDataReady(contactMessageList);
 		}
