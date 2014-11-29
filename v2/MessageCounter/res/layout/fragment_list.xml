@@ -1,7 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical" 
     android:padding="@dimen/padding_medium" >
 
     <android.support.v7.widget.CardView
@@ -21,57 +22,63 @@
             tools:context=".MainActivity" />
     </android.support.v7.widget.CardView>
 
-    <TextView
-        android:id="@+id/pageTitleText"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/messageInfo"
-        android:paddingLeft="4dip"
-        android:text="@string/title_list_page"
-        android:textSize="@dimen/card_title"
-        android:textStyle="bold"
-        tools:context=".MainActivity" />
+        android:padding="@dimen/card_padding" >
 
-    <!-- The List Container -->
-
-    <LinearLayout
-        android:id="@+id/listContainer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pageTitleText"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@android:id/list"
+        <TextView
+            android:id="@+id/pageTitleText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/messageInfo"
+            android:paddingLeft="4dip"
+            android:text="@string/title_list_page"
+            android:textSize="@dimen/card_title"
+            android:textStyle="bold"
+            tools:context=".MainActivity" />
+
+        <!-- The List Container -->
 
         <LinearLayout
-            android:id="@android:id/empty"
-            android:layout_width="match_parent"
+            android:id="@+id/listContainer"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:layout_below="@+id/pageTitleText"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical" >
 
-            <ProgressBar
-                android:id="@+id/loadingProgressBar"
+            <ListView
+                android:id="@android:id/list"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/padding_medium" />
+                android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/emptyListText"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@android:id/empty"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="2dip"
                 android:gravity="center_vertical"
-                android:text="@string/empty_list"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </LinearLayout>
+                android:orientation="vertical" >
 
-</RelativeLayout>
+                <ProgressBar
+                    android:id="@+id/loadingProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/padding_medium" />
+
+                <TextView
+                    android:id="@+id/emptyListText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="2dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/empty_list"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
