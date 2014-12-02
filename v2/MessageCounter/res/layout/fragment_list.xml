@@ -38,6 +38,7 @@
                 android:layout_margin="@dimen/card_margin"
                 android:text="@string/title_list_page"
                 android:textSize="@dimen/card_title"
+                android:textAllCaps="true"
                 android:textStyle="bold"
                 tools:context=".MainActivity" />
 

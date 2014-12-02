@@ -12,7 +12,7 @@
 	<string name="app_developer_info">Designed &amp; developed at ae labs</string>
 	
 	<string name="title_activity_main">Message Counter</string>
-	<string name="title_list_page">Messages Received</string>
+	<string name="title_list_page">MESSAGES RECEIVED</string>
     
     <string name="menu_settings">Settings</string>
     <string name="menu_about">About</string>
