@@ -40,7 +40,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.AboutActivity" />
+        
+        <!-- About activity -->
+        <activity
+            android:name=".activities.AboutActivity"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
 
         <!-- Services -->
         <service

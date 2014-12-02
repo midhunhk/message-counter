@@ -5,7 +5,7 @@
     <string name="title_section3">Compteur</string>
     
     <string name="app_name">du Compteur de Messages</string>
-    <string name="app_version">Version 2.3.24 (October 2014)</string>
+    <string name="app_version">Version 3.0.0 (December 2014)</string>
     <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>
 	<string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
