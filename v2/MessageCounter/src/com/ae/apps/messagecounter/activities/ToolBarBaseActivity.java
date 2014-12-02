@@ -35,13 +35,11 @@ public abstract class ToolBarBaseActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(getLayoutRessourceId());
+		setContentView(getLayoutResourceId());
 
 		// Find the toolbar and set it as action bar
 		mToolbar = (Toolbar) findViewById(getToolbarResourceId());
 		setSupportActionBar(mToolbar);
-
-		mToolbar.inflateMenu(getMenuResourceId());
 	}
 	
 	/**
@@ -65,14 +63,6 @@ public abstract class ToolBarBaseActivity extends ActionBarActivity {
 	 * 
 	 * @return
 	 */
-	protected abstract int getLayoutRessourceId();
+	protected abstract int getLayoutResourceId();
 	
-	/**
-	 * Returns the menu resource id
-	 * Should be R.menu.menu in most cases
-	 * 
-	 * @return
-	 */
-	protected abstract int getMenuResourceId();
-
 }

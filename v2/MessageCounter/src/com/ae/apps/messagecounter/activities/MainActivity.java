@@ -126,19 +126,22 @@ public class MainActivity extends ToolBarBaseActivity
 		}).start();
 		
 		// Inflate and handle menu clicks
-		getToolBar().inflateMenu(getMenuResourceId());
-		getToolBar().setOnMenuItemClickListener(this);
+		getToolBar().inflateMenu(R.menu.activity_main);
+		// getToolBar().setOnMenuItemClickListener(this);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(getMenuResourceId(), menu);
-
+		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		return handleMenuItemClick(item);
+	}
+
+	private boolean handleMenuItemClick(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_license:
 			// Show the license dialog
@@ -194,7 +197,7 @@ public class MainActivity extends ToolBarBaseActivity
 
 	@Override
 	public boolean onMenuItemClick(MenuItem item) {
-		return onOptionsItemSelected(item);
+		return handleMenuItemClick(item);
 	}
 
 	@Override
@@ -203,13 +206,8 @@ public class MainActivity extends ToolBarBaseActivity
 	}
 
 	@Override
-	protected int getLayoutRessourceId() {
+	protected int getLayoutResourceId() {
 		return R.layout.activity_main;
-	}
-
-	@Override
-	protected int getMenuResourceId() {
-		return R.menu.activity_main;
 	}
 
 }
