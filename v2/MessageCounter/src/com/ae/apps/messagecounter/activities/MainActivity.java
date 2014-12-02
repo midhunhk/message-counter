@@ -26,8 +26,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,18 +47,18 @@ import com.ae.apps.messagecounter.utils.MessageCounterUtils;
  * @author Midhun
  * 
  */
-public class MainActivity extends ActionBarActivity implements MessageDataReader, OnMenuItemClickListener {
+public class MainActivity extends ToolBarBaseActivity 
+		implements MessageDataReader, OnMenuItemClickListener {
 
 	private boolean						isDataReady;
-	private Handler						handler;
-	private List<ContactMessageVo>		contactMessageList;
+	private Handler						mHandler;
+	private List<ContactMessageVo>		mContactMessageList;
 	private final Map<String, Integer>	messageCountsCache	= new HashMap<String, Integer>();
-	private List<MessageDataConsumer>	consumers			= new ArrayList<MessageDataConsumer>();
+	private List<MessageDataConsumer>	mConsumers			= new ArrayList<MessageDataConsumer>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 
 		final SMSManager smsManager = new SMSManager(getBaseContext());
 		final ContactManager contactManager = new ContactManager(getContentResolver());
@@ -71,9 +69,6 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 		messageCountsCache.put(SMSManager.SMS_URI_INBOX, smsManager.getMessagesCount(SMSManager.SMS_URI_INBOX));
 		messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-		
 		// The mViewPager object should be null when running on tablets
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -88,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 		tabStrip.setTabIndicatorColorResource(R.color.app_theme_accent);
 
 		// Create the handler in the main thread
-		handler = new Handler();
+		mHandler = new Handler();
 
 		// the data is not yet ready
 		isDataReady = false;
@@ -115,14 +110,14 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 							.getContactMessageList(contactManager, sortedValuesMap, messageSendersMap);
 				}
 				isDataReady = true;
-				contactMessageList = data;
+				mContactMessageList = data;
 
-				handler.post(new Runnable() {
+				mHandler.post(new Runnable() {
 
 					@Override
 					public void run() {
 						// Inform the consumers that the data is ready
-						for (MessageDataConsumer consumer : consumers) {
+						for (MessageDataConsumer consumer : mConsumers) {
 							consumer.onDataReady(data);
 						}
 					}
@@ -131,13 +126,13 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 		}).start();
 		
 		// Inflate and handle menu clicks
-		toolbar.inflateMenu(R.menu.activity_main);
-		toolbar.setOnMenuItemClickListener(this);
+		getToolBar().inflateMenu(getMenuResourceId());
+		getToolBar().setOnMenuItemClickListener(this);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		getMenuInflater().inflate(getMenuResourceId(), menu);
 
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -169,14 +164,14 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 
 	@Override
 	public void registerForData(MessageDataConsumer consumer) {
-		if (consumers == null) {
-			consumers = new ArrayList<MessageDataConsumer>();
+		if (mConsumers == null) {
+			mConsumers = new ArrayList<MessageDataConsumer>();
 		}
-		consumers.add(consumer);
+		mConsumers.add(consumer);
 
 		// if data is ready, perform the call back as per the contract
 		if (isDataReady) {
-			consumer.onDataReady(contactMessageList);
+			consumer.onDataReady(mContactMessageList);
 		}
 	}
 
@@ -200,6 +195,21 @@ public class MainActivity extends ActionBarActivity implements MessageDataReader
 	@Override
 	public boolean onMenuItemClick(MenuItem item) {
 		return onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected int getToolbarResourceId() {
+		return R.id.toolbar;
+	}
+
+	@Override
+	protected int getLayoutRessourceId() {
+		return R.layout.activity_main;
+	}
+
+	@Override
+	protected int getMenuResourceId() {
+		return R.menu.activity_main;
 	}
 
 }
