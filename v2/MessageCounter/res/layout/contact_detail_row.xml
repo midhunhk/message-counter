@@ -5,25 +5,25 @@
     android:orientation="horizontal"
     android:padding="5dip" >
 
+    <!-- profile image -->
     <com.ae.apps.common.views.RoundedImageView
         android:id="@+id/userProfileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/card_margin"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:minWidth="@dimen/image_min_size"
+        android:minHeight="@dimen/image_min_size"
+        android:maxWidth="@dimen/image_max_size"
+        android:maxHeight="@dimen/image_max_size"
         android:contentDescription="@string/empty_text"/>
 
     <TextView
         android:id="@+id/contactNameText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dip"
-        android:layout_marginStart="5dip"
-        android:gravity="center_vertical"
+        android:layout_margin="@dimen/card_margin"
+        android:gravity="center"
         android:layout_toRightOf="@+id/userProfileImage"
         android:layout_toEndOf="@+id/userProfileImage"
         android:padding="@dimen/card_padding"

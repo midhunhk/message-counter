@@ -70,7 +70,7 @@ public class MainActivity extends ToolBarBaseActivity
 		messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
 
 		// The mViewPager object should be null when running on tablets
-		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+		ViewPager viewPager = (ViewPager) findViewById(R.id.pager); 
 
 		// This adapter that will return a fragment for each of the three primary sections
 		SectionsPagerAdapter pagerAdapter = new SectionsPagerAdapter(getBaseContext(), getSupportFragmentManager());

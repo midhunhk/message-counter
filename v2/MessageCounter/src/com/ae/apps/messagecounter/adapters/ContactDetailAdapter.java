@@ -107,7 +107,8 @@ public class ContactDetailAdapter extends BaseAdapter {
 					holder.userProfile.setImageBitmap(bitmap);
 				} else {
 					// If not able to get the profile icon, show a default one
-					holder.userProfile.setImageResource(R.drawable.ic_contact_picture);
+					// holder.userProfile.setImageResource(R.drawable.ic_contact_picture);
+					holder.userProfile.setImageResource(com.ae.apps.aeappslibrary.R.drawable.profile_icon_3);
 				}
 
 			} catch (Exception e) {

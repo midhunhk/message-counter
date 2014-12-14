@@ -22,5 +22,8 @@
     <dimen name="card_title">16sp</dimen>
     <dimen name="item_title">14sp</dimen>
     <dimen name="hero_text">48sp</dimen>
+    
+    <dimen name="image_min_size">48dp</dimen>
+    <dimen name="image_max_size">48dp</dimen>
 
 </resources>
