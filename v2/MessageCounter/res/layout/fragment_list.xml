@@ -36,6 +36,7 @@
                 android:layout_alignParentTop="true"
                 android:padding="@dimen/card_padding"
                 android:layout_margin="@dimen/card_margin"
+                android:textColor="@color/app_theme_light"
                 android:text="@string/title_list_page"
                 android:textSize="@dimen/card_title"
                 android:textAllCaps="true"

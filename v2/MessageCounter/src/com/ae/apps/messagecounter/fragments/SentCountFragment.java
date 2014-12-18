@@ -207,7 +207,7 @@ public class SentCountFragment extends Fragment {
 	}
 
 	private boolean getCountMessagesEnabledPref() {
-		return mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
+		return mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, true);
 	}
 
 }
