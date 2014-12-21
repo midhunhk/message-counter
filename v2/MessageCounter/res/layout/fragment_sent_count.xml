@@ -6,7 +6,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small" >
 
         <!-- enabled layout -->
 
@@ -21,7 +22,6 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/card_margin"
                 android:padding="@dimen/card_padding" >
 
                 <LinearLayout
@@ -35,8 +35,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        android:textColor="@color/app_theme_light"
                         android:text="@string/str_messages_sent_caps"
+                        android:textColor="@color/app_theme_light"
                         android:textSize="@dimen/card_title"
                         android:textStyle="bold" />
 
@@ -122,8 +122,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_small"
-                            android:textColor="@color/app_theme_light"
                             android:text="@string/str_current_cycle"
+                            android:textColor="@color/app_theme_light"
                             android:textSize="@dimen/card_title"
                             android:textStyle="bold" />
 
@@ -221,8 +221,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_small"
-                            android:textColor="@color/app_theme_light"
                             android:text="@string/str_previous_cycle"
+                            android:textColor="@color/app_theme_light"
                             android:textSize="@dimen/card_title"
                             android:textStyle="bold" />
 
@@ -273,21 +273,24 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
-        <!-- When Message Counting is not enabled, we display this informative Text -->
 
-        <TextView
+        <!-- When Message Counter is not enabled, we display this informative card -->
+
+        <android.support.v7.widget.CardView
             android:id="@+id/startCountingLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="@dimen/margin_extra_large"
-            android:drawableLeft="@drawable/ic_action_settings"
-            android:drawablePadding="@dimen/padding_medium"
-            android:drawableStart="@drawable/ic_action_settings"
-            android:padding="@dimen/padding_medium"
-            android:text="@string/str_enable_sent_count"
-            android:textSize="16sp" >
-        </TextView>
+            android:padding="@dimen/padding_large" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/margin_medium"
+                android:text="@string/str_enable_sent_count"
+                android:textSize="@dimen/card_title" >
+            </TextView>
+        </android.support.v7.widget.CardView>
     </FrameLayout>
 
 </ScrollView>
