@@ -68,7 +68,7 @@ public class SentCountFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View layout = inflater.inflate(R.layout.fragment_sent_count, null);
+		View layout = inflater.inflate(R.layout.fragment_sent_count, container, false);
 		mContext = getActivity().getBaseContext();
 
 		// get the preferences for the app
@@ -86,12 +86,15 @@ public class SentCountFragment extends Fragment {
 		mPrevCountProgressBar = (ProgressBar) layout.findViewById(R.id.prevCountProgressBar);
 		mHeroSentTodayText = (TextView) layout.findViewById(R.id.heroSentTodayText);
 		mHeroSentInCycleText = (TextView) layout.findViewById(R.id.heroSentInCycleText);
-
+		
 		// See which layout to be shown to the user
 		updateLayout();
 
 		// Cache the enabled preference value
 		cacheEnabledPref();
+		
+		// Start the service for first time user
+		startMessageCounterService();
 
 		return layout;
 	}
@@ -189,9 +192,9 @@ public class SentCountFragment extends Fragment {
 		updateLayout();
 
 		boolean enabled = getCountMessagesEnabledPref();
-		// If ecount messages is enabled, we should prolly start the service
-		if (enabled != mCachedPreferenceValue && enabled) {
-			mContext.startService(new Intent(mContext, SMSObserverService.class));
+		// If count messages is enabled, we should may be start the service
+		if (enabled != mCachedPreferenceValue) {
+			startMessageCounterService();
 		}
 	}
 
@@ -208,6 +211,17 @@ public class SentCountFragment extends Fragment {
 
 	private boolean getCountMessagesEnabledPref() {
 		return mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, true);
+	}
+	
+	/**
+	 * Starts the service if it is enabled in the setting
+	 */
+	private void startMessageCounterService(){
+		if(getCountMessagesEnabledPref()){
+			mContext.startService(new Intent(mContext, SMSObserverService.class));
+		} else {
+			mContext.stopService(new Intent(mContext, SMSObserverService.class));
+		}
 	}
 
 }
