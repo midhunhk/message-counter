@@ -1,6 +1,6 @@
 Message Counter
 ===============
-<img alt="app icon" src="https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-frc1/t1/p206x206/1623349_492913894078406_217528190_n.png"/>
+<img alt="app icon" src="https://github.com/midhunhk/message-counter/blob/talisman/v2/MessageCounter/res/drawable-hdpi/ic_launcher.png"/>
 
 Wiki - https://github.com/midhunhk/message-counter/wiki
 
