@@ -5,11 +5,11 @@
     <color name="white">#FFFFFF</color>
     
     <!-- app theme colors -->
-    <color name="app_theme_light">#33B5E5</color>
-    <color name="app_theme_dark">#0E6785</color>
+    <color name="app_theme_light">#009688</color>
+    <color name="app_theme_dark">#00695C</color>
+    <color name="app_theme_accent">#FF9800</color>
+    
+    <color name="text_black">#000000</color>
+    <color name="text_grey">#666666</color>
 
-    <!-- 
-    <color name="app_theme_light_22">#CA00CA</color>
-    <color name="app_theme_dark_22">#660066</color>
- -->
 </resources>

@@ -1,16 +1,29 @@
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    tools:ignore="MergeRootFrame" >
 
-    <android.support.v4.view.PagerTabStrip
-        android:id="@+id/pager_strip"
+    <!-- The toolbar -->
+    <include layout="@layout/toolbar" />
+
+    <!-- The ViewPager -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:background="@color/grey"
-        android:padding="@dimen/padding_small" />
+        android:layout_height="match_parent"
+        tools:context=".MainActivity" >
 
-</android.support.v4.view.ViewPager>
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_strip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:textColor="@color/white"
+            android:background="@color/app_theme_light"
+            android:padding="@dimen/padding_small" />
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

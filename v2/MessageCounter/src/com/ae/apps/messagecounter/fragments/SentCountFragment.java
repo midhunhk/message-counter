@@ -61,12 +61,14 @@ public class SentCountFragment extends Fragment {
 	private TextView			mCycleDurationText		= null;
 	private TextView			mPrevCycleDurationText	= null;
 	private TextView			mPrevCycleSentText		= null;
+	private TextView			mHeroSentTodayText		= null;
+	private TextView			mHeroSentInCycleText	= null;
 	private ProgressBar			mPrevCountProgressBar	= null;
 	private boolean				mCachedPreferenceValue;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View layout = inflater.inflate(R.layout.fragment_sent_count, null);
+		View layout = inflater.inflate(R.layout.fragment_sent_count, container, false);
 		mContext = getActivity().getBaseContext();
 
 		// get the preferences for the app
@@ -82,12 +84,17 @@ public class SentCountFragment extends Fragment {
 		mPrevCycleSentText = (TextView) layout.findViewById(R.id.prevCycleSentCountText);
 		mPrevCycleDurationText = (TextView) layout.findViewById(R.id.prevCycleDurationText);
 		mPrevCountProgressBar = (ProgressBar) layout.findViewById(R.id.prevCountProgressBar);
-
+		mHeroSentTodayText = (TextView) layout.findViewById(R.id.heroSentTodayText);
+		mHeroSentInCycleText = (TextView) layout.findViewById(R.id.heroSentInCycleText);
+		
 		// See which layout to be shown to the user
 		updateLayout();
 
 		// Cache the enabled preference value
 		cacheEnabledPref();
+		
+		// Start the service for first time user
+		startMessageCounterService();
 
 		return layout;
 	}
@@ -117,8 +124,10 @@ public class SentCountFragment extends Fragment {
 		SentCountDataManager dataManager = new SentCountDataManager();
 		SentCountDetailsVo detailsVo = dataManager.getSentCountData(mContext);
 
-		// set no of messages sent today
-		mSentTodayText.setText(detailsVo.getSentToday() + "");
+		// set no of messages sent today and in this cycle
+		mSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
+		mHeroSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
+		mHeroSentInCycleText.setText(String.valueOf(detailsVo.getSentCycle()));
 
 		// set the progressbar
 		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText, 0);
@@ -126,7 +135,7 @@ public class SentCountFragment extends Fragment {
 		// Show the previous cycle details
 		int lastCycle = detailsVo.getSentLastCycle();
 		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
-		mPrevCycleSentText.setText(lastCycle + "");
+		mPrevCycleSentText.setText(String.valueOf(lastCycle));
 		mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate));
 
 		// set the progressbar for the last cycle
@@ -183,9 +192,9 @@ public class SentCountFragment extends Fragment {
 		updateLayout();
 
 		boolean enabled = getCountMessagesEnabledPref();
-		// If ecount messages is enabled, we should prolly start the service
-		if (enabled != mCachedPreferenceValue && enabled) {
-			mContext.startService(new Intent(mContext, SMSObserverService.class));
+		// If count messages is enabled, we should may be start the service
+		if (enabled != mCachedPreferenceValue) {
+			startMessageCounterService();
 		}
 	}
 
@@ -201,7 +210,18 @@ public class SentCountFragment extends Fragment {
 	}
 
 	private boolean getCountMessagesEnabledPref() {
-		return mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
+		return mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, true);
+	}
+	
+	/**
+	 * Starts the service if it is enabled in the setting
+	 */
+	private void startMessageCounterService(){
+		if(getCountMessagesEnabledPref()){
+			mContext.startService(new Intent(mContext, SMSObserverService.class));
+		} else {
+			mContext.stopService(new Intent(mContext, SMSObserverService.class));
+		}
 	}
 
 }

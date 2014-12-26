@@ -21,7 +21,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ae.apps.messagecounter.R;
-import com.ae.apps.messagecounter.fragments.MessageChartFragment;
 import com.ae.apps.messagecounter.fragments.MessageListFragment;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
 
@@ -33,14 +32,12 @@ import com.ae.apps.messagecounter.fragments.SentCountFragment;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 	private final Context	context;
-	private final Fragment	mChartFragment;
 	private final Fragment	mListFragment;
 	private final Fragment	mSentCountFragment;
 
 	public SectionsPagerAdapter(Context context, FragmentManager fm) {
 		super(fm);
 		this.context = context;
-		mChartFragment = new MessageChartFragment();
 		mListFragment = new MessageListFragment();
 		mSentCountFragment = new SentCountFragment();
 	}
@@ -49,29 +46,25 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int i) {
 		Fragment fragment = null;
 		if (i == 0) {
-			fragment = mChartFragment;
-		} else if (i == 1) {
-			fragment = mSentCountFragment;
-		} else {
 			fragment = mListFragment;
+		} else {
+			fragment = mSentCountFragment;
 		}
 		return fragment;
 	}
 
 	@Override
 	public int getCount() {
-		return 3;
+		return 2;
 	}
 
 	@Override
 	public CharSequence getPageTitle(int position) {
 		switch (position) {
 		case 0:
-			return context.getString(R.string.title_section2).toUpperCase();
+			return context.getString(R.string.title_section1).toUpperCase();
 		case 1:
 			return context.getString(R.string.title_section3).toUpperCase();
-		case 2:
-			return context.getString(R.string.title_section1).toUpperCase();
 		}
 		return null;
 	}
