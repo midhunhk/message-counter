@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="DefaultLocale" severity="ignore" />
+    <issue id="IconMissingDensityFolder" severity="ignore" />
     <issue id="InconsistentLayout">
         <ignore path="res/layout/activity_main.xml" />
     </issue>
+    <issue id="MissingRegistered">
+        <ignore path="res/layout/contact_detail_row.xml" />
+    </issue>
+    <issue id="MissingTranslation" severity="ignore" />
 </lint>

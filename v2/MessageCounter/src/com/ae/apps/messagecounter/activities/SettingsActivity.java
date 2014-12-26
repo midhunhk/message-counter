@@ -16,16 +16,33 @@
 
 package com.ae.apps.messagecounter.activities;
 
-import com.ae.apps.messagecounter.R;
-
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+import com.ae.apps.messagecounter.R;
+
+/**
+ * Settings Activity
+ * 
+ * TODO add toolbar to this view
+ * http://stackoverflow.com/questions/26564400/creating-a-preference-screen-with-support-v21-toolbar
+ * 
+ * @author MidhunHK
+ *
+ */
 public class SettingsActivity extends PreferenceActivity {
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// will use logic from stackoverflow link to show this with toolbr
 		addPreferencesFromResource(R.xml.preferences);
+		
+		/*if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			addPreferencesFromResource(R.xml.preferences);
+		} else {
+			
+		}*/
 	}
+	
 }

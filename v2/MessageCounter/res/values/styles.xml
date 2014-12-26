@@ -1,6 +1,16 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="android:Theme.Light" />
+        <!-- Base application theme. -->
+    <style name="MessageCounterTheme" parent="AppTheme.Base">
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/app_theme_light</item>
+        <item name="colorPrimaryDark">@color/app_theme_dark</item>
+        <item name="colorAccent">@color/app_theme_accent</item>
+    </style>
     
     <style name="HighlightedTextArea">
         <item name="android:background">@color/app_theme_light</item>
