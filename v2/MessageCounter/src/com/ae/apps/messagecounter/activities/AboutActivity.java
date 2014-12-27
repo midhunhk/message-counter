@@ -16,15 +16,27 @@
 
 package com.ae.apps.messagecounter.activities;
 
-import com.ae.apps.messagecounter.R;
-
-import android.app.Activity;
 import android.os.Bundle;
 
-public class AboutActivity extends Activity {
+import com.ae.apps.messagecounter.R;
+
+public class AboutActivity extends ToolBarBaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_about);
+		
+		// Show the back arrow in toolbar to go back
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	protected int getToolbarResourceId() {
+		return R.id.toolbar;
+	}
+
+	@Override
+	protected int getLayoutResourceId() {
+		return R.layout.fragment_about;
 	}
 }

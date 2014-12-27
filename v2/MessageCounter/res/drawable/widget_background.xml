@@ -8,6 +8,6 @@
         android:color="#222222" />
 
     <!-- alpha rgb -->
-    <solid android:color="#CC222222" />
+    <solid android:color="#CC263238" />
 
 </shape>
