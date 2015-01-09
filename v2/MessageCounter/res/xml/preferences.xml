@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- enable or disable non contact messages count -->
-    <!-- 
+     
     <PreferenceCategory android:title="@string/str_pref_messages" >
         <CheckBoxPreference
             android:key="pref_key_hide_non_contact_messages"
@@ -10,7 +10,6 @@
             android:summaryOn="@string/str_pref_hide_non_contact_message_count"
             android:title="@string/str_pref_non_contact_messages" />
     </PreferenceCategory>
-     -->
     
     <!-- preferences for sent message counter -->
     <PreferenceCategory android:title="@string/str_pref_sent_message_count" >

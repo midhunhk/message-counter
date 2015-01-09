@@ -1,6 +1,7 @@
 <resources>
 
 	<string name="title_section1">Lista</string>
+	<string name="title_section2">Gráfico</string>
 	<string name="title_section3">Contador</string>
 
 	<string name="app_name">Mensagem Contador</string>

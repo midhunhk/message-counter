@@ -1,6 +1,7 @@
 <resources>
 
     <string name="title_section1">Liste</string>
+    <string name="title_section2">Graphique</string>
     <string name="title_section3">Compteur</string>
     
     <string name="app_name">du Compteur de Messages</string>
