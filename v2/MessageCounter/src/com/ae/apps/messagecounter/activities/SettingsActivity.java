@@ -16,16 +16,17 @@
 
 package com.ae.apps.messagecounter.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.View;
 
 import com.ae.apps.messagecounter.R;
 
 /**
  * Settings Activity
- * 
- * TODO add toolbar to this view
- * http://stackoverflow.com/questions/26564400/creating-a-preference-screen-with-support-v21-toolbar
  * 
  * @author MidhunHK
  *
@@ -35,14 +36,36 @@ public class SettingsActivity extends PreferenceActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// will use logic from stackoverflow link to show this with toolbr
+		
+		// Set a content view that has a toolbar and list with android:id 
+		setContentView(R.layout.activity_settings);
+		
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		
+		// add the preference items
 		addPreferencesFromResource(R.xml.preferences);
 		
-		/*if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
-			addPreferencesFromResource(R.xml.preferences);
-		} else {
+		// make the toolbar behave like an ActionBar
+		toolbar.setClickable(true);
+		toolbar.setNavigationIcon(getResIdFromAttribute(this, R.attr.homeAsUpIndicator));
+		toolbar.setTitle(R.string.menu_settings);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			
-		}*/
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		
 	}
-	
+
+	private static int getResIdFromAttribute(final Activity activity, final int attr) {
+		if (attr == 0) {
+			return 0;
+		}
+		final TypedValue typedvalueattr = new TypedValue();
+		activity.getTheme().resolveAttribute(attr, typedvalueattr, true);
+		return typedvalueattr.resourceId;
+	}
+
 }

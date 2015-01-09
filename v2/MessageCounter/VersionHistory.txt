@@ -200,4 +200,7 @@ MessageCounter 2.1.20 [December 2013]
   - Removed Non Contact Messages option in settings
   - Fix for NoSuchMethodError for getMinimumHeight
   
- # touse tralisman_r2 branch for further development
+ MessageCounter 3.0.35 [January 2015]
+  - Use toolbar in SettingsActivity
+  
+ # to use tralisman_r2 branch for further development
