@@ -7,23 +7,40 @@
     tools:ignore="MergeRootFrame" >
 
     <!-- The toolbar -->
+
     <include layout="@layout/toolbar" />
 
-    <!-- The ViewPager -->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity" >
+        android:layout_height="match_parent" >
 
-        <android.support.v4.view.PagerTabStrip
-            android:id="@+id/pager_strip"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:textColor="@color/white"
-            android:background="@color/app_theme_light"
-            android:padding="@dimen/padding_small" />
-    </android.support.v4.view.ViewPager>
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/left_drawer"
+            android:layout_width="246dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:orientation="vertical"
+            android:background="@color/white">
+            
+            <View 
+                android:layout_width="match_parent"
+            	android:layout_height="100dp"
+            	android:background="@color/material_deep_teal_200"/>
+            
+            <ListView
+            	android:id="@+id/left_drawer_list"
+            	android:layout_width="246dp"
+            	android:layout_height="match_parent"
+            	android:layout_gravity="start"
+            	android:background="@color/white" />
+            
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>

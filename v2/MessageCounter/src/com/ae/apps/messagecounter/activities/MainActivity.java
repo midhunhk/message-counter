@@ -24,11 +24,18 @@ import java.util.Map;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.managers.SMSManager;
@@ -39,6 +46,7 @@ import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.adapters.SectionsPagerAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
+import com.ae.apps.messagecounter.fragments.SentCountFragment;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 
 /**
@@ -48,39 +56,58 @@ import com.ae.apps.messagecounter.utils.MessageCounterUtils;
  * 
  */
 public class MainActivity extends ToolBarBaseActivity 
-		implements MessageDataReader, OnMenuItemClickListener {
+		implements MessageDataReader, OnMenuItemClickListener, OnItemClickListener {
 
 	private boolean						isDataReady;
 	private Handler						mHandler;
+	private ActionBarDrawerToggle		mDrawerToggle;
+	private DrawerLayout				mDrawerLayout;
+	private ListView					mDrawerList;
 	private List<ContactMessageVo>		mContactMessageList;
+	private SectionsPagerAdapter		mSectionsAdapter;
 	private final Map<String, Integer>	messageCountsCache	= new HashMap<String, Integer>();
 	private List<MessageDataConsumer>	mConsumers			= new ArrayList<MessageDataConsumer>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		if(null == savedInstanceState){
+			getSupportFragmentManager()
+				.beginTransaction()
+				.add(R.id.container, new SentCountFragment())
+				.commit();
+			getSupportActionBar().setTitle(R.string.title_section3);
+		}
+		
+		mSectionsAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 
 		final SMSManager smsManager = new SMSManager(getBaseContext());
 		final ContactManager contactManager = new ContactManager(getContentResolver());
-		
+
 		// Cache the message counts
 		messageCountsCache.put(SMSManager.SMS_URI_ALL, smsManager.getMessagesCount(SMSManager.SMS_URI_ALL));
 		messageCountsCache.put(SMSManager.SMS_URI_SENT, smsManager.getMessagesCount(SMSManager.SMS_URI_SENT));
 		messageCountsCache.put(SMSManager.SMS_URI_INBOX, smsManager.getMessagesCount(SMSManager.SMS_URI_INBOX));
 		messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
 
-		// The mViewPager object should be null when running on tablets
-		ViewPager viewPager = (ViewPager) findViewById(R.id.pager); 
+		// Navigation Drawer
+		String[] dummyMenu = {"Counter", "List", "Chart"};
 
-		// This adapter that will return a fragment for each of the three primary sections
-		SectionsPagerAdapter pagerAdapter = new SectionsPagerAdapter(getBaseContext(), getSupportFragmentManager());
+        mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, dummyMenu));
+        mDrawerList.setOnItemClickListener(this);
 
-		// Set up the ViewPager with the sections adapter.
-		viewPager.setAdapter(pagerAdapter);
-		viewPager.setCurrentItem(1);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolBar(), R.string.app_name, R.string.app_name);
 
-		PagerTabStrip tabStrip = (PagerTabStrip) findViewById(R.id.pager_strip);
-		tabStrip.setTabIndicatorColorResource(R.color.app_theme_accent);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        
+        // End changes for Navigation Drawer
 
 		// Create the handler in the main thread
 		mHandler = new Handler();
@@ -124,7 +151,7 @@ public class MainActivity extends ToolBarBaseActivity
 				});
 			}
 		}).start();
-		
+
 		// Inflate and handle menu clicks
 		getToolBar().inflateMenu(R.menu.activity_main);
 		// getToolBar().setOnMenuItemClickListener(this);
@@ -133,7 +160,7 @@ public class MainActivity extends ToolBarBaseActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return super.onCreateOptionsMenu(menu);
+		return true;
 	}
 
 	@Override
@@ -142,6 +169,15 @@ public class MainActivity extends ToolBarBaseActivity
 	}
 
 	private boolean handleMenuItemClick(MenuItem item) {
+		
+		if(item.getItemId() == android.R.id.home){
+            if(mDrawerLayout.isDrawerOpen(Gravity.START)){
+                mDrawerLayout.closeDrawers();
+            } else {
+                mDrawerLayout.openDrawer(Gravity.LEFT);
+            }
+        }
+		
 		switch (item.getItemId()) {
 		case R.id.menu_license:
 			// Show the license dialog
@@ -208,6 +244,29 @@ public class MainActivity extends ToolBarBaseActivity
 	@Override
 	protected int getLayoutResourceId() {
 		return R.layout.activity_main;
+	}
+
+	/**
+	 * Click handler for Navigation Drawer list item
+	 * 
+	 * @param parent
+	 * @param view
+	 * @param position
+	 * @param id
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		showFragmentContent(position);
+	}
+	
+	private void showFragmentContent(int position){
+		Fragment fragment = mSectionsAdapter.getItem(position);
+		getSupportFragmentManager()
+			.beginTransaction()
+			.replace(R.id.container, fragment)
+			.commit();
+		mDrawerList.setItemChecked(position, true);
+		mDrawerLayout.closeDrawers();
 	}
 
 }

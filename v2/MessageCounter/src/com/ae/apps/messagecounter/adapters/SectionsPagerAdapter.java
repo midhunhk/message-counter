@@ -21,6 +21,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.fragments.MessageChartFragment;
 import com.ae.apps.messagecounter.fragments.MessageListFragment;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
 
@@ -33,23 +34,32 @@ import com.ae.apps.messagecounter.fragments.SentCountFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 	private final Context	context;
 	private final Fragment	mListFragment;
+	private final Fragment	mChartFragment;
 	private final Fragment	mSentCountFragment;
 
 	public SectionsPagerAdapter(Context context, FragmentManager fm) {
 		super(fm);
 		this.context = context;
 		mListFragment = new MessageListFragment();
+		mChartFragment = new MessageChartFragment();
 		mSentCountFragment = new SentCountFragment();
 	}
 
 	@Override
 	public Fragment getItem(int i) {
 		Fragment fragment = null;
-		if (i == 0) {
-			fragment = mListFragment;
-		} else {
+		switch (i) {
+		case 0:
 			fragment = mSentCountFragment;
+			break;
+		case 1:
+			fragment = mListFragment;
+			break;
+		case 2:
+			fragment = mChartFragment;
+			break;
 		}
+
 		return fragment;
 	}
 
