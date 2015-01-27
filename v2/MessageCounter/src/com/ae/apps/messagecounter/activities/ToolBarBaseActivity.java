@@ -16,9 +16,11 @@
 
 package com.ae.apps.messagecounter.activities;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 
 
 /**
@@ -64,5 +66,24 @@ public abstract class ToolBarBaseActivity extends ActionBarActivity {
 	 * @return
 	 */
 	protected abstract int getLayoutResourceId();
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// Fix for NPE on LG Devices when pressing hardware menu button
+		if(keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)){
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		// Fix for NPE on LG Devices when pressing hardware menu button
+		if(keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)){
+			openOptionsMenu();
+			return true;
+		}
+		return super.onKeyUp(keyCode, event);
+	}
 	
 }

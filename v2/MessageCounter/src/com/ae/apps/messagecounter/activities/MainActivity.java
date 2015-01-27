@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,7 +36,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.mock.MockContactDataUtils;
@@ -168,6 +167,7 @@ public class MainActivity extends ToolBarBaseActivity
 		return handleMenuItemClick(item);
 	}
 
+	@SuppressLint({ "InlinedApi", "RtlHardcoded" })
 	private boolean handleMenuItemClick(MenuItem item) {
 		
 		if(item.getItemId() == android.R.id.home){

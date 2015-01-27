@@ -207,3 +207,4 @@ MessageCounter 2.1.20 [December 2013]
  MessageCounter 3.0.50 [January 2015]
   - Support for Nvigation Drawer
   - Bring back Chart Fragment due to popular demand
+  - [FIXED]	NPE when pressing hardware menu button on LG Devices
