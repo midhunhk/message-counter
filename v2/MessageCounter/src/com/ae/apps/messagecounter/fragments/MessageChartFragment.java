@@ -17,7 +17,7 @@
 package com.ae.apps.messagecounter.fragments;
 
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -31,7 +31,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.views.SimpleGraphView;
 import com.ae.apps.common.vo.ContactMessageVo;
@@ -60,6 +59,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	private List<ContactMessageVo>	mContactMessageList;
 	private boolean					mCachedSettingsValue;
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setRetainInstance(true);

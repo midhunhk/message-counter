@@ -54,8 +54,8 @@ import com.ae.apps.messagecounter.utils.MessageCounterUtils;
  * @author Midhun
  * 
  */
-public class MainActivity extends ToolBarBaseActivity 
-		implements MessageDataReader, OnMenuItemClickListener, OnItemClickListener {
+public class MainActivity extends ToolBarBaseActivity implements MessageDataReader, OnMenuItemClickListener,
+		OnItemClickListener {
 
 	private boolean						isDataReady;
 	private Handler						mHandler;
@@ -70,15 +70,12 @@ public class MainActivity extends ToolBarBaseActivity
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		if(null == savedInstanceState){
-			getSupportFragmentManager()
-				.beginTransaction()
-				.add(R.id.container, new SentCountFragment())
-				.commit();
+
+		if (null == savedInstanceState) {
+			getSupportFragmentManager().beginTransaction().add(R.id.container, new SentCountFragment()).commit();
 			getSupportActionBar().setTitle(R.string.title_section3);
 		}
-		
+
 		mSectionsAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 
 		final SMSManager smsManager = new SMSManager(getBaseContext());
@@ -91,22 +88,23 @@ public class MainActivity extends ToolBarBaseActivity
 		messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
 
 		// Navigation Drawer
-		String[] dummyMenu = {"Counter", "List", "Chart"};
+		String[] dummyMenu = { "Counter", "List", "Chart" };
 
-        mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, dummyMenu));
-        mDrawerList.setOnItemClickListener(this);
+		mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
+		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, dummyMenu));
+		mDrawerList.setOnItemClickListener(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolBar(), R.string.app_name, R.string.app_name);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();
-        
-        // End changes for Navigation Drawer
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolBar(), R.string.app_name,
+				R.string.app_name);
+
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		mDrawerToggle.syncState();
+
+		// End changes for Navigation Drawer
 
 		// Create the handler in the main thread
 		mHandler = new Handler();
@@ -169,15 +167,15 @@ public class MainActivity extends ToolBarBaseActivity
 
 	@SuppressLint({ "InlinedApi", "RtlHardcoded" })
 	private boolean handleMenuItemClick(MenuItem item) {
-		
-		if(item.getItemId() == android.R.id.home){
-            if(mDrawerLayout.isDrawerOpen(Gravity.START)){
-                mDrawerLayout.closeDrawers();
-            } else {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
-            }
-        }
-		
+
+		if (item.getItemId() == android.R.id.home) {
+			if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+				mDrawerLayout.closeDrawers();
+			} else {
+				mDrawerLayout.openDrawer(Gravity.LEFT);
+			}
+		}
+
 		switch (item.getItemId()) {
 		case R.id.menu_license:
 			// Show the license dialog
@@ -199,6 +197,15 @@ public class MainActivity extends ToolBarBaseActivity
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+			mDrawerLayout.closeDrawers();
+			return;
+		}
+		super.onBackPressed();
 	}
 
 	@Override
@@ -258,13 +265,10 @@ public class MainActivity extends ToolBarBaseActivity
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		showFragmentContent(position);
 	}
-	
-	private void showFragmentContent(int position){
+
+	private void showFragmentContent(int position) {
 		Fragment fragment = mSectionsAdapter.getItem(position);
-		getSupportFragmentManager()
-			.beginTransaction()
-			.replace(R.id.container, fragment)
-			.commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 		mDrawerList.setItemChecked(position, true);
 		mDrawerLayout.closeDrawers();
 	}
