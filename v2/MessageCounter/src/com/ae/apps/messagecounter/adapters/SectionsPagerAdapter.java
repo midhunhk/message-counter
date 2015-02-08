@@ -72,9 +72,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 	public CharSequence getPageTitle(int position) {
 		switch (position) {
 		case 0:
-			return context.getString(R.string.title_section1).toUpperCase();
+			return context.getString(R.string.title_counter).toUpperCase();
 		case 1:
-			return context.getString(R.string.title_section3).toUpperCase();
+			return context.getString(R.string.title_sent_list).toUpperCase();
+		case 2:
+			return context.getString(R.string.title_chart).toUpperCase();
 		}
 		return null;
 	}

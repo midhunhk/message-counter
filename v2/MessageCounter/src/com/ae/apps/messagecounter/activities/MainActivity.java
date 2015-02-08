@@ -71,12 +71,14 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		mSectionsAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+		
 		if (null == savedInstanceState) {
+			// Message Counter is the default fragment
 			getSupportFragmentManager().beginTransaction().add(R.id.container, new SentCountFragment()).commit();
-			getSupportActionBar().setTitle(R.string.title_section3);
+			getSupportActionBar().setTitle(mSectionsAdapter.getPageTitle(0));
 		}
 
-		mSectionsAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
 
 		final SMSManager smsManager = new SMSManager(getBaseContext());
 		final ContactManager contactManager = new ContactManager(getContentResolver());
@@ -271,6 +273,9 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 		mDrawerList.setItemChecked(position, true);
 		mDrawerLayout.closeDrawers();
+		
+		// Display the section header in the title
+		getSupportActionBar().setTitle(mSectionsAdapter.getPageTitle(position));
 	}
 
 }

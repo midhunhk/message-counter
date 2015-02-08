@@ -1,8 +1,8 @@
 <resources>
 
-    <string name="title_section1">List</string>
-    <string name="title_section2">Chart</string>
-    <string name="title_section3">Counter</string>
+    <string name="title_sent_list">List</string>
+    <string name="title_chart">Chart</string>
+    <string name="title_counter">Counter</string>
     
     <string name="app_name">Message Counter</string>
     <string name="app_version">Version 3.0.50 Talisman R2 (January 2015)</string>
@@ -43,7 +43,6 @@ limitations under the License.</string>
     <!-- same for all languages - not to be translated -->
     <string name="str_zero" translatable="false">0</string>
     <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter</string>
-    <!-- <string name="github_source_url" translatable="false">https://www.github.com/midhunhk/message-counter</string> -->
     <string name="github_source_visible_url" translatable="false">https://github.com/midhunhk/message-counter</string>
     
     <!-- Strings for Preference -->

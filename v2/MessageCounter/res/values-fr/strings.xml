@@ -1,8 +1,8 @@
 <resources>
 
-    <string name="title_section1">Liste</string>
-    <string name="title_section2">Graphique</string>
-    <string name="title_section3">Compteur</string>
+    <string name="title_sent_list">Liste</string>
+    <string name="title_chart">Graphique</string>
+    <string name="title_counter">Compteur</string>
     
     <string name="app_name">du Compteur de Messages</string>
     <string name="app_version">Version 3.0.32 (Décembre 2014)</string>

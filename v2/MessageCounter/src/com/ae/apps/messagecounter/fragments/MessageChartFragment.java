@@ -70,7 +70,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		mInboxMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_INBOX);
 		// Find the UI elements
 		mTitleText = (TextView) layout.findViewById(R.id.chartTitle);
-		mGraphContainer = (LinearLayout) layout.findViewById(R.id.graphContainer);
+		mGraphContainer = (LinearLayout) layout.findViewById(R.id.graph_container);
 		mOtherSendersText = (TextView) layout.findViewById(R.id.otherSendersText);
 
 		mReader.registerForData(this);
