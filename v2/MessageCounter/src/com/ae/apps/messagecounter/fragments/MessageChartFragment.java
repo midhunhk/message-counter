@@ -165,7 +165,6 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 					.getDefaultSharedPreferences(getActivity().getBaseContext()).getBoolean(
 							AppConstants.PREF_KEY_HIDE_NON_CONTACT_MESSAGES, false);
 		} catch (Exception e) {
-			// log this also later
 			Log.e(TAG, e.getMessage());
 		}
 		return includeNonContactMessagePref;

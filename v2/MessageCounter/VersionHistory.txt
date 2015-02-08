@@ -189,22 +189,23 @@ MessageCounter 2.1.20 [December 2013]
 	Version 3.0
  ------------------------------------
  MessageCounter 3.0.30 [December 2014] - Talisman (Material Design)
-  - Redesign Counter fragment 
-  - Use CardView
-  - Removed Chart Fragment as it is a bit buggy
-  - Use Toolbar on applicable screens
-  - basic material design 
-  - Message Counter is enabled by default
+  - [CHANGED]	Redesign Counter fragment 
+  - [CHANGED]	Use CardView
+  - [CHANGED]	Removed Chart Fragment as it is a bit buggy
+  - [CHANGED]	Use Toolbar on applicable screens
+  - [CHANGED]	basic material design 
+  - [CHANGED]	Message Counter is enabled by default
   
  MessageCounter 3.0.32 [December 2014] - Talisman (Material Design)
-  - Removed Non Contact Messages option in settings
-  - Fix for NoSuchMethodError for getMinimumHeight
+  - [CHANGED]	Removed Non Contact Messages option in settings
+  - [FIXED]		Fix for NoSuchMethodError for getMinimumHeight
   
  MessageCounter 3.0.35 [January 2015]
-  - Use toolbar in SettingsActivity
+  - [CHANGED]	Use toolbar in SettingsActivity
   
- # to use tralisman_r2 branch for further development
- MessageCounter 3.0.50 [January 2015]
-  - Support for Nvigation Drawer
-  - Bring back Chart Fragment due to popular demand
-  - [FIXED]	NPE when pressing hardware menu button on LG Devices
+ MessageCounter 3.0.50 [February 2015]
+  - [ADDED]		Support for Navigation Drawer
+  - [CHANGED]	Bring back Chart Fragment due to popular demand
+  - [FIXED]		NPE when pressing hardware menu button on LG Devices
+  - [CHANGED]	New color scheme for Chart
+  - [CHANGED]	More Material Design updates
