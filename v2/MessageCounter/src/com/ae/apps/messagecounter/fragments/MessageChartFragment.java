@@ -68,6 +68,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		mContext = getActivity().getBaseContext();
 		// Get the message count in the inbox
 		mInboxMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_INBOX);
+		
 		// Find the UI elements
 		mTitleText = (TextView) layout.findViewById(R.id.chartTitle);
 		mGraphContainer = (LinearLayout) layout.findViewById(R.id.graph_container);
@@ -119,14 +120,14 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	private void updateMessagesChart() {
 		try {
 			// Reports of IllegalStateExceptions are received
-			mTitleText.setText(getResources().getString(R.string.str_chart_title));
+			mTitleText.setText(getResources().getString(R.string.str_chart_title).toUpperCase());
 
 			// Get the preference value for including message counts from non contacts
 			boolean includeNonContactMessages = getIncludeNonContactMessagesPref();
 
 			// Do we need to show the other senders text?
 			if (includeNonContactMessages) {
-				mOtherSendersText.setVisibility(View.INVISIBLE);
+				mOtherSendersText.setVisibility(View.GONE);
 			} else {
 				mOtherSendersText.setVisibility(View.VISIBLE);
 			}
@@ -134,7 +135,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 			GraphData graphData = MessageCounterUtils.getMessageCountDegrees(mContactMessageList, mInboxMessageCount,
 					AppConstants.MAX_ROWS_IN_CHART, includeNonContactMessages);
 			View graphView = new SimpleGraphView(mContext, graphData.getValueInDegrees(), graphData.getLabels(),
-					AppConstants.CHART_COLORFUL);
+					AppConstants.CHART_COLORFUL2);
 
 			// If we are updating, remove the previous graphView
 			if (mGraphContainer.getChildCount() > 0) {

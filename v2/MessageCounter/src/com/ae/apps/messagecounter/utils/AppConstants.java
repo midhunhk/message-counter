@@ -27,6 +27,11 @@ public interface AppConstants {
 	/* Colorful set of colors that can be used for a chart */
 	int[]	CHART_COLORFUL						= { 0xFFB2C938, 0xff3BA9B8, 0xffFF9910, 0xffC74C47, 0xff5B1A69,
 			0xffA83AAE, 0xffF870BD, 0xff7AD1C4, 0xff419DDB };
+	
+	/* Colors taken from http://www.mulinblog.com/a-color-palette-optimized-for-data-visualization/
+	 * */
+	int[]	CHART_COLORFUL2						= { 0xFF5DA5DA, 0xff4D4D4D, 0xffFAA43A, 0xff60BD68, 0xffF17CB0,
+			0xffB2912F, 0xffB276B2, 0xffDECF3F, 0xffF15854 };
 
 	/* 0xffFFD302, yellow */
 
