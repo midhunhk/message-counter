@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res/com.ae.apps.messagecounter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,7 +10,8 @@
         android:id="@+id/messageInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/card_padding" >
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/padding_small" >
 
         <TextView
             android:id="@+id/messageCountAtGlanceText"
@@ -23,7 +25,8 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/card_padding" >
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/padding_small" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,10 +37,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:padding="@dimen/card_padding"
                 android:layout_margin="@dimen/card_margin"
-                android:textColor="@color/app_theme_light"
+                android:padding="@dimen/card_padding"
                 android:text="@string/title_list_page"
+                android:textColor="@color/app_theme_light"
                 android:textSize="@dimen/card_title"
                 android:textStyle="bold"
                 tools:context=".MainActivity" />

@@ -7,9 +7,10 @@
     <dimen name="margin_extra_large">40dp</dimen>
     
     <!-- paddings -->
-    <dimen name="padding_small">8dip</dimen>
-    <dimen name="padding_medium">14dip</dimen>
-    <dimen name="padding_large">18dip</dimen>
+    <dimen name="padding_small">10dip</dimen>
+    <dimen name="padding_medium">16dip</dimen>
+    <dimen name="padding_large">22dip</dimen>
+    <dimen name="padding_horizontal">28dip</dimen>
     
     <!-- progress bar size -->
     <dimen name="progress_bar_height">26dip</dimen>
@@ -17,6 +18,7 @@
     <!-- cards -->
     <dimen name="card_margin">9dp</dimen>
     <dimen name="card_padding">6dp</dimen>
+    <dimen name="navigation_drawer_width">280dp</dimen>
     
     <!-- text sizes -->
     <dimen name="card_title">18sp</dimen>
