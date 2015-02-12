@@ -66,6 +66,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 
 		View layout = inflater.inflate(R.layout.fragment_chart, null);
 		mContext = getActivity().getBaseContext();
+		
 		// Get the message count in the inbox
 		mInboxMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_INBOX);
 		
@@ -74,6 +75,11 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		mGraphContainer = (LinearLayout) layout.findViewById(R.id.graph_container);
 		mOtherSendersText = (TextView) layout.findViewById(R.id.otherSendersText);
 
+		try{
+			mTitleText.setText(getResources().getString(R.string.str_chart_title).toUpperCase());
+		} catch(Exception e){
+			Log.e(TAG, e.getMessage());
+		}
 		mReader.registerForData(this);
 		return layout;
 	}
@@ -120,7 +126,6 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	private void updateMessagesChart() {
 		try {
 			// Reports of IllegalStateExceptions are received
-			mTitleText.setText(getResources().getString(R.string.str_chart_title).toUpperCase());
 
 			// Get the preference value for including message counts from non contacts
 			boolean includeNonContactMessages = getIncludeNonContactMessagesPref();

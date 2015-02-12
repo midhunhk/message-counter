@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_small"
-                android:text="@string/empty_list"
+                android:text="@string/str_chart_title"
                 android:textColor="@color/app_theme_light"
                 android:textSize="@dimen/card_title"
                 android:textStyle="bold" />
@@ -52,7 +52,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip"
             android:layout_marginTop="10dip"
-            android:orientation="vertical" />
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/card_margin"
+                android:gravity="center_vertical"
+                android:text="@string/empty_list"
+                android:textSize="14sp" />
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
