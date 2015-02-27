@@ -47,7 +47,6 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 
 	private MessageDataReader		mReader;
 	private ContactDetailAdapter	adapter;
-	private View					messageInfoLyout;
 	private TextView				pageTitleText;
 	private boolean					loadAnimationDone;
 	private ProgressBar				mProgressBar;
@@ -63,10 +62,8 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		TextView messageCountGlanceText = (TextView) layout.findViewById(R.id.messageCountAtGlanceText);
 
 		pageTitleText = (TextView) layout.findViewById(R.id.pageTitleText);
-		messageInfoLyout = layout.findViewById(R.id.messageInfo);
 		if (loadAnimationDone == false) {
 			pageTitleText.setVisibility(View.INVISIBLE);
-			messageInfoLyout.setVisibility(View.INVISIBLE);
 		}
 
 		// Create an empty list for the adapter
@@ -131,9 +128,7 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 							R.animator.slide_in_top);
 					// add a small delay before starting the animation
 					slideInAnimation.setStartOffset(500);
-					messageInfoLyout.startAnimation(slideInAnimation);
 				}
-				messageInfoLyout.setVisibility(View.VISIBLE);
 				pageTitleText.setVisibility(View.VISIBLE);
 			}
 		}
