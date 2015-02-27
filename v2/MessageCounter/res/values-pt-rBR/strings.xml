@@ -5,7 +5,7 @@
 	<string name="title_counter">Contador</string>
 
 	<string name="app_name">Mensagem Contador</string>
-	<string name="app_version">versão 3.0.32 (Dezembro 2014)</string>
+	<string name="app_version">versão 3.0.50 (fevereiro 2015)</string>
 	<string name="app_desc">Mensagem Contador exibe mensagens da caixa de entrada estatísticas e número de mensagens de cada um dos seus contatos. Este projeto de código \'s fonte está disponível no GitHub.</string>
 	<string name="app_disclaim">Disclaimer: Este aplicativo é criado para fins educativos e como tal tem nenhuma garantia ou apoio. Desde APIs do Android sem documentos são utilizados, este aplicativo pode não funcionar como esperado em todos os dispositivos.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
