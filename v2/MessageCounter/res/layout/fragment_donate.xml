@@ -1,0 +1,148 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res/com.ae.apps.messagecounter"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <!-- The toolbar -->
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_large" >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/padding_small" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_medium" >
+
+                    <ImageView
+                        android:id="@+id/appIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_gravity="start"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginStart="0dp"
+                        android:contentDescription="@string/empty_text"
+                        android:padding="@dimen/padding_small"
+                        android:src="@drawable/ic_launcher" />
+
+                    <TextView
+                        android:id="@+id/appVersion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dip"
+                        android:layout_toEndOf="@+id/appIcon"
+                        android:layout_toRightOf="@+id/appIcon"
+                        android:text="@string/app_name"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/appDeveloper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/appVersion"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dip"
+                        android:layout_toEndOf="@+id/appIcon"
+                        android:layout_toRightOf="@+id/appIcon"
+                        android:text="@string/app_version" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/appDeveloper"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dip"
+                        android:layout_toEndOf="@+id/appIcon"
+                        android:layout_toRightOf="@+id/appIcon"
+                        android:text="@string/app_developer_info" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/padding_small" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_medium" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dip"
+                        android:layout_marginBottom="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:text="@string/app_desc" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/padding_small" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_medium" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:text="@string/app_source_code" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:text="@string/github_source_visible_url" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/padding_small" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_medium" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/app_disclaim" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

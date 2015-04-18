@@ -29,6 +29,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
@@ -286,5 +288,11 @@ public class MessageCounterUtils {
 		Date endDate = MessageCounterUtils.getCycleEndDate(startDate);
 		return MessageCounterUtils.getDisplayDateString(startDate) + " - "
 				+ MessageCounterUtils.getDisplayDateString(endDate);
+	}
+	
+	public static String getContentFromXml(Resources resources, int fileId){
+		XmlResourceParser parser = resources.getXml(fileId);
+		
+		return parser.getText();
 	}
 }

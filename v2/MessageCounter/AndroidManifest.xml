@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter"
-    android:versionCode="336"
-    android:versionName="3.0.50" >
+    android:versionCode="350"
+    android:versionName="3.1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_SMS" android:required="true" />
     <uses-permission android:name="android.permission.READ_CONTACTS" android:required="true" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <!-- screen support -->
     <supports-screens

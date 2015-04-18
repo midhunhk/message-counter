@@ -210,3 +210,6 @@ MessageCounter 2.1.20 [December 2013]
   - [CHANGED]	New color scheme for Chart
   - [CHANGED]	More Material Design updates
   - [REMOVED]	Animation for message summary
+  
+  MessageCounter 3.1.0 [April 2015]
+  - [ADDED]		In-App Donations
