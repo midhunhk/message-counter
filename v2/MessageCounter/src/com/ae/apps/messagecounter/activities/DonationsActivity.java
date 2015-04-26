@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.ae.apps.common.utils.inapp.IabHelper;
+import com.ae.apps.common.utils.inapp.IabResult;
+import com.ae.apps.common.utils.inapp.Purchase;
 import com.ae.apps.messagecounter.R;
-import com.ae.apps.messagecounter.utils.inapp.IabHelper;
-import com.ae.apps.messagecounter.utils.inapp.IabResult;
-import com.ae.apps.messagecounter.utils.inapp.Purchase;
 
 /**
  * Activity for showing donations, implements google play in-app billing v3.
