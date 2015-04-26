@@ -1,5 +1,6 @@
 package com.ae.apps.messagecounter.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,7 @@ import com.ae.apps.messagecounter.utils.inapp.IabResult;
 import com.ae.apps.messagecounter.utils.inapp.Purchase;
 
 /**
- * Activity for showing donations
+ * Activity for showing donations, implements google play in-app billing v3.
  * 
  * @author MidhunHK
  *
@@ -22,11 +23,14 @@ public class DonationsActivity extends ToolBarBaseActivity {
 
 	private static final String	EXTRA_DATA	= "marmaladespringcat";
 	private static final String	TAG			= "DonationsActivity";
-	private static final String	SKU_SMALL	= "product_small";
+	private static final String	SKU_SMALL	= "product_test";
 	private static final String	SKU_MEDIUM	= "product_medium";
 	private static final String	SKU_LARGE	= "product_large";
 	private static final int	RC_REQUEST	= 2001;
 	private IabHelper			mHelper		= null;
+	private Activity mActivity 				= null;
+	// private static final String[] mTestIds	= {"android.test.purchased", "android.test.canceled", "android.test.item_unavailable"};
+	// private int mTestIndex = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +38,13 @@ public class DonationsActivity extends ToolBarBaseActivity {
 
 		displayHomeAsUp();
 		
+		mActivity = this;
+		
 		// Read this from the assets folder
-		String base64EncodedPublicKey = "";
+		String base64EncodedPublicKey = getString(R.string.app_lic_cat);
 		mHelper = new IabHelper(this, base64EncodedPublicKey);
 
+		// This should be false in release build
 		mHelper.enableDebugLogging(true);
 
 		// Setup IAB
@@ -70,9 +77,13 @@ public class DonationsActivity extends ToolBarBaseActivity {
 					productCode = SKU_SMALL;
 			}
 			
+			/*productCode = mTestIds[mTestIndex];
+			mTestIndex = (mTestIndex + 1) % mTestIds.length;
+			Toast.makeText(getBaseContext(), productCode, Toast.LENGTH_SHORT).show();
+			*/
 			if(null != productCode){
 				// on button click after selecting a purchase item
-				mHelper.launchPurchaseFlow(getParent(), SKU_SMALL, RC_REQUEST, mPurchaseFinishedlistener, EXTRA_DATA);
+				mHelper.launchPurchaseFlow(mActivity, productCode, RC_REQUEST, mPurchaseFinishedlistener, EXTRA_DATA);
 			}
 		}
 	};
@@ -92,12 +103,13 @@ public class DonationsActivity extends ToolBarBaseActivity {
 
 		private void processPurchase(IabResult result, Purchase info) {
 			if(result.isFailure()){
-				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
+				// Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
 				return;
 			}
 			
 			// If valid SKU
 			String sku = info.getSku();
+			// TODO Remove condition shorting
 			if(SKU_SMALL.equals(sku) || SKU_MEDIUM.equals(sku) || SKU_LARGE.equals(sku)){
 				mHelper.consumeAsync(info, mConsumeFinishedListener);
 			}
@@ -126,7 +138,6 @@ public class DonationsActivity extends ToolBarBaseActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 		Log.d(TAG, "onactivityresult ");
 
 		if (null == mHelper) {

@@ -96,8 +96,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, dummyMenu));
 		mDrawerList.setOnItemClickListener(this);
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
+		displayHomeAsUp();
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolBar(), R.string.app_name,
@@ -197,6 +196,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		}
 	}
 
+	@SuppressLint("RtlHardcoded")
 	private void setDrawerState(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
 			if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
