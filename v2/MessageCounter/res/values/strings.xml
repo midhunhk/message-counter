@@ -18,6 +18,7 @@
     <string name="menu_about">About</string>
     <string name="menu_license">License</string>
     <string name="menu_share">Share this App</string>
+    <string name="menu_donate">Donate</string>
     
     <string name="empty_text"></string>
     <string name="empty_list">No messages found</string>
@@ -78,5 +79,12 @@ limitations under the License.</string>
     <string name="str_messages_sent_caps">MESSAGES SENT</string>
     <string name="str_today">TODAY</string>
     <string name="str_cycle">CYCLE</string>
+    
+    <!-- strings for donate v3.1 -->
+    <string name="str_donate_title">Donate</string>
+    <string name="str_donate_text">You can show support and appreciation for the development of Message Counter by donating. Donations will not be  in lieu of additional features.</string>
+    <string name="str_donate_small">Buy me a coffee</string>
+    <string name="str_donate_medium">Buy me an Ice-Cream</string>
+    <string name="str_donate_large">Buy me a meal</string>
     
 </resources>

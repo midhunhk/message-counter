@@ -1,8 +1,12 @@
 package com.ae.apps.messagecounter.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.utils.inapp.IabHelper;
@@ -17,20 +21,25 @@ import com.ae.apps.messagecounter.utils.inapp.Purchase;
  */
 public class DonationsActivity extends ToolBarBaseActivity {
 
-	private static final String	TAG		= "DonationsActivity";
+	private static final String	EXTRA_DATA	= "marmaladespringcat";
+	private static final String	TAG			= "DonationsActivity";
 	private static final String	SKU_SMALL	= "product_small";
 	private static final int	RC_REQUEST	= 2001;
-	private IabHelper			mHelper	= null;
+	private IabHelper			mHelper		= null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		displayHomeAsUp();
+		
+		// Read this from the assets folder
 		String base64EncodedPublicKey = "";
 		mHelper = new IabHelper(this, base64EncodedPublicKey);
 
 		mHelper.enableDebugLogging(true);
 
+		// Setup IAB
 		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
 
 			@Override
@@ -41,9 +50,18 @@ public class DonationsActivity extends ToolBarBaseActivity {
 			}
 		});
 		
+		final Activity activity = this;
 		
-		// on button click after selecting a purchase item
-		mHelper.launchPurchaseFlow(this, SKU_SMALL, RC_REQUEST, mPurchaseFinishedlistener, "marmaladespringcat");
+		Button mDonateButton = (Button) findViewById(R.id.btnDonateSample);
+		
+		mDonateButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// on button click after selecting a purchase item
+				mHelper.launchPurchaseFlow(activity, SKU_SMALL, RC_REQUEST, mPurchaseFinishedlistener, EXTRA_DATA);
+			}
+		});
 
 	}
 	
@@ -59,6 +77,7 @@ public class DonationsActivity extends ToolBarBaseActivity {
 			
 			if(result.isFailure()){
 				Log.d(TAG, "purchase failed ");
+				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT);
 				return;
 			}
 			
@@ -85,6 +104,7 @@ public class DonationsActivity extends ToolBarBaseActivity {
 				
 			} else {
 				// handle error
+				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT);
 			}
 		}
 	};
@@ -104,7 +124,6 @@ public class DonationsActivity extends ToolBarBaseActivity {
 		} else {
 			Log.d(TAG, "onactivityresult handled by IABUtil");
 		}
-
 	}
 
 	@Override

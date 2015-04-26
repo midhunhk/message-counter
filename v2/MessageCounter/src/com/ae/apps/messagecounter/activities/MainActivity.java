@@ -196,6 +196,9 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 			// Show the about screen
 			startActivity(new Intent(this, AboutActivity.class));
 			return false;
+		case R.id.menu_donate:
+			startActivity(new Intent(this, DonationsActivity.class));
+			return false;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

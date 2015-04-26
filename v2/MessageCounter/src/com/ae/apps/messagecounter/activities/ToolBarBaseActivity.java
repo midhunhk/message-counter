@@ -22,7 +22,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 
-
 /**
  * Base activity to support toolbar in activity layouts
  * 
@@ -31,8 +30,8 @@ import android.view.KeyEvent;
  */
 public abstract class ToolBarBaseActivity extends ActionBarActivity {
 
-	Toolbar mToolbar = null;
-	
+	Toolbar	mToolbar	= null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,18 +42,18 @@ public abstract class ToolBarBaseActivity extends ActionBarActivity {
 		mToolbar = (Toolbar) findViewById(getToolbarResourceId());
 		setSupportActionBar(mToolbar);
 	}
-	
+
 	/**
 	 * Returns the toolbar instance
+	 * 
 	 * @return
 	 */
-	protected Toolbar getToolBar(){
+	protected Toolbar getToolBar() {
 		return mToolbar;
 	}
-	
+
 	/**
-	 * Returns the toolbar resource id.
-	 * Should be R.id.toolbar in most cases
+	 * Returns the toolbar resource id. Should be R.id.toolbar in most cases
 	 * 
 	 * @return
 	 */
@@ -66,24 +65,30 @@ public abstract class ToolBarBaseActivity extends ActionBarActivity {
 	 * @return
 	 */
 	protected abstract int getLayoutResourceId();
-	
+
+	protected void displayHomeAsUp() {
+		// Show the back arrow in toolbar to go back
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// Fix for NPE on LG Devices when pressing hardware menu button
-		if(keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)){
+		if (keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)) {
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-	
+
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		// Fix for NPE on LG Devices when pressing hardware menu button
-		if(keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)){
+		if (keyCode == KeyEvent.KEYCODE_MENU && "LGE".equals(Build.BRAND)) {
 			openOptionsMenu();
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);
 	}
-	
+
 }

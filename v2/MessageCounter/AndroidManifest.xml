@@ -42,6 +42,13 @@
         
         <activity android:name=".activities.SettingsActivity" />
         
+        <activity android:name=".activities.DonationsActivity"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        
         <!-- About activity -->
         <activity
             android:name=".activities.AboutActivity"
@@ -80,5 +87,4 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_provider"/>
         </receiver>
     </application>
-
 </manifest>

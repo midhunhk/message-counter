@@ -26,8 +26,7 @@ public class AboutActivity extends ToolBarBaseActivity {
 		super.onCreate(savedInstanceState);
 		
 		// Show the back arrow in toolbar to go back
-		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		displayHomeAsUp();
 	}
 
 	@Override
