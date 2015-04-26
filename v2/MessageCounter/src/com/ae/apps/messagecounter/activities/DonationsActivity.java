@@ -1,6 +1,5 @@
 package com.ae.apps.messagecounter.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +23,8 @@ public class DonationsActivity extends ToolBarBaseActivity {
 	private static final String	EXTRA_DATA	= "marmaladespringcat";
 	private static final String	TAG			= "DonationsActivity";
 	private static final String	SKU_SMALL	= "product_small";
+	private static final String	SKU_MEDIUM	= "product_medium";
+	private static final String	SKU_LARGE	= "product_large";
 	private static final int	RC_REQUEST	= 2001;
 	private IabHelper			mHelper		= null;
 
@@ -50,20 +51,29 @@ public class DonationsActivity extends ToolBarBaseActivity {
 			}
 		});
 		
-		final Activity activity = this;
+		Button btnDonateSmall = (Button) findViewById(R.id.btnDonateSample);
 		
-		Button mDonateButton = (Button) findViewById(R.id.btnDonateSample);
-		
-		mDonateButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// on button click after selecting a purchase item
-				mHelper.launchPurchaseFlow(activity, SKU_SMALL, RC_REQUEST, mPurchaseFinishedlistener, EXTRA_DATA);
-			}
-		});
+		btnDonateSmall.setOnClickListener(mDonateButtonClickListener);
 
 	}
+	
+	View.OnClickListener mDonateButtonClickListener = new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			String productCode = null;
+			switch(v.getId()){
+			case R.id.btnDonateSample:
+				productCode = SKU_SMALL;
+				break;
+			}
+			
+			if(null != productCode){
+				// on button click after selecting a purchase item
+				mHelper.launchPurchaseFlow(getParent(), SKU_SMALL, RC_REQUEST, mPurchaseFinishedlistener, EXTRA_DATA);
+			}
+		}
+	};
 	
 	IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedlistener = new IabHelper.OnIabPurchaseFinishedListener() {
 		
@@ -77,12 +87,13 @@ public class DonationsActivity extends ToolBarBaseActivity {
 			
 			if(result.isFailure()){
 				Log.d(TAG, "purchase failed ");
-				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT);
+				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
 				return;
 			}
 			
 			// If valid SKU
-			if(info.getSku().equals(SKU_SMALL)){
+			String sku = info.getSku();
+			if(SKU_SMALL.equals(sku) || SKU_MEDIUM.equals(sku) || SKU_LARGE.equals(sku)){
 				mHelper.consumeAsync(info, mConsumeFinishedListener);
 			}
 			
@@ -104,7 +115,7 @@ public class DonationsActivity extends ToolBarBaseActivity {
 				
 			} else {
 				// handle error
-				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT);
+				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
 			}
 		}
 	};
