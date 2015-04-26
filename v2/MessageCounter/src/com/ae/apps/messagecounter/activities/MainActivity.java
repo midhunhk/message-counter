@@ -153,7 +153,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
 		// Inflate and handle menu clicks
 		getToolBar().inflateMenu(R.menu.activity_main);
-		// getToolBar().setOnMenuItemClickListener(this);
 	}
 
 	@Override
@@ -170,13 +169,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 	@SuppressLint({ "InlinedApi", "RtlHardcoded" })
 	private boolean handleMenuItemClick(MenuItem item) {
 
-		if (item.getItemId() == android.R.id.home) {
-			if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
-				mDrawerLayout.closeDrawers();
-			} else {
-				mDrawerLayout.openDrawer(Gravity.LEFT);
-			}
-		}
+		setDrawerState(item);
 
 		switch (item.getItemId()) {
 		case R.id.menu_license:
@@ -204,6 +197,16 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		}
 	}
 
+	private void setDrawerState(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+				mDrawerLayout.closeDrawers();
+			} else {
+				mDrawerLayout.openDrawer(Gravity.LEFT);
+			}
+		}
+	}
+
 	@Override
 	public void onBackPressed() {
 		if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
@@ -228,8 +231,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
 	@Override
 	public int getMessageCount(String type) {
-		if (messageCountsCache != null) {
-			if (messageCountsCache.containsKey(type))
+		if (messageCountsCache != null && messageCountsCache.containsKey(type)){
 				return messageCountsCache.get(type);
 		}
 		return 0;

@@ -66,6 +66,8 @@ public class DonationsActivity extends ToolBarBaseActivity {
 			case R.id.btnDonateSample:
 				productCode = SKU_SMALL;
 				break;
+				default:
+					productCode = SKU_SMALL;
 			}
 			
 			if(null != productCode){
@@ -85,8 +87,11 @@ public class DonationsActivity extends ToolBarBaseActivity {
 				return;
 			}
 			
+			processPurchase(result, info);
+		}
+
+		private void processPurchase(IabResult result, Purchase info) {
 			if(result.isFailure()){
-				Log.d(TAG, "purchase failed ");
 				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
 				return;
 			}
@@ -96,7 +101,6 @@ public class DonationsActivity extends ToolBarBaseActivity {
 			if(SKU_SMALL.equals(sku) || SKU_MEDIUM.equals(sku) || SKU_LARGE.equals(sku)){
 				mHelper.consumeAsync(info, mConsumeFinishedListener);
 			}
-			
 		}
 	};
 	
