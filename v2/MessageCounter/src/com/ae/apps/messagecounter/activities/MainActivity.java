@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.ae.apps.common.activities.ToolBarBaseActivity;
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.mock.MockContactDataUtils;
@@ -76,7 +79,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		if (null == savedInstanceState) {
 			// Message Counter is the default fragment
 			getSupportFragmentManager().beginTransaction().add(R.id.container, new SentCountFragment()).commit();
-			getSupportActionBar().setTitle(mSectionsAdapter.getPageTitle(0));
+			setToolbarTitle(mSectionsAdapter.getPageTitle(0));
 		}
 
 
@@ -278,9 +281,9 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 		mDrawerList.setItemChecked(position, true);
 		mDrawerLayout.closeDrawers();
-		
+
 		// Display the section header in the title
-		getSupportActionBar().setTitle(mSectionsAdapter.getPageTitle(position));
+		setToolbarTitle(mSectionsAdapter.getPageTitle(position));
 	}
 
 }
