@@ -244,7 +244,9 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		Intent shareIntent = new Intent();
 		shareIntent.setAction(Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
-		shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.play_store_url));
+		shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.play_store_url));
+		shareIntent.putExtra(Intent.EXTRA_TITLE, getString(R.string.menu_share));
+		shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
 		return shareIntent;
 	}
 
