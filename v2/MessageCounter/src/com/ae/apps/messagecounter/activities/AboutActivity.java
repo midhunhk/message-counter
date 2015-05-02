@@ -18,8 +18,15 @@ package com.ae.apps.messagecounter.activities;
 
 import android.os.Bundle;
 
+import com.ae.apps.common.activities.ToolBarBaseActivity;
 import com.ae.apps.messagecounter.R;
 
+/**
+ * The about activity
+ * 
+ * @author Midhun
+ *
+ */
 public class AboutActivity extends ToolBarBaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,8 @@ public class AboutActivity extends ToolBarBaseActivity {
 		
 		// Show the back arrow in toolbar to go back
 		displayHomeAsUp();
+		
+		setToolbarTitle(getString(R.string.menu_about));
 	}
 
 	@Override

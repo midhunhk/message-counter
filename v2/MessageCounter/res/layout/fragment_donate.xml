@@ -32,16 +32,6 @@
                     android:padding="@dimen/padding_medium" >
 
                     <TextView
-                        android:id="@+id/donateTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:text="@string/str_donate_title"
-                        android:textColor="@color/app_theme_light"
-                        android:textSize="@dimen/card_title"
-                        android:textStyle="bold" />
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dip"

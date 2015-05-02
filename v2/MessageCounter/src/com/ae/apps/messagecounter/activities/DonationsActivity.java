@@ -1,36 +1,29 @@
 package com.ae.apps.messagecounter.activities;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.ae.apps.common.utils.inapp.IabHelper;
+import com.ae.apps.common.activities.DonationsBaseActivity;
 import com.ae.apps.common.utils.inapp.IabResult;
 import com.ae.apps.common.utils.inapp.Purchase;
 import com.ae.apps.messagecounter.R;
 
 /**
- * Activity for showing donations, implements google play in-app billing v3.
+ * Activity for showing donations, using the DonationsBaseActivity for inapp billing.
  * 
  * @author MidhunHK
  *
  */
-public class DonationsActivity extends ToolBarBaseActivity {
+public class DonationsActivity extends DonationsBaseActivity {
 
 	private static final String	EXTRA_DATA	= "marmaladespringcat";
 	private static final String	TAG			= "DonationsActivity";
 	private static final String	SKU_SMALL	= "product_test";
 	private static final String	SKU_MEDIUM	= "product_medium";
 	private static final String	SKU_LARGE	= "product_large";
-	private static final int	RC_REQUEST	= 2001;
-	private IabHelper			mHelper		= null;
-	private Activity mActivity 				= null;
-	// private static final String[] mTestIds	= {"android.test.purchased", "android.test.canceled", "android.test.item_unavailable"};
-	// private int mTestIndex = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,36 +31,21 @@ public class DonationsActivity extends ToolBarBaseActivity {
 
 		displayHomeAsUp();
 		
-		mActivity = this;
-		
-		// Read this from the assets folder
-		String base64EncodedPublicKey = getString(R.string.app_lic_cat);
-		mHelper = new IabHelper(this, base64EncodedPublicKey);
+		setToolbarTitle(getString(R.string.menu_donate));
 
-		// This should be false in release build
-		mHelper.enableDebugLogging(true);
-
-		// Setup IAB
-		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-
-			@Override
-			public void onIabSetupFinished(IabResult result) {
-				if (!result.isSuccess()) {
-					Log.d(TAG, "problem in setup inapp " + result);
-				}
-			}
-		});
-		
+		// Find the Donate buttons and setup the click listeners
 		Button btnDonateSmall = (Button) findViewById(R.id.btnDonateSample);
 		
 		btnDonateSmall.setOnClickListener(mDonateButtonClickListener);
 
 	}
 	
+	// The click listener for the donation buttons on the page
 	View.OnClickListener mDonateButtonClickListener = new View.OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
+			// Identify the donation type
 			String productCode = null;
 			switch(v.getId()){
 			case R.id.btnDonateSample:
@@ -77,90 +55,11 @@ public class DonationsActivity extends ToolBarBaseActivity {
 					productCode = SKU_SMALL;
 			}
 			
-			/*productCode = mTestIds[mTestIndex];
-			mTestIndex = (mTestIndex + 1) % mTestIds.length;
-			Toast.makeText(getBaseContext(), productCode, Toast.LENGTH_SHORT).show();
-			*/
-			if(null != productCode){
-				// on button click after selecting a purchase item
-				mHelper.launchPurchaseFlow(mActivity, productCode, RC_REQUEST, mPurchaseFinishedlistener, EXTRA_DATA);
-			}
+			// Invoke the purchase flow method from the DonationsBaseActivity
+			launchPurchaseFlow(productCode, EXTRA_DATA);
 		}
 	};
 	
-	IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedlistener = new IabHelper.OnIabPurchaseFinishedListener() {
-		
-		@Override
-		public void onIabPurchaseFinished(IabResult result, Purchase info) {
-			Log.d(TAG, "onpurchasefinished " + result);
-			
-			if(null == mHelper){
-				return;
-			}
-			
-			processPurchase(result, info);
-		}
-
-		private void processPurchase(IabResult result, Purchase info) {
-			if(result.isFailure()){
-				// Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
-				return;
-			}
-			
-			// If valid SKU
-			String sku = info.getSku();
-			// TODO Remove condition shorting
-			if(SKU_SMALL.equals(sku) || SKU_MEDIUM.equals(sku) || SKU_LARGE.equals(sku)){
-				mHelper.consumeAsync(info, mConsumeFinishedListener);
-			}
-		}
-	};
-	
-	IabHelper.OnConsumeFinishedListener mConsumeFinishedListener = new IabHelper.OnConsumeFinishedListener() {
-		
-		@Override
-		public void onConsumeFinished(Purchase purchase, IabResult result) {
-			Log.d(TAG, "onconsumefinished " + result);
-			
-			if(null == mHelper){
-				return;
-			}
-			
-			if(result.isSuccess()){
-				Log.d(TAG, "thank u");
-				
-			} else {
-				// handle error
-				Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
-			}
-		}
-	};
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.d(TAG, "onactivityresult ");
-
-		if (null == mHelper) {
-			return;
-		}
-
-		if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
-			// not handled by IABUtil
-			super.onActivityResult(requestCode, resultCode, data);
-		} else {
-			Log.d(TAG, "onactivityresult handled by IABUtil");
-		}
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (null != mHelper) {
-			mHelper.dispose();
-		}
-		mHelper = null;
-	}
-
 	@Override
 	protected int getToolbarResourceId() {
 		return R.id.toolbar;
@@ -169,6 +68,33 @@ public class DonationsActivity extends ToolBarBaseActivity {
 	@Override
 	protected int getLayoutResourceId() {
 		return R.layout.fragment_donate;
+	}
+
+	@Override
+	protected String getBase64PublicKey() {
+		String base64EncodedPublicKey = getString(R.string.app_lic_cat);
+		return base64EncodedPublicKey;
+	}
+
+	@Override
+	protected boolean checkPurchaseResponse(Purchase info) {
+		// Check if we have a valid SKU to perform the inapp purchase
+		String sku = info.getSku();
+		if (SKU_SMALL.equals(sku) || SKU_MEDIUM.equals(sku) || SKU_LARGE.equals(sku)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	protected void onPurchaseConsumeFinished(Purchase purchase, IabResult result) {
+		if(result.isSuccess()){
+			Log.d(TAG, "thank u");
+			Toast.makeText(getApplicationContext(), " Thank You for the donation.", Toast.LENGTH_SHORT).show();
+		} else {
+			// handle error
+			Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
+		}
 	}
 
 }
