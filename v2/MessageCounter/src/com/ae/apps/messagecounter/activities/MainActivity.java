@@ -176,7 +176,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		switch (item.getItemId()) {
 		case R.id.menu_license:
 			// Show the license dialog
-			DialogUtils.showWithMessageAndOkButton(this, R.string.menu_license, R.string.str_license_text,
+			DialogUtils.showMaterialInfoDialog(this, R.string.menu_license, R.string.str_license_text,
 					android.R.string.ok);
 			return true;
 		case R.id.menu_share_app:

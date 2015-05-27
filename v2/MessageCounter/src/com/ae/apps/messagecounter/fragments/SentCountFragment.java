@@ -175,6 +175,7 @@ public class SentCountFragment extends Fragment {
 	private static void setProgressWithAnimation(ProgressBar progressBar, int progress, long animDelay) {
 		// We try to add animation for newer APIs here
 		if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.HONEYCOMB) {
+			progressBar.setProgress(0);
 			android.animation.ObjectAnimator animation = android.animation.ObjectAnimator.ofInt(progressBar,
 					PROGRESS_VALUE, 0, progress);
 			animation.setDuration(100);
