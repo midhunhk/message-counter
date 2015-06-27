@@ -3,6 +3,7 @@
 
     <color name="grey">#C2C2C2</color>
     <color name="white">#FFFFFF</color>
+    <color name="silver">#c0c0c0</color>
     
     <!-- app theme colors -->
     <color name="app_theme_light">#009688</color>

@@ -56,17 +56,39 @@
                     android:layout_toRightOf="@+id/appIcon"
                     android:gravity="center_vertical"
                     android:text="@string/app_name"
-                    android:textSize="@dimen/card_title"
                     android:textColor="@color/white"
+                    android:textSize="@dimen/card_title"
                     android:textStyle="bold" />
             </RelativeLayout>
 
             <ListView
                 android:id="@+id/left_drawer_list"
                 android:layout_width="246dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:background="@color/white" />
+                android:background="@color/white"
+                android:divider="@android:color/transparent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/silver"
+                android:padding="@dimen/card_padding" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/app_name" />
+<!-- 
+
+            <ListView
+                android:id="@+id/left_drawer_extra"
+                android:layout_width="246dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@color/white"
+                android:divider="@android:color/transparent" />
+ -->
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 

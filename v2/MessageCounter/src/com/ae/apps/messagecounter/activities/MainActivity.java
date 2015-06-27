@@ -37,22 +37,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ae.apps.common.activities.ToolBarBaseActivity;
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.mock.MockContactDataUtils;
-import com.ae.apps.common.utils.DialogUtils;
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.adapters.NavDrawerListAdapter;
 import com.ae.apps.messagecounter.adapters.SectionsPagerAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
+import com.ae.apps.messagecounter.vo.NavDrawerItem;
 
 /**
  * Main Activity and one entry point to this application
@@ -96,16 +96,48 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
 
 		// Navigation Drawer
-		String[] dummyMenu = { "Counter", "List", "Chart" };
-
+		List<NavDrawerItem> navItems = new ArrayList<NavDrawerItem>();
+		
+		// Create the list for the main fragments to be shown in the drawer
+		NavDrawerListAdapter drawerListAdapter = new NavDrawerListAdapter(this, navItems);
+		navItems.add(new NavDrawerItem(R.drawable.nav_icon_email, mSectionsAdapter.getPageTitle(0)));
+		navItems.add(new NavDrawerItem(R.drawable.nav_icon_list_bulleted, mSectionsAdapter.getPageTitle(1)));
+		navItems.add(new NavDrawerItem(R.drawable.nav_icon_chart_pie, mSectionsAdapter.getPageTitle(2)));
+		
 		mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
-		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, dummyMenu));
+		mDrawerList.setAdapter(drawerListAdapter);
 		mDrawerList.setOnItemClickListener(this);
+		
+		/*		
+		// Nav Drawer extra
+		List<NavDrawerItem> navExtraItems = new ArrayList<NavDrawerItem>();
+		
+		// Create the list for the main fragments to be shown in the drawer
+		final NavDrawerListAdapter drawerExtraListAdapter = new NavDrawerListAdapter(this, navExtraItems);
+		navItems.add(new NavDrawerItem(R.drawable.nav_icon_cash, getString(R.string.menu_donate), R.id.menu_donate));
+		navItems.add(new NavDrawerItem(R.drawable.nav_icon_settings, getString(R.string.menu_settings), R.id.menu_settings));
+		navItems.add(new NavDrawerItem(R.drawable.nav_icon_info, getString(R.string.menu_about), R.id.menu_about));
+		
+		ListView leftDrawerExtra = (ListView) findViewById(R.id.left_drawer_extra);
+		leftDrawerExtra.setAdapter(drawerExtraListAdapter);
+		leftDrawerExtra.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+				NavDrawerItem drawerItem = (NavDrawerItem) drawerExtraListAdapter.getItem(pos);
+				drawerItem.getItemId();
+			}
+		});
+		*/
+		
 		displayHomeAsUp();
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, getToolBar(), R.string.app_name,
+		mDrawerToggle = new ActionBarDrawerToggle(
+				this, 
+				mDrawerLayout, 
+				getToolBar(), 
+				R.string.app_name,
 				R.string.app_name);
 
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -168,7 +200,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		boolean helloNavDrawer = sharedPreferences.getBoolean(AppConstants.PREF_KEY_NAV_DRAWER_INTRO_GIVEN, false);
 		
 		// Check and introduce the Navigation Drawer on first use to the user
-		if(null != mDrawerLayout && helloNavDrawer){
+		if(null != mDrawerLayout && !helloNavDrawer){
 			mDrawerLayout.openDrawer(Gravity.LEFT);
 			sharedPreferences
 				.edit()
@@ -194,11 +226,11 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		setDrawerState(item);
 
 		switch (item.getItemId()) {
-		case R.id.menu_license:
+		/*case R.id.menu_license:
 			// Show the license dialog
 			DialogUtils.showMaterialInfoDialog(this, R.string.menu_license, R.string.str_license_text,
 					android.R.string.ok);
-			return true;
+			return true;*/
 		case R.id.menu_share_app:
 			// Share this app
 			startActivity(getShareIntent());
@@ -300,7 +332,11 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
 	private void showFragmentContent(int position) {
 		Fragment fragment = mSectionsAdapter.getItem(position);
-		getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+		getSupportFragmentManager().beginTransaction()
+			.replace(R.id.container, fragment)
+			.commit();
+		
+		// highlight the selected item and close the drawer
 		mDrawerList.setItemChecked(position, true);
 		mDrawerLayout.closeDrawers();
 

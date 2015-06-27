@@ -5,7 +5,7 @@
     <string name="title_counter">Counter</string>
     
     <string name="app_name">Message Counter</string>
-    <string name="app_version">Version 3.1.10 Talisman R3 (May 2015)</string>
+    <string name="app_version">Version 3.1.15 Talisman R3 (June 2015)</string>
     <string name="app_desc">Message Counter displays messages inbox statistics and number of messages from each of your contacts.</string>
 	<string name="app_disclaim">Disclaimer: This app is created for educational purposes and as such has no guarantee or support. Since undocumented Android APIs are used, this app may not work as expected on all devices.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
@@ -44,7 +44,8 @@ limitations under the License.</string>
     <!-- same for all languages - not to be translated -->
     <string name="str_zero" translatable="false">0</string>
     <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter</string>
-    <string name="github_source_visible_url" translatable="false">https://github.com/midhunhk/message-counter</string>
+    <string name="github_source_url" translatable="false">https://github.com/midhunhk/message-counter</string>
+    <string name="github_source_visible_url" translatable="false">github.com/midhunhk/message-counter</string>
     
     <!-- Strings for Preference -->
     <string name="str_pref_messages">Messages</string>

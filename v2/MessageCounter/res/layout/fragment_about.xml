@@ -114,6 +114,49 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/app_disclaim" />
+
+                    <RelativeLayout
+                        android:id="@+id/viewSourceCode"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:contentDescription="@string/empty_text"
+                            android:layout_margin="@dimen/margin_medium"
+                            android:src="@drawable/icon_github" />
+                        
+                        <TextView 
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/github_source_visible_url"/>
+                    </RelativeLayout>
+                    
+                    <RelativeLayout
+                        android:id="@+id/viewLicense"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:contentDescription="@string/empty_text"
+                            android:layout_margin="@dimen/margin_medium"
+                            android:src="@drawable/icon_text" />
+                        
+                        <TextView 
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_license_text"/>
+                    </RelativeLayout>
+                    
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
