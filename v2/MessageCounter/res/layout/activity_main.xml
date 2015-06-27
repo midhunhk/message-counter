@@ -74,11 +74,6 @@
                 android:layout_height="1dp"
                 android:background="@color/silver"
                 android:padding="@dimen/card_padding" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/app_name" />
 <!-- 
 
             <ListView
