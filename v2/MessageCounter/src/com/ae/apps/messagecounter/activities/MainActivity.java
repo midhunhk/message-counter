@@ -23,8 +23,10 @@ import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -49,6 +51,7 @@ import com.ae.apps.messagecounter.adapters.SectionsPagerAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
+import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 
 /**
@@ -155,6 +158,23 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
 		// Inflate and handle menu clicks
 		getToolBar().inflateMenu(R.menu.activity_main);
+		
+		showNavDrawerIntro();
+	}
+
+	@SuppressLint("RtlHardcoded")
+	private void showNavDrawerIntro() {
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this); 
+		boolean helloNavDrawer = sharedPreferences.getBoolean(AppConstants.PREF_KEY_NAV_DRAWER_INTRO_GIVEN, false);
+		
+		// Check and introduce the Navigation Drawer on first use to the user
+		if(null != mDrawerLayout && helloNavDrawer){
+			mDrawerLayout.openDrawer(Gravity.LEFT);
+			sharedPreferences
+				.edit()
+				.putBoolean(AppConstants.PREF_KEY_NAV_DRAWER_INTRO_GIVEN, true)
+				.commit();
+		}
 	}
 
 	@Override

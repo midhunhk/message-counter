@@ -49,5 +49,5 @@ public interface AppConstants {
 	String	PREF_KEY_MESSAGE_LIMIT_VALUE		= "pref_key_message_limit_value";
 	String	PREF_KEY_ENABLE_SENT_COUNT			= "pref_key_enable_sent_message_count";
 	String	PREF_KEY_ENABLE_NOTIFICATION		= "pref_key_enable_notification";
-
+	String	PREF_KEY_NAV_DRAWER_INTRO_GIVEN		= "pref_key_nav_drawer_intro_given";
 }
