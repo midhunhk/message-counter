@@ -17,6 +17,8 @@
 package com.ae.apps.messagecounter.activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -45,8 +47,10 @@ public class AboutActivity extends ToolBarBaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Launch URL to GitHub page
-
+				String url = getString(R.string.github_source_url);
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(url));
+				startActivity(intent);
 			}
 		});
 
