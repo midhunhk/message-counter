@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.ae.apps.common.activities.ToolBarBaseActivity;
 import com.ae.apps.common.managers.ContactManager;
@@ -108,28 +110,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		mDrawerList.setAdapter(drawerListAdapter);
 		mDrawerList.setOnItemClickListener(this);
 		
-		/*		
-		// Nav Drawer extra
-		List<NavDrawerItem> navExtraItems = new ArrayList<NavDrawerItem>();
-		
-		// Create the list for the main fragments to be shown in the drawer
-		final NavDrawerListAdapter drawerExtraListAdapter = new NavDrawerListAdapter(this, navExtraItems);
-		navItems.add(new NavDrawerItem(R.drawable.nav_icon_cash, getString(R.string.menu_donate), R.id.menu_donate));
-		navItems.add(new NavDrawerItem(R.drawable.nav_icon_settings, getString(R.string.menu_settings), R.id.menu_settings));
-		navItems.add(new NavDrawerItem(R.drawable.nav_icon_info, getString(R.string.menu_about), R.id.menu_about));
-		
-		ListView leftDrawerExtra = (ListView) findViewById(R.id.left_drawer_extra);
-		leftDrawerExtra.setAdapter(drawerExtraListAdapter);
-		leftDrawerExtra.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-				NavDrawerItem drawerItem = (NavDrawerItem) drawerExtraListAdapter.getItem(pos);
-				drawerItem.getItemId();
-			}
-		});
-		*/
-		
 		displayHomeAsUp();
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -144,6 +124,18 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		mDrawerToggle.syncState();
 
 		// End changes for Navigation Drawer
+		
+		// Handle clicks for Donate link from navigation drawer
+		final Context context = this;
+		TextView donateBtn = (TextView) findViewById(R.id.navDonate);
+		donateBtn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				mDrawerLayout.closeDrawers();
+				startActivity(new Intent(context, DonationsActivity.class));				
+			}
+		});
 
 		// Create the handler in the main thread
 		mHandler = new Handler();

@@ -69,21 +69,22 @@
                 android:background="@color/white"
                 android:divider="@android:color/transparent" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/silver"
-                android:padding="@dimen/card_padding" />
-<!-- 
+            <include layout="@layout/separator_line" />
 
-            <ListView
-                android:id="@+id/left_drawer_extra"
-                android:layout_width="246dp"
+            <TextView
+                android:id="@+id/navDonate"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:background="@color/white"
-                android:divider="@android:color/transparent" />
- -->
+                android:clickable="true"
+                android:background="@drawable/clickable_background"
+                android:padding="@dimen/padding_medium"
+                android:paddingLeft="@dimen/padding_large"
+                android:paddingRight="@dimen/padding_large"
+                android:layout_marginLeft="@dimen/margin_medium"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:text="@string/str_donate_title"
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 
