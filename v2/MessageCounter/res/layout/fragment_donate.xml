@@ -63,13 +63,7 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/padding_medium" />
                
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:background="@color/silver"
-                        android:padding="@dimen/card_padding" />
+                    <include layout="@layout/separator_line"/>
                     
                     <TextView
                         android:layout_width="wrap_content"

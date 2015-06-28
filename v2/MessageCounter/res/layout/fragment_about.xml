@@ -28,7 +28,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/padding_medium" >
+                    android:padding="@dimen/padding_small" >
 
                     <ImageView
                         android:id="@+id/appIcon"
@@ -103,13 +103,7 @@
                         android:layout_gravity="center"
                         android:text="@string/app_disclaim" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:background="@color/silver"
-                        android:padding="@dimen/card_padding" />
+                    <include layout="@layout/separator_line"/>
 
                     <TextView
                         android:id="@+id/viewSourceCode"
@@ -123,13 +117,7 @@
                         android:padding="@dimen/padding_small"
                         android:text="@string/github_source_visible_url" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:background="@color/silver"
-                        android:padding="@dimen/card_padding" />
+                    <include layout="@layout/separator_line"/>
 
                     <TextView
                         android:id="@+id/viewLicense"
