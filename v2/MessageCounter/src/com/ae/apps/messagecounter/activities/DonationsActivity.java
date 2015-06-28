@@ -16,7 +16,9 @@
 
 package com.ae.apps.messagecounter.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,7 @@ import com.ae.apps.common.activities.DonationsBaseActivity;
 import com.ae.apps.common.utils.inapp.IabResult;
 import com.ae.apps.common.utils.inapp.Purchase;
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.utils.AppConstants;
 
 /**
  * Activity for showing donations, using the DonationsBaseActivity for inapp billing.
@@ -37,7 +40,7 @@ public class DonationsActivity extends DonationsBaseActivity {
 
 	private static final String	EXTRA_DATA	= "marmaladespringcat";
 	private static final String	TAG			= "DonationsActivity";
-	private static final String	SKU_SMALL	= "product_test";
+	private static final String	SKU_SMALL	= "product_small";
 	private static final String	SKU_MEDIUM	= "product_medium";
 	private static final String	SKU_LARGE	= "product_large";
 
@@ -50,9 +53,13 @@ public class DonationsActivity extends DonationsBaseActivity {
 		setToolbarTitle(getString(R.string.menu_donate));
 
 		// Find the Donate buttons and setup the click listeners
-		Button btnDonateSmall = (Button) findViewById(R.id.btnDonateSample);
+		Button btnDonateSmall = (Button) findViewById(R.id.btnDonateSmall);
+		Button btnDonateMedium = (Button) findViewById(R.id.btnDonateMedium);
+		Button btnDonateLarge = (Button) findViewById(R.id.btnDonateLarge);
 		
 		btnDonateSmall.setOnClickListener(mDonateButtonClickListener);
+		btnDonateMedium.setOnClickListener(mDonateButtonClickListener);
+		btnDonateLarge.setOnClickListener(mDonateButtonClickListener);
 
 	}
 	
@@ -64,11 +71,17 @@ public class DonationsActivity extends DonationsBaseActivity {
 			// Identify the donation type
 			String productCode = null;
 			switch(v.getId()){
-			case R.id.btnDonateSample:
+			case R.id.btnDonateSmall:
 				productCode = SKU_SMALL;
 				break;
-				default:
-					productCode = SKU_SMALL;
+			case R.id.btnDonateMedium:
+				productCode = SKU_MEDIUM;
+				break;
+			case R.id.btnDonateLarge:
+				productCode = SKU_LARGE;
+				break;
+			default:
+				productCode = SKU_SMALL;
 			}
 			
 			// Invoke the purchase flow method from the DonationsBaseActivity
@@ -105,11 +118,18 @@ public class DonationsActivity extends DonationsBaseActivity {
 	@Override
 	protected void onPurchaseConsumeFinished(Purchase purchase, IabResult result) {
 		if(result.isSuccess()){
-			Log.d(TAG, "thank u");
-			Toast.makeText(getApplicationContext(), " Thank You for the donation.", Toast.LENGTH_SHORT).show();
+			// Read and increment the donations count made by the user
+			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this); 
+			int donationCount = sharedPreferences.getInt(AppConstants.PREF_KEY_DONATIONS_MADE, 0) + 1;
+			sharedPreferences
+				.edit()
+				.putInt(AppConstants.PREF_KEY_DONATIONS_MADE, donationCount)
+				.commit();
+			Toast.makeText(getApplicationContext(), getString(R.string.str_donate_thanks), Toast.LENGTH_SHORT).show();
 		} else {
 			// handle error
-			Toast.makeText(getApplicationContext(), result.getResponse(), Toast.LENGTH_SHORT).show();
+			Log.e(TAG, "Purchase response code : " + result.getResponse());
+			Toast.makeText(getApplicationContext(), getString(R.string.str_donate_fail), Toast.LENGTH_SHORT).show();
 		}
 	}
 

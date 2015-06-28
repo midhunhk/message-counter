@@ -5,7 +5,7 @@
 	<string name="title_counter">Contador</string>
 
 	<string name="app_name">Mensagem Contador</string>
-	<string name="app_version">versão 3.1.15 (June 2015)</string>
+	<string name="app_version">versão 3.1.15 (junio 2015)</string>
 	<string name="app_desc">Mensagem Contador exibe mensagens da caixa de entrada estatísticas e número de mensagens de cada um dos seus contatos. Este projeto de código \'s fonte está disponível no GitHub.</string>
 	<string name="app_disclaim">Disclaimer: Este aplicativo é criado para fins educativos e como tal tem nenhuma garantia ou apoio. Desde APIs do Android sem documentos são utilizados, este aplicativo pode não funcionar como esperado em todos os dispositivos.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
@@ -72,5 +72,15 @@ limitations under the License.</string>
     <string name="str_messages_sent_caps">MENSAGENS ENVIDAS</string>
     <string name="str_today">HOJE</string>
     <string name="str_cycle">CICLO</string>
+    
+    <!-- strings for donate v3.1 -->
+    <string name="str_donate_title">doar</string>
+    <string name="str_donate_text">Mensagem Contador é um projeto open source desenvolvido em meu tempo livre. Qualquer tipo de contribuição ajuda a adicionar recursos ou bugs Swat. Obrigado!</string>
+    <string name="str_donate_disclaimer">Doações não estará em vez de recursos adicionais. Google leva 30% das compras como taxas de transação.</string>
+	<string name="str_donate_thanks">Obrigado por doar!</string>
+	<string name="str_donate_fail">Doação falhou. Por favor, tente novamente mais tarde.</string>
+    <string name="str_donate_small">Compre-me um chocolate</string>
+    <string name="str_donate_medium">Compre-me um gelado</string>
+    <string name="str_donate_large">Compre-me Jantar</string>
 
 </resources>

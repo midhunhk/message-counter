@@ -5,7 +5,7 @@
 	<string name="title_counter">Contador de</string>
 
 	<string name="app_name">Contador de Mensajes</string>
-	<string name="app_version">versión 3.1.15 (June 2015)</string>
+	<string name="app_version">versión 3.1.15 (junio 2015)</string>
 	<string name="app_desc">Contador de mensajes muestra los mensajes de la bandeja de entrada de estadísticas y el número de mensajes de cada uno de sus contactos. Código fuente de este proyecto está disponible en GitHub. Traducciones utilizando Google Translate.</string>
 	<string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
@@ -72,4 +72,14 @@ limitations under the License.</string>
     <string name="str_messages_sent_caps">MENSAJES ENVIADOS</string>
     <string name="str_today">HOY</string>
     <string name="str_cycle">CICLO</string>
+    
+    <!-- strings for donate v3.1 -->
+    <string name="str_donate_title">donar</string>
+    <string name="str_donate_text">Contador de Mensajes es un proyecto de código abierto desarrollado en mi tiempo libre. Cualquier tipo de contribución ayuda a añadir características o bugs swat. Gracias!</string>
+    <string name="str_donate_disclaimer">Las donaciones no estarán en lugar de características adicionales. Google tiene el 30% de las compras como las comisiones por transacciones.</string>
+	<string name="str_donate_thanks">Gracias por la donación de usted!</string>
+	<string name="str_donate_fail">Donación falló. Por favor, inténtelo de nuevo más tarde.</string>
+    <string name="str_donate_small">Cómprame un chocolate</string>
+    <string name="str_donate_medium">Cómprame un helado</string>
+    <string name="str_donate_large">Cómprame Cena</string>
 </resources>

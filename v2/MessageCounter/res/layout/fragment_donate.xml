@@ -37,14 +37,48 @@
                         android:layout_margin="2dip"
                         android:layout_marginBottom="@dimen/margin_medium"
                         android:layout_marginTop="@dimen/margin_medium"
+                        android:drawableLeft="@drawable/icon_gift"
+                        android:drawableStart="@drawable/icon_gift"
+                        android:drawablePadding="@dimen/padding_small"
                         android:text="@string/str_donate_text" />
 
                     <Button
-                        android:id="@+id/btnDonateSample"
+                        android:id="@+id/btnDonateSmall"
                         android:text="@string/str_donate_small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/padding_medium" />
+                    
+                    <Button
+                        android:id="@+id/btnDonateMedium"
+                        android:text="@string/str_donate_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/padding_medium" />
+                    
+                    <Button
+                        android:id="@+id/btnDonateLarge"
+                        android:text="@string/str_donate_large"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/padding_medium" />
+               
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:background="@color/silver"
+                        android:padding="@dimen/card_padding" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dip"
+                        android:layout_marginBottom="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:textSize="12sp"
+                        android:text="@string/str_donate_disclaimer" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
