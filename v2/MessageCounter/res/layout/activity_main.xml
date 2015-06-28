@@ -15,11 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+        <!-- Load Fragments into this container -->
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <!-- Layout for the Left Navigation Drawer -->
         <LinearLayout
             android:id="@+id/left_drawer"
             android:layout_width="@dimen/navigation_drawer_width"
@@ -30,7 +32,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="90dp"
                 android:background="@drawable/navbar_bg"
                 android:padding="@dimen/padding_medium" >
 
