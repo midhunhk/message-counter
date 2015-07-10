@@ -215,3 +215,4 @@ MessageCounter 2.1.20 [December 2013]
   - [ADDED]		In-App Donations
   - [CHANGED]	About screen reorganization
   - [CHANGED]	Navigation Drawer updates
+  - [CHANGED]	UI Updates
