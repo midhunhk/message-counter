@@ -31,6 +31,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Adapter for the Navigation Drawer. 
+ * Handles the display of the Navigation drawer 
+ * 
+ * @author MidhunHK
+ *
+ */
 public class NavDrawerListAdapter extends BaseAdapter {
 	
 	private Context mContext;
@@ -60,13 +67,16 @@ public class NavDrawerListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int pos, View convertView, ViewGroup parent) {
 		if(null == convertView){
+			// Create the view first time
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.drawer_list_item, null);
 		}
 		
+		// Find the elements and set the values
 		ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
 		TextView title = (TextView) convertView.findViewById(R.id.title);
 		
+		// Find the model object for this position
 		NavDrawerItem drawerItem = (NavDrawerItem) getItem(pos);
 		
 		icon.setImageResource(drawerItem.getImageRes());

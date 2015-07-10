@@ -73,17 +73,15 @@
 
             <include layout="@layout/separator_line" />
 
-            <TextView
+            <Button
                 android:id="@+id/navDonate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:background="@drawable/clickable_background"
+                android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/padding_medium"
                 android:paddingLeft="@dimen/padding_large"
                 android:paddingRight="@dimen/padding_large"
-                android:layout_marginLeft="@dimen/margin_medium"
-                android:layout_marginStart="@dimen/margin_medium"
+                android:gravity="start"
                 android:text="@string/str_donate_title"
                 android:textSize="@dimen/card_title"
                 android:textStyle="bold" />
