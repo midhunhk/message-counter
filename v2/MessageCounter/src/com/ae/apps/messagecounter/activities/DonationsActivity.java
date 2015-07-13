@@ -22,9 +22,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.ae.apps.common.activities.DonationsBaseActivity;
+import com.ae.apps.common.utils.DialogUtils;
 import com.ae.apps.common.utils.inapp.IabResult;
 import com.ae.apps.common.utils.inapp.Purchase;
 import com.ae.apps.messagecounter.R;
@@ -125,11 +125,11 @@ public class DonationsActivity extends DonationsBaseActivity {
 				.edit()
 				.putInt(AppConstants.PREF_KEY_DONATIONS_MADE, donationCount)
 				.commit();
-			Toast.makeText(getApplicationContext(), getString(R.string.str_donate_thanks), Toast.LENGTH_SHORT).show();
+			DialogUtils.showMaterialInfoDialog(this, R.string.menu_donate, R.string.str_donate_thanks, android.R.string.ok);
 		} else {
 			// handle error
 			Log.e(TAG, "Purchase response code : " + result.getResponse());
-			Toast.makeText(getApplicationContext(), getString(R.string.str_donate_fail), Toast.LENGTH_SHORT).show();
+			DialogUtils.showMaterialInfoDialog(this, R.string.menu_donate, R.string.str_donate_fail, android.R.string.ok);
 		}
 	}
 
