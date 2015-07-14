@@ -101,7 +101,7 @@ public class DonationsActivity extends DonationsBaseActivity {
 
 	@Override
 	protected String getBase64PublicKey() {
-		String base64EncodedPublicKey = getString(R.string.app_lic_cat);
+		String base64EncodedPublicKey = getString(R.string.app_lic_cat) + getString(R.string.app_lic_dog);
 		return base64EncodedPublicKey;
 	}
 
@@ -127,7 +127,7 @@ public class DonationsActivity extends DonationsBaseActivity {
 				.commit();
 			DialogUtils.showMaterialInfoDialog(this, R.string.menu_donate, R.string.str_donate_thanks, android.R.string.ok);
 		} else {
-			// handle error
+			// handle error scenarios
 			Log.e(TAG, "Purchase response code : " + result.getResponse());
 			DialogUtils.showMaterialInfoDialog(this, R.string.menu_donate, R.string.str_donate_fail, android.R.string.ok);
 		}
