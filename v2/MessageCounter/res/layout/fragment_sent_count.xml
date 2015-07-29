@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.ae.apps.messagecounter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_small" >
@@ -7,8 +8,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         android:padding="@dimen/padding_small" >
 
         <!-- enabled layout -->
@@ -24,7 +25,8 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/card_padding" >
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/padding_small" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -107,7 +109,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_margin"
-                android:padding="@dimen/card_padding" >
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/padding_small" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -206,7 +209,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/card_margin"
-                android:padding="@dimen/card_padding" >
+                app:cardUseCompatPadding="true"
+                app:contentPadding="@dimen/padding_small" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -282,7 +286,8 @@
             android:id="@+id/startCountingLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_large" >
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small" >
 
             <TextView
                 android:layout_width="match_parent"
