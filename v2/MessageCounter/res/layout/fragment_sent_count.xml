@@ -23,6 +23,7 @@
             <!-- Hero Card -->
 
             <android.support.v7.widget.CardView
+                android:id="@+id/hero_card01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
@@ -106,9 +107,9 @@
             <!-- current cycle -->
 
             <android.support.v7.widget.CardView
+                android:id="@+id/hero_card02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/card_margin"
                 app:cardUseCompatPadding="true"
                 app:contentPadding="@dimen/padding_small" >
 
@@ -206,9 +207,9 @@
             <!-- prev cycle -->
 
             <android.support.v7.widget.CardView
+                android:id="@+id/hero_card03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/card_margin"
                 app:cardUseCompatPadding="true"
                 app:contentPadding="@dimen/padding_small" >
 
