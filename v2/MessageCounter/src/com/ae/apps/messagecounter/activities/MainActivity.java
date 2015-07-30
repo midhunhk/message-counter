@@ -218,11 +218,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		setDrawerState(item);
 
 		switch (item.getItemId()) {
-		/*case R.id.menu_license:
-			// Show the license dialog
-			DialogUtils.showMaterialInfoDialog(this, R.string.menu_license, R.string.str_license_text,
-					android.R.string.ok);
-			return true;*/
 		case R.id.menu_share_app:
 			// Share this app
 			startActivity(getShareIntent());

@@ -68,6 +68,7 @@ public class SentCountFragment extends Fragment {
 	private View				mCard01					= null;
 	private View				mCard02					= null;
 	private View				mCard03					= null;
+	private boolean				mShowAnimations			= true;
 	private boolean				mCachedPreferenceValue;
 
 	@Override
@@ -117,14 +118,17 @@ public class SentCountFragment extends Fragment {
 			mSentCounterLayout.setVisibility(View.VISIBLE);
 			mStartCountingLayout.setVisibility(View.GONE);
 
-			Animation anim1 = AnimationUtils.loadAnimation(mContext, R.anim.abc_slide_in_bottom);
-			mCard01.startAnimation(anim1);
+			// Show load animations only on fragment load
+			if (mShowAnimations) {
+				Animation anim1 = AnimationUtils.loadAnimation(mContext, R.anim.abc_slide_in_bottom);
+				mCard01.startAnimation(anim1);
 
-			Animation anim2 = CommonUtils.createAnimation(mContext, R.anim.abc_slide_in_bottom, 200);
-			mCard02.startAnimation(anim2);
+				Animation anim2 = CommonUtils.createAnimation(mContext, R.anim.abc_slide_in_bottom, 200);
+				mCard02.startAnimation(anim2);
 
-			Animation anim3 = CommonUtils.createAnimation(mContext, R.anim.abc_slide_in_bottom, 300);
-			mCard03.startAnimation(anim3);
+				Animation anim3 = CommonUtils.createAnimation(mContext, R.anim.abc_slide_in_bottom, 300);
+				mCard03.startAnimation(anim3);
+			}
 		}
 	}
 
@@ -220,6 +224,7 @@ public class SentCountFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		cacheEnabledPref();
+		mShowAnimations = false;
 	}
 
 	private void cacheEnabledPref() {
