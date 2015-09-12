@@ -66,9 +66,20 @@
                         android:text="@string/app_version" />
 
                     <TextView
+                        android:id="@+id/appReleaseDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/appDeveloper"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dip"
+                        android:layout_toEndOf="@+id/appIcon"
+                        android:layout_toRightOf="@+id/appIcon"
+                        android:text="@string/app_release_date" />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/appReleaseDate"
                         android:layout_gravity="start"
                         android:layout_margin="2dip"
                         android:layout_toEndOf="@+id/appIcon"
