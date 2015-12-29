@@ -35,7 +35,7 @@ License
 
 Dependencies
 ============
- - ae-apps-library
+ - ae-apps-library (https://github.com/midhunhk/ae-apps-library)
  - android-support-v7-appcompat
  - android-support-v7-cardview
 
