@@ -17,8 +17,8 @@
 package com.ae.apps.messagecounter.fragments;
 
 import java.util.List;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -31,6 +31,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.views.SimpleGraphView;
 import com.ae.apps.common.vo.ContactMessageVo;
@@ -64,6 +65,12 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setRetainInstance(true);
 
+		try {
+			mReader = (MessageDataReader) getActivity();
+		} catch (ClassCastException e) {
+			throw new ClassCastException(getActivity().toString() + " must implement registerForData");
+		}
+		
 		View layout = inflater.inflate(R.layout.fragment_chart, null);
 		mContext = getActivity().getBaseContext();
 		
@@ -82,16 +89,6 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 		}
 		mReader.registerForData(this);
 		return layout;
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			mReader = (MessageDataReader) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement OnCheckStatusListener");
-		}
 	}
 
 	@SuppressWarnings("unchecked")
