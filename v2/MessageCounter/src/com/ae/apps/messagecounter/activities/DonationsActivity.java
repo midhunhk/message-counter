@@ -101,8 +101,7 @@ public class DonationsActivity extends DonationsBaseActivity {
 
 	@Override
 	protected String getBase64PublicKey() {
-		String base64EncodedPublicKey = getString(R.string.app_lic_cat) + getString(R.string.app_lic_dog);
-		return base64EncodedPublicKey;
+		return getString(R.string.app_lic_cat) + getString(R.string.app_lic_dog);
 	}
 
 	@Override

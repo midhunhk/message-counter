@@ -39,7 +39,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.ae.apps.common.activities.ToolBarBaseActivity;
 import com.ae.apps.common.managers.ContactManager;
@@ -63,7 +62,7 @@ import com.ae.apps.messagecounter.vo.NavDrawerItem;
  * 
  */
 public class MainActivity extends ToolBarBaseActivity implements MessageDataReader, OnMenuItemClickListener,
-		OnItemClickListener {
+		OnItemClickListener, View.OnClickListener {
 
 	private boolean						isDataReady;
 	private Handler						mHandler;
@@ -126,16 +125,10 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		// End changes for Navigation Drawer
 		
 		// Handle clicks for Donate link from navigation drawer
-		final Context context = this;
-		TextView donateBtn = (TextView) findViewById(R.id.navDonate);
-		donateBtn.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				mDrawerLayout.closeDrawers();
-				startActivity(new Intent(context, DonationsActivity.class));				
-			}
-		});
+		findViewById(R.id.navDonate).setOnClickListener(this);
+		findViewById(R.id.navSettings).setOnClickListener(this);
+		findViewById(R.id.navAbout).setOnClickListener(this);
+		findViewById(R.id.navShare).setOnClickListener(this);
 
 		// Create the handler in the main thread
 		mHandler = new Handler();
@@ -215,7 +208,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 	@SuppressLint({ "InlinedApi", "RtlHardcoded" })
 	private boolean handleMenuItemClick(MenuItem item) {
 
-		setDrawerState(item);
+/*		setDrawerState(item);
 
 		switch (item.getItemId()) {
 		case R.id.menu_share_app:
@@ -234,8 +227,8 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 			startActivity(new Intent(this, DonationsActivity.class));
 			return false;
 		default:
-			return super.onOptionsItemSelected(item);
-		}
+		} */
+		return super.onOptionsItemSelected(item);
 	}
 
 	@SuppressLint("RtlHardcoded")
@@ -329,6 +322,33 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
 		// Display the section header in the title
 		setToolbarTitle(mSectionsAdapter.getPageTitle(position));
+	}
+
+	@Override
+	public void onClick(View v) {
+		mDrawerLayout.closeDrawers();
+		final Context context = getBaseContext();
+		
+		switch(v.getId()){
+		case R.id.navDonate:
+			startActivity(new Intent(context, DonationsActivity.class));
+			break;
+			
+		case R.id.navShare:
+			// Share this app
+			startActivity(getShareIntent());
+			break;
+			
+		case R.id.navSettings:
+			// Display the preference screen
+			startActivity(new Intent(this, SettingsActivity.class));
+			break;
+			
+		case R.id.navAbout:
+			// Show the about screen
+			startActivity(new Intent(this, AboutActivity.class));
+			break;
+		}
 	}
 
 }
