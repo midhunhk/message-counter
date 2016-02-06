@@ -10,6 +10,7 @@ public class SentCountDetailsVo {
 
 	private int	sentToday;
 	private int	sentCycle;
+	private int sentInWeek;
 	private int	cycleLimit;
 	private int	sentLastCycle;
 
@@ -43,6 +44,14 @@ public class SentCountDetailsVo {
 
 	public void setSentLastCycle(int sentLastCycle) {
 		this.sentLastCycle = sentLastCycle;
+	}
+
+	public int getSentInWeek() {
+		return sentInWeek;
+	}
+
+	public void setSentInWeek(int sentInWeek) {
+		this.sentInWeek = sentInWeek;
 	}
 
 }

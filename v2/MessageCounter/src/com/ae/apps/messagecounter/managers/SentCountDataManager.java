@@ -53,11 +53,14 @@ public class SentCountDataManager {
 		int sentTodayCount = counterDataBase.getCountValueForDay(MessageCounterUtils.getIndexFromDate(today));
 
 		// and now the sent messages count from the start date
-		int sentCycleCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils
-				.getIndexFromDate(cycleStartDate));
+		int sentCycleCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
 
 		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
 		int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
+		
+		// Messages sent this week
+		Date weekStartDate = MessageCounterUtils.getWeekStartDate();
+		int sentWeekCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(weekStartDate));
 
 		// Close the db connection
 		counterDataBase.close();
@@ -72,6 +75,7 @@ public class SentCountDataManager {
 		detailsVo.setSentCycle(sentCycleCount);
 		detailsVo.setSentLastCycle(lastCycleCount);
 		detailsVo.setCycleLimit(limit);
+		detailsVo.setSentInWeek(sentWeekCount);
 
 		return detailsVo;
 	}

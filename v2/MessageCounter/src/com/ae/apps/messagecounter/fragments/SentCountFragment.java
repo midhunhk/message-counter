@@ -64,6 +64,7 @@ public class SentCountFragment extends Fragment {
 	private TextView			mPrevCycleSentText		= null;
 	private TextView			mHeroSentTodayText		= null;
 	private TextView			mHeroSentInCycleText	= null;
+	private TextView			mSentThisWeekText		= null;
 	private ProgressBar			mPrevCountProgressBar	= null;
 	private View				mCard01					= null;
 	private View				mCard02					= null;
@@ -91,6 +92,7 @@ public class SentCountFragment extends Fragment {
 		mPrevCountProgressBar = (ProgressBar) layout.findViewById(R.id.prevCountProgressBar);
 		mHeroSentTodayText = (TextView) layout.findViewById(R.id.heroSentTodayText);
 		mHeroSentInCycleText = (TextView) layout.findViewById(R.id.heroSentInCycleText);
+		mSentThisWeekText = (TextView) layout.findViewById(R.id.countSentThisWeekText);
 
 		mCard01 = layout.findViewById(R.id.hero_card01);
 		mCard02 = layout.findViewById(R.id.hero_card02);
@@ -149,6 +151,7 @@ public class SentCountFragment extends Fragment {
 		mSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
 		mHeroSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
 		mHeroSentInCycleText.setText(String.valueOf(detailsVo.getSentCycle()));
+		mSentThisWeekText.setText(String.valueOf(detailsVo.getSentInWeek()));
 
 		// set the progressbar
 		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText, 0);

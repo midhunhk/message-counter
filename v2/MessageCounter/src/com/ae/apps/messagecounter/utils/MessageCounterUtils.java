@@ -247,6 +247,16 @@ public class MessageCounterUtils {
 		calendar.add(Calendar.MONTH, -1);
 		return calendar.getTime();
 	}
+	
+	/**
+	 * Returns the start of the week
+	 * @return
+	 */
+	public static Date getWeekStartDate(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+		return calendar.getTime();
+	}
 
 	public static int getMessageLimitValue(SharedPreferences preferences) {
 		String rawVal = preferences.getString(AppConstants.PREF_KEY_MESSAGE_LIMIT_VALUE, NO_LIMIT_SET);
