@@ -127,8 +127,8 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		// Handle clicks for Donate link from navigation drawer
 		findViewById(R.id.navDonate).setOnClickListener(this);
 		findViewById(R.id.navSettings).setOnClickListener(this);
-		findViewById(R.id.navAbout).setOnClickListener(this);
-		findViewById(R.id.navShare).setOnClickListener(this);
+		// findViewById(R.id.navAbout).setOnClickListener(this);
+		// findViewById(R.id.navShare).setOnClickListener(this);
 
 		// Create the handler in the main thread
 		mHandler = new Handler();
@@ -208,26 +208,25 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 	@SuppressLint({ "InlinedApi", "RtlHardcoded" })
 	private boolean handleMenuItemClick(MenuItem item) {
 
-/*		setDrawerState(item);
+		setDrawerState(item);
 
 		switch (item.getItemId()) {
 		case R.id.menu_share_app:
 			// Share this app
 			startActivity(getShareIntent());
 			return true;
-		case R.id.menu_settings:
+		/*case R.id.menu_settings:
 			// Display the preference screen
 			startActivity(new Intent(this, SettingsActivity.class));
-			return true;
+			return true;*/
 		case R.id.menu_about:
 			// Show the about screen
 			startActivity(new Intent(this, AboutActivity.class));
 			return false;
-		case R.id.menu_donate:
+		/*case R.id.menu_donate:
 			startActivity(new Intent(this, DonationsActivity.class));
-			return false;
-		default:
-		} */
+			return false;*/
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -334,20 +333,20 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 			startActivity(new Intent(context, DonationsActivity.class));
 			break;
 			
-		case R.id.navShare:
+		/*case R.id.navShare:
 			// Share this app
 			startActivity(getShareIntent());
-			break;
+			break;*/
 			
 		case R.id.navSettings:
 			// Display the preference screen
 			startActivity(new Intent(this, SettingsActivity.class));
 			break;
 			
-		case R.id.navAbout:
+		/*case R.id.navAbout:
 			// Show the about screen
 			startActivity(new Intent(this, AboutActivity.class));
-			break;
+			break;*/
 		}
 	}
 

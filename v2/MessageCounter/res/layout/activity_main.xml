@@ -108,6 +108,7 @@
             android:textStyle="bold"
             android:textAllCaps="false"  />
 
+        <!-- 
         <Button
             android:id="@+id/navShare"
             android:layout_width="match_parent"
@@ -140,7 +141,7 @@
             android:text="@string/menu_about"
             android:textSize="@dimen/card_title"
             android:textStyle="bold"
-            android:textAllCaps="false"  />
+            android:textAllCaps="false"  /> -->
         
     </LinearLayout>
 
