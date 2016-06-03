@@ -1,14 +1,12 @@
 Message Counter
 ===============
-<img alt="app icon" src="https://github.com/midhunhk/message-counter/blob/master/v2/MessageCounter/res/drawable-xhdpi/ic_launcher.png"/>
+<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/master/resources/screenshots/promo_v3_1_small.png" width="220"/>
 
 Wiki - https://github.com/midhunhk/message-counter/wiki
 
 Github Page - http://midhunhk.github.io/message-counter
 
 Message Counter is an app for Android. It counts the number of SMS sent in a cycle and notifies you when you have reached the cycle limit. It supports API 8 (Froyo) and above.
-
-<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/master/v2/screen-shots/en-01-hero_framed.png" />
 
 Features:
 - Shows the number of SMS messages in inbox, sent and total.
