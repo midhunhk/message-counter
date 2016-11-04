@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter"
-    android:versionCode="366"
-    android:versionName="3.1.1" >
+    android:versionCode="370"
+    android:versionName="3.2.0" >
 
     <uses-sdk
         android:minSdkVersion="8"

@@ -1,1 +1,1 @@
-include ':messageCounter'
+include ':messageCounter', ':aeAppsLibrary'
