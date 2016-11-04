@@ -67,13 +67,12 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
 	private boolean						isDataReady;
 	private Handler						mHandler;
-	private ActionBarDrawerToggle		mDrawerToggle;
 	private DrawerLayout				mDrawerLayout;
 	private ListView					mDrawerList;
 	private List<ContactMessageVo>		mContactMessageList;
 	private SectionsPagerAdapter		mSectionsAdapter;
-	private final Map<String, Integer>	messageCountsCache	= new HashMap<String, Integer>();
-	private List<MessageDataConsumer>	mConsumers			= new ArrayList<MessageDataConsumer>();
+	private final Map<String, Integer>	messageCountsCache	= new HashMap<>();
+	private List<MessageDataConsumer>	mConsumers			= new ArrayList<>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +86,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 			setToolbarTitle(mSectionsAdapter.getPageTitle(0));
 		}
 
-
 		final SMSManager smsManager = new SMSManager(getBaseContext());
 		final ContactManager contactManager = new ContactManager(getContentResolver());
 
@@ -98,7 +96,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
 
 		// Navigation Drawer
-		List<NavDrawerItem> navItems = new ArrayList<NavDrawerItem>();
+		List<NavDrawerItem> navItems = new ArrayList<>();
 		
 		// Create the list for the main fragments to be shown in the drawer
 		NavDrawerListAdapter drawerListAdapter = new NavDrawerListAdapter(this, navItems);
@@ -113,10 +111,10 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		displayHomeAsUp();
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerToggle = new ActionBarDrawerToggle(
-				this, 
-				mDrawerLayout, 
-				getToolBar(), 
+		ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+				this,
+				mDrawerLayout,
+				getToolBar(),
 				R.string.app_name,
 				R.string.app_name);
 
@@ -143,7 +141,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 			@Override
 			public void run() {
 				final List<ContactMessageVo> data;
-				boolean isMockedRun = false;
+				boolean isMockedRun = Boolean.parseBoolean("false");
 				if (isMockedRun) {
 					// We are doing a mock run, most probably to take some screenshots
 					data = MockContactDataUtils.getMockContactMessageList(getResources());
@@ -191,7 +189,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 			sharedPreferences
 				.edit()
 				.putBoolean(AppConstants.PREF_KEY_NAV_DRAWER_INTRO_GIVEN, true)
-				.commit();
+				.apply();
 		}
 	}
 
@@ -254,7 +252,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 	@Override
 	public void registerForData(MessageDataConsumer consumer) {
 		if (mConsumers == null) {
-			mConsumers = new ArrayList<MessageDataConsumer>();
+			mConsumers = new ArrayList<>();
 		}
 		mConsumers.add(consumer);
 
