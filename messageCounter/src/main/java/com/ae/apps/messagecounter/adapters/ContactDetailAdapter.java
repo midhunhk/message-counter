@@ -51,7 +51,7 @@ public class ContactDetailAdapter extends BaseAdapter {
 	/**
 	 * Update the list
 	 * 
-	 * @param objects
+	 * @param objects list of contact messages
 	 */
 	public void updateList(List<ContactMessageVo> objects) {
 		this.list = objects;
@@ -106,7 +106,7 @@ public class ContactDetailAdapter extends BaseAdapter {
 				} else {
 					// If not able to get the profile icon, show a default one
 					// holder.userProfile.setImageResource(R.drawable.ic_contact_picture);
-					holder.userProfile.setImageResource(com.ae.apps.aeappslibrary.R.drawable.profile_icon_3);
+					holder.userProfile.setImageResource(R.drawable.profile_icon_3);
 				}
 
 			} catch (Exception e) {
@@ -132,7 +132,7 @@ public class ContactDetailAdapter extends BaseAdapter {
 		return position;
 	}
 
-	class ViewHolder {
+	private class ViewHolder {
 		//QuickContactBadge	badge;
 		ImageView 			userProfile;
 		TextView			contactName;

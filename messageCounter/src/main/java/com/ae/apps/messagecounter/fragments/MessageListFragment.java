@@ -97,15 +97,14 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 	private String getMessageCountsSummary(int allMessageCount, int sentMessageCount, int inboxMessageCount,
 			int draftMessageCount) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(getResources().getString(R.string.message_count_sent, sentMessageCount)).append(
-				" + " + getResources().getString(R.string.message_count_inbox, inboxMessageCount));
+		builder.append(getResources().getString(R.string.message_count_sent, String.valueOf(sentMessageCount) )).append(
+				" + " + getResources().getString(R.string.message_count_inbox, String.valueOf(inboxMessageCount) ));
 		if (draftMessageCount > 0) {
 			builder.append(" + " + getResources().getString(R.string.message_count_draft, draftMessageCount));
 		}
 		builder.append(" = " + getResources().getString(R.string.message_count_all, allMessageCount));
 
-		String str = builder.toString();
-		return str;
+		return builder.toString();
 	}
 
 	/**
@@ -127,9 +126,10 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 				// Make some hidden views visible with some animation
 				if (null != getActivity() && null != getActivity().getBaseContext()) {
 					Animation slideInAnimation = AnimationUtils.loadAnimation(getActivity().getBaseContext(),
-							R.animator.slide_in_top);
+							R.anim.abc_slide_in_top);
 					// add a small delay before starting the animation
 					slideInAnimation.setStartOffset(500);
+					// Expected resource of type anim[ResourceType]
 				}
 				pageTitleText.setVisibility(View.VISIBLE);
 			}

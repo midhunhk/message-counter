@@ -145,9 +145,9 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 			}
 
 			// Create a new SimpleGraphView and add it to the graphContainer
-			Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
+			/*Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
 			fadeInAnimation.setStartOffset(150);
-			graphView.startAnimation(fadeInAnimation);
+			graphView.startAnimation(fadeInAnimation);*/
 			mGraphContainer.addView(graphView);
 		} catch (Exception e) {
 			Log.e(TAG, e.getMessage());

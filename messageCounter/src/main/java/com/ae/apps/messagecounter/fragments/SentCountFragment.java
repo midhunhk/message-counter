@@ -166,7 +166,7 @@ public class SentCountFragment extends Fragment {
 		setProgressInfo(lastCycle, detailsVo.getCycleLimit(), mPrevCountProgressBar, mPrevCycleSentText, 0);
 
 		// Some basic animations
-		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
+		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.anim.abc_fade_in);
 		fadeInAnimation.setStartOffset(150);
 		// mSentCounterLayout.startAnimation(fadeInAnimation);
 	}
