@@ -34,10 +34,8 @@ License
 Dependencies
 ============
  - ae-apps-library (https://github.com/midhunhk/ae-apps-library)
- - android-support-v7-appcompat
- - android-support-v7-cardview
 
-App Store
+Play Store
 =========
 
 <a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
@@ -47,4 +45,4 @@ App Store
 
 This app is available on the Google Play Store at https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter
 
-This project requires the ae_apps_library project (https://github.com/midhunhk/ae_apps_library).
+This project requires the ae_apps_library project (https://github.com/midhunhk/ae-apps-library).
