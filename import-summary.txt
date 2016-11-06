@@ -1,0 +1,176 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Manifest Merging:
+-----------------
+Your project uses libraries that provide manifests, and your Eclipse
+project did not explicitly turn on manifest merging. In Android Gradle
+projects, manifests are always merged (meaning that contents from your
+libraries' manifests will be merged into the app manifest. If you had
+manually copied contents from library manifests into your app manifest
+you may need to remove these for the app to build correctly.
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From AeAppsLibrary:
+* AeAppsLibrary.iml
+* VersionHistory.txt
+* build.gradle
+* ic_launcher-web.png
+* proguard-project.txt
+From MessageCounter:
+* .gitignore
+* LICENSE-2.0.txt
+* MessageCounter.iml
+* VersionHistory.txt
+* ic_launcher-web.png
+* lib\
+* lib\aeappslibrary.jar
+* proguard\
+* proguard\dump.txt
+* proguard\mapping.txt
+* proguard\seeds.txt
+* proguard\usage.txt
+From android-support-v7-cardview:
+* android-support-v7-cardview.iml
+* build.gradle
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:22.2.1
+android-support-v7-appcompat.jar => com.android.support:appcompat-v7:22.2.1
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+android-support-v7-appcompat => [com.android.support:appcompat-v7:22.2.1]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In AeAppsLibrary:
+* AndroidManifest.xml => aeAppsLibrary\src\main\AndroidManifest.xml
+* assets\ => aeAppsLibrary\src\main\assets
+* libs\android-support-v7-cardview.jar => aeAppsLibrary\libs\android-support-v7-cardview.jar
+* libs\android-support-v7-recyclerview.jar => aeAppsLibrary\libs\android-support-v7-recyclerview.jar
+* lint.xml => aeAppsLibrary\lint.xml
+* res\ => aeAppsLibrary\src\main\res\
+* src\ => aeAppsLibrary\src\main\java\
+* src\com\android\vending\billing\IInAppBillingService.aidl => aeAppsLibrary\src\main\aidl\com\android\vending\billing\IInAppBillingService.aidl
+In android-support-v7-cardview:
+* AndroidManifest.xml => androidsupportv7cardview\src\main\AndroidManifest.xml
+* assets\ => androidsupportv7cardview\src\main\assets
+* res\ => androidsupportv7cardview\src\main\res\
+* src\ => androidsupportv7cardview\src\main\java
+* src\.readme => androidsupportv7cardview\src\main\resources\.readme
+In MessageCounter:
+* D:\WorkSpaces\_repositories\ae-apps-library\ => messageCounter\src\main\java\
+* D:\WorkSpaces\_repositories\ae-apps-library\.gitignore => messageCounter\src\main\resources\.gitignore
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\compiler.xml => messageCounter\src\main\resources\.idea\compiler.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\copyright\apache_licence_V2.xml => messageCounter\src\main\resources\.idea\copyright\apache_licence_V2.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\copyright\profiles_settings.xml => messageCounter\src\main\resources\.idea\copyright\profiles_settings.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\encodings.xml => messageCounter\src\main\resources\.idea\encodings.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\libraries\libs.xml => messageCounter\src\main\resources\.idea\libraries\libs.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\misc.xml => messageCounter\src\main\resources\.idea\misc.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\modules.xml => messageCounter\src\main\resources\.idea\modules.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\vcs.xml => messageCounter\src\main\resources\.idea\vcs.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\.idea\workspace.xml => messageCounter\src\main\resources\.idea\workspace.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\.classpath => messageCounter\src\main\resources\library\AeAppsLibrary\.classpath
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\.project => messageCounter\src\main\resources\library\AeAppsLibrary\.project
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\.settings\org.eclipse.jdt.core.prefs => messageCounter\src\main\resources\library\AeAppsLibrary\.settings\org.eclipse.jdt.core.prefs
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\AeAppsLibrary.iml => messageCounter\src\main\resources\library\AeAppsLibrary\AeAppsLibrary.iml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\AndroidManifest.xml => messageCounter\src\main\resources\library\AeAppsLibrary\AndroidManifest.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\aidl\com\android\vending\billing\IInAppBillingService.aidl => messageCounter\src\main\aidl\library\AeAppsLibrary\bin\aidl\com\android\vending\billing\IInAppBillingService.aidl
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\AndroidManifest.xml => messageCounter\src\main\resources\library\AeAppsLibrary\bin\AndroidManifest.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\classes\com\android\vending\billing\IInAppBillingService.aidl => messageCounter\src\main\aidl\library\AeAppsLibrary\bin\classes\com\android\vending\billing\IInAppBillingService.aidl
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\jarlist.cache => messageCounter\src\main\resources\library\AeAppsLibrary\bin\jarlist.cache
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\R.txt => messageCounter\src\main\resources\library\AeAppsLibrary\bin\R.txt
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-hdpi\ic_action_search.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-hdpi\ic_action_search.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-hdpi\ic_launcher.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-hdpi\ic_launcher.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-ldpi\ic_launcher.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-ldpi\ic_launcher.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-mdpi\ic_action_search.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-mdpi\ic_action_search.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-mdpi\ic_launcher.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-mdpi\ic_launcher.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\ic_action_search.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\ic_action_search.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\ic_launcher.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\ic_launcher.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_1.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_1.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_2.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_2.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_3.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_3.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_4.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_4.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_5.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_5.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_6.png => messageCounter\src\main\resources\library\AeAppsLibrary\bin\res\crunch\drawable-xhdpi\profile_icon_6.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\build.gradle => messageCounter\src\main\resources\library\AeAppsLibrary\build.gradle
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\ic_launcher-web.png => messageCounter\src\main\resources\library\AeAppsLibrary\ic_launcher-web.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\lint.xml => messageCounter\src\main\resources\library\AeAppsLibrary\lint.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\proguard-project.txt => messageCounter\src\main\resources\library\AeAppsLibrary\proguard-project.txt
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\project.properties => messageCounter\src\main\resources\library\AeAppsLibrary\project.properties
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\animator\fade_in.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\animator\fade_in.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\animator\slide_in_top.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\animator\slide_in_top.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-hdpi\default_profile_image.jpg => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-hdpi\default_profile_image.jpg
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-hdpi\ic_action_search.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-hdpi\ic_action_search.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-hdpi\ic_launcher.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-hdpi\ic_launcher.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-ldpi\ic_launcher.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-ldpi\ic_launcher.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-mdpi\default_profile_image.jpg => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-mdpi\default_profile_image.jpg
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-mdpi\ic_action_search.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-mdpi\ic_action_search.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-mdpi\ic_launcher.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-mdpi\ic_launcher.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-xhdpi\ic_action_search.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-xhdpi\ic_action_search.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-xhdpi\ic_launcher.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-xhdpi\ic_launcher.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_1.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_1.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_2.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_2.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_3.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_3.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_4.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_4.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_5.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_5.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_6.png => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable-xhdpi\profile_icon_6.png
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\drawable\dashed_line.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\drawable\dashed_line.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\layout\activity_main.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\layout\activity_main.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\layout\separator_line.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\layout\separator_line.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\menu\activity_main.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\menu\activity_main.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\values\colors.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\values\colors.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\values\dimens.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\values\dimens.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\values\strings.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\values\strings.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\res\values\styles.xml => messageCounter\src\main\resources\library\AeAppsLibrary\res\values\styles.xml
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\src\com\android\vending\billing\IInAppBillingService.aidl => messageCounter\src\main\aidl\library\AeAppsLibrary\src\com\android\vending\billing\IInAppBillingService.aidl
+* D:\WorkSpaces\_repositories\ae-apps-library\library\AeAppsLibrary\VersionHistory.txt => messageCounter\src\main\resources\library\AeAppsLibrary\VersionHistory.txt
+* D:\WorkSpaces\_repositories\ae-apps-library\README.md => messageCounter\src\main\resources\README.md
+* AndroidManifest.xml => messageCounter\src\main\AndroidManifest.xml
+* assets\ => messageCounter\src\main\assets
+* lint.xml => messageCounter\lint.xml
+* proguard-project.txt => messageCounter\proguard-project.txt
+* res\ => messageCounter\src\main\res\
+* src\ => messageCounter\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)
