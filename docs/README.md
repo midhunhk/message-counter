@@ -1,3 +1,3 @@
-Message Counter
-===============
+Message Counter Documentation
+=============================
 Project documentation will be hosted here, one day...
