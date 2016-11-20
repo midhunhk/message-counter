@@ -20,6 +20,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.activities.MainActivity;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
@@ -37,6 +38,8 @@ public class SMSObserver extends ContentObserver {
 
 	private static final String	COLUMN_NAME_PROTOCOL	= "protocol";
 	private static final String	COLUMN_NAME_ID			= "_id";
+	private static final String COLUMN_NAME_DATE		= "date";
+	private static final String TAG 					= "SMSObserver";
 
 	private Uri					observableUri			= null;
 	private Context				mContext				= null;
@@ -59,9 +62,15 @@ public class SMSObserver extends ContentObserver {
 			// Read lastMessageId from SharedPreferences
 			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext); 
 			String lastMessageId = sharedPreferences.getString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, "");
-			
+
 			// See if this message was processed earlier, sometimes same messageId can come multiple times
 			boolean isNewMessage = !lastMessageId.equals(messageId);
+
+			// Check for any messages that we might have missed since the last message was logged
+			// Experimental feature
+			if(isNewMessage) {
+				// checkForMessagesNotLogged(lastMessageId, messageId);
+			}
 
 			// protocol will be null for sent messages
 			if (protocol == null && isNewMessage) {
@@ -75,13 +84,13 @@ public class SMSObserver extends ContentObserver {
 				// Add an entry into the database
 				counterDataBase.addMessageSentCounter(today);
 
-				// if sentcount limit and notify on reching the limit are enabled, we shall show a notification
+				// if sent count limit and notify on reaching the limit are enabled, we shall show a notification
 				showMessageLimitNotification(counterDataBase);
 
 				// Close the connection to the database
 				counterDataBase.close();
 
-				// Store this message id incase we get multiple callbacks for the same id
+				// Store this message id in case we get multiple callbacks for the same id
 				Log.d("SendSMSObserver", " An SMS was sent at " + date.getTime() + " with id " + messageId);
 				sharedPreferences
 					.edit()
@@ -93,6 +102,34 @@ public class SMSObserver extends ContentObserver {
 			}
 		}
 		cursor.close();
+	}
+
+	private void checkForMessagesNotLogged(String lastMessageId, String messageId) {
+		// Get the timestamp for the lastMessage that was logged
+		String[] projection = new String[]{COLUMN_NAME_ID, COLUMN_NAME_DATE};
+		Cursor lastMessageCursor = mContext.getContentResolver().query(
+				Uri.parse(SMSManager.SMS_URI_SENT),
+				projection,
+				COLUMN_NAME_ID + "= ? ",
+				new String[]{lastMessageId}, null);
+		Log.d(TAG, "lastMessageCursor count :" + lastMessageCursor.getCount());
+		lastMessageCursor.moveToFirst();
+
+		Long lastMessageTimeStamp = Long.parseLong(lastMessageCursor.getString(lastMessageCursor.getColumnIndex(COLUMN_NAME_DATE)));
+		lastMessageCursor.close();
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(lastMessageTimeStamp);
+
+		// Open a connection to the app's database to see how many messages we missed to count
+		CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
+
+		int missedCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(calendar.getTime()));
+		if(missedCount > 0){
+			// Query sent messages since last timestamp and add to the database
+		}
+
+		counterDataBase.close();
 	}
 
 	private void showMessageLimitNotification(CounterDataBaseAdapter counterDataBase) {

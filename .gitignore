@@ -13,8 +13,11 @@
 bin/
 gen/
 build/
+
+# misc folders
 aeAppsLibrary/
 gradle/
+_backs/
 
 # Local configuration file (sdk path, etc)
 local.properties
