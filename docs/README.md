@@ -1,0 +1,3 @@
+Message Counter
+===============
+Project documentation will be hosted here, one day...
