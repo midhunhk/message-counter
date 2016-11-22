@@ -1,0 +1,86 @@
+<resources>
+
+	<string name="title_sent_list">Lista</string>
+	<string name="title_chart">Gráfico</string>
+	<string name="title_counter">Contador de</string>
+
+	<string name="app_name">Contador de Mensajes</string>
+	<string name="app_version">versión 3.1.1</string>
+	<string name="app_release_date">April 2016</string>
+	<string name="app_desc">Contador de mensajes muestra los mensajes de la bandeja de entrada de estadísticas y el número de mensajes de cada uno de sus contactos. Código fuente de este proyecto está disponible en GitHub. Traducciones utilizando Google Translate.</string>
+	<string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
+	<string name="app_source_code">This project\'s source code is available at GitHub</string>
+	<string name="app_developer_info">diseñado &amp; desarrollado por ae labs</string>
+
+	<string name="title_activity_main">Contador de Mensajes</string>
+	<string name="title_list_page">Los mensajes de Bandeja de entrada de Contactos</string>
+
+	<string name="menu_settings">Configuración</string>
+	<string name="menu_about">Acerca de</string>
+	<string name="menu_license">Licencia</string>
+	<string name="menu_share">Comparte esta aplicación</string>
+
+	<string name="empty_text"/>
+	<string name="empty_list">No se han encontrado mensajes de</string>
+
+	<string name="message_count_inbox">%s recibidos</string>
+	<string name="message_count_sent">%s enviados</string>
+	<string name="message_count_draft">%s borrador</string>
+	<string name="message_count_all">%s en total</string>
+
+	<string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at\n\n
+http://www.apache.org/licenses/LICENSE-2.0\n\n
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</string>
+
+	<string name="str_chart_title">Top los remitentes de mensajes</string>
+	<string name="str_other_senders">(Otros) de texto puede incluir mensajes de números que no están guardados en tus contactos que pueden incluir las redes móviles o instituciones financieras.</string>
+
+	<!-- Strings for Preference -->
+    <string name="str_pref_messages">Mensajes</string>
+    <string name="str_pref_non_contact_messages">Mensajes sin contacto</string>
+    <string name="str_pref_show_non_contact_message_count">Incluir mensajes de los no contactos</string>
+    <string name="str_pref_hide_non_contact_message_count">Excluir mensajes de los no contactos</string>
+    
+    <!-- changes for v2.2 -->
+    <string name="str_messages_sent">mensajes enviados</string>
+    <string name="str_this_cycle">Este ciclo</string>
+    <string name="str_sent_today">Enviado hoy</string>
+    <string name="str_cycle_start_date">Ciclo de la fecha de inicio</string>
+    <string name="str_sent_count">Contar mensajes enviados</string>
+    <string name="str_enable_sent_count">Para hacer el seguimiento de los mensajes enviados contar, puede activar esta función en la configuración y proporcionar los límites</string>
+    
+    <string name="str_pref_sent_message_count">Número de mensajes enviados</string>
+    <string name="str_pref_sent_message_desc">Un servicio de fondo se puede utilizar para controlar los mensajes enviados</string>
+    <string name="str_pref_cycle_start_desc">Ciclo de la fecha de inicio</string>
+    <string name="str_pref_message_limit">mensajes límites</string>
+    <string name="str_pref_message_limit_desc">Limite para los mensajes que se pueden enviar en un ciclo. El valor predeterminado es 100</string>
+    
+    <!-- added for 2.2.7 -->
+    <string name="str_notify_on_limit">Notifique al llegar a límite</string>
+    <string name="str_enble_notify_on_limit">Notifique al llegar a enviar SMS límite para este ciclo</string>
+    <string name="str_sms_limit_notif_title">Límite SMS Alcanzado</string>
+    <string name="str_sms_limit_notif_text">Enviar SMS límite alcanzado para este ciclo</string>
+    <string name="str_current_cycle">Ciclo actual</string>
+    <string name="str_previous_cycle">Ciclo anterior</string>
+    
+    <!-- strings for widgets v2.3 -->
+    <string name="str_messages_sent_caps">MENSAJES ENVIADOS</string>
+    <string name="str_today">HOY</string>
+    <string name="str_cycle">CICLO</string>
+    
+    <!-- strings for donate v3.1 -->
+    <string name="str_donate_title">donar</string>
+    <string name="str_donate_text">Contador de Mensajes es un proyecto de código abierto desarrollado en mi tiempo libre. Cualquier tipo de contribución ayuda a añadir características o bugs swat. Gracias!</string>
+    <string name="str_donate_disclaimer">Las donaciones no estarán en lugar de características adicionales. Google tiene el 30% de las compras como las comisiones por transacciones.</string>
+	<string name="str_donate_thanks">Gracias por la donación de usted!</string>
+	<string name="str_donate_fail">Donación falló. Por favor, inténtelo de nuevo más tarde.</string>
+    <string name="str_donate_small">Cómprame un chocolate</string>
+    <string name="str_donate_medium">Cómprame un helado</string>
+    <string name="str_donate_large">Cómprame Cena</string>
+</resources>

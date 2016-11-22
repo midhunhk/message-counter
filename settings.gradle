@@ -1,0 +1,2 @@
+include ':messageCounter', ":AeAppsLibrary"
+project(":AeAppsLibrary").projectDir = new File(settingsDir, "../AeAppsLib/app")
