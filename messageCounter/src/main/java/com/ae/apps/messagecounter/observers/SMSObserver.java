@@ -1,3 +1,19 @@
+/*
+ * Copyright 2016 Midhun Harikumar
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.ae.apps.messagecounter.observers;
 
 import java.util.Calendar;
@@ -29,18 +45,20 @@ import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 
 /**
- * This class will observe the a content provider for changes
+ * SMSObserver will observe the SMS content provider for any changes
  * 
  * @author Midhun
  * 
  */
 public class SMSObserver extends ContentObserver {
 
+    // Class Constants
 	private static final String	COLUMN_NAME_PROTOCOL	= "protocol";
 	private static final String	COLUMN_NAME_ID			= "_id";
 	private static final String COLUMN_NAME_DATE		= "date";
 	private static final String TAG 					= "SMSObserver";
 
+    // Private references that are set from the ctor
 	private Uri					observableUri			= null;
 	private Context				mContext				= null;
 
@@ -66,10 +84,13 @@ public class SMSObserver extends ContentObserver {
 			// See if this message was processed earlier, sometimes same messageId can come multiple times
 			boolean isNewMessage = !lastMessageId.equals(messageId);
 
+			// Experimental feature - For Unicorn
 			// Check for any messages that we might have missed since the last message was logged
-			// Experimental feature
-			if(isNewMessage) {
-				// checkForMessagesNotLogged(lastMessageId, messageId);
+            // If new message id is different from last saved message id, check if any messages
+            // went un counted. Enable this flag from the preferences menu
+			if((isNewMessage || true) && PreferenceManager.getDefaultSharedPreferences(mContext)
+                        .getBoolean(AppConstants.PREF_KEY_ENABLE_OFFLINE_COUNT, false)) {
+				checkForMessagesNotLogged(lastMessageId, messageId);
 			}
 
 			// protocol will be null for sent messages
@@ -104,39 +125,68 @@ public class SMSObserver extends ContentObserver {
 		cursor.close();
 	}
 
+    /**
+     * Check for sent messages that were not tracked by the background service
+     *
+     * @param lastMessageId
+     * @param messageId
+     */
 	private void checkForMessagesNotLogged(String lastMessageId, String messageId) {
 		// Get the timestamp for the lastMessage that was logged
-		String[] projection = new String[]{COLUMN_NAME_ID, COLUMN_NAME_DATE};
+		String[] projection = new String[]{ COLUMN_NAME_ID, COLUMN_NAME_DATE };
 		Cursor lastMessageCursor = mContext.getContentResolver().query(
-				Uri.parse(SMSManager.SMS_URI_SENT),
-				projection,
-				COLUMN_NAME_ID + "= ? ",
-				new String[]{lastMessageId}, null);
-		Log.d(TAG, "lastMessageCursor count :" + lastMessageCursor.getCount());
-		lastMessageCursor.moveToFirst();
+                    observableUri,
+				    projection,
+				    COLUMN_NAME_ID + "= ? ",
+				    new String[]{ lastMessageId }, null);
 
-		Long lastMessageTimeStamp = Long.parseLong(lastMessageCursor.getString(lastMessageCursor.getColumnIndex(COLUMN_NAME_DATE)));
-		lastMessageCursor.close();
+		Log.d(TAG, "lastMessageCursor count :" + lastMessageCursor.getCount() + " Id : " + lastMessageId);
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(lastMessageTimeStamp);
+        if(lastMessageCursor.moveToFirst()) {
+            // Get the timestamp for the last sent message that was logged
+            Long lastMessageTimeStamp = Long.parseLong(lastMessageCursor.getString(
+                    lastMessageCursor.getColumnIndex(COLUMN_NAME_DATE)));
+            lastMessageCursor.close();
 
-		// Open a connection to the app's database to see how many messages we missed to count
-		CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
+            Log.d(TAG, "lastMessageTimeStamp :" + lastMessageTimeStamp);
 
-		int missedCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(calendar.getTime()));
-		if(missedCount > 0){
-			// Query sent messages since last timestamp and add to the database
-		}
+            Cursor newMessagesCursor = mContext.getContentResolver().query(
+                    Uri.parse(SMSManager.SMS_URI_SENT),
+                    projection,
+                    COLUMN_NAME_DATE + "> ? ",
+                    new String[]{ String.valueOf(lastMessageTimeStamp) }, null);
 
-		counterDataBase.close();
+            Log.d(TAG, "newMessagesCursor count :" + newMessagesCursor.getCount());
+
+            if(newMessagesCursor.getCount() > 0){
+                CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(lastMessageTimeStamp);
+                // Query sent messages since last timestamp and add to the database
+                // int missedCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(calendar.getTime()));
+                while(newMessagesCursor.moveToNext()){
+                    String msgId = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(COLUMN_NAME_ID));
+                    String sentDate = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(COLUMN_NAME_DATE));
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTimeInMillis(Long.parseLong(sentDate));
+                    // Parse and add to message counter database. Skip the new message id which will be added by calling method
+                    if(!messageId.equals(msgId)){
+                        long index = MessageCounterUtils.getIndexFromDate(cal.getTime());
+                        counterDataBase.addMessageSentCounter(index);
+                    }
+                }
+                counterDataBase.close();
+            }
+            newMessagesCursor.close();
+        }
 	}
 
 	private void showMessageLimitNotification(CounterDataBaseAdapter counterDataBase) {
 		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-		boolean sentCountlimitEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
+		boolean sentCountLimitEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
 		boolean notifEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_NOTIFICATION, false);
-		if (sentCountlimitEnabled && notifEnabled) {
+		if (sentCountLimitEnabled && notifEnabled) {
 			Date currentCycleStartDate = MessageCounterUtils.getCycleStartDate(preferences);
 			long dateIndex = MessageCounterUtils.getIndexFromDate(currentCycleStartDate);
 			int userLimit = MessageCounterUtils.getMessageLimitValue(preferences);

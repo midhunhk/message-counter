@@ -62,8 +62,8 @@ public class SMSObserverService extends Service {
 		super.onDestroy();
 		Log.d("SMSObserverService", "onDestroy");
 		if (mObserver != null) {
-			// We should unregester when the service is killed
-			Log.d("SMSObserverService", "unregistering content observe on service destroy");
+			// We should unregister when the service is killed
+			Log.d("SMSObserverService", "unregister content observe on service destroy");
 			this.getContentResolver().unregisterContentObserver(mObserver);
 		}
 	}

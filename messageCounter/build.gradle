@@ -16,6 +16,13 @@ android {
     }
     productFlavors {
     }
+    applicationVariants.all{ variant ->
+        variant.outputs.each{ output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    output.outputFile.name.replace(".apk", "-${variant.versionName}-${variant.versionCode}.apk"))
+        }
+    }
 }
 
 dependencies {

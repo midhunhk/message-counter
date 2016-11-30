@@ -1,47 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- enable or disable non contact messages count -->
-     
-    <PreferenceCategory android:title="@string/str_pref_messages" >
+
+    <PreferenceCategory android:title="@string/str_pref_messages">
         <CheckBoxPreference
             android:key="pref_key_hide_non_contact_messages"
             android:summaryOff="@string/str_pref_show_non_contact_message_count"
             android:summaryOn="@string/str_pref_hide_non_contact_message_count"
-            android:title="@string/str_pref_non_contact_messages" />
+            android:title="@string/str_pref_non_contact_messages"/>
     </PreferenceCategory>
-    
+
     <!-- preferences for sent message counter -->
-    <PreferenceCategory android:title="@string/str_pref_sent_message_count" >
-        <CheckBoxPreference 
-            android:key="pref_key_enable_sent_message_count"
-            android:disableDependentsState="false"
-            android:title="@string/str_sent_count"
+    <PreferenceCategory android:title="@string/str_pref_sent_message_count">
+        <CheckBoxPreference
             android:defaultValue="true"
-            android:summary="@string/str_pref_sent_message_desc" />
+            android:disableDependentsState="false"
+            android:key="pref_key_enable_sent_message_count"
+            android:summary="@string/str_pref_sent_message_desc"
+            android:title="@string/str_sent_count"/>
 
         <ListPreference
-            android:key="pref_key_cycle_start_date"
+            android:defaultValue="1"
+            android:dependency="pref_key_enable_sent_message_count"
             android:entries="@array/pick_day_values"
             android:entryValues="@array/pick_day_values"
-            android:dependency="pref_key_enable_sent_message_count"
-            android:defaultValue="1"
-            android:title="@string/str_cycle_start_date"
-            android:summary="@string/str_pref_cycle_start_desc" />
+            android:key="pref_key_cycle_start_date"
+            android:summary="@string/str_pref_cycle_start_desc"
+            android:title="@string/str_cycle_start_date"/>
 
         <EditTextPreference
-            android:key="pref_key_message_limit_value"
-            android:inputType="number"
             android:defaultValue="100"
             android:dependency="pref_key_enable_sent_message_count"
-            android:title="@string/str_pref_message_limit"
-            android:summary="@string/str_pref_message_limit_desc" />
-        
-        <CheckBoxPreference 
-            android:key="pref_key_enable_notification"
+            android:inputType="number"
+            android:key="pref_key_message_limit_value"
+            android:summary="@string/str_pref_message_limit_desc"
+            android:title="@string/str_pref_message_limit"/>
+
+        <CheckBoxPreference
             android:dependency="pref_key_enable_sent_message_count"
-            android:title="@string/str_notify_on_limit"
-            android:summary="@string/str_enble_notify_on_limit" />
+            android:key="pref_key_enable_notification"
+            android:summary="@string/str_enble_notify_on_limit"
+            android:title="@string/str_notify_on_limit"/>
+    </PreferenceCategory>
+
+    <!-- Experimental -->
+    <PreferenceCategory android:title="@string/str_pref_experimental">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:disableDependentsState="false"
+            android:key="pref_key_enable_offline_count"
+            android:summary="@string/str_pref_offline_message_desc"
+            android:title="@string/str_offline_messages"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

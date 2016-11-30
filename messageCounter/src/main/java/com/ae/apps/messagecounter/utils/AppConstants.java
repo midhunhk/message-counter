@@ -53,4 +53,6 @@ public interface AppConstants {
 	String	PREF_KEY_NAV_DRAWER_INTRO_GIVEN		= "pref_key_nav_drawer_intro_given";
 	String	PREF_KEY_DONATIONS_MADE				= "pref_key_donations_made";
 	String	PREF_KEY_LAST_SENT_MESSAGE_ID		= "pref_key_last_sent_message_id";
+
+	String	PREF_KEY_ENABLE_OFFLINE_COUNT		= "pref_key_enable_offline_count";
 }

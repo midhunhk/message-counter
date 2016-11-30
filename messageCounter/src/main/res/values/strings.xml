@@ -67,6 +67,11 @@ limitations under the License.</string>
     <string name="str_pref_cycle_start_desc">The start date for each cycle</string>
     <string name="str_pref_message_limit">Message limit</string>
     <string name="str_pref_message_limit_desc">Limit for messages that can be sent per cycle. Default is 100</string>
+
+    <!-- added for 3.2.0 -->
+    <string name="str_pref_experimental">Experimental</string>
+    <string name="str_offline_messages">Count offline Messages</string>
+    <string name="str_pref_offline_message_desc">Check for messages sent while the background service was offline on next startup</string>
     
     <!-- added for 2.2.7 -->
     <string name="str_notify_on_limit">Notify on reaching limit</string>
