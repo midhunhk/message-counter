@@ -1,6 +1,6 @@
 Unicorn
 =======
-<img alt="Unicorn" src="resources/artwork/icon_unicorn.png" width="100" /> Welcome to the unicorn branch!
+<img alt="Unicorn" src="resources/artwork/icon_unicorn.png" width="100" /> Welcome to the unicorn branch! See wiki page for project info.
 
 Message Counter
 ===============
