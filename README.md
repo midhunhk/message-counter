@@ -1,3 +1,7 @@
+Unicorn
+=======
+<img alt="Unicorn" src="resources/artwork/icon_unicorn.png" width="100" /> Welcome to the unicorn branch!
+
 Message Counter
 ===============
 <img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/master/resources/screenshots/promo_v3_1_small.png" width="220"/>
