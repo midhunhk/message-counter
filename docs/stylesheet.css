@@ -1,0 +1,69 @@
+/*******************************************************************************
+MeyerWeb Reset
+*******************************************************************************/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {display: block;}
+ol, ul {list-style: none;}
+table {border-collapse: collapse;border-spacing: 0;}
+
+/*******************************************************************************
+Theme Styles
+*******************************************************************************/
+
+body {
+  box-sizing: border-box;
+  /*color:#373737;
+  background: #212121;*/
+  font-size: 16px;
+  font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 10px 0;
+  font-weight: 700;
+  color:#222222;
+  font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
+  letter-spacing: -1px;
+}
+
+h1 {font-size: 36px;font-weight: 700;}
+
+/* Ids */
+#header{height: 40px;background-color: #ff9900;}
+#banner{height: 280px;background-color: #ffaa22;}
+#footer{background: #212121;color:#eeeeee;}
+#callToActionButton{margin:100px 10px 10px 10px; }
+
+/* Classes */
+
+.inner{width:100%;max-width: 960px;padding: 15px 15px;margin: 0 auto;}
+.darkrow{ color: #eaeaea; background: #323232;}
+
+.col-wrapper{width:960px; margin:0 auto;}
+.col{margin:0 10px; float:left; display:inline;}
+.col-670{width:670px;}
+.col-250{width:250px;}
