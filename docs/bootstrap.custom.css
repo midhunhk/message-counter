@@ -1,0 +1,38 @@
+/* custom navbar styles */
+#app-navbar.navbar-default .navbar-brand {
+    color: rgba(0, 0, 0, 1);
+}
+#app-navbar.navbar-default {
+    font-size: 14px;
+    background-color: rgba(255, 153, 0, 1);
+    border-bottom-width: 0px;
+}
+#app-navbar.navbar-default .navbar-nav>li>a {
+    color: rgba(119, 119, 119, 1);
+    background-color: rgba(255, 153, 0, 1);
+}
+#app-navbar.navbar-default .navbar-nav>li>a:hover,
+#app-navbar.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(234, 234, 234, 1);
+    background-color: rgba(248, 248, 248, 0);
+}
+#app-navbar.navbar-default .navbar-nav>.active>a,
+#app-navbar.navbar-default .navbar-nav>.active>a:hover,
+#app-navbar.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 170, 34, 1);
+}
+#app-navbar.navbar-default .navbar-toggle {
+    border-color: #ffaa22;
+}
+#app-navbar.navbar-default .navbar-toggle:hover,
+#app-navbar.navbar-default .navbar-toggle:focus {
+    background-color: #ffaa22;
+}
+#app-navbar.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffaa22;
+}
+#app-navbar.navbar-default .navbar-toggle:hover .icon-bar,
+#app-navbar.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #ff9900;
+}
