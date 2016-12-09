@@ -5,80 +5,131 @@
 		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
 		<meta name="description" content="Message-counter : Message Counter" />
 		
+		<!-- Bootstrap style sheet -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="bootstrap.custom.css">
+		
 		<link rel="stylesheet" type="text/css" media="screen" href="stylesheet.css">
 		
 		<title>Message Counter</title>
 	</head>
 	
 	<body>
-		<!-- Header -->
-		<header id="header">
-			<div class="inner">
-				<span><b>Unicorn</b></span>
-			</div>
-		</header>
+		<!-- Navbar -->
+		<div id="app-navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    		<div class="container-fluid inner container nopadding">
+        		<div class="navbar-header">
+            		<button type="button" class="navbar-toggle" 
+						data-toggle="collapse" data-target=".navbar-menubuilder">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+            		</button>
+        		</div>
+        		<div class="collapse navbar-collapse navbar-menubuilder">
+            		<ul class="nav navbar-nav navbar-left">
+    	            	<li class="nav active"><a class="navbar-brand" href="http://midhunhk.github.io/message-counter">Message Counter</a></li>
+        	        	<li class="nav"><a href="#about">About</a></li>
+            	    	<li class="nav"><a href="https://github.com/midhunhk/message-counter" target="_blank">GitHub</a></li>
+	            	</ul>
+    	    	</div>
+	    	</div>
+		</div>
 
 		<!-- Main Content -->
-		<div id="mainContent">
+		<section id="main">
 			
+			<!-- Hero Banner -->
 			<section id="banner">
-			
-				<div class="inner">
-					<div class="col-wrapper">
-						<div class="col col-670">
-							<h1>Message Counter</h1>
-							<h3>Count your sent messages!</h3>
-							<p id="callToActionButton">
-								<a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
-								<img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png"></a>
-							</p>							
-						</div>
-					
-						<div class="col col-250">
-							<img src="images/promo.png" height="250px" />
-						</div>
+
+				<div class="inner row">
+  					<div class="col-md-6 page-header col-sm-10">
+						<h1>Message Counter</h1>
+						<h2>Count your sent messages!</h2>
+						<p id="">
+							<a class="btn btn-large" href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter" title="Android app on Google Play">
+								<img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png">
+							</a>
+						</p>	
+					</div>
+					<div class="col-md-2">
+					</div>
+  					<div class="col-md-2 hidden-sm">
+						<img src="images/promo.png" alt="app on phone" height="250px" class="pull-right"/>
+					</div>
+					<div class="col-md-2">
 					</div>
 				</div>
-			
 			</section>
 			
-			<section class="inner">
-				<p>
-					Message Counter is an Android app that counts the number of SMS sent in a cycle and notifies you when you have reached the cycle limit. It supports API 8 (Froyo) and above.
-				</p>
-			</section>
-			
-			<section class="darkrow">
-				<div class="inner">
-					<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<section class="inner container ">
+				<div class="well well-lg">
+					<p class="lead">
+						Message Counter is an Android app that counts the number of SMS sent in a cycle and notifies you when you have reached the limit.
 					</p>
 				</div>
 			</section>
 			
-			<section class="inner">
-				<h2>Features</h2>
+			<section class="inner container">
+					<div class="panel-body">
+						<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
+					</div>
+				</div>
+			</section>
+			
+			<section class="inner container">
+				<div class="page-header">
+					<h1>Features</h1>
+				</div>
 				<p>
 					<ul>
 						<li>Track the number of SMS messages in inbox, sent and total.</li>
 						<li>Track number of SMS sent per each cycle</li>
 						<li>Track number of SMS sent each week</li>
 						<li>Notification when SMS limit per cycle is reached</li>
-						<li>Sorted list of contact and message count from them</li>
+						<li>List of top contacts who have sent you messages</li>
 						<li>Material Design</li>
-						<li>Widgets!</li>
+						<li>Widgets</li>
+						<li>Multiple language support</li>
 						<li>No Advertisements</li>
 					</ul>
 				</p>
 			</section>
 		
-		</div>
+			<section class="darkrow">
+				<div class="inner container">
+					<a name="about"></a>
+					<div class="page-header">
+						<h1>About</h1>
+					</div>
+					<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+			</section>
+
+			<section>
+				<div class="inner container">
+					<a name="about"></a>
+					<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+			</section>
+
+		</section>
+		<!-- End Main Content -->
 		
 		<!-- Footer -->
 		<footer id="footer">
-			<div class="inner">
+			<div class="inner container">
 				<p class="copyright">Message-counter is maintained by <a href="https://github.com/midhunhk">midhunhk</a></p>
 			</div>
 		</footer>
+
+		
 	</body>
 </html>
