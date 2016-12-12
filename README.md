@@ -2,6 +2,7 @@ Message Counter
 ===============
 <img alt="app icon" src="https://github.com/midhunhk/message-counter/blob/master/v2/MessageCounter/res/drawable-xhdpi/ic_launcher.png"/>
 
+
 Wiki - https://github.com/midhunhk/message-counter/wiki
 
 Github Page - http://midhunhk.github.io/message-counter

@@ -32,10 +32,12 @@ import com.ae.apps.messagecounter.R;
  * @author Midhun
  *
  */
+
 public class AboutActivity extends ToolBarBaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 
 		// Show the back arrow in toolbar to go back
 		displayHomeAsUp();
@@ -64,6 +66,7 @@ public class AboutActivity extends ToolBarBaseActivity {
 						android.R.string.ok);
 			}
 		});
+
 	}
 
 	@Override

@@ -67,5 +67,4 @@ public class SettingsActivity extends PreferenceActivity {
 		activity.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;
 	}
-
 }
