@@ -40,7 +40,6 @@ public class SMSObserver extends ContentObserver {
 
 	private Uri					observableUri			= null;
 	private Context				mContext				= null;
-	private String				mLastMessageId			= null;
 
 	public SMSObserver(Handler handler, Context context, Uri uriToObserve) {
 		super(handler);
@@ -57,8 +56,12 @@ public class SMSObserver extends ContentObserver {
 			String messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID));
 			String protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL));
 
+			// Read lastMessageId from SharedPreferences
+			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext); 
+			String lastMessageId = sharedPreferences.getString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, "");
+			
 			// See if this message was processed earlier, sometimes same messageId can come multiple times
-			boolean isNewMessage = (mLastMessageId == null || !mLastMessageId.equals(messageId));
+			boolean isNewMessage = !lastMessageId.equals(messageId);
 
 			// protocol will be null for sent messages
 			if (protocol == null && isNewMessage) {
@@ -80,7 +83,10 @@ public class SMSObserver extends ContentObserver {
 
 				// Store this message id incase we get multiple callbacks for the same id
 				Log.d("SendSMSObserver", " An SMS was sent at " + date.getTime() + " with id " + messageId);
-				mLastMessageId = messageId;
+				sharedPreferences
+					.edit()
+					.putString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, messageId)
+					.commit();
 
 				// Send a broadcast to update our widgets
 				sendWidgetUpdateBroadcast();

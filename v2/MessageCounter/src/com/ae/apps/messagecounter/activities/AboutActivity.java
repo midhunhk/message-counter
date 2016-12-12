@@ -16,18 +16,57 @@
 
 package com.ae.apps.messagecounter.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
+import com.ae.apps.common.activities.ToolBarBaseActivity;
+import com.ae.apps.common.utils.DialogUtils;
 import com.ae.apps.messagecounter.R;
+
+/**
+ * The about activity
+ * 
+ * @author Midhun
+ *
+ */
 
 public class AboutActivity extends ToolBarBaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
+
 		// Show the back arrow in toolbar to go back
-		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		displayHomeAsUp();
+
+		setToolbarTitle(getString(R.string.menu_about));
+
+		View sourceCode = findViewById(R.id.viewSourceCode);
+		sourceCode.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				String url = getString(R.string.github_source_url);
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(url));
+				startActivity(intent);
+			}
+		});
+
+		final Context context = this;
+		View license = findViewById(R.id.viewLicense);
+		license.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				DialogUtils.showMaterialInfoDialog(context, R.string.menu_license, R.string.str_license_text,
+						android.R.string.ok);
+			}
+		});
+
 	}
 
 	@Override

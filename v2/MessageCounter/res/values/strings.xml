@@ -1,10 +1,12 @@
 <resources>
 
-    <string name="title_section1">List</string>
-    <string name="title_section3">Counter</string>
+    <string name="title_sent_list">List</string>
+    <string name="title_chart">Chart</string>
+    <string name="title_counter">Counter</string>
     
     <string name="app_name">Message Counter</string>
-    <string name="app_version">Version 3.0.32 (December 2014)</string>
+    <string name="app_version">Version 3.1.1</string>
+    <string name="app_release_date">April 2016</string>
     <string name="app_desc">Message Counter displays messages inbox statistics and number of messages from each of your contacts.</string>
 	<string name="app_disclaim">Disclaimer: This app is created for educational purposes and as such has no guarantee or support. Since undocumented Android APIs are used, this app may not work as expected on all devices.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
@@ -16,7 +18,8 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_about">About</string>
     <string name="menu_license">License</string>
-    <string name="menu_share">Share this App</string>
+    <string name="menu_share">Tell your friends</string>
+    <string name="menu_donate">Donate</string>
     
     <string name="empty_text"></string>
     <string name="empty_list">No messages found</string>
@@ -42,8 +45,8 @@ limitations under the License.</string>
     <!-- same for all languages - not to be translated -->
     <string name="str_zero" translatable="false">0</string>
     <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter</string>
-    <!-- <string name="github_source_url" translatable="false">https://www.github.com/midhunhk/message-counter</string> -->
-    <string name="github_source_visible_url" translatable="false">https://github.com/midhunhk/message-counter</string>
+    <string name="github_source_url" translatable="false">https://github.com/midhunhk/message-counter</string>
+    <string name="github_source_visible_url" translatable="false">github.com/midhunhk/message-counter</string>
     
     <!-- Strings for Preference -->
     <string name="str_pref_messages">Messages</string>
@@ -79,4 +82,15 @@ limitations under the License.</string>
     <string name="str_today">TODAY</string>
     <string name="str_cycle">CYCLE</string>
     
+    <!-- strings for donate v3.1 -->
+    <string name="str_donate_title">Donate</string>
+    <string name="str_donate_text">Message Counter is an open source project developed in my spare time. Any sort of contribution helps to add features or swat bugs. Thank you!</string>
+    <string name="str_donate_disclaimer">Donations will not be  in lieu of additional features. Google takes 30% of purchases as transaction fees.</string>
+	<string name="str_donate_thanks">Thank you for donating!</string>
+	<string name="str_donate_fail">Donation failed. Please try again later.</string>
+    <string name="str_donate_small">Buy me a Chocolate</string>
+    <string name="str_donate_medium">Buy me an Ice-Cream</string>
+    <string name="str_donate_large">Buy me Dinner</string>
+    <string name="str_sent_this_week">Sent this Week</string>
+
 </resources>

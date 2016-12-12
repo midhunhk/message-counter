@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- margins -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_extra_large">40dp</dimen>
+    
+    <!-- paddings -->
+    <dimen name="padding_small">10dip</dimen>
+    <dimen name="padding_medium">16dip</dimen>
+    <dimen name="padding_large">22dip</dimen>
+    <dimen name="padding_horizontal">28dip</dimen>
+    
+    <!-- progress bar size -->
+    <dimen name="progress_bar_height">26dip</dimen>
+    
+    <!-- cards -->
+    <dimen name="card_margin">9dp</dimen>
+    <dimen name="card_padding">6dp</dimen>
+    <dimen name="navigation_drawer_width">280dp</dimen>
+    
+    <!-- text sizes -->
+    <dimen name="card_title">18sp</dimen>
+    <dimen name="item_title">16sp</dimen>
+    <dimen name="hero_text">50sp</dimen>
+    
+    <dimen name="image_min_size">50dp</dimen>
+    <dimen name="image_max_size">50dp</dimen>
+
+</resources>

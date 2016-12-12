@@ -18,8 +18,7 @@ package com.ae.apps.messagecounter.fragments;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -29,7 +28,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
@@ -47,15 +45,21 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 
 	private MessageDataReader		mReader;
 	private ContactDetailAdapter	adapter;
-	private View					messageInfoLyout;
 	private TextView				pageTitleText;
 	private boolean					loadAnimationDone;
 	private ProgressBar				mProgressBar;
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setRetainInstance(true);
 
+		try {
+			mReader = (MessageDataReader) getActivity();
+		} catch (ClassCastException e) {
+			throw new ClassCastException(getActivity().toString() + " must implement registerForData");
+		}
+		
 		// Create the layout and find the elements
 		View layout = inflater.inflate(R.layout.fragment_list, null);
 		mProgressBar = (ProgressBar) layout.findViewById(R.id.loadingProgressBar);
@@ -63,10 +67,8 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		TextView messageCountGlanceText = (TextView) layout.findViewById(R.id.messageCountAtGlanceText);
 
 		pageTitleText = (TextView) layout.findViewById(R.id.pageTitleText);
-		messageInfoLyout = layout.findViewById(R.id.messageInfo);
 		if (loadAnimationDone == false) {
 			pageTitleText.setVisibility(View.INVISIBLE);
-			messageInfoLyout.setVisibility(View.INVISIBLE);
 		}
 
 		// Create an empty list for the adapter
@@ -82,6 +84,18 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		int inboxMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_INBOX);
 		int draftMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_DRAFTS);
 
+		// Build the summary of message counts string
+		String summary = getMessageCountsSummary(allMessageCount, sentMessageCount, inboxMessageCount, draftMessageCount);
+		messageCountGlanceText.setText(summary);
+
+		// Wait till the data is loaded and get a callback once its ready
+		mReader.registerForData(this);
+
+		return layout;
+	}
+
+	private String getMessageCountsSummary(int allMessageCount, int sentMessageCount, int inboxMessageCount,
+			int draftMessageCount) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getResources().getString(R.string.message_count_sent, sentMessageCount)).append(
 				" + " + getResources().getString(R.string.message_count_inbox, inboxMessageCount));
@@ -90,23 +104,8 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 		}
 		builder.append(" = " + getResources().getString(R.string.message_count_all, allMessageCount));
 
-		messageCountGlanceText.setText(builder.toString());
-
-		// Wait till the data is loaded and get a callback once its ready
-		mReader.registerForData(this);
-
-		return layout;
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			// Register for a callback when the data is ready
-			mReader = (MessageDataReader) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement OnCheckStatusListener");
-		}
+		String str = builder.toString();
+		return str;
 	}
 
 	/**
@@ -131,9 +130,7 @@ public class MessageListFragment extends ListFragment implements MessageDataCons
 							R.animator.slide_in_top);
 					// add a small delay before starting the animation
 					slideInAnimation.setStartOffset(500);
-					messageInfoLyout.startAnimation(slideInAnimation);
 				}
-				messageInfoLyout.setVisibility(View.VISIBLE);
 				pageTitleText.setVisibility(View.VISIBLE);
 			}
 		}

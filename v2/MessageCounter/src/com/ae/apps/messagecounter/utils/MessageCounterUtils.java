@@ -29,6 +29,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.IntegerComparator;
@@ -245,6 +247,16 @@ public class MessageCounterUtils {
 		calendar.add(Calendar.MONTH, -1);
 		return calendar.getTime();
 	}
+	
+	/**
+	 * Returns the start of the week
+	 * @return
+	 */
+	public static Date getWeekStartDate(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+		return calendar.getTime();
+	}
 
 	public static int getMessageLimitValue(SharedPreferences preferences) {
 		String rawVal = preferences.getString(AppConstants.PREF_KEY_MESSAGE_LIMIT_VALUE, NO_LIMIT_SET);
@@ -286,5 +298,11 @@ public class MessageCounterUtils {
 		Date endDate = MessageCounterUtils.getCycleEndDate(startDate);
 		return MessageCounterUtils.getDisplayDateString(startDate) + " - "
 				+ MessageCounterUtils.getDisplayDateString(endDate);
+	}
+	
+	public static String getContentFromXml(Resources resources, int fileId){
+		XmlResourceParser parser = resources.getXml(fileId);
+		
+		return parser.getText();
 	}
 }

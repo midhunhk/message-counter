@@ -1,16 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter"
-    android:versionCode="321"
-    android:versionName="3.0" >
+    android:versionCode="366"
+    android:versionName="3.1.1" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="22" />
 
     <!-- Declare the permissions required -->
     <uses-permission android:name="android.permission.READ_SMS" android:required="true" />
     <uses-permission android:name="android.permission.READ_CONTACTS" android:required="true" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <!-- screen support -->
     <supports-screens
@@ -31,8 +32,7 @@
         <!-- Activities -->
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/title_activity_main"
-            android:screenOrientation="portrait" >
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,6 +41,13 @@
         </activity>
         
         <activity android:name=".activities.SettingsActivity" />
+        
+        <activity android:name=".activities.DonationsActivity"
+            android:parentActivityName=".activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
         
         <!-- About activity -->
         <activity
@@ -80,5 +87,4 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_provider"/>
         </receiver>
     </application>
-
 </manifest>

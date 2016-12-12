@@ -1,10 +1,12 @@
 <resources>
 
-    <string name="title_section1">Liste</string>
-    <string name="title_section3">Compteur</string>
+    <string name="title_sent_list">Liste</string>
+    <string name="title_chart">Graphique</string>
+    <string name="title_counter">Compteur</string>
     
     <string name="app_name">du Compteur de Messages</string>
-    <string name="app_version">Version 3.0.32 (Décembre 2014)</string>
+    <string name="app_version">Version 3.1.1</string>
+    <string name="app_release_date">April 2016</string>
     <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>
 	<string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
@@ -71,4 +73,15 @@ limitations under the License.</string>
     <string name="str_messages_sent_caps">MESSAGES ENVOYÉS</string>
     <string name="str_today">UJOURD\'HUI</string>
     <string name="str_cycle">CYCLE</string>
+    
+    <!-- strings for donate v3.1 -->
+    <string name="str_donate_title">donner</string>
+    <string name="str_donate_text">Compteur de Messages est un projet open source développé dans mon temps libre. Toute sorte de contribution permet d\'ajouter des fonctionnalités ou des bugs de Swat. Merci!</string>
+    <string name="str_donate_disclaimer">Les dons ne seront pas à la place des fonctionnalités supplémentaires. Google prend 30% des achats que des frais de transaction.</string>
+	<string name="str_donate_thanks">Merci pour le don!</string>
+	<string name="str_donate_fail">Donation échoué. S\'il vous plaît réessayer plus tard.</string>
+    <string name="str_donate_small">Achetez-moi un chocolat</string>
+    <string name="str_donate_medium">Achetez-moi une glace</string>
+    <string name="str_donate_large">Achetez-moi Dîner</string>
+
 </resources>

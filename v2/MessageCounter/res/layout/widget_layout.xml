@@ -24,6 +24,7 @@
             android:layout_marginLeft="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_weight="1"
+            android:textSize="12sp"
             android:gravity="center"
             android:text="@string/str_today"
             android:textColor="@color/white" />
@@ -34,6 +35,7 @@
             android:layout_marginLeft="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_weight="1"
+            android:textSize="12sp"
             android:gravity="center"
             android:text="@string/str_cycle"
             android:textColor="@color/white" />

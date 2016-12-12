@@ -17,19 +17,16 @@
 package com.ae.apps.messagecounter.adapters;
 
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
 
@@ -43,12 +40,12 @@ public class ContactDetailAdapter extends BaseAdapter {
 
 	private Context					context;
 	private List<ContactMessageVo>	list;
-	private Animation				fadeInAnimation;
+	// private Animation				fadeInAnimation;
 
 	public ContactDetailAdapter(Context context, List<ContactMessageVo> objects) {
 		this.context = context;
 		this.list = objects;
-		fadeInAnimation = AnimationUtils.loadAnimation(context, R.animator.fade_in);
+		// fadeInAnimation = AnimationUtils.loadAnimation(context, R.animator.fade_in);
 	}
 
 	/**
@@ -61,6 +58,7 @@ public class ContactDetailAdapter extends BaseAdapter {
 		notifyDataSetInvalidated();
 	}
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
@@ -69,7 +67,7 @@ public class ContactDetailAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.contact_detail_row, null);
 			// QuickContactBadge badge = (QuickContactBadge) convertView.findViewById(R.id.badge_medium);
 			ImageView userProfile = (ImageView) convertView.findViewById(R.id.userProfileImage);
-			userProfile.startAnimation(fadeInAnimation);
+			// userProfile.startAnimation(fadeInAnimation);
 			holder = new ViewHolder();
 			// holder.badge = badge;
 			holder.userProfile = userProfile;
@@ -93,7 +91,7 @@ public class ContactDetailAdapter extends BaseAdapter {
 			}
 			String count = String.valueOf(contactMessageVo.getMessageCount());
 			if (count == null) {
-				holder.timesContacted.setText("0");
+				holder.timesContacted.setText(String.valueOf(0));
 			} else {
 				holder.timesContacted.setText(count);
 			}

@@ -35,6 +35,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.ae.apps.common.utils.CommonUtils;
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.managers.SentCountDataManager;
 import com.ae.apps.messagecounter.services.SMSObserverService;
@@ -63,7 +64,12 @@ public class SentCountFragment extends Fragment {
 	private TextView			mPrevCycleSentText		= null;
 	private TextView			mHeroSentTodayText		= null;
 	private TextView			mHeroSentInCycleText	= null;
+	private TextView			mSentThisWeekText		= null;
 	private ProgressBar			mPrevCountProgressBar	= null;
+	private View				mCard01					= null;
+	private View				mCard02					= null;
+	private View				mCard03					= null;
+	private boolean				mShowAnimations			= true;
 	private boolean				mCachedPreferenceValue;
 
 	@Override
@@ -86,13 +92,18 @@ public class SentCountFragment extends Fragment {
 		mPrevCountProgressBar = (ProgressBar) layout.findViewById(R.id.prevCountProgressBar);
 		mHeroSentTodayText = (TextView) layout.findViewById(R.id.heroSentTodayText);
 		mHeroSentInCycleText = (TextView) layout.findViewById(R.id.heroSentInCycleText);
-		
+		mSentThisWeekText = (TextView) layout.findViewById(R.id.countSentThisWeekText);
+
+		mCard01 = layout.findViewById(R.id.hero_card01);
+		mCard02 = layout.findViewById(R.id.hero_card02);
+		mCard03 = layout.findViewById(R.id.hero_card03);
+
 		// See which layout to be shown to the user
 		updateLayout();
 
 		// Cache the enabled preference value
 		cacheEnabledPref();
-		
+
 		// Start the service for first time user
 		startMessageCounterService();
 
@@ -108,6 +119,18 @@ public class SentCountFragment extends Fragment {
 			showSentCountDetails();
 			mSentCounterLayout.setVisibility(View.VISIBLE);
 			mStartCountingLayout.setVisibility(View.GONE);
+
+			// Show load animations only on fragment load
+			if (mShowAnimations) {
+				Animation anim1 = AnimationUtils.loadAnimation(mContext, R.anim.abc_slide_in_bottom);
+				mCard01.startAnimation(anim1);
+
+				Animation anim2 = CommonUtils.createAnimation(mContext, R.anim.abc_slide_in_bottom, 200);
+				mCard02.startAnimation(anim2);
+
+				Animation anim3 = CommonUtils.createAnimation(mContext, R.anim.abc_slide_in_bottom, 300);
+				mCard03.startAnimation(anim3);
+			}
 		}
 	}
 
@@ -128,6 +151,7 @@ public class SentCountFragment extends Fragment {
 		mSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
 		mHeroSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
 		mHeroSentInCycleText.setText(String.valueOf(detailsVo.getSentCycle()));
+		mSentThisWeekText.setText(String.valueOf(detailsVo.getSentInWeek()));
 
 		// set the progressbar
 		setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText, 0);
@@ -144,7 +168,7 @@ public class SentCountFragment extends Fragment {
 		// Some basic animations
 		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
 		fadeInAnimation.setStartOffset(150);
-		mSentCounterLayout.startAnimation(fadeInAnimation);
+		// mSentCounterLayout.startAnimation(fadeInAnimation);
 	}
 
 	private void setProgressInfo(int count, int limit, ProgressBar progressBar, TextView progressText, long animDelay) {
@@ -175,6 +199,7 @@ public class SentCountFragment extends Fragment {
 	private static void setProgressWithAnimation(ProgressBar progressBar, int progress, long animDelay) {
 		// We try to add animation for newer APIs here
 		if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.HONEYCOMB) {
+			progressBar.setProgress(0);
 			android.animation.ObjectAnimator animation = android.animation.ObjectAnimator.ofInt(progressBar,
 					PROGRESS_VALUE, 0, progress);
 			animation.setDuration(100);
@@ -202,6 +227,7 @@ public class SentCountFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		cacheEnabledPref();
+		mShowAnimations = false;
 	}
 
 	private void cacheEnabledPref() {
@@ -212,12 +238,12 @@ public class SentCountFragment extends Fragment {
 	private boolean getCountMessagesEnabledPref() {
 		return mPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, true);
 	}
-	
+
 	/**
 	 * Starts the service if it is enabled in the setting
 	 */
-	private void startMessageCounterService(){
-		if(getCountMessagesEnabledPref()){
+	private void startMessageCounterService() {
+		if (getCountMessagesEnabledPref()) {
 			mContext.startService(new Intent(mContext, SMSObserverService.class));
 		} else {
 			mContext.stopService(new Intent(mContext, SMSObserverService.class));

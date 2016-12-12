@@ -18,11 +18,12 @@ package com.ae.apps.messagecounter.fragments;
 
 import java.util.List;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ import com.ae.apps.messagecounter.vo.GraphData;
  */
 public class MessageChartFragment extends Fragment implements MessageDataConsumer {
 
+	private static final String	TAG	= "MessageChartFragment";
 	private MessageDataReader		mReader;
 	private Context					mContext;
 	private LinearLayout			mGraphContainer;
@@ -58,31 +60,35 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	private List<ContactMessageVo>	mContactMessageList;
 	private boolean					mCachedSettingsValue;
 
+	@SuppressLint("InflateParams")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setRetainInstance(true);
 
+		try {
+			mReader = (MessageDataReader) getActivity();
+		} catch (ClassCastException e) {
+			throw new ClassCastException(getActivity().toString() + " must implement registerForData");
+		}
+		
 		View layout = inflater.inflate(R.layout.fragment_chart, null);
 		mContext = getActivity().getBaseContext();
+		
 		// Get the message count in the inbox
 		mInboxMessageCount = mReader.getMessageCount(SMSManager.SMS_URI_INBOX);
+		
 		// Find the UI elements
 		mTitleText = (TextView) layout.findViewById(R.id.chartTitle);
-		mGraphContainer = (LinearLayout) layout.findViewById(R.id.graphContainer);
+		mGraphContainer = (LinearLayout) layout.findViewById(R.id.graph_container);
 		mOtherSendersText = (TextView) layout.findViewById(R.id.otherSendersText);
 
+		try{
+			mTitleText.setText(getResources().getString(R.string.str_chart_title).toUpperCase());
+		} catch(Exception e){
+			Log.e(TAG, e.getMessage());
+		}
 		mReader.registerForData(this);
 		return layout;
-	}
-
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			mReader = (MessageDataReader) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString() + " must implement OnCheckStatusListener");
-		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -117,36 +123,35 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 	private void updateMessagesChart() {
 		try {
 			// Reports of IllegalStateExceptions are received
-			mTitleText.setText(getResources().getString(R.string.str_chart_title));
-		} catch (IllegalStateException e) {
-			// may be log this later
+
+			// Get the preference value for including message counts from non contacts
+			boolean includeNonContactMessages = getIncludeNonContactMessagesPref();
+
+			// Do we need to show the other senders text?
+			if (includeNonContactMessages) {
+				mOtherSendersText.setVisibility(View.GONE);
+			} else {
+				mOtherSendersText.setVisibility(View.VISIBLE);
+			}
+
+			GraphData graphData = MessageCounterUtils.getMessageCountDegrees(mContactMessageList, mInboxMessageCount,
+					AppConstants.MAX_ROWS_IN_CHART, includeNonContactMessages);
+			View graphView = new SimpleGraphView(mContext, graphData.getValueInDegrees(), graphData.getLabels(),
+					AppConstants.CHART_COLORFUL2);
+
+			// If we are updating, remove the previous graphView
+			if (mGraphContainer.getChildCount() > 0) {
+				mGraphContainer.removeAllViews();
+			}
+
+			// Create a new SimpleGraphView and add it to the graphContainer
+			Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
+			fadeInAnimation.setStartOffset(150);
+			graphView.startAnimation(fadeInAnimation);
+			mGraphContainer.addView(graphView);
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
 		}
-
-		// Get the preference value for including message counts from non contacts
-		boolean includeNonContactMessages = getIncludeNonContactMessagesPref();
-
-		// Do we need to show the other senders text?
-		if (includeNonContactMessages) {
-			mOtherSendersText.setVisibility(View.INVISIBLE);
-		} else {
-			mOtherSendersText.setVisibility(View.VISIBLE);
-		}
-
-		GraphData graphData = MessageCounterUtils.getMessageCountDegrees(mContactMessageList, mInboxMessageCount,
-				AppConstants.MAX_ROWS_IN_CHART, includeNonContactMessages);
-		View graphView = new SimpleGraphView(mContext, graphData.getValueInDegrees(), graphData.getLabels(),
-				AppConstants.CHART_COLORFUL);
-
-		// If we are updating, remove the previous graphView
-		if (mGraphContainer.getChildCount() > 0) {
-			mGraphContainer.removeAllViews();
-		}
-
-		// Create a new SimpleGraphView and add it to the graphContainer
-		Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.animator.fade_in);
-		fadeInAnimation.setStartOffset(150);
-		graphView.startAnimation(fadeInAnimation);
-		mGraphContainer.addView(graphView);
 	}
 
 	/**
@@ -162,7 +167,7 @@ public class MessageChartFragment extends Fragment implements MessageDataConsume
 					.getDefaultSharedPreferences(getActivity().getBaseContext()).getBoolean(
 							AppConstants.PREF_KEY_HIDE_NON_CONTACT_MESSAGES, false);
 		} catch (Exception e) {
-			// log this also later
+			Log.e(TAG, e.getMessage());
 		}
 		return includeNonContactMessagePref;
 	}
