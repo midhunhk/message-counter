@@ -53,8 +53,10 @@ blockquote p {display: inline;}
 #footer{background: #212121;color:#eeeeee;}
 #main{min-width: 560px; margin-top: 40px;}
 
-/* Classes */
+h1, h2{font-family: 'Crimson Text', serif;}
 
+/* Classes */
 .inner{width:100%;padding: 15px 15px;margin: 0 auto; min-width: 900px; width:960px;}
 .nopadding{padding: 0 !important;}
 .darkrow{ color: #eaeaea; background: #323232;}
+.darkrow h1{ color: #eaeaea;}
