@@ -72,7 +72,7 @@ public class SMSObserver extends ContentObserver {
 	public void onChange(boolean selfChange) {
 		super.onChange(selfChange);
 		Cursor cursor = mContext.getContentResolver().query(observableUri, null, null, null, null);
-		if (cursor.moveToNext()) {
+		if (null != cursor && cursor.moveToNext()) {
 			// We need the protocol and the message _id
 			String messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID));
 			String protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL));
@@ -116,20 +116,22 @@ public class SMSObserver extends ContentObserver {
 				sharedPreferences
 					.edit()
 					.putString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, messageId)
-					.commit();
+					.apply();
 
 				// Send a broadcast to update our widgets
 				sendWidgetUpdateBroadcast();
 			}
 		}
-		cursor.close();
+		if(null != cursor) {
+			cursor.close();
+		}
 	}
 
     /**
      * Check for sent messages that were not tracked by the background service
      *
-     * @param lastMessageId
-     * @param messageId
+     * @param lastMessageId the last message id
+     * @param messageId the new message id
      */
 	private void checkForMessagesNotLogged(String lastMessageId, String messageId) {
 		// Get the timestamp for the lastMessage that was logged
@@ -140,9 +142,11 @@ public class SMSObserver extends ContentObserver {
 				    COLUMN_NAME_ID + "= ? ",
 				    new String[]{ lastMessageId }, null);
 
-		Log.d(TAG, "lastMessageCursor count :" + lastMessageCursor.getCount() + " Id : " + lastMessageId);
+		int lastMessageCount = (null != lastMessageCursor) ? lastMessageCursor.getCount() : 0;
 
-        if(lastMessageCursor.moveToFirst()) {
+		Log.d(TAG, "lastMessageCursor count :" + lastMessageCount + " Id : " + lastMessageId);
+
+        if(null != lastMessageCursor && lastMessageCursor.moveToFirst()) {
             // Get the timestamp for the last sent message that was logged
             Long lastMessageTimeStamp = Long.parseLong(lastMessageCursor.getString(
                     lastMessageCursor.getColumnIndex(COLUMN_NAME_DATE)));
@@ -156,9 +160,14 @@ public class SMSObserver extends ContentObserver {
                     COLUMN_NAME_DATE + "> ? ",
                     new String[]{ String.valueOf(lastMessageTimeStamp) }, null);
 
-            Log.d(TAG, "newMessagesCursor count :" + newMessagesCursor.getCount());
+			int newMessagesCount = 0;
+			if(null != newMessagesCursor){
+				newMessagesCount = newMessagesCursor.getCount();
+			}
 
-            if(newMessagesCursor.getCount() > 0){
+            Log.d(TAG, "newMessagesCursor count :" + newMessagesCount);
+
+            if(newMessagesCount > 0){
                 CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
 
                 Calendar calendar = Calendar.getInstance();
@@ -178,7 +187,9 @@ public class SMSObserver extends ContentObserver {
                 }
                 counterDataBase.close();
             }
-            newMessagesCursor.close();
+			if(null != newMessagesCursor){
+				newMessagesCursor.close();
+			}
         }
 	}
 
