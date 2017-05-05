@@ -101,6 +101,8 @@ public class SentCountFragment extends Fragment {
         mCard02 = layout.findViewById(R.id.hero_card02);
         mCard03 = layout.findViewById(R.id.hero_card03);
 
+        mDataManager = new SentCountDataManager();
+
         // See which layout to be shown to the user
         updateLayout();
 
@@ -110,7 +112,6 @@ public class SentCountFragment extends Fragment {
         // Start the service for first time user
         startMessageCounterService();
 
-        mDataManager = new SentCountDataManager();
 
         // When the app is installed for the first time, we can look at the sent messages and index them as well
         indexAllMessagesForFirstInstall();
@@ -138,6 +139,7 @@ public class SentCountFragment extends Fragment {
                         public void run() {
                             // Run on UI thread
                             Toast.makeText(mContext, "Indexed all sent messages", Toast.LENGTH_SHORT).show();
+                            updateLayout();
                         }
                     });
                 }
