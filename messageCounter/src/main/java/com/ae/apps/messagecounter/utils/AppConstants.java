@@ -56,4 +56,6 @@ public interface AppConstants {
 	String	PREF_KEY_LAST_SENT_TIME_STAMP		= "pref_key_last_sent_message_time_stamp";
 
 	String	PREF_KEY_ENABLE_OFFLINE_COUNT		= "pref_key_enable_offline_count";
+    String	PREF_KEY_HISTORIC_DATA_INDEXED		= "pref_key_historic_data_indexed";
+
 }

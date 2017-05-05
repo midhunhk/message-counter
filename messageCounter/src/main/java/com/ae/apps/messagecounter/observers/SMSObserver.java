@@ -16,9 +16,6 @@
 
 package com.ae.apps.messagecounter.observers;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -34,16 +31,19 @@ import android.net.Uri;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.activities.MainActivity;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
+import com.ae.apps.messagecounter.managers.SentCountDataManager;
 import com.ae.apps.messagecounter.receivers.WidgetUpdateReceiver;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
+import com.ae.apps.messagecounter.utils.MessagesTableConstants;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * SMSObserver will get invoked when the SMS content provider has any changes
@@ -52,14 +52,7 @@ import com.ae.apps.messagecounter.utils.MessageCounterUtils;
  */
 public class SMSObserver extends ContentObserver {
 
-    private static final String COLUMN_NAME_PROTOCOL = "protocol";
     private static final String TAG = "SMSObserver";
-    private static final String COLUMN_NAME_ID = "_id";
-    private static final String COLUMN_NAME_DATE = "date";
-    private static final String COLUMN_NAME_PERSON = "person";
-    private static final String[] SMS_TABLE_PROJECTION = new String[]{
-            COLUMN_NAME_ID, COLUMN_NAME_DATE, COLUMN_NAME_PERSON, COLUMN_NAME_PROTOCOL
-    };
 
     // Private references that are set from the constructor
     private Uri mObservableUri = null;
@@ -68,8 +61,8 @@ public class SMSObserver extends ContentObserver {
     /**
      * Initializes the SMSObserver class
      *
-     * @param handler handler
-     * @param context context
+     * @param handler      handler
+     * @param context      context
      * @param uriToObserve uriToObserve
      */
     public SMSObserver(Handler handler, Context context, Uri uriToObserve) {
@@ -85,9 +78,9 @@ public class SMSObserver extends ContentObserver {
         Cursor cursor = mContext.getContentResolver().query(mObservableUri, null, null, null, null);
         if (null != cursor && cursor.moveToNext()) {
             // We need the protocol and the message _id
-            String messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID));
-            String protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL));
-            String sentTime = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE));
+            String messageId = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_ID));
+            String protocol = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_PROTOCOL));
+            String sentTime = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_DATE));
 
             cursor.close();
 
@@ -102,9 +95,11 @@ public class SMSObserver extends ContentObserver {
             // Check for any messages that we might have missed since the last message was logged.
             // If new message ID is different from last saved message ID, check if any messages
             // went un counted. Enable this flag from the preferences menu
-            boolean enableOfflineCount = sharedPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_OFFLINE_COUNT, false);
+            boolean enableOfflineCount = sharedPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_OFFLINE_COUNT, true);
             if (isNewMessage && enableOfflineCount) {
-                checkForUnLoggedMessages(lastMessageId, messageId);
+                SentCountDataManager countDataManager = new SentCountDataManager();
+                Log.d(TAG, "lastMessageId is " + lastMessageId);
+                countDataManager.checkForUnLoggedMessages(mContext, messageId, false);
             }
 
             // protocol will be null for sent messages
@@ -140,79 +135,6 @@ public class SMSObserver extends ContentObserver {
                 sendWidgetUpdateBroadcast();
             }
         }
-    }
-
-    /**
-     * Check for sent messages that were not tracked by the background service
-     *
-     * @param lastMessageId the last message's id
-     * @param messageId     the new message's id
-     * @return number of messages added
-     */
-    private int checkForUnLoggedMessages(String lastMessageId, String messageId) {
-        Log.d(TAG, "Enter checkForUnLoggedMessages : lastMessageId " + lastMessageId + " messageId " + messageId);
-
-        // Read lastMessageTimeStamp from SharedPreferences as the lastMessage may be removed by the user
-        String lastMessageTimeStamp = PreferenceManager.getDefaultSharedPreferences(mContext)
-                .getString(AppConstants.PREF_KEY_LAST_SENT_TIME_STAMP, "");
-        Log.d(TAG, "lastMessageTimeStamp :" + lastMessageTimeStamp);
-
-        int newMessagesAdded = 0;
-        // When we get valid lastMessageTimeStamp, we can check how many messages came were sent afterwards
-        if (!TextUtils.isEmpty(lastMessageTimeStamp)) {
-            Cursor newMessagesCursor = mContext.getContentResolver().query(
-                    Uri.parse(SMSManager.SMS_URI_ALL),
-                    SMS_TABLE_PROJECTION,
-                    "person is null and " + COLUMN_NAME_DATE + "> ? ",
-                    new String[]{String.valueOf(lastMessageTimeStamp)}, null);
-
-            int newMessagesCount = (null != newMessagesCursor) ? newMessagesCursor.getCount() : 0;
-            Log.d(TAG, "newMessagesCursor count :" + newMessagesCount);
-
-            try {
-                if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
-                    Log.d(TAG, "Open MessageCounterDatabase");
-                    // Connect to the App's database
-                    CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
-
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(Long.valueOf(lastMessageTimeStamp));
-
-                    Calendar cal = Calendar.getInstance();
-                    Log.d(TAG, "Start loop over result, pos " + newMessagesCursor.getPosition());
-                    do {
-                        Log.d(TAG, "newMessagesCursor.getPosition() " + newMessagesCursor.getPosition());
-                        String msgId = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(COLUMN_NAME_ID));
-                        String sentDate = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(COLUMN_NAME_DATE));
-                        String protocol = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(COLUMN_NAME_PROTOCOL));
-
-                        Log.d(TAG, "message (" + msgId + ") was sent on " + sentDate);
-                        Log.d(TAG, "protocol is" + protocol);
-
-                        cal.setTimeInMillis(Long.parseLong(sentDate));
-                        // Parse and add to message counter database.
-                        // Skip the new message id which will be added by calling method
-                        if (!messageId.equals(msgId) && null == protocol) {
-                            // Count this message against the date it was sent
-                            long dateIndex = MessageCounterUtils.getIndexFromDate(cal.getTime());
-                            Log.d(TAG, "Adding message (" + msgId + ") to CounterDataBase");
-                            counterDataBase.addMessageSentCounter(dateIndex);
-                            newMessagesAdded++;
-                        }
-                    } while (newMessagesCursor.moveToNext());
-
-                    counterDataBase.close();
-                }
-                if (null != newMessagesCursor) {
-                    newMessagesCursor.close();
-                }
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage());
-                Log.e(TAG, Log.getStackTraceString(e));
-            }
-        }
-        Log.d(TAG, "Exit checkForUnLoggedMessages, added " + newMessagesAdded + " messages");
-        return newMessagesAdded;
     }
 
     private void showMessageLimitNotification(CounterDataBaseAdapter counterDataBase) {

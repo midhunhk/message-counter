@@ -16,8 +16,6 @@
 
 package com.ae.apps.messagecounter.fragments;
 
-import java.util.Date;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +40,8 @@ import com.ae.apps.messagecounter.services.SMSObserverService;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 import com.ae.apps.messagecounter.vo.SentCountDetailsVo;
+
+import java.util.Date;
 
 /**
  * This fragment hosts the sent messages counter interface
@@ -71,6 +71,8 @@ public class SentCountFragment extends Fragment {
 	private View				mCard03					= null;
 	private boolean				mShowAnimations			= true;
 	private boolean				mCachedPreferenceValue;
+
+    private SentCountDataManager mDataManager;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,10 +109,27 @@ public class SentCountFragment extends Fragment {
 		// Start the service for first time user
 		startMessageCounterService();
 
+        mDataManager = new SentCountDataManager();
+
+        // When the app is installed for the first time, we can look at the sent messages and index them as well
+        indexAllMessagesForFirstInstall();
+
 		return layout;
 	}
 
-	private void updateLayout() {
+    private void indexAllMessagesForFirstInstall() {
+        boolean historicDataIndexed = mPreferences.getBoolean(AppConstants.PREF_KEY_HISTORIC_DATA_INDEXED, false);
+        if(false == historicDataIndexed && CommonUtils.isFirstInstall(mContext)){
+            // Check for un tracked messages and add to the index, this should only be called once
+            // per fresh install of the application.
+            mDataManager.checkForUnLoggedMessages(mContext, "", true);
+            mPreferences.edit()
+                    .putBoolean(AppConstants.PREF_KEY_HISTORIC_DATA_INDEXED, true)
+                    .apply();
+        }
+    }
+
+    private void updateLayout() {
 		boolean enabled = getCountMessagesEnabledPref();
 		if (enabled == false) {
 			mSentCounterLayout.setVisibility(View.GONE);
@@ -135,7 +154,7 @@ public class SentCountFragment extends Fragment {
 	}
 
 	/**
-	 * This method sets up the data that needs to be displyed if we have to show the content
+	 * This method sets up the data that needs to be displayed if we have to show the content
 	 */
 	private void showSentCountDetails() {
 		// Lets find the cycle start date
@@ -144,8 +163,7 @@ public class SentCountFragment extends Fragment {
 		mCycleDurationText.setText(MessageCounterUtils.getDurationDateString(cycleStartDate));
 
 		// Get the sent count details from the database
-		SentCountDataManager dataManager = new SentCountDataManager();
-		SentCountDetailsVo detailsVo = dataManager.getSentCountData(mContext);
+		SentCountDetailsVo detailsVo = mDataManager.getSentCountData(mContext);
 
 		// set no of messages sent today and in this cycle
 		mSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));

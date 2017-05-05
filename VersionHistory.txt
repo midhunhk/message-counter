@@ -222,3 +222,6 @@ MessageCounter 2.1.20 [Dec 2013]
   - [CHANGED]	Navigation Drawer updates
   - [REMOVED]	Menu in toolbar moved to Navigation Drawer
   - [CHANGED]	UI Adjustments
+
+// Deobfuscation file
+D:\WorkSpaces\_repositories\MessageCounter\messageCounter\build\outputs\mapping\release\mapping.txt

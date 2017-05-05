@@ -47,7 +47,7 @@
     <!-- Experimental -->
     <PreferenceCategory android:title="@string/str_pref_experimental">
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:disableDependentsState="false"
             android:key="pref_key_enable_offline_count"
             android:summary="@string/str_pref_offline_message_desc"
