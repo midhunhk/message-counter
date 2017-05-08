@@ -69,7 +69,7 @@ limitations under the License.</string>
 	<string name="str_current_cycle">Ciclo atual</string>
 	<string name="str_previous_cycle">Ciclo Anterior</string>
 	
-	<!-- strings for widgets v2.3 -->
+    <!-- strings for widgets v2.3 -->
     <string name="str_messages_sent_caps">MENSAGENS ENVIDAS</string>
     <string name="str_today">HOJE</string>
     <string name="str_cycle">CICLO</string>
@@ -78,10 +78,15 @@ limitations under the License.</string>
     <string name="str_donate_title">doar</string>
     <string name="str_donate_text">Mensagem Contador é um projeto open source desenvolvido em meu tempo livre. Qualquer tipo de contribuição ajuda a adicionar recursos ou bugs Swat. Obrigado!</string>
     <string name="str_donate_disclaimer">Doações não estará em vez de recursos adicionais. Google leva 30% das compras como taxas de transação.</string>
-	<string name="str_donate_thanks">Obrigado por doar!</string>
-	<string name="str_donate_fail">Doação falhou. Por favor, tente novamente mais tarde.</string>
+    <string name="str_donate_thanks">Obrigado por doar!</string>
+    <string name="str_donate_fail">Doação falhou. Por favor, tente novamente mais tarde.</string>
     <string name="str_donate_small">Compre-me um chocolate</string>
     <string name="str_donate_medium">Compre-me um gelado</string>
     <string name="str_donate_large">Compre-me Jantar</string>
+
+    <!-- added for 3.2.0 -->
+    <string name="str_pref_experimental">Experimental</string>
+    <string name="str_offline_messages">Contagem de mensagens offline</string>
+    <string name="str_offline_messages">Verificar as mensagens enviadas quando o serviço de fundo estava off-line na próxima inicialização</string>
 
 </resources>
