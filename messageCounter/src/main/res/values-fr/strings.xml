@@ -83,4 +83,9 @@ limitations under the License.</string>
     <string name="str_donate_small">Achetez-moi un chocolat</string>
     <string name="str_donate_medium">Achetez-moi une glace</string>
     <string name="str_donate_large">Achetez-moi Dîner</string>
+	
+    <!-- added for 3.2.0 -->
+    <string name="str_pref_experimental">Experimental</string>
+    <string name="str_offline_messages">Nombre de Messages hors ligne</string>
+    <string name="str_offline_messages">Recherchez les messages envoyés pendant que le service de fond a été déconnecté au prochain démarrage</string>
 </resources>
