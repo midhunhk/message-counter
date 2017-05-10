@@ -68,11 +68,6 @@ limitations under the License.</string>
     <string name="str_pref_message_limit">Message limit</string>
     <string name="str_pref_message_limit_desc">Limit for messages that can be sent per cycle. Default is 100</string>
 
-    <!-- added for 3.2.0 -->
-    <string name="str_pref_experimental">Experimental</string>
-    <string name="str_offline_messages">Count offline Messages</string>
-    <string name="str_pref_offline_message_desc">Check for messages sent while the background service was offline on next startup</string>
-    
     <!-- added for 2.2.7 -->
     <string name="str_notify_on_limit">Notify on reaching limit</string>
     <string name="str_enble_notify_on_limit">Notify on reaching SMS send limit</string>
@@ -80,8 +75,7 @@ limitations under the License.</string>
     <string name="str_sms_limit_notif_text">SMS limit reached for this cycle</string>
     <string name="str_current_cycle">CURRENT CYCLE</string>
     <string name="str_previous_cycle">PREVIOUS CYCLE</string>
-    
-    
+
     <!-- strings for widgets v2.3 -->
     <string name="str_messages_sent_caps">MESSAGES SENT</string>
     <string name="str_today">TODAY</string>
@@ -97,5 +91,10 @@ limitations under the License.</string>
     <string name="str_donate_medium">Buy me an Ice-Cream</string>
     <string name="str_donate_large">Buy me Dinner</string>
     <string name="str_sent_this_week">Sent this Week</string>
-    
+
+    <!-- added for 3.2.0 -->
+    <string name="str_pref_experimental">Experimental</string>
+    <string name="str_offline_messages">Count offline Messages</string>
+    <string name="str_pref_offline_message_desc">Check for messages sent while the background service was offline on next startup</string>
+
 </resources>

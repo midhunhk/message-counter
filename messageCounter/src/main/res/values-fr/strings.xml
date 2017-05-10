@@ -87,5 +87,5 @@ limitations under the License.</string>
     <!-- added for 3.2.0 -->
     <string name="str_pref_experimental">Experimental</string>
     <string name="str_offline_messages">Nombre de Messages hors ligne</string>
-    <string name="str_offline_messages">Recherchez les messages envoyés pendant que le service de fond a été déconnecté au prochain démarrage</string>
+    <string name="str_pref_offline_message_desc">Recherchez les messages envoyés pendant que le service de fond a été déconnecté au prochain démarrage</string>
 </resources>

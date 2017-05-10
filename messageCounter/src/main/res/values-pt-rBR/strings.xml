@@ -87,6 +87,6 @@ limitations under the License.</string>
     <!-- added for 3.2.0 -->
     <string name="str_pref_experimental">Experimental</string>
     <string name="str_offline_messages">Contagem de mensagens offline</string>
-    <string name="str_offline_messages">Verificar as mensagens enviadas quando o serviço de fundo estava off-line na próxima inicialização</string>
+    <string name="str_pref_offline_message_desc">Verificar as mensagens enviadas quando o serviço de fundo estava off-line na próxima inicialização</string>
 
 </resources>

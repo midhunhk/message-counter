@@ -87,6 +87,6 @@ limitations under the License.</string>
     <!-- added for 3.2.0 -->
     <string name="str_pref_experimental">Experimental</string>
     <string name="str_offline_messages">Cuenta mensajes fuera de línea</string>
-    <string name="str_offline_messages">Para verificar los mensajes enviados mientras que el fondo estaba fuera de línea en el siguiente Inicio</string>
+    <string name="str_pref_offline_message_desc">Para verificar los mensajes enviados mientras que el fondo estaba fuera de línea en el siguiente Inicio</string>
 	
 </resources>
