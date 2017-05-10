@@ -66,6 +66,16 @@
                         android:text="@string/app_version" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="2dip"
+                        android:layout_below="@id/appVersion"
+                        android:layout_toEndOf="@+id/appDeveloper"
+                        android:layout_toRightOf="@+id/appDeveloper"
+                        android:text="@string/app_code_name"/>
+
+                    <TextView
                         android:id="@+id/appReleaseDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -19,7 +19,7 @@
     <dimen name="card_margin">6dp</dimen>
     <dimen name="card_padding">3dp</dimen>
     
-    <dimen name="navigation_drawer_width">246dp</dimen>
+    <dimen name="navigation_drawer_width">266dp</dimen>
     
     <!-- text sizes -->
     <dimen name="card_title">16sp</dimen>
