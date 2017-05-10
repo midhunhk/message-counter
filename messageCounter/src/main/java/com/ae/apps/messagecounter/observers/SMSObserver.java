@@ -162,7 +162,7 @@ public class SMSObserver extends ContentObserver {
                         .setContentTitle(notificationTitle)
                         .setContentText(notificationText)
                         .setNumber(userLimit)
-                        .setSmallIcon(R.drawable.ic_app_icon)
+                        .setSmallIcon(R.drawable.ic_notification_icon)
                         .setAutoCancel(true)
                         .build();
 
