@@ -1,3 +1,3 @@
-Message Counter Documentation
+Message Counter App Page
 =============================
-Project documentation will be hosted here, one day...
+This is the Message Counter app page available at http://midhunhk.github.io/message-counter/.

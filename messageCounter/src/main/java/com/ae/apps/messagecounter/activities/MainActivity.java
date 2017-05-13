@@ -25,6 +25,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -87,7 +89,10 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 		}
 
 		final SMSManager smsManager = new SMSManager(getBaseContext());
-		final ContactManager contactManager = new ContactManager(getContentResolver());
+		final ContactManager.Config config = new ContactManager.Config();
+		config.contentResolver = getContentResolver();
+		config.addContactsWithPhoneNumbers = false;
+		final ContactManager contactManager = new ContactManager(config);
 
 		// Cache the message counts
 		messageCountsCache.put(SMSManager.SMS_URI_ALL, smsManager.getMessagesCount(SMSManager.SMS_URI_ALL));
