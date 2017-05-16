@@ -37,8 +37,6 @@ Open the project in Android Studio
 <a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
  <img alt="Get it on Google Play" width="200px" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">
 </a>
-
-This app is available on the Google Play Store at https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter
  
 ## License
  Licensed under the Apache License, Version 2.0 (the "License");
