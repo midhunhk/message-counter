@@ -6,7 +6,9 @@ jdk:
 # Install Dependencies
 before_install:
     - git clone --depth=50 --branch=master https://github.com/midhunhk/ae-apps-library.git ../AeAppsLib
-
+    # we should be at /home/travis/build/midhunhk/message-counter
+    - pwd
+    - mv '/messageCounter/src/main/res/values/for-build.txt' '/messageCounter/src/main/res/values/for-build.xml'
 # Android settings
 android:
   components:
@@ -21,8 +23,6 @@ android:
      
 # Run before runnig the build script
 before_script:
-    - pwd
-    - mv '/messageCounter/src/main/res/values/for-build.txt' '/messageCounter/src/main/res/values/for-build.xml'
     - wget http://services.gradle.org/distributions/gradle-3.3-bin.zip
     - unzip gradle-3.3-bin.zip
     - export GRADLE_HOME=$PWD/gradle-3.3
