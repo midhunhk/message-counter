@@ -13,7 +13,7 @@ android:
     - tools
     # Same version as specified in build.gradle
     - build-tools-25.0.1
-    - android-22
+    - android-25
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-21
   licenses:
