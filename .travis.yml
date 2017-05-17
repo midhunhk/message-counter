@@ -18,7 +18,9 @@ before_install:
     - ls
     - cd 'values'
     - ls
-    - cd '/messageCounter/src/main/res/values/'
+    - mv for-build.txt for-build.xml
+    - cd ../../../../..
+    #- cd '/messageCounter/src/main/res/values/'
     - ls
     #- mv '/messageCounter/src/main/res/values/for-build.txt' '/messageCounter/src/main/res/values/for-build.xml'
 # Android settings
