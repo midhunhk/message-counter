@@ -14,8 +14,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }
+    
+    lintOptions {
+        abortOnError false
+    }
+    
     productFlavors {
     }
+    
     applicationVariants.all{ variant ->
         variant.outputs.each{ output ->
             output.outputFile = new File(
