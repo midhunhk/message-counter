@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- enable or disable non contact messages count -->
-
-    <PreferenceCategory android:title="@string/str_pref_messages">
+    <!-- Experimental -->
+    <PreferenceCategory android:title="@string/str_pref_experimental">
         <CheckBoxPreference
-            android:key="pref_key_hide_non_contact_messages"
-            android:summaryOff="@string/str_pref_show_non_contact_message_count"
-            android:summaryOn="@string/str_pref_hide_non_contact_message_count"
-            android:title="@string/str_pref_non_contact_messages"/>
+            android:defaultValue="true"
+            android:disableDependentsState="false"
+            android:key="pref_key_enable_offline_count"
+            android:summary="@string/str_pref_offline_message_desc"
+            android:title="@string/str_offline_messages"/>
     </PreferenceCategory>
 
     <!-- preferences for sent message counter -->
@@ -44,14 +44,13 @@
             android:title="@string/str_notify_on_limit"/>
     </PreferenceCategory>
 
-    <!-- Experimental -->
-    <PreferenceCategory android:title="@string/str_pref_experimental">
+    <!-- enable or disable non contact messages count -->
+    <PreferenceCategory android:title="@string/str_pref_messages">
         <CheckBoxPreference
-            android:defaultValue="true"
-            android:disableDependentsState="false"
-            android:key="pref_key_enable_offline_count"
-            android:summary="@string/str_pref_offline_message_desc"
-            android:title="@string/str_offline_messages"/>
+            android:key="pref_key_hide_non_contact_messages"
+            android:summaryOff="@string/str_pref_show_non_contact_message_count"
+            android:summaryOn="@string/str_pref_hide_non_contact_message_count"
+            android:title="@string/str_pref_non_contact_messages"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
