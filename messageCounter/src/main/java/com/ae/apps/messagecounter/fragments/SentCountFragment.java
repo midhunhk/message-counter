@@ -74,6 +74,7 @@ public class SentCountFragment extends Fragment {
     private boolean mCachedPreferenceValue;
 
     private SentCountDataManager mDataManager;
+    private SentCountDetailsVo mSentCountData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +85,33 @@ public class SentCountFragment extends Fragment {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
         // Find ui elements
+        findViews(layout);
+
+        mDataManager = SentCountDataManager.newInstance();
+
+        // Get the sent count details from the database
+        updateSentCountData();
+
+        // See which layout to be shown to the user
+        updateLayout();
+
+        // Cache the enabled preference value
+        cacheEnabledPref();
+
+        // Start the service for first time user
+        startMessageCounterService();
+
+        // When the app is installed for the first time, we can look at the sent messages and index them as well
+        indexAllMessagesForFirstInstall();
+
+        return layout;
+    }
+
+    private void updateSentCountData() {
+        mSentCountData = mDataManager.getSentCountData(mContext);
+    }
+
+    private void findViews(View layout) {
         mProgressText = (TextView) layout.findViewById(R.id.countProgressText);
         mSentTodayText = (TextView) layout.findViewById(R.id.countSentTodayText);
         mProgressBar = (ProgressBar) layout.findViewById(R.id.countProgressBar);
@@ -100,23 +128,6 @@ public class SentCountFragment extends Fragment {
         mCard01 = layout.findViewById(R.id.hero_card01);
         mCard02 = layout.findViewById(R.id.hero_card02);
         mCard03 = layout.findViewById(R.id.hero_card03);
-
-        mDataManager = new SentCountDataManager();
-
-        // See which layout to be shown to the user
-        updateLayout();
-
-        // Cache the enabled preference value
-        cacheEnabledPref();
-
-        // Start the service for first time user
-        startMessageCounterService();
-
-
-        // When the app is installed for the first time, we can look at the sent messages and index them as well
-        indexAllMessagesForFirstInstall();
-
-        return layout;
     }
 
     private void indexAllMessagesForFirstInstall() {
@@ -129,7 +140,7 @@ public class SentCountFragment extends Fragment {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    mDataManager.checkForUnLoggedMessages(mContext, "", true);
+                    final int messagesAdded = mDataManager.checkForUnLoggedMessages(mContext, "", true);
                     mPreferences.edit()
                             .putBoolean(AppConstants.PREF_KEY_HISTORIC_DATA_INDEXED, true)
                             .apply();
@@ -139,7 +150,10 @@ public class SentCountFragment extends Fragment {
                         public void run() {
                             // Run on UI thread
                             Toast.makeText(mContext, "Indexed all sent messages", Toast.LENGTH_SHORT).show();
-                            updateLayout();
+                            if(messagesAdded > 0) {
+                                updateSentCountData();
+                                updateLayout();
+                            }
                         }
                     });
                 }
@@ -181,26 +195,23 @@ public class SentCountFragment extends Fragment {
 
         mCycleDurationText.setText(MessageCounterUtils.getDurationDateString(cycleStartDate));
 
-        // Get the sent count details from the database
-        SentCountDetailsVo detailsVo = mDataManager.getSentCountData(mContext);
-
         // set no of messages sent today and in this cycle
-        mSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
-        mHeroSentTodayText.setText(String.valueOf(detailsVo.getSentToday()));
-        mHeroSentInCycleText.setText(String.valueOf(detailsVo.getSentCycle()));
-        mSentThisWeekText.setText(String.valueOf(detailsVo.getSentInWeek()));
+        mSentTodayText.setText(String.valueOf(mSentCountData.getSentToday()));
+        mHeroSentTodayText.setText(String.valueOf(mSentCountData.getSentToday()));
+        mHeroSentInCycleText.setText(String.valueOf(mSentCountData.getSentCycle()));
+        mSentThisWeekText.setText(String.valueOf(mSentCountData.getSentInWeek()));
 
         // set the progressbar
-        setProgressInfo(detailsVo.getSentCycle(), detailsVo.getCycleLimit(), mProgressBar, mProgressText, 0);
+        setProgressInfo(mSentCountData.getSentCycle(), mSentCountData.getCycleLimit(), mProgressBar, mProgressText, 0);
 
         // Show the previous cycle details
-        int lastCycle = detailsVo.getSentLastCycle();
+        int lastCycle = mSentCountData.getSentLastCycle();
         Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
         mPrevCycleSentText.setText(String.valueOf(lastCycle));
         mPrevCycleDurationText.setText(MessageCounterUtils.getDurationDateString(prevCycleStartDate));
 
         // set the progressbar for the last cycle
-        setProgressInfo(lastCycle, detailsVo.getCycleLimit(), mPrevCountProgressBar, mPrevCycleSentText, 0);
+        setProgressInfo(lastCycle, mSentCountData.getCycleLimit(), mPrevCountProgressBar, mPrevCycleSentText, 0);
 
         // Some basic animations
         Animation fadeInAnimation = AnimationUtils.loadAnimation(mContext, R.anim.abc_fade_in);

@@ -91,16 +91,7 @@ public class SMSObserver extends ContentObserver {
             // See if this message was processed earlier, sometimes same messageId can come multiple times
             boolean isNewMessage = !lastMessageId.equals(messageId);
 
-            // Experimental feature - For Unicorn
-            // Check for any messages that we might have missed since the last message was logged.
-            // If new message ID is different from last saved message ID, check if any messages
-            // went un counted. Enable this flag from the preferences menu
-            boolean enableOfflineCount = sharedPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_OFFLINE_COUNT, true);
-            if (isNewMessage && enableOfflineCount) {
-                SentCountDataManager countDataManager = new SentCountDataManager();
-                Log.d(TAG, "lastMessageId is " + lastMessageId);
-                countDataManager.checkForUnLoggedMessages(mContext, messageId, false);
-            }
+            checkForOfflineMessages(messageId, sharedPreferences, lastMessageId, isNewMessage);
 
             // protocol will be null for sent messages
             if (protocol == null && isNewMessage) {
@@ -134,6 +125,19 @@ public class SMSObserver extends ContentObserver {
                 // Send a broadcast to update our widgets
                 sendWidgetUpdateBroadcast();
             }
+        }
+    }
+
+    // Experimental feature - For Unicorn
+    // Check for any messages that we might have missed since the last message was logged.
+    // If new message ID is different from last saved message ID, check if any messages
+    // went un counted. Enable this flag from the preferences menu
+    private void checkForOfflineMessages(String messageId, SharedPreferences sharedPreferences, String lastMessageId, boolean isNewMessage) {
+        boolean enableOfflineCount = sharedPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_OFFLINE_COUNT, true);
+        if (isNewMessage && enableOfflineCount) {
+            SentCountDataManager countDataManager = SentCountDataManager.newInstance();
+            Log.d(TAG, "lastMessageId is " + lastMessageId);
+            countDataManager.checkForUnLoggedMessages(mContext, messageId, false);
         }
     }
 

@@ -54,8 +54,8 @@ public class WidgetUpdateReceiver extends AppWidgetProvider {
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
 		// Get data from database here
-		SentCountDataManager dataManager = new SentCountDataManager();
-		logger.addSplit("get data from databse");
+		SentCountDataManager dataManager = SentCountDataManager.newInstance();
+		logger.addSplit("get data from database");
 		SentCountDetailsVo detailsVo = dataManager.getSentCountData(context);
 		logger.addSplit("read done, updating widgets");
 
