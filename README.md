@@ -1,6 +1,6 @@
 Message Counter
 ===============
-[![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=master)](https://travis-ci.org/midhunhk/message-counter) ![](https://img.shields.io/badge/version-3.2-008080.svg)
+[![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=master)](https://travis-ci.org/midhunhk/message-counter) ![](https://img.shields.io/badge/version-3.2.0-008080.svg)
 
 <img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/master/docs/images/002.png" width="560"/>
 
