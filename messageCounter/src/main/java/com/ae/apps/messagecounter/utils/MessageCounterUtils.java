@@ -16,6 +16,16 @@
 
 package com.ae.apps.messagecounter.utils;
 
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
+
+import com.ae.apps.common.managers.ContactManager;
+import com.ae.apps.common.utils.ValueComparator;
+import com.ae.apps.common.vo.ContactMessageVo;
+import com.ae.apps.messagecounter.models.Cycle;
+import com.ae.apps.messagecounter.vo.GraphData;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,281 +38,278 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
-
-import com.ae.apps.common.managers.ContactManager;
-import com.ae.apps.common.utils.IntegerComparator;
-import com.ae.apps.common.utils.ValueComparator;
-import com.ae.apps.common.vo.ContactMessageVo;
-import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
-import com.ae.apps.messagecounter.vo.GraphData;
-
 /**
  * Utility methods for MessageCounter
- * 
+ *
  * @author Midhun
- * 
  */
 public class MessageCounterUtils {
 
-	private static final String		NO_LIMIT_SET		= "-1";
-	private static SimpleDateFormat	DATE_INDEX_FORMAT	= new SimpleDateFormat("yyMMdd", Locale.getDefault());
-	// private static SimpleDateFormat	DATE_DISPLAY_FORMAT	= new SimpleDateFormat("dd MMM, yyyy", Locale.getDefault());
-	private static SimpleDateFormat	DATE_DISPLAY_FORMAT	= new SimpleDateFormat("dd MMM", Locale.getDefault());
+    private static final String NO_LIMIT_SET = "-1";
+    private static SimpleDateFormat DATE_INDEX_FORMAT = new SimpleDateFormat("yyMMdd", Locale.getDefault());
+    private static SimpleDateFormat DATE_DISPLAY_FORMAT = new SimpleDateFormat("dd MMM", Locale.getDefault());
 
-	/**
-	 * Sorts a map using the value rather than key
-	 * 
-	 * @param source
-	 * @return
-	 */
-	public static Map<String, Integer> sortThisMap(Map<String, Integer> source) {
-		IntegerComparator comparator = new IntegerComparator(source);
-		Map<String, Integer> sortedMap = new TreeMap<String, Integer>(comparator);
-		sortedMap.putAll(source);
-		return sortedMap;
-	}
+    /**
+     * Sorts a map using the value rather than key
+     *
+     * @param source source map
+     * @return
+     */
+    public static Map<String, Integer> sortThisMap(Map<String, Integer> source) {
+        ValueComparator comparator = new ValueComparator(source);
+        Map<String, Integer> sortedMap = new TreeMap<String, Integer>(comparator);
 
-	/**
-	 * Converts a list into percentages
-	 * 
-	 * @param messageVos
-	 * @param totalMessagesCount
-	 * @param maxRowsForChart
-	 * @return
-	 */
-	public static GraphData getMessageCountDegrees(List<ContactMessageVo> messageVos, int totalMessagesCount,
-			int maxRowsForChart, boolean skipOthersCount) {
-		int messageCount = 0;
-		float tempCounter = 0;
+        sortedMap.putAll(source);
+        return sortedMap;
+    }
 
-		// Create a copy of the source list and sort it
-		List<ContactMessageVo> sortedList = new ArrayList<ContactMessageVo>(messageVos);
-		Collections.copy(sortedList, messageVos);
-		Collections.sort(sortedList);
+    /**
+     * Converts a list into percentages
+     *
+     * @param messageVos list of messagevos
+     * @param totalMessagesCount totalmessages
+     * @param maxRowsForChart max number of rows
+     * @param skipOthersCount flag for skipping others count
+     * @return
+     */
+    public static GraphData getMessageCountDegrees(List<ContactMessageVo> messageVos, int totalMessagesCount,
+                                                   int maxRowsForChart, boolean skipOthersCount) {
+        int messageCount;
+        float tempCounter = 0;
 
-		String contactName = null;
-		Float percentInDegrees = null;
-		ContactMessageVo messageVo = null;
+        // Create a copy of the source list and sort it
+        List<ContactMessageVo> sortedList = new ArrayList<ContactMessageVo>(messageVos);
+        Collections.copy(sortedList, messageVos);
+        Collections.sort(sortedList);
 
-		Map<String, Float> messageCountMap = new HashMap<String, Float>();
-		ValueComparator comparator = new ValueComparator(messageCountMap);
-		Map<String, Float> sortedMap = new TreeMap<String, Float>(comparator);
+        String contactName;
+        Float percentInDegrees;
+        ContactMessageVo messageVo;
 
-		int loopLimit = sortedList.size();
-		if (maxRowsForChart > 1 && loopLimit > maxRowsForChart) {
-			loopLimit = maxRowsForChart - 1;
-		}
+        Map<String, Float> messageCountMap = new HashMap<String, Float>();
+        ValueComparator comparator = new ValueComparator(messageCountMap);
+        Map<String, Float> sortedMap = new TreeMap<String, Float>(comparator);
 
-		int messageCountFromRealContacts = 0;
-		for (ContactMessageVo contactMessageVo : sortedList) {
-			messageCountFromRealContacts += contactMessageVo.getMessageCount();
-		}
+        int loopLimit = sortedList.size();
+        if (maxRowsForChart > 1 && loopLimit > maxRowsForChart) {
+            loopLimit = maxRowsForChart - 1;
+        }
 
-		if (skipOthersCount) {
-			totalMessagesCount = messageCountFromRealContacts;
-		}
+        int messageCountFromRealContacts = 0;
+        for (ContactMessageVo contactMessageVo : sortedList) {
+            messageCountFromRealContacts += contactMessageVo.getMessageCount();
+        }
 
-		for (int index = 0; index < loopLimit; index++) {
-			messageVo = sortedList.get(index);
-			messageCount = messageVo.getMessageCount();
-			if (messageVo.getContactVo() != null && messageVo.getContactVo().getName() != null) {
-				contactName = messageVo.getContactVo().getName() + " (" + messageCount + ")";
-			} else {
-				contactName = "Contact " + index + " (" + messageCount + ")";
-			}
+        if (skipOthersCount) {
+            totalMessagesCount = messageCountFromRealContacts;
+        }
 
-			// convert to degree
-			percentInDegrees = 360f * messageCount / totalMessagesCount;
-			messageCountMap.put(contactName, percentInDegrees);
+        for (int index = 0; index < loopLimit; index++) {
+            messageVo = sortedList.get(index);
+            messageCount = messageVo.getMessageCount();
+            if (messageVo.getContactVo() != null && messageVo.getContactVo().getName() != null) {
+                contactName = messageVo.getContactVo().getName() + " (" + messageCount + ")";
+            } else {
+                contactName = "Contact " + index + " (" + messageCount + ")";
+            }
 
-			tempCounter += messageCount;
-		}
+            // convert to degree
+            percentInDegrees = 360f * messageCount / totalMessagesCount;
+            messageCountMap.put(contactName, percentInDegrees);
 
-		// Calculate the data for the others row
-		float balanceMessageCount = totalMessagesCount - tempCounter;
-		// Show it only if necessary
-		if (balanceMessageCount > 0) { // && sortedList.size() > maxRowsForChart) {
-			percentInDegrees = 360f * balanceMessageCount / totalMessagesCount;
-			messageCountMap.put("Others (" + (int) balanceMessageCount + ")", percentInDegrees);
-		}
+            tempCounter += messageCount;
+        }
 
-		// Get the data from the map and put inside the Graph data object
-		sortedMap.putAll(messageCountMap);
+        // Calculate the data for the others row
+        float balanceMessageCount = totalMessagesCount - tempCounter;
+        // Show it only if necessary
+        if (balanceMessageCount > 0) { // && sortedList.size() > maxRowsForChart) {
+            percentInDegrees = 360f * balanceMessageCount / totalMessagesCount;
+            messageCountMap.put("Others (" + (int) balanceMessageCount + ")", percentInDegrees);
+        }
 
-		String[] labels = new String[sortedMap.size()];
-		float[] values = new float[sortedMap.size()];
-		int i = 0;
-		for (Float f : sortedMap.values()) {
-			values[i] = f;
-			i++;
-		}
+        // Get the data from the map and put inside the Graph data object
+        sortedMap.putAll(messageCountMap);
 
-		// Create a new GraphData object to hold the graph data
-		GraphData data = new GraphData();
-		data.setLabels(sortedMap.keySet().toArray(labels));
-		data.setValueInDegrees(values);
+        String[] labels = new String[sortedMap.size()];
+        float[] values = new float[sortedMap.size()];
+        int i = 0;
+        for (Float f : sortedMap.values()) {
+            values[i] = f;
+            i++;
+        }
 
-		return data;
-	}
+        // Create a new GraphData object to hold the graph data
+        GraphData data = new GraphData();
+        data.setLabels(sortedMap.keySet().toArray(labels));
+        data.setValueInDegrees(values);
 
-	/**
-	 * Returns a list of ContactMessageVos
-	 * 
-	 * @param manager
-	 * @param sortedMessageMap
-	 * @param messageMap
-	 * @return
-	 */
-	public static List<ContactMessageVo> getContactMessageList(ContactManager manager,
-			Map<String, Integer> sortedMessageMap, Map<String, Integer> messageMap) {
-		// Collate the ContactVo, photo bitmap and message count and create the data for the list
-		Integer messageCount = null;
-		ContactMessageVo contactMessageVo = null;
-		Set<String> contactIdsKeySet = sortedMessageMap.keySet();
-		List<ContactMessageVo> contactMessageList = new ArrayList<ContactMessageVo>();
-		for (String contactId : contactIdsKeySet) {
-			messageCount = messageMap.get(contactId);
-			if (messageCount != null) {
-				// create a new ContactMessageVo object with the data that we have
-				contactMessageVo = new ContactMessageVo();
-				contactMessageVo.setContactVo(manager.getContactInfo(contactId));
-				contactMessageVo.setMessageCount(messageCount);
-				contactMessageVo.setPhoto(manager.getContactPhoto(contactId));
-				contactMessageList.add(contactMessageVo);
-			}
-		}
-		return contactMessageList;
-	}
+        return data;
+    }
 
-	/**
-	 * Returns a mapping of address and total message count
-	 * 
-	 * @param manager
-	 * @param messageSendersMap
-	 * @return
-	 */
-	public static Map<String, Integer> convertAddressToContact(ContactManager manager,
-			Map<String, Integer> messageSendersMap) {
-		// mapping of contactId with message count
-		Map<String, Integer> contactsMap = new HashMap<String, Integer>();
+    /**
+     * Returns a list of ContactMessageVos
+     *
+     * @param manager contact manager instance TO REMOVE
+     * @param sortedMessageMap sorted map
+     * @param messageMap message map
+     * @return
+     */
+    public static List<ContactMessageVo> getContactMessageList(ContactManager manager,
+                                                               Map<String, Integer> sortedMessageMap, Map<String, Integer> messageMap) {
+        // Collate the ContactVo, photo bitmap and message count and create the data for the list
+        Integer messageCount;
+        ContactMessageVo contactMessageVo;
+        Set<String> contactIdsKeySet = sortedMessageMap.keySet();
+        List<ContactMessageVo> contactMessageList = new ArrayList<ContactMessageVo>();
+        if (null != contactIdsKeySet && !contactIdsKeySet.isEmpty()) {
+            for (String contactId : contactIdsKeySet) {
+                messageCount = messageMap.get(contactId);
+                if (messageCount != null) {
+                    // create a new ContactMessageVo object with the data that we have
+                    contactMessageVo = new ContactMessageVo();
+                    contactMessageVo.setContactVo(manager.getContactInfo(contactId));
+                    contactMessageVo.setMessageCount(messageCount);
+                    contactMessageVo.setPhoto(manager.getContactPhoto(contactId));
+                    contactMessageList.add(contactMessageVo);
+                }
+            }
+        }
+        return contactMessageList;
+    }
 
-		String contactId = null;
-		Integer messageCount = null;
-		Set<String> addressesKeySet = messageSendersMap.keySet();
-		for (String address : addressesKeySet) {
-			contactId = manager.getContactIdFromAddress(address);
-			// contactId will be null for address not in contact list
-			if (contactId != null) {
-				messageCount = messageSendersMap.get(address);
-				if (contactsMap.containsKey(contactId)) {
-					// If contactId already exists, update the message count
-					messageCount = messageCount + contactsMap.get(contactId);
-				}
-				contactsMap.put(contactId, messageCount);
-			}
-		}
-		return contactsMap;
-	}
+    /**
+     * Returns a mapping of address and total message count
+     *
+     * @param manager contact manager instance TO REMOVE
+     * @param messageSendersMap message sendersmap
+     * @return
+     */
+    public static Map<String, Integer> convertAddressToContact(ContactManager manager,
+                                                               Map<String, Integer> messageSendersMap) {
+        // mapping of contactId with message count
+        Map<String, Integer> contactsMap = new HashMap<>();
 
-	/**
-	 * Returns the index from the a given date
-	 * 
-	 * @param date
-	 * @return
-	 */
-	public static long getIndexFromDate(Date date) {
-		return Long.parseLong(DATE_INDEX_FORMAT.format(date));
-	}
+        String contactId;
+        Integer messageCount;
+        Set<String> addressesKeySet = messageSendersMap.keySet();
+        for (String address : addressesKeySet) {
+            contactId = manager.getContactIdFromAddress(address);
+            // contactId will be null for address not in contact list
+            if (contactId != null) {
+                messageCount = messageSendersMap.get(address);
+                if (contactsMap.containsKey(contactId)) {
+                    // If contactId already exists, update the message count
+                    messageCount = messageCount + contactsMap.get(contactId);
+                }
+                contactsMap.put(contactId, messageCount);
+            }
+        }
+        return contactsMap;
+    }
 
-	public static CharSequence getDisplayDateString(Date cycleStartDate) {
-		return DATE_DISPLAY_FORMAT.format(cycleStartDate);
-	}
+    /**
+     * Returns the index from the a given date
+     *
+     * @param date date
+     * @return
+     */
+    public static long getIndexFromDate(Date date) {
+        return Long.parseLong(DATE_INDEX_FORMAT.format(date));
+    }
 
-	/**
-	 * Returns the cycle end date. By default, cycle duration will be a month
-	 * 
-	 * @param startDate
-	 * @return
-	 */
-	public static Date getCycleEndDate(Date startDate) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(startDate);
-		calendar.add(Calendar.MONTH, +1);
-		calendar.add(Calendar.DATE, -1);
-		return calendar.getTime();
-	}
+    public static CharSequence getDisplayDateString(Date cycleStartDate) {
+        return DATE_DISPLAY_FORMAT.format(cycleStartDate);
+    }
 
-	/**
-	 * Returns the previous cycle start date
-	 * 
-	 * @param startDate
-	 * @return
-	 */
-	public static Date getPrevCycleStartDate(Date startDate) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(startDate);
-		calendar.add(Calendar.MONTH, -1);
-		return calendar.getTime();
-	}
-	
-	/**
-	 * Returns the start of the week
-	 * @return
-	 */
-	public static Date getWeekStartDate(){
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
-		return calendar.getTime();
-	}
+    /**
+     * Returns the cycle end date. By default, cycle duration will be a month
+     *
+     * @param startDate start date
+     * @return
+     */
+    public static Date getCycleEndDate(Date startDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.MONTH, +1);
+        calendar.add(Calendar.DATE, -1);
+        return calendar.getTime();
+    }
 
-	public static int getMessageLimitValue(SharedPreferences preferences) {
-		String rawVal = preferences.getString(AppConstants.PREF_KEY_MESSAGE_LIMIT_VALUE, NO_LIMIT_SET);
-		int limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
-		try {
-			limit = Integer.valueOf(rawVal);
-		} catch (NumberFormatException e) {
-			limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
-		}
-		return limit;
-	}
+    /**
+     * Returns the previous cycle start date
+     *
+     * @param startDate start date
+     * @return
+     */
+    public static Date getPrevCycleStartDate(Date startDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        calendar.add(Calendar.MONTH, -1);
+        return calendar.getTime();
+    }
 
-	public static Date getCycleStartDate(SharedPreferences preferences) {
-		int cycleStart = Integer.valueOf(preferences.getString(AppConstants.PREF_KEY_CYCLE_START_DATE,
-				AppConstants.DEFAULT_CYCLE_START_DATE));
-		Calendar calendar = Calendar.getInstance();
-		if (calendar.get(Calendar.DATE) < cycleStart) {
-			calendar.add(Calendar.MONTH, -1);
-		}
-		calendar.set(Calendar.DATE, cycleStart);
-		return calendar.getTime();
-	}
+    /**
+     * Returns the start of the week
+     *
+     * @return
+     */
+    public static Date getWeekStartDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+        return calendar.getTime();
+    }
 
-	public static int getCycleSentCount(CounterDataBaseAdapter counterDataBase, Date cycleStartDate) {
-		Date cycleEndDate = MessageCounterUtils.getCycleEndDate(cycleStartDate);
-		long cycleStartIndex = MessageCounterUtils.getIndexFromDate(cycleStartDate);
-		long cycleEndIndex = MessageCounterUtils.getIndexFromDate(cycleEndDate);
-		return counterDataBase.getTotalSentCountBetween(cycleStartIndex, cycleEndIndex);
-	}
+    public static int getMessageLimitValue(SharedPreferences preferences) {
+        String rawVal = preferences.getString(AppConstants.PREF_KEY_MESSAGE_LIMIT_VALUE, NO_LIMIT_SET);
+        int limit;
+        try {
+            limit = Integer.valueOf(rawVal);
+        } catch (NumberFormatException e) {
+            limit = AppConstants.DEFAULT_MESSAGE_LIMIT;
+        }
+        return limit;
+    }
 
-	/**
-	 * Returns the dates in a startDate - endDate format
-	 * 
-	 * @param startDate
-	 * @param endDate
-	 * @return
-	 */
-	public static String getDurationDateString(Date startDate) {
-		Date endDate = MessageCounterUtils.getCycleEndDate(startDate);
-		return MessageCounterUtils.getDisplayDateString(startDate) + " - "
-				+ MessageCounterUtils.getDisplayDateString(endDate);
-	}
-	
-	public static String getContentFromXml(Resources resources, int fileId){
-		XmlResourceParser parser = resources.getXml(fileId);
-		
-		return parser.getText();
-	}
+    public static Date getCycleStartDate(SharedPreferences preferences) {
+        int cycleStart = Integer.valueOf(preferences.getString(AppConstants.PREF_KEY_CYCLE_START_DATE,
+                AppConstants.DEFAULT_CYCLE_START_DATE));
+        Calendar calendar = Calendar.getInstance();
+        if (calendar.get(Calendar.DATE) < cycleStart) {
+            calendar.add(Calendar.MONTH, -1);
+        }
+        calendar.set(Calendar.DATE, cycleStart);
+        return calendar.getTime();
+    }
+
+    /**
+     * Get count of messages sent in a cycle
+     *
+     * @param cycleStartDate cycle start date
+     * @return
+     */
+    public static Cycle getCycleSentCount(Date cycleStartDate) {
+        Date cycleEndDate = MessageCounterUtils.getCycleEndDate(cycleStartDate);
+        long cycleStartIndex = MessageCounterUtils.getIndexFromDate(cycleStartDate);
+        long cycleEndIndex = MessageCounterUtils.getIndexFromDate(cycleEndDate);
+        return new Cycle(cycleStartIndex, cycleEndIndex);
+    }
+
+    /**
+     * Returns the dates in a startDate - endDate format
+     *
+     * @param startDate start date
+     * @return
+     */
+    public static String getDurationDateString(Date startDate) {
+        Date endDate = MessageCounterUtils.getCycleEndDate(startDate);
+        return MessageCounterUtils.getDisplayDateString(startDate) + " - "
+                + MessageCounterUtils.getDisplayDateString(endDate);
+    }
+
+    public static String getContentFromXml(Resources resources, int fileId) {
+        XmlResourceParser parser = resources.getXml(fileId);
+
+        return parser.getText();
+    }
 }

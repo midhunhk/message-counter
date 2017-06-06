@@ -26,6 +26,7 @@ import android.util.Log;
 
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
+import com.ae.apps.messagecounter.models.Cycle;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 import com.ae.apps.messagecounter.utils.MessagesTableConstants;
@@ -83,7 +84,9 @@ public class SentCountDataManager {
         int sentCycleCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
 
         Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
-        int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
+
+        Cycle cycle = MessageCounterUtils.getCycleSentCount(prevCycleStartDate);
+        int lastCycleCount = counterDataBase.getTotalSentCountBetween(cycle.getStartDateIndex(), cycle.getEndDateIndex());
 
         // Messages sent this week
         Date weekStartDate = MessageCounterUtils.getWeekStartDate();
