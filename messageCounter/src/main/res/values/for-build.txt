@@ -1,4 +1,7 @@
+<empty/>
+<!--
 <resources>
     <string name="app_lic_cat">marmalede</string>
     <string name="app_lic_dog">peanutbutter</string>
 </resources>
+-->

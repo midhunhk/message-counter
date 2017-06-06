@@ -27,3 +27,6 @@ local.properties
 .project
 .gradle
 .idea
+
+# for travis
+/messageCounter/src/main/res/values/for-build.txt
