@@ -44,6 +44,8 @@ public class SentCountDataManager {
     private static final String TAG = "SentCountDataManager";
     private static SentCountDataManager instance;
 
+    public static final String BLANK_MESSAGE_ID = "";
+
     /**
      * Returns an instance of the SentCountDataManager
      *
