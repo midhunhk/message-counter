@@ -20,7 +20,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 
-import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.utils.ValueComparator;
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.models.Cycle;
@@ -35,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 /**
