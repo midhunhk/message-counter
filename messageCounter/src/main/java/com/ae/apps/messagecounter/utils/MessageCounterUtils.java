@@ -148,67 +148,6 @@ public class MessageCounterUtils {
     }
 
     /**
-     * Returns a list of ContactMessageVos
-     *
-     * @param manager contact manager instance TO REMOVE
-     * @param sortedMessageMap sorted map
-     * @param messageMap message map
-     * @return
-     */
-    public static List<ContactMessageVo> getContactMessageList(ContactManager manager,
-                                                               Map<String, Integer> sortedMessageMap, Map<String, Integer> messageMap) {
-        // Collate the ContactVo, photo bitmap and message count and create the data for the list
-        Integer messageCount;
-        ContactMessageVo contactMessageVo;
-        Set<String> contactIdsKeySet = sortedMessageMap.keySet();
-        List<ContactMessageVo> contactMessageList = new ArrayList<ContactMessageVo>();
-        if (null != contactIdsKeySet && !contactIdsKeySet.isEmpty()) {
-            for (String contactId : contactIdsKeySet) {
-                messageCount = messageMap.get(contactId);
-                if (messageCount != null) {
-                    // create a new ContactMessageVo object with the data that we have
-                    contactMessageVo = new ContactMessageVo();
-                    contactMessageVo.setContactVo(manager.getContactInfo(contactId));
-                    contactMessageVo.setMessageCount(messageCount);
-                    contactMessageVo.setPhoto(manager.getContactPhoto(contactId));
-                    contactMessageList.add(contactMessageVo);
-                }
-            }
-        }
-        return contactMessageList;
-    }
-
-    /**
-     * Returns a mapping of address and total message count
-     *
-     * @param manager contact manager instance TO REMOVE
-     * @param messageSendersMap message sendersmap
-     * @return
-     */
-    public static Map<String, Integer> convertAddressToContact(ContactManager manager,
-                                                               Map<String, Integer> messageSendersMap) {
-        // mapping of contactId with message count
-        Map<String, Integer> contactsMap = new HashMap<>();
-
-        String contactId;
-        Integer messageCount;
-        Set<String> addressesKeySet = messageSendersMap.keySet();
-        for (String address : addressesKeySet) {
-            contactId = manager.getContactIdFromAddress(address);
-            // contactId will be null for address not in contact list
-            if (contactId != null) {
-                messageCount = messageSendersMap.get(address);
-                if (contactsMap.containsKey(contactId)) {
-                    // If contactId already exists, update the message count
-                    messageCount = messageCount + contactsMap.get(contactId);
-                }
-                contactsMap.put(contactId, messageCount);
-            }
-        }
-        return contactsMap;
-    }
-
-    /**
      * Returns the index from the a given date
      *
      * @param date date
