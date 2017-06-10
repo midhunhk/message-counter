@@ -51,11 +51,11 @@ public class MessageCounterUtils {
      * Sorts a map using the value rather than key
      *
      * @param source source map
-     * @return
+     * @return sorted map
      */
     public static Map<String, Integer> sortThisMap(Map<String, Integer> source) {
-        ValueComparator comparator = new ValueComparator(source);
-        Map<String, Integer> sortedMap = new TreeMap<String, Integer>(comparator);
+        ValueComparator<String, Integer> comparator = new ValueComparator(source);
+        Map<String, Integer> sortedMap = new TreeMap<>(comparator);
 
         sortedMap.putAll(source);
         return sortedMap;
@@ -64,10 +64,10 @@ public class MessageCounterUtils {
     /**
      * Converts a list into percentages
      *
-     * @param messageVos list of messagevos
-     * @param totalMessagesCount totalmessages
-     * @param maxRowsForChart max number of rows
-     * @param skipOthersCount flag for skipping others count
+     * @param messageVos         list of message vos
+     * @param totalMessagesCount total messages
+     * @param maxRowsForChart    max number of rows
+     * @param skipOthersCount    flag for skipping others count
      * @return
      */
     public static GraphData getMessageCountDegrees(List<ContactMessageVo> messageVos, int totalMessagesCount,
@@ -149,7 +149,7 @@ public class MessageCounterUtils {
      * Returns the index from the a given date
      *
      * @param date date
-     * @return
+     * @return index
      */
     public static long getIndexFromDate(Date date) {
         return Long.parseLong(DATE_INDEX_FORMAT.format(date));
@@ -163,7 +163,7 @@ public class MessageCounterUtils {
      * Returns the cycle end date. By default, cycle duration will be a month
      *
      * @param startDate start date
-     * @return
+     * @return end date
      */
     public static Date getCycleEndDate(Date startDate) {
         Calendar calendar = Calendar.getInstance();
@@ -177,7 +177,7 @@ public class MessageCounterUtils {
      * Returns the previous cycle start date
      *
      * @param startDate start date
-     * @return
+     * @return previous cycle start date
      */
     public static Date getPrevCycleStartDate(Date startDate) {
         Calendar calendar = Calendar.getInstance();
@@ -236,7 +236,7 @@ public class MessageCounterUtils {
      * Returns the dates in a startDate - endDate format
      *
      * @param startDate start date
-     * @return
+     * @return duration date string
      */
     public static String getDurationDateString(Date startDate) {
         Date endDate = MessageCounterUtils.getCycleEndDate(startDate);
