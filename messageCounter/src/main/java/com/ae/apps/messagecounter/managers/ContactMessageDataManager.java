@@ -42,13 +42,14 @@ public class ContactMessageDataManager {
     /**
      * Constructs an instance of this class
      *
-     * @param contentResolver
-     * @param context
+     * @param contentResolver content resolver
+     * @param context context
      */
     public ContactMessageDataManager(ContentResolver contentResolver, Context context) {
         final ContactManager.Config config = new ContactManager.Config();
         config.contentResolver = contentResolver;
         config.addContactsWithPhoneNumbers = false;
+        config.readContactsAsync = false;
         contactManager = new ContactManager(config);
 
         smsManager = new SMSManager(context);
@@ -57,7 +58,7 @@ public class ContactMessageDataManager {
     /**
      * Maps Contact Messages and Contact info into a sorted list
      *
-     * @return
+     * @return list of contact messages
      */
     public List<ContactMessageVo> getContactMessagesData() {
         // Get the mapping of address and message count
@@ -74,8 +75,8 @@ public class ContactMessageDataManager {
     /**
      * Returns a mapping of address and total message count
      *
-     * @param messageSendersMap message sendersmap
-     * @return
+     * @param messageSendersMap message senders map
+     * @return map of address and message counts
      */
     private Map<String, Integer> convertAddressToContact(Map<String, Integer> messageSendersMap) {
         // mapping of contactId with message count
@@ -104,15 +105,15 @@ public class ContactMessageDataManager {
      *
      * @param sortedMessageMap sorted map
      * @param messageMap       message map
-     * @return
+     * @return list of contact messages
      */
     private List<ContactMessageVo> getContactMessageList(Map<String, Integer> sortedMessageMap, Map<String, Integer> messageMap) {
         // Collate the ContactVo, photo bitmap and message count and create the data for the list
         Integer messageCount;
         ContactMessageVo contactMessageVo;
         Set<String> contactIdsKeySet = sortedMessageMap.keySet();
-        List<ContactMessageVo> contactMessageList = new ArrayList<ContactMessageVo>();
-        if (null != contactIdsKeySet && !contactIdsKeySet.isEmpty()) {
+        List<ContactMessageVo> contactMessageList = new ArrayList<>();
+        if (!contactIdsKeySet.isEmpty()) {
             for (String contactId : contactIdsKeySet) {
                 messageCount = messageMap.get(contactId);
                 if (messageCount != null) {
