@@ -16,9 +16,6 @@
 
 package com.ae.apps.messagecounter.managers;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -34,138 +31,160 @@ import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 import com.ae.apps.messagecounter.utils.MessagesTableConstants;
 import com.ae.apps.messagecounter.vo.SentCountDetailsVo;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Manager for retrieving all the sent count data ready for the UI from database
- * 
+ *
  * @author Midhun
- * 
  */
 public class SentCountDataManager {
 
-	private static final String TAG = "SentCountDataManager";
+    private static final String TAG = "SentCountDataManager";
+    private static SentCountDataManager instance;
 
-	public SentCountDetailsVo getSentCountData(Context context) {
-		// Get the user preferences
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    /**
+     * Returns an instance of the SentCountDataManager
+     *
+     * @return a new instance
+     */
+    public static SentCountDataManager newInstance() {
+        if (null == instance) {
+            instance = new SentCountDataManager();
+        }
+        return instance;
+    }
 
-		// Get the limit the user has specified
-		int limit = MessageCounterUtils.getMessageLimitValue(preferences);
+    private SentCountDataManager() {
 
-		// Cycle start date is also available in the preferences
-		Date cycleStartDate = MessageCounterUtils.getCycleStartDate(preferences);
-		Date today = Calendar.getInstance().getTime();
+    }
 
-		// Initialize and open the database
-		CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(context);
+    public SentCountDetailsVo getSentCountData(Context context) {
+        // Get the user preferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-		// Find the no of messages sent today
-		int sentTodayCount = counterDataBase.getCountValueForDay(MessageCounterUtils.getIndexFromDate(today));
+        // Get the limit the user has specified
+        int limit = MessageCounterUtils.getMessageLimitValue(preferences);
 
-		// and now the sent messages count from the start date
-		int sentCycleCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
+        // Cycle start date is also available in the preferences
+        Date cycleStartDate = MessageCounterUtils.getCycleStartDate(preferences);
+        Date today = Calendar.getInstance().getTime();
 
-		Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
-		int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
-		
-		// Messages sent this week
-		Date weekStartDate = MessageCounterUtils.getWeekStartDate();
-		int sentWeekCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(weekStartDate));
+        // Initialize and open the database
+        CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(context);
 
-		// Close the db connection
-		counterDataBase.close();
+        // Find the no of messages sent today
+        int sentTodayCount = counterDataBase.getCountValueForDay(MessageCounterUtils.getIndexFromDate(today));
 
-		if (sentTodayCount == -1) {
-			sentTodayCount = 0;
-		}
+        // and now the sent messages count from the start date
+        int sentCycleCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
 
-		// Form the details vo
-		SentCountDetailsVo detailsVo = new SentCountDetailsVo();
-		detailsVo.setSentToday(sentTodayCount);
-		detailsVo.setSentCycle(sentCycleCount);
-		detailsVo.setSentLastCycle(lastCycleCount);
-		detailsVo.setCycleLimit(limit);
-		detailsVo.setSentInWeek(sentWeekCount);
+        Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
+        int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
 
-		return detailsVo;
-	}
+        // Messages sent this week
+        Date weekStartDate = MessageCounterUtils.getWeekStartDate();
+        int sentWeekCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(weekStartDate));
 
-	/**
-	 * Check for sent messages that were not tracked by the background service
-	 *
-     * @param context the context
-	 * @param messageId     the new message's id
+        // Close the db connection
+        counterDataBase.close();
+
+        if (sentTodayCount == -1) {
+            sentTodayCount = 0;
+        }
+
+        // Form the details vo
+        SentCountDetailsVo detailsVo = new SentCountDetailsVo();
+        detailsVo.setSentToday(sentTodayCount);
+        detailsVo.setSentCycle(sentCycleCount);
+        detailsVo.setSentLastCycle(lastCycleCount);
+        detailsVo.setCycleLimit(limit);
+        detailsVo.setSentInWeek(sentWeekCount);
+
+        return detailsVo;
+    }
+
+    /**
+     * Check for sent messages that were not tracked by the background service
+     *
+     * @param context          the context
+     * @param messageId        the new message's id
      * @param indexAllMessages whether to index all messages in the ms table
-	 * @return number of messages added
-	 */
-	public int checkForUnLoggedMessages(Context context, String messageId, boolean indexAllMessages) {
-		Log.d(TAG, "Enter checkForUnLoggedMessages : messageId " + messageId);
+     * @return number of messages added
+     */
+    public int checkForUnLoggedMessages(Context context, String messageId, boolean indexAllMessages) {
+        Log.d(TAG, "Enter checkForUnLoggedMessages : messageId " + messageId);
 
         String defaultTimeStamp = "";
-        if(indexAllMessages){
+        if (indexAllMessages) {
             defaultTimeStamp = "0";
         }
 
-		// Read lastMessageTimeStamp from SharedPreferences as the lastMessage may be removed by the user
-		String lastMessageTimeStamp = PreferenceManager.getDefaultSharedPreferences(context)
-				.getString(AppConstants.PREF_KEY_LAST_SENT_TIME_STAMP, defaultTimeStamp);
-		Log.d(TAG, "lastMessageTimeStamp :" + lastMessageTimeStamp);
+        // Read lastMessageTimeStamp from SharedPreferences as the lastMessage may be removed by the user
+        String lastMessageTimeStamp = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(AppConstants.PREF_KEY_LAST_SENT_TIME_STAMP, defaultTimeStamp);
+        Log.d(TAG, "lastMessageTimeStamp :" + lastMessageTimeStamp);
 
-		int newMessagesAdded = 0;
-		// When we get valid lastMessageTimeStamp, we can check how many messages came were sent afterwards
-		if (!TextUtils.isEmpty(lastMessageTimeStamp)) {
-			Cursor newMessagesCursor = context.getContentResolver().query(
-					Uri.parse(SMSManager.SMS_URI_ALL),
+        int newMessagesAdded = 0;
+        // When we get valid lastMessageTimeStamp, we can check how many messages came were sent afterwards
+        if (!TextUtils.isEmpty(lastMessageTimeStamp)) {
+            Cursor newMessagesCursor = context.getContentResolver().query(
+                    Uri.parse(SMSManager.SMS_URI_ALL),
                     MessagesTableConstants.SMS_TABLE_PROJECTION,
-					"person is null and " + MessagesTableConstants.COLUMN_NAME_DATE + "> ? ",
-					new String[]{String.valueOf(lastMessageTimeStamp)}, null);
+                    "person is null and " + MessagesTableConstants.COLUMN_NAME_DATE + "> ? ",
+                    new String[]{String.valueOf(lastMessageTimeStamp)}, null);
 
-			int newMessagesCount = (null != newMessagesCursor) ? newMessagesCursor.getCount() : 0;
-			Log.d(TAG, "newMessagesCursor count :" + newMessagesCount);
+            int newMessagesCount = (null != newMessagesCursor) ? newMessagesCursor.getCount() : 0;
+            Log.d(TAG, "newMessagesCursor count :" + newMessagesCount);
 
-			try {
-				if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
-					Log.d(TAG, "Open MessageCounterDatabase");
-					// Connect to the App's database
-					CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(context);
+            CounterDataBaseAdapter counterDataBase = null;
+            try {
+                if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
+                    Log.d(TAG, "Open MessageCounterDatabase");
+                    // Connect to the App's database
+                    counterDataBase = new CounterDataBaseAdapter(context);
 
-					Calendar calendar = Calendar.getInstance();
-					calendar.setTimeInMillis(Long.valueOf(lastMessageTimeStamp));
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(Long.valueOf(lastMessageTimeStamp));
 
-					Calendar cal = Calendar.getInstance();
-					Log.d(TAG, "Start loop over result, pos " + newMessagesCursor.getPosition());
-					do {
-						Log.d(TAG, "newMessagesCursor.getPosition() " + newMessagesCursor.getPosition());
-						String msgId = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_ID));
-						String sentDate = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_DATE));
-						String protocol = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_PROTOCOL));
+                    Calendar cal = Calendar.getInstance();
+                    // Log.d(TAG, "Start loop over result, pos " + newMessagesCursor.getPosition());
+                    do {
+                        // Log.d(TAG, "newMessagesCursor.getPosition() " + newMessagesCursor.getPosition());
+                        String msgId = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_ID));
+                        String sentDate = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_DATE));
+                        String protocol = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_PROTOCOL));
 
-						Log.d(TAG, "message (" + msgId + ") was sent on " + sentDate);
-						Log.d(TAG, "protocol is" + protocol);
+                        // Log.d(TAG, "message (" + msgId + ") was sent on " + sentDate);
+                        // Log.d(TAG, "protocol is" + protocol);
 
-						cal.setTimeInMillis(Long.parseLong(sentDate));
-						// Parse and add to message counter database.
-						// Skip the new message id which will be added by calling method
-						if (!messageId.equals(msgId) && null == protocol) {
-							// Count this message against the date it was sent
-							long dateIndex = MessageCounterUtils.getIndexFromDate(cal.getTime());
-							Log.d(TAG, "Adding message (" + msgId + ") to CounterDataBase");
-							counterDataBase.addMessageSentCounter(dateIndex);
-							newMessagesAdded++;
-						}
-					} while (newMessagesCursor.moveToNext());
-
-					counterDataBase.close();
-				}
-				if (null != newMessagesCursor) {
-					newMessagesCursor.close();
-				}
-			} catch (Exception e) {
-				Log.e(TAG, e.getMessage());
-				Log.e(TAG, Log.getStackTraceString(e));
-			}
-		}
-		Log.d(TAG, "Exit checkForUnLoggedMessages, added " + newMessagesAdded + " messages");
-		return newMessagesAdded;
-	}
+                        cal.setTimeInMillis(Long.parseLong(sentDate));
+                        // Parse and add to message counter database.
+                        // Skip the new message id which will be added by calling method
+                        if (!messageId.equals(msgId) && null == protocol) {
+                            // Count this message against the date it was sent
+                            long dateIndex = MessageCounterUtils.getIndexFromDate(cal.getTime());
+                            // Log.d(TAG, "Adding message (" + msgId + ") to CounterDataBase");
+                            counterDataBase.addMessageSentCounter(dateIndex);
+                            newMessagesAdded++;
+                        }
+                    } while (newMessagesCursor.moveToNext());
+                }
+                if (null != newMessagesCursor) {
+                    newMessagesCursor.close();
+                }
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
+                Log.e(TAG, Log.getStackTraceString(e));
+            } finally{
+                if(null != counterDataBase){
+                    counterDataBase.close();
+                }
+            }
+        }
+        Log.d(TAG, "Exit checkForUnLoggedMessages, added " + newMessagesAdded + " messages");
+        return newMessagesAdded;
+    }
 
 }
