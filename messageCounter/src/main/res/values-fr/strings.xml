@@ -22,7 +22,6 @@
     <string name="menu_share">Partagez cette appli</string>
     <string name="menu_donate">Faire un don</string>
     
-    <string name="empty_text"></string>
     <string name="empty_list">Aucun message trouvé</string>
     
     <string name="message_count_inbox">%s reçus</string>
@@ -30,16 +29,6 @@
     <string name="message_count_draft"> %s brouillons</string>
     <string name="message_count_all">%s au total</string>
     
-    <string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at\n\n
-http://www.apache.org/licenses/LICENSE-2.0\n\n
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.</string>
-
     <string name="str_chart_title">Top des expéditeurs de messages</string>
     <string name="str_other_senders">(Autres) texte peut inclure des messages provenant de numéros qui ne sont pas enregistrés dans vos contacts qui peuvent inclure des réseaux mobiles ou les institutions financières.</string>
     

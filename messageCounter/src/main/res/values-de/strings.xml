@@ -22,7 +22,6 @@
     <string name="menu_share">Tell your friends</string>
     <string name="menu_donate">Donate</string>
 
-    <string name="empty_text"></string>
     <string name="empty_list">No messages found</string>
 
     <string name="message_count_inbox">%s received</string>

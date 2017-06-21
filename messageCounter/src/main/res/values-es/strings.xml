@@ -22,23 +22,12 @@
 	<string name="menu_share">Comparte esta aplicación</string>
     <string name="menu_donate">Donar</string>
 
-	<string name="empty_text"/>
 	<string name="empty_list">No se han encontrado mensajes de</string>
 
 	<string name="message_count_inbox">%s recibidos</string>
 	<string name="message_count_sent">%s enviados</string>
 	<string name="message_count_draft">%s borrador</string>
 	<string name="message_count_all">%s en total</string>
-
-	<string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at\n\n
-http://www.apache.org/licenses/LICENSE-2.0\n\n
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.</string>
 
 	<string name="str_chart_title">Top los remitentes de mensajes</string>
 	<string name="str_other_senders">(Otros) de texto puede incluir mensajes de números que no están guardados en tus contactos que pueden incluir las redes móviles o instituciones financieras.</string>
