@@ -22,7 +22,7 @@
     <string name="menu_share">Tell your friends</string>
     <string name="menu_donate">Donate</string>
     
-    <string name="empty_text"></string>
+    <string name="empty_text" translatable="false"></string>
     <string name="empty_list">No messages found</string>
     
     <string name="message_count_inbox">%s received</string>
@@ -30,7 +30,7 @@
     <string name="message_count_draft"> %s draft</string>
     <string name="message_count_all"> %s in total.</string>
     
-    <string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
+    <string name="str_license_text" translatable="false">Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at\n\n
 http://www.apache.org/licenses/LICENSE-2.0\n\n

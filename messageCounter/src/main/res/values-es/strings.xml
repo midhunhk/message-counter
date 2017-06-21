@@ -20,6 +20,7 @@
 	<string name="menu_about">Acerca de</string>
 	<string name="menu_license">Licencia</string>
 	<string name="menu_share">Comparte esta aplicación</string>
+    <string name="menu_donate">Donar</string>
 
 	<string name="empty_text"/>
 	<string name="empty_list">No se han encontrado mensajes de</string>
@@ -84,10 +85,11 @@ limitations under the License.</string>
     <string name="str_donate_small">Cómprame un chocolate</string>
     <string name="str_donate_medium">Cómprame un helado</string>
     <string name="str_donate_large">Cómprame Cena</string>
-	
+    <string name="str_sent_this_week">Enviada esta semana</string>
+
     <!-- added for 3.2.0 -->
     <string name="str_pref_experimental">Experimental</string>
     <string name="str_offline_messages">Cuenta mensajes fuera de línea</string>
     <string name="str_pref_offline_message_desc">Para verificar los mensajes enviados mientras que el fondo estaba fuera de línea en el siguiente Inicio</string>
-	
+
 </resources>
