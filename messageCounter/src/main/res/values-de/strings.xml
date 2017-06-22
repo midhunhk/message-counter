@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_sent_list">List</string>
-    <string name="title_chart">Chart</string>
-    <string name="title_counter">Counter</string>
+    <string name="title_sent_list">Liste</string>
+    <string name="title_chart">Diagramm</string>
+    <string name="title_counter">Zähler</string>
 
-    <string name="app_name">Message Counter</string>
+    <string name="app_name">Nachrichtenzähler</string>
     <string name="app_version">Version 3.2.0</string>
-    <string name="app_code_name">Unicorn</string>
-    <string name="app_release_date">May 2017</string>
-    <string name="app_desc">Message Counter displays messages inbox statistics and number of messages from each of your contacts.</string>
-    <string name="app_disclaim">Disclaimer: This app is created for educational purposes and as such has no guarantee or support. Since undocumented Android APIs are used, this app may not work as expected on all devices.</string>
-    <string name="app_source_code">This project\'s source code is available at GitHub</string>
-    <string name="app_developer_info">Designed &amp; developed at ae labs</string>
+    <string name="app_code_name">Einhorn</string>
+    <string name="app_release_date">Juni 2017</string>
+    <string name="app_desc">Message Counter zeigt Nachrichten Posteingangsstatistiken und Anzahl der Nachrichten von jedem Ihrer Kontakte an.</string>
+    <string name="app_disclaim">Haftungsausschluss: Diese App wird für pädagogische Zwecke erstellt und hat daher keine Garantie oder Unterstützung. Da undokumentierte Android-APIs verwendet werden, funktioniert diese App möglicherweise nicht wie erwartet auf allen Geräten.</string>
+    <string name="app_source_code">Der Quellcode dieses Projekts steht bei GitHub zur Verfügung</string>
+    <string name="app_developer_info">Entworfen und entwickelt bei ae Labs</string>
 
-    <string name="title_activity_main">Message Counter</string>
-    <string name="title_list_page">MESSAGES RECEIVED</string>
+    <string name="title_activity_main">Nachrichtenzähler</string>
+    <string name="title_list_page">MELDUNGEN EMPFANGEN</string>
 
-    <string name="menu_settings">Settings</string>
-    <string name="menu_about">About</string>
-    <string name="menu_license">License</string>
-    <string name="menu_share">Tell your friends</string>
-    <string name="menu_donate">Donate</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_about">Über</string>
+    <string name="menu_license">Lizenz</string>
+    <string name="menu_share">Sag deinen Freunden</string>
+    <string name="menu_donate">Spenden</string>
 
-    <string name="empty_list">No messages found</string>
+    <string name="empty_list">Keine Nachrichten gefunden</string>
 
-    <string name="message_count_inbox">%s received</string>
-    <string name="message_count_sent"> %s sent</string>
-    <string name="message_count_draft"> %s draft</string>
-    <string name="message_count_all"> %s in total.</string>
+    <string name="message_count_inbox">%s empfangen</string>
+    <string name="message_count_sent"> %s Gesendet</string>
+    <string name="message_count_draft"> %s Entwurf</string>
+    <string name="message_count_all"> %s in Summe.</string>
 
-    <string name="str_chart_title">Top message senders</string>
-    <string name="str_other_senders">Others text includes messages from numbers that are not saved in your contacts, like mobile networks or financial institutions.</string>
+    <string name="str_chart_title">Top-Nachrichtensender</string>
+    <string name="str_other_senders">Andere Text enthält Nachrichten von Nummern, die nicht in Ihren Kontakten gespeichert sind, wie Mobilfunknetze oder Finanzinstitute.</string>
 
     <!-- Strings for Preference -->
-    <string name="str_pref_messages">Messages</string>
-    <string name="str_pref_non_contact_messages">Non contact messages</string>
-    <string name="str_pref_show_non_contact_message_count">Include messages from non contacts</string>
-    <string name="str_pref_hide_non_contact_message_count">Exclude messages from non contacts</string>
+    <string name="str_pref_messages">Meldungen</string>
+    <string name="str_pref_non_contact_messages">Nicht-Kontakt-Nachrichten</string>
+    <string name="str_pref_show_non_contact_message_count">Nachrichten aus Nichtkontakten einschließen</string>
+    <string name="str_pref_hide_non_contact_message_count">Nachrichten von Nichtkontakten ausschließen</string>
 
     <!-- added for v2.2 -->
-    <string name="str_messages_sent">Messages sent</string>
-    <string name="str_this_cycle">This cycle</string>
-    <string name="str_sent_today">Messages sent today</string>
-    <string name="str_cycle_start_date">Cycle start date</string>
-    <string name="str_sent_count">Count Sent Messages</string>
-    <string name="str_enable_sent_count">For keeping track of sent messages count, you can enable this feature in settings and provide the limits</string>
+    <string name="str_messages_sent">Gesendete Nachrichten</string>
+    <string name="str_this_cycle">Dieser Zyklus</string>
+    <string name="str_sent_today">Heute gesendete Nachrichten</string>
+    <string name="str_cycle_start_date">Zyklus Startdatum</string>
+    <string name="str_sent_count">Zählen Sie gesendete Nachrichten</string>
+    <string name="str_enable_sent_count">Für die Verfolgung der gesendeten Nachrichten zählen, können Sie diese Funktion in den Einstellungen aktivieren und die Grenzen vorgeben</string>
 
-    <string name="str_pref_sent_message_count">Sent Message Count</string>
-    <string name="str_pref_sent_message_desc">A background service will be used to monitor sent messages</string>
-    <string name="str_pref_cycle_start_desc">The start date for each cycle</string>
-    <string name="str_pref_message_limit">Message limit</string>
-    <string name="str_pref_message_limit_desc">Limit for messages that can be sent per cycle. Default is 100</string>
+    <string name="str_pref_sent_message_count">Gesendete Nachrichtenzählung</string>
+    <string name="str_pref_sent_message_desc">Ein Hintergrunddienst wird verwendet, um gesendete Nachrichten zu überwachen</string>
+    <string name="str_pref_cycle_start_desc">Der Starttermin für jeden Zyklus</string>
+    <string name="str_pref_message_limit">Meldungsgrenze</string>
+    <string name="str_pref_message_limit_desc">Begrenzung für Nachrichten, die pro Zyklus gesendet werden können. Voreinstellung ist 100</string>
 
     <!-- added for 2.2.7 -->
-    <string name="str_notify_on_limit">Notify on reaching limit</string>
-    <string name="str_enble_notify_on_limit">Notify on reaching SMS send limit</string>
-    <string name="str_sms_limit_notif_title">SMS Limit Reached</string>
-    <string name="str_sms_limit_notif_text">SMS limit reached for this cycle</string>
-    <string name="str_current_cycle">CURRENT CYCLE</string>
-    <string name="str_previous_cycle">PREVIOUS CYCLE</string>
+    <string name="str_notify_on_limit">Benachrichtigung bei Erreichen der Grenze</string>
+    <string name="str_enble_notify_on_limit">Benachrichtigung bei Erreichen der Grenze</string>
+    <string name="str_sms_limit_notif_title">SMS-Limit erreicht</string>
+    <string name="str_sms_limit_notif_text">SMS-Grenzwert für diesen Zyklus erreicht</string>
+    <string name="str_current_cycle">AKTUELLER ZYKLUS</string>
+    <string name="str_previous_cycle">VORHERIGER ZYKLUS</string>
 
     <!-- strings for widgets v2.3 -->
-    <string name="str_messages_sent_caps">MESSAGES SENT</string>
-    <string name="str_today">TODAY</string>
-    <string name="str_cycle">CYCLE</string>
+    <string name="str_messages_sent_caps">MELDUNGEN SENT</string>
+    <string name="str_today">HEUTE</string>
+    <string name="str_cycle">ZYKLUS</string>
 
     <!-- strings for donate v3.1 -->
-    <string name="str_donate_title">Donate</string>
-    <string name="str_donate_text">Message Counter is an open source project developed in my spare time. Any sort of contribution helps to add features or swat bugs. Thank you!</string>
-    <string name="str_donate_disclaimer">Donations will not be  in lieu of additional features. Google takes 30% of purchases as transaction fees.</string>
-    <string name="str_donate_thanks">Thank you for donating!</string>
-    <string name="str_donate_fail">Donation failed. Please try again later.</string>
-    <string name="str_donate_small">Buy me a Chocolate</string>
-    <string name="str_donate_medium">Buy me an Ice-Cream</string>
-    <string name="str_donate_large">Buy me Dinner</string>
-    <string name="str_sent_this_week">Sent this Week</string>
+    <string name="str_donate_title">Spenden</string>
+    <string name="str_donate_text">Message Counter ist ein Open-Source-Projekt in meiner Freizeit entwickelt. Jede Art von Beitrag hilft bei der Hinzufügung von Features oder Swat Bugs. Vielen Dank!</string>
+    <string name="str_donate_disclaimer">Spenden werden nicht anstelle von zusätzlichen Features sein. Google nimmt 30% der Einkäufe als Transaktionsgebühren in Anspruch.</string>
+    <string name="str_donate_thanks">Danke für die Spende!</string>
+    <string name="str_donate_fail">Spende fehlgeschlagen Bitte versuchen Sie es später noch einmal.</string>
+    <string name="str_donate_small">Kaufen Sie mir eine Schokolade</string>
+    <string name="str_donate_medium">Kaufen Sie mir eine Eiscreme</string>
+    <string name="str_donate_large">Kaufen Sie mich Abendessen</string>
+    <string name="str_sent_this_week">Gesendet diese Woche</string>
 
     <!-- added for 3.2.0 -->
     <string name="str_pref_experimental">Experimental</string>
-    <string name="str_offline_messages">Count offline Messages</string>
-    <string name="str_pref_offline_message_desc">Check for messages sent while the background service was offline on next startup</string>
+    <string name="str_offline_messages">Zählen Sie offline Nachrichten</string>
+    <string name="str_pref_offline_message_desc">Überprüfen Sie nach Nachrichten, die gesendet wurden, während der Hintergrunddienst beim nächsten Start offline war</string>
 
 </resources>
