@@ -22,134 +22,124 @@ import android.database.Cursor;
 import com.ae.apps.common.db.DataBaseHelper;
 
 /**
- * Class that helps ccess the database
- * 
+ * Class that helps access the database
+ *
  * @author Midhun
- * 
  */
 public class CounterDataBaseAdapter extends DataBaseHelper {
 
-	private static final int		DATABASE_VERSION		= 1;
-	private static String			DATABASE_NAME			= "db_message_counter";
-	private static final String		TABLE_COUNTER			= "tbl_sms_counter";
 
-	/* Table keys */
-	public static final String		KEY_DATE				= "date_index";
-	public static final String		KEY_COUNT				= "sent_count";
+    /**
+     * Create an instance of CounterDataBaseAdapter
+     *
+     * @param context context
+     */
+    public CounterDataBaseAdapter(Context context) {
+        super(context, CounterDataBaseConstants.DATABASE_NAME, null,
+                CounterDataBaseConstants.DATABASE_VERSION, CounterDataBaseConstants.CREATE_TABLES_SQL);
+    }
 
-	/* The SQL to create the table */
-	private static final String		COUNTER_TABLE_CREATE	= "CREATE TABLE " + TABLE_COUNTER + " (" + KEY_DATE
-																	+ " NUMERIC PRIMARY KEY, " + KEY_COUNT
-																	+ " NUMERIC NOT NULL);";
-	/* Projection for retrieving the data */
-	private static final String[]	DATA_PROJECTION			= new String[] { KEY_DATE, KEY_COUNT };
+    /**
+     * Fetch all the data
+     *
+     * @return cursor
+     */
+    public Cursor getAllCountInfo() {
+        return query(CounterDataBaseConstants.TABLE_COUNTER, CounterDataBaseConstants.DATA_PROJECTION,
+                null, null, null, null, null);
+    }
 
-	private static final String[]	CREATE_TABLES_SQL		= new String[] { COUNTER_TABLE_CREATE };
+    /**
+     * Returns the count for a specific day
+     *
+     * @param dateIndex date index
+     * @return message count for date index
+     */
+    public int getCountValueForDay(long dateIndex) {
+        int returnValue;
+        String[] args = {dateIndex + ""};
+        Cursor cursor = query(CounterDataBaseConstants.TABLE_COUNTER, CounterDataBaseConstants.DATA_PROJECTION,
+                CounterDataBaseConstants.KEY_DATE + " = ? ", args, null, null, null);
+        if (cursor == null || cursor.getCount() == 0) {
+            returnValue = -1;
+        } else {
+            cursor.moveToNext();
+            returnValue = cursor.getInt(cursor.getColumnIndex(CounterDataBaseConstants.KEY_COUNT));
+            cursor.close();
+        }
 
-	/**
-	 * Create an instance of CounterDataBaseAdapter
-	 * 
-	 * @param context
-	 */
-	public CounterDataBaseAdapter(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION, CREATE_TABLES_SQL);
-	}
+        return returnValue;
+    }
 
-	/**
-	 * Fetch all the data
-	 * 
-	 * @return
-	 */
-	public Cursor getAllCountInfo() {
-		return query(TABLE_COUNTER, DATA_PROJECTION, null, null, null, null, null);
-	}
+    /**
+     * Add a count for this dateIndex. If a row is found, the count value is incremented.
+     * If not found, a new row will be inserted with the value 1
+     *
+     * @param dateIndex date index
+     * @return insert status
+     */
+    public long addMessageSentCounter(long dateIndex) {
+        int currentCount = getCountValueForDay(dateIndex);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CounterDataBaseConstants.KEY_DATE, dateIndex);
+        long result;
 
-	/**
-	 * Returns the count for a specific day
-	 * 
-	 * @param dateIndex
-	 * @return
-	 */
-	public int getCountValueForDay(long dateIndex) {
-		int returnValue = 0;
-		String[] args = { dateIndex + "" };
-		Cursor cursor = query(TABLE_COUNTER, DATA_PROJECTION, KEY_DATE + " = ? ", args, null, null, null);
-		if (cursor == null || cursor.getCount() == 0) {
-			returnValue = -1;
-		} else {
-			cursor.moveToNext();
-			returnValue = cursor.getInt(cursor.getColumnIndex(KEY_COUNT));
-			cursor.close();
-		}
+        if (currentCount == -1) {
+            // no rows exist for this day, so insert a new row
+            currentCount = 1;
+            contentValues.put(CounterDataBaseConstants.KEY_COUNT, currentCount);
+            result = insert(CounterDataBaseConstants.TABLE_COUNTER, contentValues);
+        } else {
+            // update the count for this day
+            currentCount++;
+            contentValues.put(CounterDataBaseConstants.KEY_COUNT, currentCount);
+            String[] whereArgs = {dateIndex + ""};
+            result = update(CounterDataBaseConstants.TABLE_COUNTER, contentValues,
+                    CounterDataBaseConstants.KEY_DATE + " = ? ", whereArgs);
+        }
+        return result;
+    }
 
-		return returnValue;
-	}
+    /**
+     * Returns the sum of messages sent since a startDay
+     *
+     * @param startDateIndex start date index
+     * @return total messages sent since start day
+     */
+    public int getTotalSentCountSinceDate(long startDateIndex) {
+        int count = 0;
+        String[] selectionArgs = {startDateIndex + ""};
+        Cursor cursor = rawQuery(
+                "SELECT SUM(" + CounterDataBaseConstants.KEY_COUNT + ") FROM "
+                        + CounterDataBaseConstants.TABLE_COUNTER
+                        + " WHERE " + CounterDataBaseConstants.KEY_DATE + " >= ?", selectionArgs);
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
 
-	/**
-	 * Add a count for this dateIndex. If a row is found, the count value is incremented. If not found, a new row will
-	 * be inserted with the value 1
-	 * 
-	 * @param
-	 * @return
-	 */
-	public long addMessageSentCounter(long dateIndex) {
-		int currentCount = getCountValueForDay(dateIndex);
-		ContentValues contentValues = new ContentValues();
-		contentValues.put(KEY_DATE, dateIndex);
-		long result = 0;
+        return count;
+    }
 
-		if (currentCount == -1) {
-			// no rows exist for this day, so insert a new row
-			currentCount = 1;
-			contentValues.put(KEY_COUNT, currentCount);
-			result = insert(TABLE_COUNTER, contentValues);
-		} else {
-			// update the count for this day
-			currentCount++;
-			contentValues.put(KEY_COUNT, currentCount);
-			String[] whereArgs = { dateIndex + "" };
-			result = update(TABLE_COUNTER, contentValues, KEY_DATE + " = ? ", whereArgs);
-		}
-		return result;
-	}
+    /**
+     * Returns the sum of message sent between two dates
+     *
+     * @param startDateIndex start date index
+     * @param endDateIndex   end date index
+     * @return messages sent between the dates
+     */
+    public int getTotalSentCountBetween(long startDateIndex, long endDateIndex) {
+        int count = 0;
+        String[] selectionArgs = {startDateIndex + "", endDateIndex + ""};
+        Cursor cursor = rawQuery("SELECT SUM(" + CounterDataBaseConstants.KEY_COUNT + ") FROM "
+                + CounterDataBaseConstants.TABLE_COUNTER + " WHERE "
+                + CounterDataBaseConstants.KEY_DATE + " BETWEEN ? AND ?", selectionArgs);
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
 
-	/**
-	 * Returns the sum of messages sent since a startDay
-	 * 
-	 * @param startDateIndex
-	 * @return
-	 */
-	public int getTotalSentCountSinceDate(long startDateIndex) {
-		int count = 0;
-		String[] selectionArgs = { startDateIndex + "" };
-		Cursor cursor = rawQuery(
-				"SELECT SUM(" + KEY_COUNT + ") FROM " + TABLE_COUNTER + " WHERE " + KEY_DATE + " >= ?", selectionArgs);
-		if (cursor.moveToFirst()) {
-			count = cursor.getInt(0);
-		}
-		cursor.close();
-
-		return count;
-	}
-
-	/**
-	 * Returns the sum of message sent between two dates
-	 * 
-	 * @param startDateIndex
-	 * @param endDateIndex
-	 * @return
-	 */
-	public int getTotalSentCountBetween(long startDateIndex, long endDateIndex) {
-		int count = 0;
-		String[] selectionArgs = { startDateIndex + "", endDateIndex + "" };
-		Cursor cursor = rawQuery("SELECT SUM(" + KEY_COUNT + ") FROM " + TABLE_COUNTER + " WHERE " + KEY_DATE
-				+ " BETWEEN ? AND ?", selectionArgs);
-		if (cursor.moveToFirst()) {
-			count = cursor.getInt(0);
-		}
-		cursor.close();
-
-		return count;
-	}
+        return count;
+    }
 
 }

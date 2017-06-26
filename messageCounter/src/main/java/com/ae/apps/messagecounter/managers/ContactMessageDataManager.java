@@ -21,6 +21,7 @@ import android.content.Context;
 
 import com.ae.apps.common.managers.ContactManager;
 import com.ae.apps.common.managers.SMSManager;
+import com.ae.apps.common.managers.contact.AeContactManager;
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 
@@ -31,26 +32,29 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Combines data from ContactsVo and the SMS Manager
+ * Combines data from Contacts and the SMS Manager
  */
 
 public class ContactMessageDataManager {
 
     private SMSManager smsManager;
-    private ContactManager contactManager;
+    private AeContactManager contactManager;
 
     /**
      * Constructs an instance of this class
      *
      * @param contentResolver content resolver
-     * @param context context
+     * @param context         context
      */
     public ContactMessageDataManager(ContentResolver contentResolver, Context context) {
-        final ContactManager.Config config = new ContactManager.Config();
-        config.contentResolver = contentResolver;
-        config.addContactsWithPhoneNumbers = false;
-        config.readContactsAsync = false;
-        contactManager = new ContactManager(config);
+        // Build an instance of ContactManager
+        contactManager = new ContactManager.Builder(contentResolver, context.getResources())
+                .addContactsWithPhoneNumbers(false)
+                .build();
+
+        // We need to explicitly fetch all contacts
+        // Since the contacts data is needed right away, not using the async version
+        contactManager.fetchAllContacts();
 
         smsManager = new SMSManager(context);
     }
