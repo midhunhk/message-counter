@@ -57,28 +57,38 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
      */
     public int getCountValueForDay(long dateIndex) {
         int returnValue;
-        String[] args = {dateIndex + ""};
+        String[] args = {String.valueOf(dateIndex)};
         Cursor cursor = query(CounterDataBaseConstants.TABLE_COUNTER, CounterDataBaseConstants.DATA_PROJECTION,
                 CounterDataBaseConstants.KEY_DATE + " = ? ", args, null, null, null);
-        if (cursor == null || cursor.getCount() == 0) {
+        if (null == cursor || cursor.getCount() == 0) {
             returnValue = -1;
         } else {
             cursor.moveToNext();
             returnValue = cursor.getInt(cursor.getColumnIndex(CounterDataBaseConstants.KEY_COUNT));
-            cursor.close();
         }
+
+        if(null != cursor) cursor.close();
 
         return returnValue;
     }
 
     /**
-     * Add a count for this dateIndex. If a row is found, the count value is incremented.
-     * If not found, a new row will be inserted with the value 1
+     * Update the messages sent count represented by a dateIndex.
+     *
+     * If no messages have been sent for this date, a new row would be inserted with
+     * messageCount.
+     * If an existing row is found, the current count would be updated with the
+     * messageCount.
      *
      * @param dateIndex date index
-     * @return insert status
+     * @param messageCount messages count to add
+     * @return insert or update status
      */
-    public long addMessageSentCounter(long dateIndex) {
+    public long addMessageSentCounter(long dateIndex, int messageCount) {
+        if(messageCount <= 0){
+            return -1;
+        }
+
         int currentCount = getCountValueForDay(dateIndex);
         ContentValues contentValues = new ContentValues();
         contentValues.put(CounterDataBaseConstants.KEY_DATE, dateIndex);
@@ -86,13 +96,12 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
 
         if (currentCount == -1) {
             // no rows exist for this day, so insert a new row
-            currentCount = 1;
-            contentValues.put(CounterDataBaseConstants.KEY_COUNT, currentCount);
+            contentValues.put(CounterDataBaseConstants.KEY_COUNT, messageCount);
             result = insert(CounterDataBaseConstants.TABLE_COUNTER, contentValues);
         } else {
             // update the count for this day
-            currentCount++;
-            contentValues.put(CounterDataBaseConstants.KEY_COUNT, currentCount);
+            int updatedCount = currentCount + messageCount;
+            contentValues.put(CounterDataBaseConstants.KEY_COUNT, updatedCount);
             String[] whereArgs = {dateIndex + ""};
             result = update(CounterDataBaseConstants.TABLE_COUNTER, contentValues,
                     CounterDataBaseConstants.KEY_DATE + " = ? ", whereArgs);
