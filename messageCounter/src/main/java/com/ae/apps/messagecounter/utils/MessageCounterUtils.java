@@ -19,10 +19,13 @@ package com.ae.apps.messagecounter.utils;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.database.Cursor;
+import android.telephony.SmsMessage;
 
 import com.ae.apps.common.utils.ValueComparator;
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.models.Cycle;
+import com.ae.apps.messagecounter.models.Message;
 import com.ae.apps.messagecounter.vo.GraphData;
 
 import java.text.SimpleDateFormat;
@@ -160,6 +163,15 @@ public class MessageCounterUtils {
     }
 
     /**
+     * Calculates the number of messages in a multi part message based on the messageBody
+     * @param messageBody the message body
+     * @return message count
+     */
+    public static int getMessageCount(String messageBody){
+        return SmsMessage.calculateLength(messageBody, false)[0];
+    }
+
+    /**
      * Returns the cycle end date. By default, cycle duration will be a month
      *
      * @param startDate start date
@@ -248,5 +260,29 @@ public class MessageCounterUtils {
         XmlResourceParser parser = resources.getXml(fileId);
 
         return parser.getText();
+    }
+
+    public static Message getMessageFromCursor(Cursor cursor) {
+        final String messageId = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_ID));
+        final String protocol = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_PROTOCOL));
+        final String sentTime = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_DATE));
+        final String body = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_BODY));
+
+        Message message = new Message();
+        message.setId(messageId);
+        message.setBody(body);
+        message.setDate(sentTime);
+        message.setProtocol(protocol);
+
+        // Calculate the messages count for multipart messages
+        int messagesCount = 1;
+        try{
+            messagesCount = getMessageCount(body);
+        } catch(Exception e){
+            // Skip any exceptions
+        }
+        message.setMessagesCount(messagesCount);
+
+        return message;
     }
 }
