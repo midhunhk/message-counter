@@ -38,6 +38,7 @@
             android:title="@string/str_pref_message_limit"/>
 
         <CheckBoxPreference
+            android:defaultValue="true"
             android:dependency="pref_key_enable_sent_message_count"
             android:key="pref_key_enable_notification"
             android:summary="@string/str_enble_notify_on_limit"
