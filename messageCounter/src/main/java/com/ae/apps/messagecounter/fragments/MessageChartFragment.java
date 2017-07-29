@@ -16,8 +16,6 @@
 
 package com.ae.apps.messagecounter.fragments;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -27,8 +25,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,6 +37,8 @@ import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 import com.ae.apps.messagecounter.vo.GraphData;
+
+import java.util.List;
 
 /**
  * A Fragment that displays the data using a chart

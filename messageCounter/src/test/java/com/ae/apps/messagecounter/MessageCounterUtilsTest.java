@@ -3,9 +3,10 @@ package com.ae.apps.messagecounter;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.util.Calendar;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by user on 6/10/2017.
