@@ -124,7 +124,7 @@ MessageCounter 2.1.20 [Dec 2013]
  - [CHANGED]	Text block highlight color
  
  MessageCounter 2.1.28 [Dec 2013]
-  - [CHANGED]	Animation durtions
+  - [CHANGED]	Animation durations
   - [ADDED]		Display draft messages
   - [CHANGED]	Message counts at a glance
   
@@ -150,7 +150,7 @@ MessageCounter 2.1.20 [Dec 2013]
  - [FIXED]		Bugs in Sent Message counter
  
  MessageCounter 2.2.74 [Mar 2014]
- - [ADDED]		Notifiction on reaching cycle limit
+ - [ADDED]		Notification on reaching cycle limit
  - [CHANGED]	Sent messages count ui tweaks
  - [CHANGED]	Unobstructed loading screen
  
@@ -176,7 +176,7 @@ MessageCounter 2.1.20 [Dec 2013]
  
  MessageCounter 2.3.16 [Jul 2014]
  - [FIXED]		Minor bug Fixes for Xperia and HTC devices
- - [CHANGED]	Counter fragment is main frgment
+ - [CHANGED]	Counter fragment is main fragment
 
  MessageCounter 2.3.20 [Aug 2014]
  - [FIXED]		Minor bug Fixes as reported
@@ -223,5 +223,18 @@ MessageCounter 2.1.20 [Dec 2013]
   - [REMOVED]	Menu in toolbar moved to Navigation Drawer
   - [CHANGED]	UI Adjustments
 
-// Deobfuscation file
+ ------------------------------------
+	Version 3.2 Unicorn
+ ------------------------------------
+
+ MessageCounter 3.2.0 [May 2017]
+ - UI Tweaks
+ - Performance Enhancements
+ - Experimental Feature to count messages sent when service is not running
+
+ MessageCounter 3.2.1 [Aug 2017]
+ - Support for German
+ - Multi Length message support
+
+// De obfuscation file
 D:\WorkSpaces\_repositories\MessageCounter\messageCounter\build\outputs\mapping\release\mapping.txt
