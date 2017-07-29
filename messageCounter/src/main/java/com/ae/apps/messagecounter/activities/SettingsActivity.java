@@ -23,7 +23,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.ae.apps.common.activities.ToolBarBaseActivity;
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.fragments.SettingsFragment;
 
 /**
  * Settings Activity
@@ -31,24 +33,28 @@ import com.ae.apps.messagecounter.R;
  * @author MidhunHK
  *
  */
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends ToolBarBaseActivity {
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		// Set a content view that has a toolbar and list with android:id 
-		setContentView(R.layout.activity_settings);
-		
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		
-		// add the preference items
-		addPreferencesFromResource(R.xml.preferences);
-		
+		// setContentView(R.layout.activity_settings);
+
+        // Display the fragment as the main content.
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.settings_fragment_container, new SettingsFragment())
+                .commit();
+
+        displayHomeAsUp();
+
 		// make the toolbar behave like an ActionBar
+        Toolbar toolbar = getToolBar();
+
 		toolbar.setClickable(true);
-		toolbar.setNavigationIcon(getResIdFromAttribute(this, R.attr.homeAsUpIndicator));
-		toolbar.setTitle(R.string.menu_settings);
+//		toolbar.setNavigationIcon(getResIdFromAttribute(this, R.attr.homeAsUpIndicator));
+//		toolbar.setTitle(R.string.menu_settings);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -56,10 +62,19 @@ public class SettingsActivity extends PreferenceActivity {
 				finish();
 			}
 		});
-		
 	}
 
-	private static int getResIdFromAttribute(final Activity activity, final int attr) {
+    @Override
+    protected int getToolbarResourceId() {
+        return R.id.toolbar;
+    }
+
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_settings;
+    }
+
+    private static int getResIdFromAttribute(final Activity activity, final int attr) {
 		if (attr == 0) {
 			return 0;
 		}

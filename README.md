@@ -1,6 +1,10 @@
 Message Counter
 ===============
-[![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=master)](https://travis-ci.org/midhunhk/message-counter) ![](https://img.shields.io/badge/version-3.2.0-008080.svg)
+[![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=unicorn_r2)](https://travis-ci.org/midhunhk/message-counter) 
+[![Release](https://img.shields.io/github/release/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/releases) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/v3.2.0.svg)](https://github.com/midhunhk/message-counter) 
+[![Issues](https://img.shields.io/github/issues/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/issues) 
+![](https://img.shields.io/badge/api-9+-008080.svg)
 
 <img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/master/docs/images/002.png" width="560"/>
 

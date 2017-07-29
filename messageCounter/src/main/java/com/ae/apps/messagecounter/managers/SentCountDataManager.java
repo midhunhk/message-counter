@@ -26,6 +26,8 @@ import android.util.Log;
 
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
+import com.ae.apps.messagecounter.models.Cycle;
+import com.ae.apps.messagecounter.models.Message;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
 import com.ae.apps.messagecounter.utils.MessagesTableConstants;
@@ -43,6 +45,8 @@ public class SentCountDataManager {
 
     private static final String TAG = "SentCountDataManager";
     private static SentCountDataManager instance;
+
+    public static final String BLANK_MESSAGE_ID = "";
 
     /**
      * Returns an instance of the SentCountDataManager
@@ -81,7 +85,9 @@ public class SentCountDataManager {
         int sentCycleCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(cycleStartDate));
 
         Date prevCycleStartDate = MessageCounterUtils.getPrevCycleStartDate(cycleStartDate);
-        int lastCycleCount = MessageCounterUtils.getCycleSentCount(counterDataBase, prevCycleStartDate);
+
+        Cycle cycle = MessageCounterUtils.getCycleSentCount(prevCycleStartDate);
+        int lastCycleCount = counterDataBase.getTotalSentCountBetween(cycle.getStartDateIndex(), cycle.getEndDateIndex());
 
         // Messages sent this week
         Date weekStartDate = MessageCounterUtils.getWeekStartDate();
@@ -127,8 +133,9 @@ public class SentCountDataManager {
         Log.d(TAG, "lastMessageTimeStamp :" + lastMessageTimeStamp);
 
         int newMessagesAdded = 0;
-        // When we get valid lastMessageTimeStamp, we can check how many messages came were sent afterwards
+        // When we get valid lastMessageTimeStamp, we can check how many messages were sent since then
         if (!TextUtils.isEmpty(lastMessageTimeStamp)) {
+
             Cursor newMessagesCursor = context.getContentResolver().query(
                     Uri.parse(SMSManager.SMS_URI_ALL),
                     MessagesTableConstants.SMS_TABLE_PROJECTION,
@@ -139,35 +146,30 @@ public class SentCountDataManager {
             Log.d(TAG, "newMessagesCursor count :" + newMessagesCount);
 
             CounterDataBaseAdapter counterDataBase = null;
+            Calendar messageSentDate = Calendar.getInstance();
             try {
                 if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
                     Log.d(TAG, "Open MessageCounterDatabase");
                     // Connect to the App's database
                     counterDataBase = new CounterDataBaseAdapter(context);
 
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(Long.valueOf(lastMessageTimeStamp));
+                    //Calendar calendar = Calendar.getInstance();
+                    //calendar.setTimeInMillis(Long.valueOf(lastMessageTimeStamp));
 
-                    Calendar cal = Calendar.getInstance();
                     // Log.d(TAG, "Start loop over result, pos " + newMessagesCursor.getPosition());
                     do {
-                        // Log.d(TAG, "newMessagesCursor.getPosition() " + newMessagesCursor.getPosition());
-                        String msgId = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_ID));
-                        String sentDate = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_DATE));
-                        String protocol = newMessagesCursor.getString(newMessagesCursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_PROTOCOL));
+                        Message message = MessageCounterUtils.getMessageFromCursor(newMessagesCursor);
 
-                        // Log.d(TAG, "message (" + msgId + ") was sent on " + sentDate);
-                        // Log.d(TAG, "protocol is" + protocol);
+                        messageSentDate.setTimeInMillis(Long.parseLong(message.getDate()));
 
-                        cal.setTimeInMillis(Long.parseLong(sentDate));
                         // Parse and add to message counter database.
                         // Skip the new message id which will be added by calling method
-                        if (!messageId.equals(msgId) && null == protocol) {
+                        if (!messageId.equals(message.getId()) && null == message.getProtocol()) {
                             // Count this message against the date it was sent
-                            long dateIndex = MessageCounterUtils.getIndexFromDate(cal.getTime());
-                            // Log.d(TAG, "Adding message (" + msgId + ") to CounterDataBase");
-                            counterDataBase.addMessageSentCounter(dateIndex);
-                            newMessagesAdded++;
+                            long dateIndex = MessageCounterUtils.getIndexFromDate(messageSentDate.getTime());
+
+                            counterDataBase.addMessageSentCounter(dateIndex, message.getMessagesCount());
+                            newMessagesAdded += message.getMessagesCount();
                         }
                     } while (newMessagesCursor.moveToNext());
                 }
@@ -177,8 +179,8 @@ public class SentCountDataManager {
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
                 Log.e(TAG, Log.getStackTraceString(e));
-            } finally{
-                if(null != counterDataBase){
+            } finally {
+                if (null != counterDataBase) {
                     counterDataBase.close();
                 }
             }

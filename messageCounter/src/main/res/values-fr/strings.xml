@@ -5,8 +5,8 @@
     <string name="title_counter">Compteur</string>
     
     <string name="app_name">du Compteur de Messages</string>
-    <string name="app_version">Version 3.2.0</string>
-    <string name="app_release_date">May 2017</string>
+    <string name="app_version">Version 3.2.1</string>
+    <string name="app_release_date">Aug 2017</string>
     <string name="app_code_name">Licorne</string>
     <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>
 	<string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
@@ -20,8 +20,8 @@
     <string name="menu_about">Sur</string>
     <string name="menu_license">License</string>
     <string name="menu_share">Partagez cette appli</string>
+    <string name="menu_donate">Faire un don</string>
     
-    <string name="empty_text"></string>
     <string name="empty_list">Aucun message trouvé</string>
     
     <string name="message_count_inbox">%s reçus</string>
@@ -29,16 +29,6 @@
     <string name="message_count_draft"> %s brouillons</string>
     <string name="message_count_all">%s au total</string>
     
-    <string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at\n\n
-http://www.apache.org/licenses/LICENSE-2.0\n\n
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.</string>
-
     <string name="str_chart_title">Top des expéditeurs de messages</string>
     <string name="str_other_senders">(Autres) texte peut inclure des messages provenant de numéros qui ne sont pas enregistrés dans vos contacts qui peuvent inclure des réseaux mobiles ou les institutions financières.</string>
     
@@ -84,9 +74,11 @@ limitations under the License.</string>
     <string name="str_donate_small">Achetez-moi un chocolat</string>
     <string name="str_donate_medium">Achetez-moi une glace</string>
     <string name="str_donate_large">Achetez-moi Dîner</string>
-	
+    <string name="str_sent_this_week">Envoyé cette semaine</string>
+
     <!-- added for 3.2.0 -->
     <string name="str_pref_experimental">Experimental</string>
     <string name="str_offline_messages">Nombre de Messages hors ligne</string>
     <string name="str_pref_offline_message_desc">Recherchez les messages envoyés pendant que le service de fond a été déconnecté au prochain démarrage</string>
+
 </resources>

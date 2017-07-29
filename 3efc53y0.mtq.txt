@@ -1,0 +1,16 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Explicit paths specified without -i or -o; assuming --only paths...
+# On branch unicorn_r2
+# Your branch is ahead of 'origin/unicorn_r2' by 2 commits.
+#   (use "git push" to publish your local commits)
+#
+# Changes to be committed:
+#	modified:   messageCounter/src/main/java/com/ae/apps/messagecounter/managers/SentCountDataManager.java
+#	new file:   messageCounter/src/main/java/com/ae/apps/messagecounter/models/Message.java
+#	modified:   messageCounter/src/main/java/com/ae/apps/messagecounter/observers/SMSObserver.java
+#	modified:   messageCounter/src/main/java/com/ae/apps/messagecounter/utils/MessageCounterUtils.java
+#	modified:   messageCounter/src/main/java/com/ae/apps/messagecounter/utils/MessagesTableConstants.java
+#
+

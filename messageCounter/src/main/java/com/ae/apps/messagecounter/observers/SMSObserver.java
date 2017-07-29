@@ -37,10 +37,10 @@ import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.activities.MainActivity;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
 import com.ae.apps.messagecounter.managers.SentCountDataManager;
+import com.ae.apps.messagecounter.models.Message;
 import com.ae.apps.messagecounter.receivers.WidgetUpdateReceiver;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.MessageCounterUtils;
-import com.ae.apps.messagecounter.utils.MessagesTableConstants;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -77,10 +77,7 @@ public class SMSObserver extends ContentObserver {
 
         Cursor cursor = mContext.getContentResolver().query(mObservableUri, null, null, null, null);
         if (null != cursor && cursor.moveToNext()) {
-            // We need the protocol and the message _id
-            String messageId = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_ID));
-            String protocol = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_PROTOCOL));
-            String sentTime = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_DATE));
+            Message message = MessageCounterUtils.getMessageFromCursor(cursor);
 
             cursor.close();
 
@@ -88,44 +85,51 @@ public class SMSObserver extends ContentObserver {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
             String lastMessageId = sharedPreferences.getString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, "");
 
-            // See if this message was processed earlier, sometimes same messageId can come multiple times
-            boolean isNewMessage = !lastMessageId.equals(messageId);
+            // See if this message was processed earlier, sometimes we get callback with same messageId multiple times
+            boolean isNewMessage = !lastMessageId.equals(message.getId());
 
-            checkForOfflineMessages(messageId, sharedPreferences, lastMessageId, isNewMessage);
+            checkForOfflineMessages(message.getId(), sharedPreferences, lastMessageId, isNewMessage);
 
             // protocol will be null for sent messages
-            if (protocol == null && isNewMessage) {
-                // A Message was sent just now
-                Date date = Calendar.getInstance().getTime();
+            if (message.getProtocol() == null && isNewMessage) {
 
-                // Lets open a database connection and add an entry
-                CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
-                long today = MessageCounterUtils.getIndexFromDate(date);
-
-                // Add an entry into the database
-                counterDataBase.addMessageSentCounter(today);
-
-                // if sent count limit and notify on reaching the limit are enabled, we shall show a notification
-                showMessageLimitNotification(counterDataBase);
-
-                // Close the connection to the database
-                counterDataBase.close();
+                // Update the message count in the database
+                // Also check for Limit reached
+                updateMessageSentCount(message);
 
                 // Store this message id in case we get multiple callbacks for the same id
-                Log.d("SendSMSObserver", " An SMS was sent at " + sentTime + " with id " + messageId);
+                Log.d("SendSMSObserver", " An SMS was sent at " + message.getDate() + " with id " + message.getId());
                 sharedPreferences.edit()
-                        .putString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, messageId)
+                        .putString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, message.getId())
                         .apply();
 
                 // Store last message sent timestamp also
                 sharedPreferences.edit()
-                        .putString(AppConstants.PREF_KEY_LAST_SENT_TIME_STAMP, sentTime)
+                        .putString(AppConstants.PREF_KEY_LAST_SENT_TIME_STAMP, message.getDate())
                         .apply();
 
                 // Send a broadcast to update our widgets
                 sendWidgetUpdateBroadcast();
             }
         }
+    }
+
+    private void updateMessageSentCount(Message message) {
+        // A Message was sent just now
+        Date date = Calendar.getInstance().getTime();
+        long today = MessageCounterUtils.getIndexFromDate(date);
+
+        // Lets open a database connection and add an entry
+        CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
+
+        // Add an entry into the database
+        counterDataBase.addMessageSentCounter(today, message.getMessagesCount());
+
+        // if sent count limit and notify on reaching the limit are enabled, we shall show a notification
+        showMessageLimitNotification(counterDataBase);
+
+        // Close the connection to the database
+        counterDataBase.close();
     }
 
     // Experimental feature - For Unicorn

@@ -16,8 +16,6 @@
 
 package com.ae.apps.messagecounter.fragments;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -28,12 +26,16 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.adapters.ContactDetailAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment that displays the message count details as a list
