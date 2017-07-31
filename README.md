@@ -36,6 +36,9 @@ Open the project in Android Studio
 ## Dependencies
  - ae-apps-library (https://github.com/midhunhk/ae-apps-library)
 
+## Milestones
+https://github.com/midhunhk/message-counter/milestones
+
 ## Play Store
 
 <a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
