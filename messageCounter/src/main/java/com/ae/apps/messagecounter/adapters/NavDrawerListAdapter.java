@@ -16,11 +16,6 @@
 
 package com.ae.apps.messagecounter.adapters;
 
-import java.util.List;
-
-import com.ae.apps.messagecounter.R;
-import com.ae.apps.messagecounter.vo.NavDrawerItem;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -30,6 +25,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.vo.NavDrawerItem;
+
+import java.util.List;
 
 /**
  * Adapter for the Navigation Drawer. 

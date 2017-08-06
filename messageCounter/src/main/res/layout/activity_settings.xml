@@ -7,14 +7,13 @@
     <include layout="@layout/toolbar"/>
 
     <FrameLayout
+        android:id="@+id/settings_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_medium">
-
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </FrameLayout>
+        android:paddingTop="@dimen/padding_small"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingStart="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small"
+        android:paddingEnd="@dimen/padding_small" />
 
 </LinearLayout>

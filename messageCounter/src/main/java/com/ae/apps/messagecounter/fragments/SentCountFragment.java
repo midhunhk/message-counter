@@ -140,7 +140,8 @@ public class SentCountFragment extends Fragment {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    final int messagesAdded = mDataManager.checkForUnLoggedMessages(mContext, "", true);
+                    final int messagesAdded = mDataManager.checkForUnLoggedMessages(mContext,
+                            SentCountDataManager.BLANK_MESSAGE_ID, true);
                     mPreferences.edit()
                             .putBoolean(AppConstants.PREF_KEY_HISTORIC_DATA_INDEXED, true)
                             .apply();

@@ -5,8 +5,8 @@
 	<string name="title_counter">Contador</string>
 
 	<string name="app_name">Mensagem Contador</string>
-	<string name="app_version">versão 3.2.0 </string>
-	<string name="app_release_date">May 2017</string>
+	<string name="app_version">versão 3.2.1 </string>
+	<string name="app_release_date">Aug 2017</string>
 	<string name="app_code_name">(Unicornio)</string>
 	<string name="app_desc">Mensagem Contador exibe mensagens da caixa de entrada estatísticas e número de mensagens de cada um dos seus contatos. Este projeto de código \'s fonte está disponível no GitHub.</string>
 	<string name="app_disclaim">Disclaimer: Este aplicativo é criado para fins educativos e como tal tem nenhuma garantia ou apoio. Desde APIs do Android sem documentos são utilizados, este aplicativo pode não funcionar como esperado em todos os dispositivos.</string>
@@ -20,24 +20,14 @@
 	<string name="menu_about">Sobre</string>
 	<string name="menu_license">Licença</string>
 	<string name="menu_share">Compartilhe este aplicativo</string>
+	<string name="menu_donate">Doar</string>
 
-	<string name="empty_text"/>
 	<string name="empty_list">Nenhuma mensagem encontrada</string>
 
 	<string name="message_count_inbox">%s recebido</string>
 	<string name="message_count_sent"> %s enviado</string>
 	<string name="message_count_draft"> %s rascunho</string>
 	<string name="message_count_all"> %s no total.</string>
-
-	<string name="str_license_text">Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at\n\n
-http://www.apache.org/licenses/LICENSE-2.0\n\n
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.</string>
 
 	<string name="str_chart_title">Remetentes de mensagens Top</string>
 	<string name="str_other_senders">Outros texto inclui mensagens de números que não são salvos em seus contatos, como as redes móveis ou instituições financeiras.</string>
@@ -84,10 +74,11 @@ limitations under the License.</string>
     <string name="str_donate_small">Compre-me um chocolate</string>
     <string name="str_donate_medium">Compre-me um gelado</string>
     <string name="str_donate_large">Compre-me Jantar</string>
+	<string name="str_sent_this_week">Enviado esta semana</string>
 
-    <!-- added for 3.2.0 -->
-    <string name="str_pref_experimental">Experimental</string>
-    <string name="str_offline_messages">Contagem de mensagens offline</string>
-    <string name="str_pref_offline_message_desc">Verificar as mensagens enviadas quando o serviço de fundo estava off-line na próxima inicialização</string>
+	<!-- added for 3.2.0 -->
+	<string name="str_pref_experimental">Experimental</string>
+	<string name="str_offline_messages">Contagem de mensagens offline</string>
+	<string name="str_pref_offline_message_desc">Verificar as mensagens enviadas quando o serviço de fundo estava off-line na próxima inicialização</string>
 
 </resources>

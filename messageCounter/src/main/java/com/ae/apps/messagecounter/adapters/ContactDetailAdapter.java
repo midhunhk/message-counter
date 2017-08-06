@@ -16,7 +16,6 @@
 
 package com.ae.apps.messagecounter.adapters;
 
-import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,8 +26,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
+
+import java.util.List;
 
 /**
  * Custom Adapter for showing the contact details
