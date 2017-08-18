@@ -7,6 +7,10 @@ MessageCounter 1.1.1 [Jan 2013]
  - [CHANGED]	Fetch the number of messages in inbox
  - [ADDED]		Using AeAppsLibrary for common code
 
+------------------------------------
+	Version 1.2
+------------------------------------
+
 MessageCounter 1.2.20 [Jan 2013]
  - [ADDED]
  - [FIXED]		Null pointer caused by null contactId
