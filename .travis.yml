@@ -1,7 +1,6 @@
 language: android
-
-jdk: 
-  - oraclejdk8
+dist: precise
+jdk: oraclejdk8
 
 # Install Dependencies
 before_install:
