@@ -16,6 +16,7 @@
 package com.ae.apps.messagecounter.adapters;
 
 import android.content.Context;
+import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -26,59 +27,66 @@ import com.ae.apps.messagecounter.fragments.MessageListFragment;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
 
 /**
- * The Pager Adapter for the pager menu used in this app
- * 
+ * The Pager Adapter manages the fragments loaded into the main content area
+ *
  * @author midhun
- * 
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-	private final Context	context;
-	private final Fragment	mListFragment;
-	private final Fragment	mChartFragment;
-	private final Fragment	mSentCountFragment;
+    private final Context context;
 
-	public SectionsPagerAdapter(Context context, FragmentManager fm) {
-		super(fm);
-		this.context = context;
-		mListFragment = new MessageListFragment();
-		mChartFragment = new MessageChartFragment();
-		mSentCountFragment = new SentCountFragment();
-	}
+    // The Fragments are lazily initialized and cached by the adapter
+    private Fragment mListFragment;
+    private Fragment mChartFragment;
+    private Fragment mSentCountFragment;
 
-	@Override
-	public Fragment getItem(int i) {
-		Fragment fragment = null;
-		switch (i) {
-		case 0:
-			fragment = mSentCountFragment;
-			break;
-		case 1:
-			fragment = mListFragment;
-			break;
-		case 2:
-			fragment = mChartFragment;
-			break;
-		}
+    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+        super(fm);
+        this.context = context;
+    }
 
-		return fragment;
-	}
+    @Override
+    public Fragment getItem(int i) {
+        Fragment fragment = null;
+        switch (i) {
+            case R.id.menu_counter:
+                if (null == mSentCountFragment) {
+                    mSentCountFragment = new SentCountFragment();
+                }
+                fragment = mSentCountFragment;
+                break;
+            case R.id.menu_list:
+                if (null == mListFragment) {
+                    mListFragment = new MessageListFragment();
+                }
+                fragment = mListFragment;
+                break;
+            case R.id.menu_chart:
+                if (null == mChartFragment) {
+                    mChartFragment = new MessageChartFragment();
+                }
+                fragment = mChartFragment;
+                break;
+        }
 
-	@Override
-	public int getCount() {
-		return 2;
-	}
+        return fragment;
+    }
 
-	@Override
-	public String getPageTitle(int position) {
-		switch (position) {
-		case 0:
-			return context.getString(R.string.title_counter);
-		case 1:
-			return context.getString(R.string.title_sent_list);
-		case 2:
-			return context.getString(R.string.title_chart);
-		}
-		return null;
-	}
+    @Override
+    public int getCount() {
+        return 2;
+    }
+
+    @Override
+    public String getPageTitle(int itemId) {
+        switch (itemId) {
+            case R.id.menu_counter:
+                return context.getString(R.string.title_counter);
+            case R.id.menu_list:
+                return context.getString(R.string.title_sent_list);
+            case R.id.menu_chart:
+                return context.getString(R.string.title_chart);
+        }
+        return null;
+    }
 
 }

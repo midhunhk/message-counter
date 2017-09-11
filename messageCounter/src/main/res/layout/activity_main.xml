@@ -1,26 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout android:id="@+id/drawer_layout"
                                         xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:app="http://schemas.android.com/apk/res-auto"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <!-- The toolbar -->
+    <!-- setting the coordinator layout inorder to pull the bottom navigation view down to the bottom-->
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <!--The bottom navigation -->
 
-        <include layout="@layout/toolbar"/>
-
-        <!-- Load Fragments into this container -->
-
-        <FrameLayout
-            android:id="@+id/container"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/bottom_navigation_height"
+            android:orientation="vertical">
 
-        <!-- Layout for the Left Navigation Drawer -->
-    </LinearLayout>
+            <!-- The toolbar -->
+
+            <include layout="@layout/toolbar"/>
+
+            <!-- Load Fragments into this container -->
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigationBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?android:attr/windowBackground"
+            app:layout_insetEdge="bottom"
+            app:itemBackground="@drawable/bottom_navigation_selector"
+            app:itemIconTint="@color/bottom_navigation_color_selector"
+            app:itemTextColor="@color/bottom_navigation_color_selector"
+            app:menu="@menu/bottom_navigation_menu"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
 
     <LinearLayout
         android:id="@+id/left_drawer"
@@ -49,6 +73,7 @@
                 android:textStyle="bold"/>
         </RelativeLayout>
 
+        <!-- Layout for the Left Navigation Drawer -->
         <ListView
             android:id="@+id/left_drawer_list"
             android:layout_width="246dp"
@@ -56,8 +81,6 @@
             android:layout_gravity="start"
             android:background="@color/white"
             android:divider="@android:color/transparent"/>
-
-        <include layout="@layout/separator_line"/>
 
         <Button
             android:id="@+id/navDonate"
@@ -72,7 +95,6 @@
             android:paddingLeft="@dimen/padding_large"
             android:paddingRight="@dimen/padding_large"
             android:text="@string/str_donate_title"
-            android:textAllCaps="false"
             android:textSize="@dimen/card_title"
             android:textStyle="bold"/>
 
@@ -89,44 +111,8 @@
             android:paddingLeft="@dimen/padding_large"
             android:paddingRight="@dimen/padding_large"
             android:text="@string/menu_settings"
-            android:textAllCaps="false"
             android:textSize="@dimen/card_title"
             android:textStyle="bold"/>
-
-        <!-- 
-        <Button
-            android:id="@+id/navShare"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:gravity="start"
-            android:padding="@dimen/padding_medium"
-            android:paddingLeft="@dimen/padding_large"
-            android:paddingRight="@dimen/padding_large"
-            android:drawableLeft="@drawable/nav_icon_share"
-            android:drawableStart="@drawable/nav_icon_share"
-            android:drawablePadding="@dimen/padding_medium"
-            android:text="@string/menu_share"
-            android:textSize="@dimen/card_title"
-            android:textStyle="bold"
-            android:textAllCaps="false"  />
-        
-        <Button
-            android:id="@+id/navAbout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:gravity="start"
-            android:padding="@dimen/padding_medium"
-            android:paddingLeft="@dimen/padding_large"
-            android:paddingRight="@dimen/padding_large"
-            android:drawableLeft="@drawable/nav_icon_info"
-            android:drawableStart="@drawable/nav_icon_info"
-            android:drawablePadding="@dimen/padding_medium"
-            android:text="@string/menu_about"
-            android:textSize="@dimen/card_title"
-            android:textStyle="bold"
-            android:textAllCaps="false"  /> -->
 
     </LinearLayout>
 

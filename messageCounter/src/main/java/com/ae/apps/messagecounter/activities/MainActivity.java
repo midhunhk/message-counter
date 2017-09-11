@@ -23,6 +23,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.IntegerRes;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -41,14 +44,12 @@ import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.mock.MockContactDataUtils;
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
-import com.ae.apps.messagecounter.adapters.NavDrawerListAdapter;
 import com.ae.apps.messagecounter.adapters.SectionsPagerAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
 import com.ae.apps.messagecounter.managers.ContactMessageDataManager;
 import com.ae.apps.messagecounter.utils.AppConstants;
-import com.ae.apps.messagecounter.vo.NavDrawerItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,44 +88,21 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         final SMSManager smsManager = new SMSManager(getBaseContext());
 
         // Cache the message counts
-        messageCountsCache.put(SMSManager.SMS_URI_ALL, smsManager.getMessagesCount(SMSManager.SMS_URI_ALL));
-        messageCountsCache.put(SMSManager.SMS_URI_SENT, smsManager.getMessagesCount(SMSManager.SMS_URI_SENT));
-        messageCountsCache.put(SMSManager.SMS_URI_INBOX, smsManager.getMessagesCount(SMSManager.SMS_URI_INBOX));
-        messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
-
-        // Navigation Drawer
-        List<NavDrawerItem> navItems = new ArrayList<>();
-
-        // Create the list for the main fragments to be shown in the drawer
-        NavDrawerListAdapter drawerListAdapter = new NavDrawerListAdapter(this, navItems);
-        navItems.add(new NavDrawerItem(R.drawable.nav_icon_email, mSectionsAdapter.getPageTitle(0)));
-        navItems.add(new NavDrawerItem(R.drawable.nav_icon_list_bulleted, mSectionsAdapter.getPageTitle(1)));
-        navItems.add(new NavDrawerItem(R.drawable.nav_icon_chart_pie, mSectionsAdapter.getPageTitle(2)));
-
-        mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
-        mDrawerList.setAdapter(drawerListAdapter);
-        mDrawerList.setOnItemClickListener(this);
+        cacheMessageCounts(smsManager);
 
         displayHomeAsUp();
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
-                this,
-                mDrawerLayout,
-                getToolBar(),
-                R.string.app_name,
-                R.string.app_name);
+        // Navigation Drawer
+        setupNavigationDrawer();
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();
-
-        // End changes for Navigation Drawer
-
-        // Handle clicks for Donate link from navigation drawer
-        findViewById(R.id.navDonate).setOnClickListener(this);
-        findViewById(R.id.navSettings).setOnClickListener(this);
-        // findViewById(R.id.navAbout).setOnClickListener(this);
-        // findViewById(R.id.navShare).setOnClickListener(this);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationBottom);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                showFragmentContent(item.getItemId());
+                return true;
+            }
+        });
 
         // Create the handler in the main thread
         mHandler = new Handler();
@@ -167,6 +145,46 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         getToolBar().inflateMenu(R.menu.activity_main);
 
         showNavDrawerIntro();
+    }
+
+    private void cacheMessageCounts(SMSManager smsManager) {
+        messageCountsCache.put(SMSManager.SMS_URI_ALL, smsManager.getMessagesCount(SMSManager.SMS_URI_ALL));
+        messageCountsCache.put(SMSManager.SMS_URI_SENT, smsManager.getMessagesCount(SMSManager.SMS_URI_SENT));
+        messageCountsCache.put(SMSManager.SMS_URI_INBOX, smsManager.getMessagesCount(SMSManager.SMS_URI_INBOX));
+        messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
+    }
+
+    private void setupNavigationDrawer() {
+        // List<NavDrawerItem> navItems = new ArrayList<>();
+
+        // Create the list for the main fragments to be shown in the drawer
+        /*NavDrawerListAdapter drawerListAdapter = new NavDrawerListAdapter(this, navItems);
+        navItems.add(new NavDrawerItem(R.drawable.nav_icon_email, mSectionsAdapter.getPageTitle(0)));
+        navItems.add(new NavDrawerItem(R.drawable.nav_icon_list_bulleted, mSectionsAdapter.getPageTitle(1)));
+        navItems.add(new NavDrawerItem(R.drawable.nav_icon_chart_pie, mSectionsAdapter.getPageTitle(2)));
+
+        mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
+        mDrawerList.setAdapter(drawerListAdapter);
+        mDrawerList.setOnItemClickListener(this);*/
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                mDrawerLayout,
+                getToolBar(),
+                R.string.app_name,
+                R.string.app_name);
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+
+        // End changes for Navigation Drawer
+
+        // Handle clicks for Donate link from navigation drawer
+        findViewById(R.id.navDonate).setOnClickListener(this);
+        findViewById(R.id.navSettings).setOnClickListener(this);
+        // findViewById(R.id.navAbout).setOnClickListener(this);
+        // findViewById(R.id.navShare).setOnClickListener(this);
     }
 
     @SuppressLint("RtlHardcoded")
@@ -296,21 +314,24 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        showFragmentContent(position);
+        // showFragmentContent(position);
+        // afterDrawerItemClicked(position);
     }
 
-    private void showFragmentContent(int position) {
-        Fragment fragment = mSectionsAdapter.getItem(position);
+    private void showFragmentContent(@IntegerRes int itemId) {
+        Fragment fragment = mSectionsAdapter.getItem(itemId);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
 
-        // highlight the selected item and close the drawer
-        mDrawerList.setItemChecked(position, true);
-        mDrawerLayout.closeDrawers();
-
         // Display the section header in the title
-        setToolbarTitle(mSectionsAdapter.getPageTitle(position));
+        setToolbarTitle(mSectionsAdapter.getPageTitle(itemId));
+    }
+
+    private void afterDrawerItemClicked(@IntegerRes int itemId) {
+        // highlight the selected item and close the drawer
+        mDrawerList.setItemChecked(itemId, true);
+        mDrawerLayout.closeDrawers();
     }
 
     @Override

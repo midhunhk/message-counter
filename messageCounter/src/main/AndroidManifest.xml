@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter"
-    android:versionCode="390"
-    android:versionName="3.2.1" >
+    android:versionCode="391"
+    android:versionName="3.3.0" >
 
     <!-- Declare the permissions required -->
     <uses-permission android:name="android.permission.READ_SMS" android:required="true" />
