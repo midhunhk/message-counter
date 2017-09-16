@@ -31,9 +31,11 @@
     <!-- ListView for the Left Navigation Drawer -->
     <ListView
         android:id="@+id/left_drawer_list"
-        android:layout_width="246dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
         android:background="@color/white"
         android:divider="@android:color/transparent"/>
 

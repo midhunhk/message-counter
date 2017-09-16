@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/selectableItemBackground">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:padding="@dimen/padding_small">
 
     <ImageView
         android:id="@+id/icon"
@@ -19,12 +20,12 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/icon"
         android:layout_toEndOf="@id/icon"
+        android:layout_toRightOf="@id/icon"
         android:gravity="center_vertical"
-        android:padding="@dimen/padding_large"
+        android:padding="@dimen/padding_medium"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/card_title"
-        android:textStyle="bold" />
+        android:textSize="@dimen/item_title"
+        android:textStyle="bold"/>
 
 </RelativeLayout>
