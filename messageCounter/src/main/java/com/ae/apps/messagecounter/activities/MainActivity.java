@@ -177,6 +177,7 @@ public class MainActivity extends ToolBarBaseActivity
         messageCountsCache.put(SMSManager.SMS_URI_DRAFTS, smsManager.getMessagesCount(SMSManager.SMS_URI_DRAFTS));
     }
 
+    @SuppressWarnings("deprecation")
     private void setupNavigationDrawer() {
         List<NavDrawerItem> navItems = new ArrayList<>();
 
