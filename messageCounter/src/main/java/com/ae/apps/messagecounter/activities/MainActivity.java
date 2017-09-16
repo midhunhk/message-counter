@@ -44,12 +44,14 @@ import com.ae.apps.common.managers.SMSManager;
 import com.ae.apps.common.mock.MockContactDataUtils;
 import com.ae.apps.common.vo.ContactMessageVo;
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.adapters.NavDrawerListAdapter;
 import com.ae.apps.messagecounter.adapters.SectionsPagerAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
 import com.ae.apps.messagecounter.managers.ContactMessageDataManager;
 import com.ae.apps.messagecounter.utils.AppConstants;
+import com.ae.apps.messagecounter.vo.NavDrawerItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,15 +63,20 @@ import java.util.Map;
  *
  * @author Midhun
  */
-public class MainActivity extends ToolBarBaseActivity implements MessageDataReader, OnMenuItemClickListener,
-        OnItemClickListener, View.OnClickListener {
+public class MainActivity extends ToolBarBaseActivity
+        implements MessageDataReader, OnMenuItemClickListener{
+
+    private static final long NAV_MENU_DONATE = 4001;
+    private static final long NAV_MENU_SETTINGS = 4002;
+    private static final long NAV_MENU_SHARE = 4003;
+    private static final long NAV_MENU_ABOUT = 4004;
 
     private boolean isDataReady;
     private Handler mHandler;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
     private List<ContactMessageVo> mContactMessageList;
     private SectionsPagerAdapter mSectionsAdapter;
+
     private final Map<String, Integer> messageCountsCache = new HashMap<>();
     private List<MessageDataConsumer> mConsumers = new ArrayList<>();
 
@@ -81,7 +88,10 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
         if (null == savedInstanceState) {
             // Message Counter is the default fragment
-            getSupportFragmentManager().beginTransaction().add(R.id.container, new SentCountFragment()).commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container, new SentCountFragment())
+                    .commit();
             setToolbarTitle(mSectionsAdapter.getPageTitle(0));
         }
 
@@ -95,15 +105,22 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         // Navigation Drawer
         setupNavigationDrawer();
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationBottom);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                showFragmentContent(item.getItemId());
-                return true;
-            }
-        });
+        setupBottomNavigationView();
 
+        consumeMessagesDataAsync();
+
+        // getToolBar().inflateMenu(R.menu.activity_main);
+
+        showNavDrawerIntro();
+    }
+
+    /**
+     * Consumes Contacts and Messages data in a separate thread.
+     * Will notify all consumers when the data is ready
+     * If a consumer registers for this event after data is already available,
+     * the consumer is notified immediately
+     */
+    private void consumeMessagesDataAsync() {
         // Create the handler in the main thread
         mHandler = new Handler();
 
@@ -132,7 +149,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
                     @Override
                     public void run() {
-                        // Inform the consumers that the data is ready
+                        // Inform the consumers that the data is ready and pass the data
                         for (MessageDataConsumer consumer : mConsumers) {
                             consumer.onDataReady(data);
                         }
@@ -140,11 +157,17 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
                 });
             }
         }).start();
+    }
 
-        // Inflate and handle menu clicks
-        getToolBar().inflateMenu(R.menu.activity_main);
-
-        showNavDrawerIntro();
+    private void setupBottomNavigationView() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationBottom);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                showFragmentContent(item.getItemId());
+                return true;
+            }
+        });
     }
 
     private void cacheMessageCounts(SMSManager smsManager) {
@@ -155,17 +178,23 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
     }
 
     private void setupNavigationDrawer() {
-        // List<NavDrawerItem> navItems = new ArrayList<>();
+        List<NavDrawerItem> navItems = new ArrayList<>();
 
         // Create the list for the main fragments to be shown in the drawer
-        /*NavDrawerListAdapter drawerListAdapter = new NavDrawerListAdapter(this, navItems);
-        navItems.add(new NavDrawerItem(R.drawable.nav_icon_email, mSectionsAdapter.getPageTitle(0)));
-        navItems.add(new NavDrawerItem(R.drawable.nav_icon_list_bulleted, mSectionsAdapter.getPageTitle(1)));
-        navItems.add(new NavDrawerItem(R.drawable.nav_icon_chart_pie, mSectionsAdapter.getPageTitle(2)));
+        NavDrawerListAdapter drawerListAdapter = new NavDrawerListAdapter(this, navItems);
+        navItems.add(new NavDrawerItem(R.drawable.nav_icon_donate, R.string.menu_donate, NAV_MENU_DONATE));
+        navItems.add(new NavDrawerItem(R.drawable.nav_icon_settings, R.string.menu_settings, NAV_MENU_SETTINGS));
+        navItems.add(new NavDrawerItem(R.drawable.nav_icon_share, R.string.menu_share, NAV_MENU_SHARE));
+        navItems.add(new NavDrawerItem(R.drawable.nav_icon_share, R.string.menu_about, NAV_MENU_ABOUT));
 
-        mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
+        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
         mDrawerList.setAdapter(drawerListAdapter);
-        mDrawerList.setOnItemClickListener(this);*/
+        mDrawerList.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                handleNavigationDrawerMenuClick(id);
+            }
+        });
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
@@ -177,14 +206,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
-
-        // End changes for Navigation Drawer
-
-        // Handle clicks for Donate link from navigation drawer
-        findViewById(R.id.navDonate).setOnClickListener(this);
-        findViewById(R.id.navSettings).setOnClickListener(this);
-        // findViewById(R.id.navAbout).setOnClickListener(this);
-        // findViewById(R.id.navShare).setOnClickListener(this);
     }
 
     @SuppressLint("RtlHardcoded")
@@ -304,20 +325,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         return R.layout.activity_main;
     }
 
-    /**
-     * Click handler for Navigation Drawer list item
-     *
-     * @param parent   the parent view
-     * @param view     the view
-     * @param position the position
-     * @param id       the id
-     */
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // showFragmentContent(position);
-        // afterDrawerItemClicked(position);
-    }
-
     private void showFragmentContent(@IntegerRes int itemId) {
         Fragment fragment = mSectionsAdapter.getItem(itemId);
         getSupportFragmentManager().beginTransaction()
@@ -328,36 +335,18 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         setToolbarTitle(mSectionsAdapter.getPageTitle(itemId));
     }
 
-    private void afterDrawerItemClicked(@IntegerRes int itemId) {
-        // highlight the selected item and close the drawer
-        mDrawerList.setItemChecked(itemId, true);
-        mDrawerLayout.closeDrawers();
-    }
-
-    @Override
-    public void onClick(View v) {
+    public void handleNavigationDrawerMenuClick(long id) {
         mDrawerLayout.closeDrawers();
         final Context context = getBaseContext();
 
-        switch (v.getId()) {
-            case R.id.navDonate:
-                startActivity(new Intent(context, DonationsActivity.class));
-                break;
-			
-		/*case R.id.navShare:
-			// Share this app
-			startActivity(getShareIntent());
-			break;*/
-
-            case R.id.navSettings:
-                // Display the preference screen
-                startActivity(new Intent(this, SettingsActivity.class));
-                break;
-			
-		/*case R.id.navAbout:
-			// Show the about screen
-			startActivity(new Intent(this, AboutActivity.class));
-			break;*/
+        if(NAV_MENU_DONATE == id) {
+            startActivity(new Intent(context, DonationsActivity.class));
+        } else if(NAV_MENU_SHARE == id) {
+            startActivity(getShareIntent());
+        } else if(NAV_MENU_SETTINGS == id) {
+            startActivity(new Intent(this, SettingsActivity.class));
+        } else if(NAV_MENU_ABOUT == id) {
+            startActivity(new Intent(this, AboutActivity.class));
         }
     }
 

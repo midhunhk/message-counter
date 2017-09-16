@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/left_drawer"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/navigation_drawer_width"
+              android:layout_height="match_parent"
+              android:layout_gravity="start"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/navbar_bg"
+        android:padding="@dimen/padding_medium">
+
+        <TextView
+            android:id="@+id/appCodeName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingEnd="0dp"
+            android:paddingLeft="90dip"
+            android:paddingRight="0dp"
+            android:paddingStart="90dip"
+            android:text="@string/app_code_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/card_title"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <!-- ListView for the Left Navigation Drawer -->
+    <ListView
+        android:id="@+id/left_drawer_list"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        android:divider="@android:color/transparent"/>
+
+</LinearLayout>

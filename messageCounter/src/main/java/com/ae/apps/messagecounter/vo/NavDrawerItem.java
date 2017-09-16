@@ -16,57 +16,58 @@
 
 package com.ae.apps.messagecounter.vo;
 
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+
 /**
  * Represents a Navigation Drawer item
- * 
- * @author MidhunHk
  *
+ * @author MidhunHk
  */
 public class NavDrawerItem {
 
-	private int		imageRes;
-	private int		itemId;
-	private String	title;
+    @DrawableRes
+    private int imageRes;
 
-	/**
-	 * Create a Nav Drawer Item
-	 * 
-	 * @param imageRes
-	 * @param titleRes
-	 */
-	public NavDrawerItem(int imageRes, String title) {
-		this.imageRes = imageRes;
-		this.title = title;
-	}
-	
-	public NavDrawerItem(int imageRes, String title, int itemId) {
-		this.imageRes = imageRes;
-		this.title = title;
-		this.itemId = itemId;
-	}
+    @StringRes
+    private int titleRes;
 
-	public int getImageRes() {
-		return imageRes;
-	}
+    private long itemId;
 
-	public void setImageRes(int imageRes) {
-		this.imageRes = imageRes;
-	}
+    /**
+     * Create a Nav Drawer Item
+     *
+     * @param imageRes Image resource for the menu item
+     * @param titleRes    Title for the menu item
+     * @param itemId   Item id for the menu
+     */
+    public NavDrawerItem(@DrawableRes int imageRes, @StringRes int titleRes, long itemId) {
+        this.imageRes = imageRes;
+        this.titleRes = titleRes;
+        this.itemId = itemId;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public int getImageRes() {
+        return imageRes;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setImageRes(int imageRes) {
+        this.imageRes = imageRes;
+    }
 
-	public int getItemId() {
-		return itemId;
-	}
+    public long getItemId() {
+        return itemId;
+    }
 
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
+    }
 
+    public int getTitleRes() {
+        return titleRes;
+    }
+
+    public void setTitleRes(int titleRes) {
+        this.titleRes = titleRes;
+    }
 }
