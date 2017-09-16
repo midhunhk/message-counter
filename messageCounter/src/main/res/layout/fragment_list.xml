@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/padding_medium" >
+    android:padding="@dimen/padding_small" >
 
     <android.support.v7.widget.CardView
         android:id="@+id/messageInfo"
