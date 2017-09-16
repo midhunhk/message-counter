@@ -30,9 +30,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -63,8 +61,7 @@ import java.util.Map;
  *
  * @author Midhun
  */
-public class MainActivity extends ToolBarBaseActivity
-        implements MessageDataReader, OnMenuItemClickListener{
+public class MainActivity extends ToolBarBaseActivity implements MessageDataReader{
 
     private static final long NAV_MENU_DONATE = 4001;
     private static final long NAV_MENU_SETTINGS = 4002;
@@ -225,53 +222,6 @@ public class MainActivity extends ToolBarBaseActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return handleMenuItemClick(item);
-    }
-
-    @SuppressLint({"InlinedApi", "RtlHardcoded"})
-    private boolean handleMenuItemClick(MenuItem item) {
-
-        setDrawerState(item);
-
-        switch (item.getItemId()) {
-            case R.id.menu_share_app:
-                // Share this app
-                startActivity(getShareIntent());
-                return true;
-        /*case R.id.menu_settings:
-			// Display the preference screen
-			startActivity(new Intent(this, SettingsActivity.class));
-			return true;*/
-            case R.id.menu_about:
-                // Show the about screen
-                startActivity(new Intent(this, AboutActivity.class));
-                return false;
-		/*case R.id.menu_donate:
-			startActivity(new Intent(this, DonationsActivity.class));
-			return false;*/
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressLint("RtlHardcoded")
-    private void setDrawerState(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                mDrawerLayout.closeDrawers();
-            } else {
-                mDrawerLayout.openDrawer(Gravity.LEFT);
-            }
-        }
-    }
-
-    @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
@@ -311,10 +261,10 @@ public class MainActivity extends ToolBarBaseActivity
         return shareIntent;
     }
 
-    @Override
+    /*@Override
     public boolean onMenuItemClick(MenuItem item) {
         return handleMenuItemClick(item);
-    }
+    }*/
 
     @Override
     protected int getToolbarResourceId() {
