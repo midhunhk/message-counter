@@ -186,7 +186,7 @@ public class MainActivity extends ToolBarBaseActivity
         navItems.add(new NavDrawerItem(R.drawable.nav_icon_donate, R.string.menu_donate, NAV_MENU_DONATE));
         navItems.add(new NavDrawerItem(R.drawable.nav_icon_settings, R.string.menu_settings, NAV_MENU_SETTINGS));
         navItems.add(new NavDrawerItem(R.drawable.nav_icon_share, R.string.menu_share, NAV_MENU_SHARE));
-        navItems.add(new NavDrawerItem(R.drawable.nav_icon_share, R.string.menu_about, NAV_MENU_ABOUT));
+        navItems.add(new NavDrawerItem(R.drawable.nav_icon_info, R.string.menu_about, NAV_MENU_ABOUT));
 
         ListView mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
         mDrawerList.setAdapter(drawerListAdapter);
