@@ -5,6 +5,10 @@
         android:icon="@drawable/nav_icon_email"
         android:title="@string/title_counter"/>
     <item
+        android:id="@+id/menu_ignore"
+        android:icon="@drawable/nav_icon_ignore"
+        android:title="@string/title_ignore"/>
+    <item
         android:id="@+id/menu_list"
         android:icon="@drawable/nav_icon_list_bulleted"
         android:title="@string/title_sent_list"/>

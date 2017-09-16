@@ -6,4 +6,9 @@
          -->
     </style>
 
+    <style name="buttonTintAccent">
+        <item name="android:backgroundTint">@color/app_theme_accent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

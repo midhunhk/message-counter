@@ -16,12 +16,12 @@
 package com.ae.apps.messagecounter.adapters;
 
 import android.content.Context;
-import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.fragments.IgnoreFragment;
 import com.ae.apps.messagecounter.fragments.MessageChartFragment;
 import com.ae.apps.messagecounter.fragments.MessageListFragment;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
@@ -37,6 +37,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     // The Fragments are lazily initialized and cached by the adapter
     private Fragment mListFragment;
     private Fragment mChartFragment;
+    private Fragment mIgnoreFragment;
     private Fragment mSentCountFragment;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -53,6 +54,12 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                     mSentCountFragment = new SentCountFragment();
                 }
                 fragment = mSentCountFragment;
+                break;
+            case R.id.menu_ignore:
+                if (null == mChartFragment) {
+                    mIgnoreFragment = new IgnoreFragment();
+                }
+                fragment = mIgnoreFragment;
                 break;
             case R.id.menu_list:
                 if (null == mListFragment) {
@@ -73,7 +80,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -81,6 +88,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         switch (itemId) {
             case R.id.menu_counter:
                 return context.getString(R.string.title_counter);
+            case R.id.menu_ignore:
+                return context.getString(R.string.title_ignore);
             case R.id.menu_list:
                 return context.getString(R.string.title_sent_list);
             case R.id.menu_chart:
