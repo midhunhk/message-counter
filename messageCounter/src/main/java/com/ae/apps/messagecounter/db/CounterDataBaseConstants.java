@@ -39,7 +39,7 @@ interface CounterDataBaseConstants {
 
     // Create Tables
     String[] CREATE_TABLES_SQL = new String[]{
-            MESSAGE_COUNTER_SQL,
-            IGNORE_LIST_SQL
+            MESSAGE_COUNTER_SQL
+            /*,IGNORE_LIST_SQL*/
     };
 }
