@@ -49,6 +49,7 @@ import com.ae.apps.messagecounter.data.MessageDataReader;
 import com.ae.apps.messagecounter.fragments.SentCountFragment;
 import com.ae.apps.messagecounter.managers.ContactMessageDataManager;
 import com.ae.apps.messagecounter.utils.AppConstants;
+import com.ae.apps.messagecounter.utils.BottomNavigationViewHelper;
 import com.ae.apps.messagecounter.vo.NavDrawerItem;
 
 import java.util.ArrayList;
@@ -165,6 +166,9 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
                 return true;
             }
         });
+
+        // Disable shiftingMode for the BottomNavigationView so we can properly display more than 3 items
+        BottomNavigationViewHelper.disableShiftingMode(bottomNavigationView);
     }
 
     private void cacheMessageCounts(SMSManager smsManager) {

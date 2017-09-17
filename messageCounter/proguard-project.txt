@@ -22,3 +22,8 @@
 # This will keep line numbers and file name obfuscation
 -renamesourcefileattribute SourceFile
 -keepattributes SourceFile,LineNumberTable
+
+# Required for disabling shiftingMode of the BottomNavigationView
+-keepclassmembers class android.support.design.internal.BottomNavigationItemView{
+    boolean mShiftingMode;
+}
