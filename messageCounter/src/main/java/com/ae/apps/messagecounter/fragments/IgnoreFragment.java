@@ -18,17 +18,19 @@ package com.ae.apps.messagecounter.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.models.IgnoredContact;
 
 /**
  * Manage Ignore lists
  */
-public class IgnoreFragment extends Fragment {
+public class IgnoreFragment extends Fragment implements IgnoreDialogFragment.IgnoreDialogListener {
 
     public IgnoreFragment() {
         // Required empty public constructor
@@ -48,9 +50,21 @@ public class IgnoreFragment extends Fragment {
         btnShowIgnoreDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"Show dialog to add a contact", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Show dialog to add a contact", Toast.LENGTH_SHORT).show();
+                showSelectIgnoreContactDialog();
             }
         });
     }
 
+    private void showSelectIgnoreContactDialog() {
+        FragmentManager fragmentManager = getFragmentManager();
+        IgnoreDialogFragment dialogFragment = IgnoreDialogFragment.newInstance();
+        dialogFragment.setTargetFragment(IgnoreFragment.this, 300);
+        dialogFragment.show(fragmentManager, "fragment_ignore_contact");
+    }
+
+    @Override
+    public void onContactSelected(IgnoredContact ignoredContact) {
+
+    }
 }
