@@ -1,5 +1,7 @@
 package com.ae.apps.messagecounter.db;
 
+import android.provider.BaseColumns;
+
 /**
  * Constants for CounterDatabase
  */
@@ -7,19 +9,37 @@ interface CounterDataBaseConstants {
     int DATABASE_VERSION = 1;
 
     String DATABASE_NAME = "db_message_counter";
-    String TABLE_COUNTER = "tbl_sms_counter";
 
-    /* Table keys */
-    String KEY_DATE = "date_index";
-    String KEY_COUNT = "sent_count";
+    // Message Counter Table
+    String MESSAGE_COUNTER_TABLE = "tbl_sms_counter";
+    String MESSAGE_COUNTER_DATE_INDEX = "date_index";
+    String MESSAGE_COUNTER_SENT_COUNT = "sent_count";
 
-    /* The SQL to create the table */
-    String COUNTER_TABLE_CREATE = "CREATE TABLE " + TABLE_COUNTER + " ("
-            + KEY_DATE + " NUMERIC PRIMARY KEY, "
-            + KEY_COUNT + " NUMERIC NOT NULL);";
+    String MESSAGE_COUNTER_SQL = "CREATE TABLE " + MESSAGE_COUNTER_TABLE + " ("
+            + MESSAGE_COUNTER_DATE_INDEX + " NUMERIC PRIMARY KEY, "
+            + MESSAGE_COUNTER_SENT_COUNT + " NUMERIC NOT NULL" +
+            ");";
 
-    /* Projection for retrieving the data */
-    String[] DATA_PROJECTION = new String[]{KEY_DATE, KEY_COUNT};
+    String[] MESSAGE_COUNTER_COLUMNS = new String[]{
+            MESSAGE_COUNTER_DATE_INDEX,
+            MESSAGE_COUNTER_SENT_COUNT
+    };
 
-    String[] CREATE_TABLES_SQL = new String[]{COUNTER_TABLE_CREATE};
+    // Ignore List Table
+    String IGNORE_LIST_TABLE = "tbl_ignore_list";
+    String IGNORE_LIST_ID = BaseColumns._ID;
+    String IGNORE_LIST_NAME = "ignore_name";
+    String IGNORE_LIST_NUMBER = "ignore_number";
+
+    String IGNORE_LIST_SQL = "CREATE TABLE " + IGNORE_LIST_TABLE + " (" +
+            IGNORE_LIST_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            IGNORE_LIST_NAME + " TEXT NOT NULL, " +
+            IGNORE_LIST_NUMBER + " TEXT NOT NULL" +
+            ");";
+
+    // Create Tables
+    String[] CREATE_TABLES_SQL = new String[]{
+            MESSAGE_COUNTER_SQL,
+            IGNORE_LIST_SQL
+    };
 }

@@ -18,6 +18,7 @@ package com.ae.apps.messagecounter.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.ae.apps.common.db.DataBaseHelper;
 
@@ -39,13 +40,18 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
                 CounterDataBaseConstants.DATABASE_VERSION, CounterDataBaseConstants.CREATE_TABLES_SQL);
     }
 
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        super.onUpgrade(db, oldVersion, newVersion);
+    }
+
     /**
      * Fetch all the data
      *
      * @return cursor
      */
     public Cursor getAllCountInfo() {
-        return query(CounterDataBaseConstants.TABLE_COUNTER, CounterDataBaseConstants.DATA_PROJECTION,
+        return query(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE, CounterDataBaseConstants.MESSAGE_COUNTER_COLUMNS,
                 null, null, null, null, null);
     }
 
@@ -58,13 +64,13 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
     public int getCountValueForDay(long dateIndex) {
         int returnValue;
         String[] args = {String.valueOf(dateIndex)};
-        Cursor cursor = query(CounterDataBaseConstants.TABLE_COUNTER, CounterDataBaseConstants.DATA_PROJECTION,
-                CounterDataBaseConstants.KEY_DATE + " = ? ", args, null, null, null);
+        Cursor cursor = query(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE, CounterDataBaseConstants.MESSAGE_COUNTER_COLUMNS,
+                CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX + " = ? ", args, null, null, null);
         if (null == cursor || cursor.getCount() == 0) {
             returnValue = -1;
         } else {
             cursor.moveToNext();
-            returnValue = cursor.getInt(cursor.getColumnIndex(CounterDataBaseConstants.KEY_COUNT));
+            returnValue = cursor.getInt(cursor.getColumnIndex(CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT));
         }
 
         if(null != cursor) cursor.close();
@@ -91,20 +97,20 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
 
         int currentCount = getCountValueForDay(dateIndex);
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CounterDataBaseConstants.KEY_DATE, dateIndex);
+        contentValues.put(CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX, dateIndex);
         long result;
 
         if (currentCount == -1) {
             // no rows exist for this day, so insert a new row
-            contentValues.put(CounterDataBaseConstants.KEY_COUNT, messageCount);
-            result = insert(CounterDataBaseConstants.TABLE_COUNTER, contentValues);
+            contentValues.put(CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT, messageCount);
+            result = insert(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE, contentValues);
         } else {
             // update the count for this day
             int updatedCount = currentCount + messageCount;
-            contentValues.put(CounterDataBaseConstants.KEY_COUNT, updatedCount);
+            contentValues.put(CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT, updatedCount);
             String[] whereArgs = {dateIndex + ""};
-            result = update(CounterDataBaseConstants.TABLE_COUNTER, contentValues,
-                    CounterDataBaseConstants.KEY_DATE + " = ? ", whereArgs);
+            result = update(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE, contentValues,
+                    CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX + " = ? ", whereArgs);
         }
         return result;
     }
@@ -119,9 +125,9 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
         int count = 0;
         String[] selectionArgs = {startDateIndex + ""};
         Cursor cursor = rawQuery(
-                "SELECT SUM(" + CounterDataBaseConstants.KEY_COUNT + ") FROM "
-                        + CounterDataBaseConstants.TABLE_COUNTER
-                        + " WHERE " + CounterDataBaseConstants.KEY_DATE + " >= ?", selectionArgs);
+                "SELECT SUM(" + CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT + ") FROM "
+                        + CounterDataBaseConstants.MESSAGE_COUNTER_TABLE
+                        + " WHERE " + CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX + " >= ?", selectionArgs);
         if (cursor.moveToFirst()) {
             count = cursor.getInt(0);
         }
@@ -140,9 +146,9 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
     public int getTotalSentCountBetween(long startDateIndex, long endDateIndex) {
         int count = 0;
         String[] selectionArgs = {startDateIndex + "", endDateIndex + ""};
-        Cursor cursor = rawQuery("SELECT SUM(" + CounterDataBaseConstants.KEY_COUNT + ") FROM "
-                + CounterDataBaseConstants.TABLE_COUNTER + " WHERE "
-                + CounterDataBaseConstants.KEY_DATE + " BETWEEN ? AND ?", selectionArgs);
+        Cursor cursor = rawQuery("SELECT SUM(" + CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT + ") FROM "
+                + CounterDataBaseConstants.MESSAGE_COUNTER_TABLE + " WHERE "
+                + CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX + " BETWEEN ? AND ?", selectionArgs);
         if (cursor.moveToFirst()) {
             count = cursor.getInt(0);
         }
