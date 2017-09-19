@@ -105,9 +105,10 @@ limitations under the License.</string>
     <!-- added for 3.3.0 -->
     <string name="str_ignore_title">Ignore List</string>
     <string name="str_ignore_add_number">Add a Number</string>
-    <string name="str_ignore_add_to_ignore_list">Add to Ignore List</string>
+    <string name="str_ignore_add_to_ignore_list">Add To Ignore List</string>
     <string name="str_ignore_btn_ignore">Ignore</string>
     <string name="str_ignore_name">Name</string>
     <string name="str_ignore_number">Number</string>
+    <string name="str_ignore_empty_list">Start by adding a number to ignore</string>
 
 </resources>

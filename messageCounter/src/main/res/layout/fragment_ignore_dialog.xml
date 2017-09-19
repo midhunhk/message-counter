@@ -3,41 +3,42 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
-              android:padding="@dimen/padding_medium"
               tools:context="com.ae.apps.messagecounter.fragments.IgnoreDialogFragment">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/addTripDialogHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:gravity="center"
-        android:text="@string/str_ignore_add_to_ignore_list"
-        android:textColor="@color/app_theme_light"
-        android:textSize="@dimen/card_title"
-        android:textStyle="bold"/>
+        android:layout_height="@dimen/dialog_header_height"
+        android:layout_alignParentTop="true"
+        android:background="@color/app_theme_light">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:gravity="center"
+            android:text="@string/str_ignore_add_to_ignore_list"
+            android:textColor="@color/app_theme_accent"
+            android:textSize="@dimen/card_title"
+            android:textStyle="bold"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".35"
-            android:text="@string/str_ignore_name"
-            android:textSize="18sp"/>
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_medium">
 
         <EditText
-            android:id="@+id/txtIgnoreName"
-            android:layout_width="0dp"
+            android:id="@+id/txtIgnoreNumber"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:gravity="right"
-            android:inputType="text|textCapWords"
+            android:hint="@string/str_ignore_number"
+            android:inputType="number|phone"
             tools:ignore="RtlHardcoded"/>
     </LinearLayout>
 
@@ -46,22 +47,15 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".30"
-            android:text="@string/str_ignore_number"
-            android:textSize="18sp"/>
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_medium">
 
         <EditText
-            android:id="@+id/txtIgnoreNumber"
-            android:layout_width="0dp"
+            android:id="@+id/txtIgnoreName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:gravity="right"
+            android:hint="@string/str_ignore_name"
             android:inputType="text|textCapWords"
             tools:ignore="RtlHardcoded"/>
     </LinearLayout>
@@ -70,7 +64,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_medium">
 
         <Button
             android:id="@+id/btnCancel"

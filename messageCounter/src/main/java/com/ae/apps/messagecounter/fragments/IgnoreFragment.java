@@ -16,16 +16,24 @@
 package com.ae.apps.messagecounter.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.ae.apps.common.views.EmptyRecyclerView;
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.adapters.IgnoreListRecyclerViewAdapter;
 import com.ae.apps.messagecounter.models.IgnoredContact;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Manage Ignore lists
@@ -50,10 +58,27 @@ public class IgnoreFragment extends Fragment implements IgnoreDialogFragment.Ign
         btnShowIgnoreDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Show dialog to add a contact", Toast.LENGTH_SHORT).show();
                 showSelectIgnoreContactDialog();
             }
         });
+
+        EmptyRecyclerView recyclerView = (EmptyRecyclerView) layout.findViewById(R.id.list);
+        View emptyView = layout.findViewById(R.id.empty_view);
+
+        List<IgnoredContact> list = new ArrayList<>();
+
+        IgnoredContact ic = new IgnoredContact();
+        ic.setName("Test");
+        ic.setNumber("(987654321)");
+        list.add(ic);
+        IgnoreListRecyclerViewAdapter recyclerViewAdapter = new IgnoreListRecyclerViewAdapter(list);
+
+        if (null != recyclerView) {
+            Context context = layout.getContext();
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setAdapter(recyclerViewAdapter);
+            recyclerView.setEmptyView(emptyView);
+        }
     }
 
     private void showSelectIgnoreContactDialog() {
@@ -65,6 +90,6 @@ public class IgnoreFragment extends Fragment implements IgnoreDialogFragment.Ign
 
     @Override
     public void onContactSelected(IgnoredContact ignoredContact) {
-
+        Toast.makeText(getActivity(), ignoredContact.toString(), Toast.LENGTH_SHORT).show();
     }
 }

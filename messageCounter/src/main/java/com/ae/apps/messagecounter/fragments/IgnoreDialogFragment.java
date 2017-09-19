@@ -22,10 +22,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ae.apps.messagecounter.R;
@@ -37,6 +39,9 @@ import com.ae.apps.messagecounter.models.IgnoredContact;
 public class IgnoreDialogFragment extends AppCompatDialogFragment {
 
     private final int CONTACT_PICKER_RESULT = 1001;
+
+    private EditText mTxtName;
+    private EditText mTxtNumber;
 
     public IgnoreDialogFragment() {
         // Required empty public constructor
@@ -90,15 +95,25 @@ public class IgnoreDialogFragment extends AppCompatDialogFragment {
                 }
             }
         });
+
+        mTxtName = (EditText) view.findViewById(R.id.txtIgnoreName);
+        mTxtNumber = (EditText) view.findViewById(R.id.txtIgnoreNumber);
     }
 
     private IgnoredContact validateIgnoredContact() throws IgnoreDialogValidationException {
-        // Do Validation
+        if(TextUtils.isEmpty(mTxtNumber.getText().toString())){
+            throw new IgnoreDialogValidationException("Number is required");
+        }
+
         IgnoredContact ignoredContact = new IgnoredContact();
 
-        ignoredContact.setName("Test Name");
-        ignoredContact.setNumber("234546567");
+        ignoredContact.setNumber(mTxtNumber.getText().toString().trim());
 
+        if(TextUtils.isEmpty(mTxtName.getText().toString())){
+            ignoredContact.setName(ignoredContact.getNumber());
+        } else {
+            ignoredContact.setName(mTxtName.getText().toString().trim());
+        }
         return ignoredContact;
     }
 
@@ -127,7 +142,7 @@ public class IgnoreDialogFragment extends AppCompatDialogFragment {
     /**
      * Validation class for IgnoreDialog
      */
-    class IgnoreDialogValidationException extends Throwable {
+    private class IgnoreDialogValidationException extends Throwable {
         IgnoreDialogValidationException(String message) {
             super(message);
         }

@@ -31,4 +31,9 @@ public class IgnoredContact {
     public void setNumber(String number) {
         this.number = number;
     }
+
+    @Override
+    public String toString() {
+        return name + " (" + number + ")";
+    }
 }
