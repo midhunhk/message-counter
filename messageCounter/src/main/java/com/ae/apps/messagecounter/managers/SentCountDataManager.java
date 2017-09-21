@@ -76,7 +76,7 @@ public class SentCountDataManager {
         Date today = Calendar.getInstance().getTime();
 
         // Initialize and open the database
-        CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(context);
+        CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(context);
 
         // Find the no of messages sent today
         int sentTodayCount = counterDataBase.getCountValueForDay(MessageCounterUtils.getIndexFromDate(today));
@@ -94,7 +94,7 @@ public class SentCountDataManager {
         int sentWeekCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(weekStartDate));
 
         // Close the db connection
-        counterDataBase.close();
+        // counterDataBase.close();
 
         if (sentTodayCount == -1) {
             sentTodayCount = 0;
@@ -145,13 +145,12 @@ public class SentCountDataManager {
             int newMessagesCount = (null != newMessagesCursor) ? newMessagesCursor.getCount() : 0;
             Log.d(TAG, "newMessagesCursor count :" + newMessagesCount);
 
-            CounterDataBaseAdapter counterDataBase = null;
             Calendar messageSentDate = Calendar.getInstance();
             try {
                 if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
                     Log.d(TAG, "Open MessageCounterDatabase");
                     // Connect to the App's database
-                    counterDataBase = new CounterDataBaseAdapter(context);
+                    CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(context);
 
                     //Calendar calendar = Calendar.getInstance();
                     //calendar.setTimeInMillis(Long.valueOf(lastMessageTimeStamp));
@@ -179,10 +178,6 @@ public class SentCountDataManager {
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
                 Log.e(TAG, Log.getStackTraceString(e));
-            } finally {
-                if (null != counterDataBase) {
-                    counterDataBase.close();
-                }
             }
         }
         Log.d(TAG, "Exit checkForUnLoggedMessages, added " + newMessagesAdded + " messages");

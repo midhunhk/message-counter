@@ -29,13 +29,32 @@ import com.ae.apps.common.db.DataBaseHelper;
  */
 public class CounterDataBaseAdapter extends DataBaseHelper {
 
+    private static volatile CounterDataBaseAdapter sInstance;
+    private static final Object sMutex = new Object();
+
+    /**
+     * A thread safe factory method that returns the only instance of the CounterDataBaseAdapter
+     *
+     * @param context context required by the DataBaseHelper
+     * @return
+     */
+    public static CounterDataBaseAdapter getInstance(Context context){
+        if(null == sInstance){
+            synchronized (sMutex){
+                if (null == sInstance){
+                    sInstance = new CounterDataBaseAdapter(context);
+                }
+            }
+        }
+        return sInstance;
+    }
 
     /**
      * Create an instance of CounterDataBaseAdapter
      *
      * @param context context
      */
-    public CounterDataBaseAdapter(Context context) {
+    private CounterDataBaseAdapter(Context context) {
         super(context, CounterDataBaseConstants.DATABASE_NAME, null,
                 CounterDataBaseConstants.DATABASE_VERSION, CounterDataBaseConstants.CREATE_TABLES_SQL);
     }
@@ -51,7 +70,8 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
      * @return cursor
      */
     public Cursor getAllCountInfo() {
-        return query(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE, CounterDataBaseConstants.MESSAGE_COUNTER_COLUMNS,
+        return query(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE,
+                CounterDataBaseConstants.MESSAGE_COUNTER_COLUMNS,
                 null, null, null, null, null);
     }
 
