@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Constants for CounterDatabase
  */
 interface CounterDataBaseConstants {
-    int DATABASE_VERSION = 1;
+    int DATABASE_VERSION = 2;
 
     String DATABASE_NAME = "db_message_counter";
 
@@ -43,6 +43,6 @@ interface CounterDataBaseConstants {
     // Create Tables
     String[] CREATE_TABLES_SQL = new String[]{
             MESSAGE_COUNTER_SQL
-            /*,IGNORE_LIST_SQL*/
+            ,IGNORE_LIST_SQL
     };
 }

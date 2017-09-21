@@ -36,7 +36,7 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
      * A thread safe factory method that returns the only instance of the CounterDataBaseAdapter
      *
      * @param context context required by the DataBaseHelper
-     * @return
+     * @return Only instance of CounterDataBaseAdapter
      */
     public static CounterDataBaseAdapter getInstance(Context context){
         if(null == sInstance){
@@ -62,6 +62,10 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onUpgrade(db, oldVersion, newVersion);
+        if(oldVersion < 2){
+            // Ignore List table added with db version 2
+            db.execSQL(CounterDataBaseConstants.IGNORE_LIST_SQL);
+        }
     }
 
     /**
