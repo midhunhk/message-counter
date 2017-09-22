@@ -151,7 +151,7 @@ public class SMSObserver extends ContentObserver {
      * Checks if notification and send count limits are enabled and shows a notification
      * if the limit has been crossed
      */
-    private void showMessageLimitNotification(CounterDataBaseAdapter counterDataBase) {
+    private void showMessageLimitNotification() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         boolean sentCountLimitEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
         boolean notifEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_NOTIFICATION, false);
