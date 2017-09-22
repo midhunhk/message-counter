@@ -53,6 +53,7 @@ import java.util.Date;
 public class SMSObserver extends ContentObserver {
 
     private static final String TAG = "SMSObserver";
+    private final int SEND_COUNT_REACHED_ID = 0;
 
     // Private references that are set from the constructor
     private Uri mObservableUri = null;
@@ -92,10 +93,10 @@ public class SMSObserver extends ContentObserver {
 
             // protocol will be null for sent messages
             if (message.getProtocol() == null && isNewMessage) {
-
-                // Update the message count in the database
-                // Also check for Limit reached
                 updateMessageSentCount(message);
+                
+                // if sent count limit and notify on reaching the limit are enabled, we shall show a notification
+                showMessageLimitNotification();
 
                 // Store this message id in case we get multiple callbacks for the same id
                 Log.d("SendSMSObserver", " An SMS was sent at " + message.getDate() + " with id " + message.getId());
@@ -114,29 +115,30 @@ public class SMSObserver extends ContentObserver {
         }
     }
 
+    /**
+     * Updates the message counter database with the number of messages sent in this instance
+     */
     private void updateMessageSentCount(Message message) {
         // A Message was sent just now
         Date date = Calendar.getInstance().getTime();
         long today = MessageCounterUtils.getIndexFromDate(date);
 
-        // Lets open a database connection and add an entry
-        CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(mContext);
+        // Get an instance of the CounterDataBase
+        CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(mContext);
 
         // Add an entry into the database
         counterDataBase.addMessageSentCounter(today, message.getMessagesCount());
 
-        // if sent count limit and notify on reaching the limit are enabled, we shall show a notification
-        showMessageLimitNotification(counterDataBase);
-
         // Close the connection to the database
-        counterDataBase.close();
+        // counterDataBase.close();
     }
 
     // Experimental feature - For Unicorn
     // Check for any messages that we might have missed since the last message was logged.
     // If new message ID is different from last saved message ID, check if any messages
     // went un counted. Enable this flag from the preferences menu
-    private void checkForOfflineMessages(String messageId, SharedPreferences sharedPreferences, String lastMessageId, boolean isNewMessage) {
+    private void checkForOfflineMessages(String messageId, SharedPreferences sharedPreferences, 
+                                         String lastMessageId, boolean isNewMessage) {
         boolean enableOfflineCount = sharedPreferences.getBoolean(AppConstants.PREF_KEY_ENABLE_OFFLINE_COUNT, true);
         if (isNewMessage && enableOfflineCount) {
             SentCountDataManager countDataManager = SentCountDataManager.newInstance();
@@ -145,6 +147,10 @@ public class SMSObserver extends ContentObserver {
         }
     }
 
+    /**
+     * Checks if notification and send count limits are enabled and shows a notification
+     * if the limit has been crossed
+     */
     private void showMessageLimitNotification(CounterDataBaseAdapter counterDataBase) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         boolean sentCountLimitEnabled = preferences.getBoolean(AppConstants.PREF_KEY_ENABLE_SENT_COUNT, false);
@@ -153,7 +159,8 @@ public class SMSObserver extends ContentObserver {
             Date currentCycleStartDate = MessageCounterUtils.getCycleStartDate(preferences);
             long dateIndex = MessageCounterUtils.getIndexFromDate(currentCycleStartDate);
             int userLimit = MessageCounterUtils.getMessageLimitValue(preferences);
-            int currentCount = counterDataBase.getTotalSentCountSinceDate(dateIndex);
+            
+            int currentCount = CounterDataBaseAdapter.getInstance(mContext).getTotalSentCountSinceDate(dateIndex);
             if (currentCount >= userLimit) {
                 // Get some resources for the notification
                 Resources resources = mContext.getResources();
@@ -179,7 +186,7 @@ public class SMSObserver extends ContentObserver {
                         .getSystemService(Context.NOTIFICATION_SERVICE);
 
                 // Show a notification to the user here "send message for this cycle has reached limit"
-                notificationManager.notify(0, notification);
+                notificationManager.notify(SEND_COUNT_REACHED_ID, notification);
             }
         }
     }
