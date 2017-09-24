@@ -36,7 +36,7 @@ interface CounterDataBaseConstants {
     String IGNORE_LIST_SQL = "CREATE TABLE " + IGNORE_LIST_TABLE + " (" +
             IGNORE_LIST_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             IGNORE_LIST_NAME + " TEXT NOT NULL, " +
-            IGNORE_LIST_NUMBER + " TEXT NOT NULL" +
+            IGNORE_LIST_NUMBER + " TEXT NOT NULL, " +
             IGNORE_LIST_CUSTOM + " TEXT" +
             ");";
 
