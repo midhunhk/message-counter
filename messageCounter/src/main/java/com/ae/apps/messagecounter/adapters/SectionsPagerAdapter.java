@@ -86,16 +86,16 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public String getPageTitle(int itemId) {
         switch (itemId) {
-            case R.id.menu_counter:
-                return context.getString(R.string.title_counter);
             case R.id.menu_ignore:
                 return context.getString(R.string.title_ignore);
             case R.id.menu_list:
                 return context.getString(R.string.title_sent_list);
             case R.id.menu_chart:
                 return context.getString(R.string.title_chart);
+            case R.id.menu_counter:
+            default:
+                return context.getString(R.string.title_counter);
         }
-        return null;
     }
 
 }
