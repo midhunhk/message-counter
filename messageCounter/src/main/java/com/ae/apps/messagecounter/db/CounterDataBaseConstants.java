@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 /**
  * Constants for CounterDatabase
  */
-interface CounterDataBaseConstants {
+public interface CounterDataBaseConstants {
     int DATABASE_VERSION = 2;
 
     String DATABASE_NAME = "db_message_counter";
@@ -32,6 +32,12 @@ interface CounterDataBaseConstants {
     String IGNORE_LIST_NUMBER = "ignore_number";
     // For future Use
     String IGNORE_LIST_CUSTOM = "ignore_custom_col01";
+
+    String[] IGNORE_LIST_COLUMNS = new String[]{
+            IGNORE_LIST_ID,
+            IGNORE_LIST_NAME,
+            IGNORE_LIST_NUMBER
+    };
 
     String IGNORE_LIST_SQL = "CREATE TABLE " + IGNORE_LIST_TABLE + " (" +
             IGNORE_LIST_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

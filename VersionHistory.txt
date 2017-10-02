@@ -240,5 +240,13 @@ MessageCounter 2.1.20 [Dec 2013]
  - Support for German
  - Multi Length message support
 
+ ------------------------------------
+	Version 3.3 Valkyrie
+ ------------------------------------
+
+ MessageCounter 3.3.0 [Oct 2017]
+ - Bottom Navigation View
+ - Ignore List
+
 // De obfuscation file
 D:\WorkSpaces\_repositories\MessageCounter\messageCounter\build\outputs\mapping\release\mapping.txt

@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.data.IgnoreContactListener;
 import com.ae.apps.messagecounter.models.IgnoredContact;
 
 /**
@@ -132,8 +133,8 @@ public class IgnoreDialogFragment extends AppCompatDialogFragment {
     }
 
     private void updateWithSelectedContact(IgnoredContact ignoredContact) {
-        if (getTargetFragment() instanceof IgnoreDialogListener) {
-            ((IgnoreDialogListener) getTargetFragment()).onContactSelected(ignoredContact);
+        if (getTargetFragment() instanceof IgnoreContactListener) {
+            ((IgnoreContactListener) getTargetFragment()).onContactSelected(ignoredContact);
         } else {
             throw new RuntimeException("must implement the interface IgnoreDialogListener");
         }
@@ -148,16 +149,4 @@ public class IgnoreDialogFragment extends AppCompatDialogFragment {
         }
     }
 
-    /**
-     * Activity/Fragment that invokes this Dialog must implement this interface
-     * to get callback when data is ready
-     */
-    interface IgnoreDialogListener {
-        /**
-         * Invoked when a contact has been selected for blocking
-         *
-         * @param ignoredContact ignored contact
-         */
-        void onContactSelected(IgnoredContact ignoredContact);
-    }
 }

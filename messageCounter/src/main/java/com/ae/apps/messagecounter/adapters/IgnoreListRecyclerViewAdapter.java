@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ae.apps.messagecounter.R;
+import com.ae.apps.messagecounter.data.IgnoreContactListener;
 import com.ae.apps.messagecounter.models.IgnoredContact;
 
 import java.util.List;
@@ -19,9 +20,11 @@ import java.util.List;
 public class IgnoreListRecyclerViewAdapter extends RecyclerView.Adapter<IgnoreListRecyclerViewAdapter.ViewHolder> {
 
     private final List<IgnoredContact> mValues;
+    private IgnoreContactListener mIgnoreContactListener;
 
-    public IgnoreListRecyclerViewAdapter(List<IgnoredContact> items) {
+    public IgnoreListRecyclerViewAdapter(List<IgnoredContact> items, IgnoreContactListener listener) {
         mValues = items;
+        mIgnoreContactListener = listener;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class IgnoreListRecyclerViewAdapter extends RecyclerView.Adapter<IgnoreLi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        IgnoredContact ignoredContact = mValues.get(position);
+        final IgnoredContact ignoredContact = mValues.get(position);
         holder.mItem = ignoredContact;
 
         holder.mName.setText(ignoredContact.getName());
@@ -43,7 +46,7 @@ public class IgnoreListRecyclerViewAdapter extends RecyclerView.Adapter<IgnoreLi
         holder.mBtnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Clicked on delete button", Toast.LENGTH_SHORT).show();
+                mIgnoreContactListener.onIgnoredContactRemoved(ignoredContact);
             }
         });
     }

@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/str_ignore_number"
+            android:maxLength="16"
             android:inputType="number|phone"
             tools:ignore="RtlHardcoded"/>
     </LinearLayout>
@@ -55,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:maxLength="32"
             android:hint="@string/str_ignore_name"
             android:inputType="text|textCapWords"
             tools:ignore="RtlHardcoded"/>

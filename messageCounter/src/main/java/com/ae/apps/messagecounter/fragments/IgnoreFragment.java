@@ -29,16 +29,21 @@ import android.widget.Toast;
 import com.ae.apps.common.views.EmptyRecyclerView;
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.adapters.IgnoreListRecyclerViewAdapter;
+import com.ae.apps.messagecounter.data.IgnoreContactListener;
+import com.ae.apps.messagecounter.managers.IgnoreNumbersManager;
 import com.ae.apps.messagecounter.models.IgnoredContact;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Manage Ignore lists
  */
-public class IgnoreFragment extends Fragment implements IgnoreDialogFragment.IgnoreDialogListener {
+public class IgnoreFragment extends Fragment implements IgnoreContactListener {
+
+    private List<IgnoredContact> mIgnoredContacts;
+    private IgnoreNumbersManager mIgnoreNumbersManager;
+    private IgnoreListRecyclerViewAdapter mRecyclerViewAdapter;
 
     public IgnoreFragment() {
         // Required empty public constructor
@@ -47,7 +52,7 @@ public class IgnoreFragment extends Fragment implements IgnoreDialogFragment.Ign
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_ignore, container, false);
-
+        mIgnoreNumbersManager =  new IgnoreNumbersManager(getContext());
         setupViews(layout);
 
         return layout;
@@ -65,20 +70,27 @@ public class IgnoreFragment extends Fragment implements IgnoreDialogFragment.Ign
         EmptyRecyclerView recyclerView = (EmptyRecyclerView) layout.findViewById(R.id.list);
         View emptyView = layout.findViewById(R.id.empty_view);
 
-        List<IgnoredContact> list = new ArrayList<>();
+        readIgnoredContacts();
 
-        IgnoredContact ic = new IgnoredContact();
-        ic.setName("Test");
-        ic.setNumber("(987654321)");
-        list.add(ic);
-        IgnoreListRecyclerViewAdapter recyclerViewAdapter = new IgnoreListRecyclerViewAdapter(list);
+        mRecyclerViewAdapter = new IgnoreListRecyclerViewAdapter(mIgnoredContacts, this);
 
         if (null != recyclerView) {
             Context context = layout.getContext();
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(recyclerViewAdapter);
+            recyclerView.setAdapter(mRecyclerViewAdapter);
             recyclerView.setEmptyView(emptyView);
         }
+    }
+
+    private void readIgnoredContacts() {
+        mIgnoredContacts = new ArrayList<>();
+
+        IgnoredContact ic = new IgnoredContact();
+        ic.setName("Test");
+        ic.setNumber("(987654321)");
+        //mIgnoredContacts.add(ic);
+
+        mIgnoredContacts = mIgnoreNumbersManager.allIgnoredNumbers();
     }
 
     private void showSelectIgnoreContactDialog() {
@@ -89,7 +101,21 @@ public class IgnoreFragment extends Fragment implements IgnoreDialogFragment.Ign
     }
 
     @Override
-    public void onContactSelected(IgnoredContact ignoredContact) {
+    public void onContactSelected(final IgnoredContact ignoredContact) {
         Toast.makeText(getActivity(), ignoredContact.toString(), Toast.LENGTH_SHORT).show();
+        if(null != mRecyclerViewAdapter && null != mIgnoredContacts){
+            mIgnoreNumbersManager.addIgnoredContact(ignoredContact);
+            mIgnoredContacts.add(ignoredContact);
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onIgnoredContactRemoved(IgnoredContact ignoredContact) {
+        if(null != mRecyclerViewAdapter && null != mIgnoredContacts) {
+            mIgnoreNumbersManager.removeIgnoredContact(ignoredContact);
+            mIgnoredContacts.remove(ignoredContact);
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
     }
 }

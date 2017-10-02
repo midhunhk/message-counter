@@ -181,4 +181,62 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
         return count;
     }
 
+    // ----------------------------------
+    // Operations on Ignore Table
+    // ----------------------------------
+
+    /**
+     * Return all Ignored Numbers
+     *
+     * @return
+     */
+    public Cursor allIgnoredContacts() {
+        return query(CounterDataBaseConstants.IGNORE_LIST_TABLE,
+                CounterDataBaseConstants.IGNORE_LIST_COLUMNS,
+                null, null, null, null, null);
+    }
+
+    /**
+     * Add a number to ignored table
+     *
+     * @param name Name
+     * @param number Number
+     * @return id of the newly inserted row
+     */
+    public long addNumberToIgnore(final String name, final String number){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CounterDataBaseConstants.IGNORE_LIST_NAME, name);
+        contentValues.put(CounterDataBaseConstants.IGNORE_LIST_NUMBER, number);
+        return insert(CounterDataBaseConstants.IGNORE_LIST_TABLE, contentValues);
+    }
+
+    /**
+     * Checks if a number is already ignored
+     *
+     * @param number number to compare
+     * @return true if number is present false otherwise
+     */
+    public boolean checkIgnoredNumber(final String number){
+        String[] selectionArgs = { number };
+        Cursor cursor = rawQuery("SELECT " + CounterDataBaseConstants.IGNORE_LIST_ID + " FROM "
+                + CounterDataBaseConstants.IGNORE_LIST_TABLE + " WHERE "
+                + CounterDataBaseConstants.IGNORE_LIST_NUMBER + " = ?", selectionArgs);
+        int count = cursor.getCount();
+        cursor.close();
+        return count > 0;
+    }
+
+    /**
+     * Removes a contact from Ignored table
+     *
+     * @param id id of ignoredContact to remove
+     */
+    public void removeNumberFromIgnore(long id){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CounterDataBaseConstants.IGNORE_LIST_ID, id);
+        delete(CounterDataBaseConstants.IGNORE_LIST_TABLE,
+                CounterDataBaseConstants.IGNORE_LIST_ID + " = ? ",
+                new String[]{ String.valueOf(id) });
+    }
+
 }
