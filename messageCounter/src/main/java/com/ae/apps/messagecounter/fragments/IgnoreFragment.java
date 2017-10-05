@@ -52,7 +52,7 @@ public class IgnoreFragment extends Fragment implements IgnoreContactListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_ignore, container, false);
-        mIgnoreNumbersManager =  new IgnoreNumbersManager(getContext());
+        mIgnoreNumbersManager =  IgnoreNumbersManager.getInstance(getContext());
         setupViews(layout);
 
         return layout;
@@ -90,7 +90,7 @@ public class IgnoreFragment extends Fragment implements IgnoreContactListener {
         ic.setNumber("(987654321)");
         //mIgnoredContacts.add(ic);
 
-        mIgnoredContacts = mIgnoreNumbersManager.allIgnoredNumbers();
+        mIgnoredContacts = mIgnoreNumbersManager.allIgnoredContacts();
     }
 
     private void showSelectIgnoreContactDialog() {

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.data.IgnoreContactListener;

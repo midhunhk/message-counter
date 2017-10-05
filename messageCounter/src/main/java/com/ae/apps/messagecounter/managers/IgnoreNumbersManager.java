@@ -16,38 +16,80 @@ import java.util.List;
  */
 public class IgnoreNumbersManager {
 
-    private final Context mContext;
+    private static IgnoreNumbersManager sInstance;
+    private final CounterDataBaseAdapter counterDataBase;
+    private transient List<String> mIgnoredNumbersCache;
 
     /**
      * Creates an instance of the IgnoreNumbersManager
+     *
      * @param context context
      */
-    public IgnoreNumbersManager(Context context){
-        mContext = context;
+    private IgnoreNumbersManager(Context context) {
+        counterDataBase = CounterDataBaseAdapter.getInstance(context);
+    }
+
+    public static IgnoreNumbersManager getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new IgnoreNumbersManager(context);
+        }
+        return sInstance;
     }
 
     /**
-     * Returns all ignored numbers from the database
+     * Returns all ignored numbers as IgnoredContact model
      *
      * @return List of IgnoredContacts
      */
-    public List<IgnoredContact> allIgnoredNumbers(){
-        CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(mContext);
+    public List<IgnoredContact> allIgnoredContacts() {
         List<IgnoredContact> ignoredContacts = new ArrayList<>();
 
         Cursor cursor = counterDataBase.allIgnoredContacts();
-        if(null != cursor && cursor.moveToFirst()){
+        if (null != cursor && cursor.moveToFirst()) {
             IgnoredContact ignoredContact;
-            do{
+            do {
                 ignoredContact = new IgnoredContact();
                 ignoredContact.setId(cursor.getString(cursor.getColumnIndex(CounterDataBaseConstants.IGNORE_LIST_ID)));
                 ignoredContact.setName(cursor.getString(cursor.getColumnIndex(CounterDataBaseConstants.IGNORE_LIST_NAME)));
                 ignoredContact.setNumber(cursor.getString(cursor.getColumnIndex(CounterDataBaseConstants.IGNORE_LIST_NUMBER)));
                 ignoredContacts.add(ignoredContact);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
             cursor.close();
         }
         return ignoredContacts;
+    }
+
+    /**
+     * Returns List of Ignored Numbers as a Collection of numbers
+     * Reads the data from the database initially and caches into a local
+     * List and serves from it until the cache is invalidated
+     *
+     * @see {IgnoreNumbersManager.invalidateIgnoredNumbersCache()}
+     *
+     * @return List of Ignored Numbers
+     */
+    protected List<String> getIgnoredNumbers(){
+        if(null == mIgnoredNumbersCache || mIgnoredNumbersCache.isEmpty()){
+            mIgnoredNumbersCache = new ArrayList<>();
+            String number;
+            Cursor cursor = counterDataBase.allIgnoredContacts();
+            if (null != cursor && cursor.moveToFirst()) {
+                do {
+                    number = cursor.getString(cursor.getColumnIndex(CounterDataBaseConstants.IGNORE_LIST_NUMBER));
+                    mIgnoredNumbersCache.add(number);
+                } while (cursor.moveToNext());
+                cursor.close();
+            }
+        }
+        return mIgnoredNumbersCache;
+    }
+
+    /**
+     * Invalidates the cached Ignored Numbers. Should be called when the database
+     * entries are added or removed
+     */
+    protected void invalidateIgnoredNumbersCache(){
+        mIgnoredNumbersCache = null;
     }
 
     /**
@@ -56,10 +98,10 @@ public class IgnoreNumbersManager {
      * @param ignoredContact new contact
      * @return Updated IgnoredContact with id
      */
-    public IgnoredContact addIgnoredContact(IgnoredContact ignoredContact){
-        CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(mContext);
+    public IgnoredContact addIgnoredContact(IgnoredContact ignoredContact) {
         long id = counterDataBase.addNumberToIgnore(ignoredContact.getName(), ignoredContact.getNumber());
         ignoredContact.setId(String.valueOf(id));
+        invalidateIgnoredNumbersCache();
         return ignoredContact;
     }
 
@@ -68,9 +110,9 @@ public class IgnoreNumbersManager {
      *
      * @param ignoredContact contact to be un ignored
      */
-    public void removeIgnoredContact(IgnoredContact ignoredContact){
-        CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(mContext);
+    public void removeIgnoredContact(IgnoredContact ignoredContact) {
         counterDataBase.removeNumberFromIgnore(Long.valueOf(ignoredContact.getId()));
+        invalidateIgnoredNumbersCache();
     }
 
     /**
@@ -79,9 +121,11 @@ public class IgnoreNumbersManager {
      * @param ignoredContact IgnoredContact to check
      * @return if number is already ignored or not
      */
-    public boolean checkIfNumberIgnored(IgnoredContact ignoredContact){
-        CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(mContext);
-        return counterDataBase.checkIgnoredNumber(ignoredContact.getNumber());
+    public boolean checkIfNumberIgnored(IgnoredContact ignoredContact) {
+        // return counterDataBase.checkIgnoredNumber(ignoredContact.getNumber());
+        // Checking against a local cache instead of hitting the database
+        // as there shouldn't be a lot of IgnoredNumbers in normal use cases
+        return getIgnoredNumbers().contains(ignoredContact.getNumber());
     }
 
 }
