@@ -36,8 +36,8 @@ public class MessageCounterTest {
         onView(withId(R.id.menu_counter))
                 .perform(click());
 
-        onView(withId(R.id.hero_card01))
-                .check(matches(isDisplayed()));
+        /*onView(withId(R.id.hero_card01))
+                .check(matches(isDisplayed()));*/
     }
 
     @Test
