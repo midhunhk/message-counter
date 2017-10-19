@@ -151,11 +151,8 @@ public class SentCountDataManager {
                     Log.d(TAG, "Open MessageCounterDatabase");
                     // Connect to the App's database
                     CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(context);
+                    IgnoreNumbersManager ignoreNumbersManager = IgnoreNumbersManager.getInstance(context);
 
-                    //Calendar calendar = Calendar.getInstance();
-                    //calendar.setTimeInMillis(Long.valueOf(lastMessageTimeStamp));
-
-                    // Log.d(TAG, "Start loop over result, pos " + newMessagesCursor.getPosition());
                     do {
                         Message message = MessageCounterUtils.getMessageFromCursor(newMessagesCursor);
 
@@ -167,8 +164,11 @@ public class SentCountDataManager {
                             // Count this message against the date it was sent
                             long dateIndex = MessageCounterUtils.getIndexFromDate(messageSentDate.getTime());
 
-                            counterDataBase.addMessageSentCounter(dateIndex, message.getMessagesCount());
-                            newMessagesAdded += message.getMessagesCount();
+                            // Valkyrie - Update the count only if the number is not present in the ignore list
+                            if(!ignoreNumbersManager.checkIfNumberIgnored(message.getAddress())) {
+                                counterDataBase.addMessageSentCounter(dateIndex, message.getMessagesCount());
+                                newMessagesAdded += message.getMessagesCount();
+                            }
                         }
                     } while (newMessagesCursor.moveToNext());
                 }

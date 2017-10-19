@@ -62,7 +62,7 @@ import java.util.Map;
  *
  * @author Midhun
  */
-public class MainActivity extends ToolBarBaseActivity implements MessageDataReader{
+public class MainActivity extends ToolBarBaseActivity implements MessageDataReader {
 
     private static final long NAV_MENU_DONATE = 4001;
     private static final long NAV_MENU_SETTINGS = 4002;
@@ -137,7 +137,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
                     data = MockContactDataUtils.getMockContactMessageList(getResources());
                 } else {
                     ContactMessageDataManager messageDataManager =
-                            new ContactMessageDataManager(getContentResolver(), getBaseContext());
+                            ContactMessageDataManager.getInstance(getContentResolver(), getBaseContext());
                     data = messageDataManager.getContactMessagesData();
                 }
                 isDataReady = true;
@@ -294,13 +294,13 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         mDrawerLayout.closeDrawers();
         final Context context = getBaseContext();
 
-        if(NAV_MENU_DONATE == id) {
+        if (NAV_MENU_DONATE == id) {
             startActivity(new Intent(context, DonationsActivity.class));
-        } else if(NAV_MENU_SHARE == id) {
+        } else if (NAV_MENU_SHARE == id) {
             startActivity(getShareIntent());
-        } else if(NAV_MENU_SETTINGS == id) {
+        } else if (NAV_MENU_SETTINGS == id) {
             startActivity(new Intent(this, SettingsActivity.class));
-        } else if(NAV_MENU_ABOUT == id) {
+        } else if (NAV_MENU_ABOUT == id) {
             startActivity(new Intent(this, AboutActivity.class));
         }
     }

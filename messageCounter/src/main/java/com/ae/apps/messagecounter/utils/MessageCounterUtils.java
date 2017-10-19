@@ -267,12 +267,14 @@ public class MessageCounterUtils {
         final String protocol = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_PROTOCOL));
         final String sentTime = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_DATE));
         final String body = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_BODY));
+        final String address = cursor.getString(cursor.getColumnIndex(MessagesTableConstants.COLUMN_NAME_ADDRESS));
 
         Message message = new Message();
         message.setId(messageId);
         message.setBody(body);
         message.setDate(sentTime);
         message.setProtocol(protocol);
+        message.setAddress(address);
 
         // Calculate the messages count for multipart messages
         int messagesCount = 1;

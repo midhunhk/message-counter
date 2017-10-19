@@ -64,12 +64,11 @@ public class IgnoreNumbersManager {
      * Reads the data from the database initially and caches into a local
      * List and serves from it until the cache is invalidated
      *
-     * @see {IgnoreNumbersManager.invalidateIgnoredNumbersCache()}
-     *
      * @return List of Ignored Numbers
+     * @see {IgnoreNumbersManager.invalidateIgnoredNumbersCache()}
      */
-    protected List<String> getIgnoredNumbers(){
-        if(null == mIgnoredNumbersCache || mIgnoredNumbersCache.isEmpty()){
+    protected List<String> getIgnoredNumbers() {
+        if (null == mIgnoredNumbersCache || mIgnoredNumbersCache.isEmpty()) {
             mIgnoredNumbersCache = new ArrayList<>();
             String number;
             Cursor cursor = counterDataBase.allIgnoredContacts();
@@ -88,7 +87,7 @@ public class IgnoreNumbersManager {
      * Invalidates the cached Ignored Numbers. Should be called when the database
      * entries are added or removed
      */
-    protected void invalidateIgnoredNumbersCache(){
+    protected void invalidateIgnoredNumbersCache() {
         mIgnoredNumbersCache = null;
     }
 
@@ -118,14 +117,17 @@ public class IgnoreNumbersManager {
     /**
      * Checks if a number is already ignored
      *
-     * @param ignoredContact IgnoredContact to check
+     * @param number number to check if its already ignored
      * @return if number is already ignored or not
      */
-    public boolean checkIfNumberIgnored(IgnoredContact ignoredContact) {
-        // return counterDataBase.checkIgnoredNumber(ignoredContact.getNumber());
+    public boolean checkIfNumberIgnored(String number) {
+        // If number is not present, we can't check if it present in the ignored list
+        if (null == number) {
+            return false;
+        }
         // Checking against a local cache instead of hitting the database
         // as there shouldn't be a lot of IgnoredNumbers in normal use cases
-        return getIgnoredNumbers().contains(ignoredContact.getNumber());
+        return getIgnoredNumbers().contains(number.replaceAll("\\+", ""));
     }
 
 }

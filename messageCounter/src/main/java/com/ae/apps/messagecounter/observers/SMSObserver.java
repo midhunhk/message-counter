@@ -36,6 +36,7 @@ import android.util.Log;
 import com.ae.apps.messagecounter.R;
 import com.ae.apps.messagecounter.activities.MainActivity;
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
+import com.ae.apps.messagecounter.managers.IgnoreNumbersManager;
 import com.ae.apps.messagecounter.managers.SentCountDataManager;
 import com.ae.apps.messagecounter.models.Message;
 import com.ae.apps.messagecounter.receivers.WidgetUpdateReceiver;
@@ -93,26 +94,34 @@ public class SMSObserver extends ContentObserver {
 
             // protocol will be null for sent messages
             if (message.getProtocol() == null && isNewMessage) {
-                updateMessageSentCount(message);
-                
-                // if sent count limit and notify on reaching the limit are enabled, we shall show a notification
-                showMessageLimitNotification();
+                // Consider as a new message sent only if this is not ignored
+                IgnoreNumbersManager ignoreNumbersManager = IgnoreNumbersManager.getInstance(mContext);
+                if(!ignoreNumbersManager.checkIfNumberIgnored(message.getAddress())) {
+                    updateMessageSentCount(message);
+
+                    // if sent count limit and notify on reaching the limit are enabled, we shall show a notification
+                    showMessageLimitNotification();
+
+                    // Send a broadcast to update our widgets
+                    sendWidgetUpdateBroadcast();
+                }
 
                 // Store this message id in case we get multiple callbacks for the same id
                 Log.d("SendSMSObserver", " An SMS was sent at " + message.getDate() + " with id " + message.getId());
-                sharedPreferences.edit()
-                        .putString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, message.getId())
-                        .apply();
-
-                // Store last message sent timestamp also
-                sharedPreferences.edit()
-                        .putString(AppConstants.PREF_KEY_LAST_SENT_TIME_STAMP, message.getDate())
-                        .apply();
-
-                // Send a broadcast to update our widgets
-                sendWidgetUpdateBroadcast();
+                updateLastSentMessageInfo(message, sharedPreferences);
             }
         }
+    }
+
+    private void updateLastSentMessageInfo(Message message, SharedPreferences sharedPreferences) {
+        sharedPreferences.edit()
+                .putString(AppConstants.PREF_KEY_LAST_SENT_MESSAGE_ID, message.getId())
+                .apply();
+
+        // Store last message sent timestamp also
+        sharedPreferences.edit()
+                .putString(AppConstants.PREF_KEY_LAST_SENT_TIME_STAMP, message.getDate())
+                .apply();
     }
 
     /**

@@ -37,6 +37,7 @@ import java.util.Set;
 
 public class ContactMessageDataManager {
 
+    private static ContactMessageDataManager sInstance;
     private SMSManager smsManager;
     private AeContactManager contactManager;
 
@@ -46,7 +47,7 @@ public class ContactMessageDataManager {
      * @param contentResolver content resolver
      * @param context         context
      */
-    public ContactMessageDataManager(ContentResolver contentResolver, Context context) {
+    private ContactMessageDataManager(ContentResolver contentResolver, Context context) {
         // Build an instance of ContactManager
         contactManager = new ContactManager.Builder(contentResolver, context.getResources())
                 .addContactsWithPhoneNumbers(false)
@@ -57,6 +58,20 @@ public class ContactMessageDataManager {
         contactManager.fetchAllContacts();
 
         smsManager = new SMSManager(context);
+    }
+
+    /**
+     * Returns an instance of ContactMessageDataManager
+     *
+     * @param contentResolver content resolver
+     * @param context the context
+     * @return an instance
+     */
+    public static ContactMessageDataManager getInstance(ContentResolver contentResolver, Context context) {
+        if (sInstance == null) {
+            sInstance = new ContactMessageDataManager(contentResolver, context);
+        }
+        return sInstance;
     }
 
     /**
