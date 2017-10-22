@@ -101,6 +101,7 @@ public class IgnoreNumbersManager {
      *
      * @param ignoredContact new contact
      * @return Updated IgnoredContact with id
+     * @see IgnoreNumbersManager#invalidateIgnoredNumbersCache()
      */
     public IgnoredContact addIgnoredContact(IgnoredContact ignoredContact) {
         String ignoredNumber = ignoredContact.getNumber().trim().replaceAll(" ", EMPTY_STRING);
@@ -114,6 +115,7 @@ public class IgnoreNumbersManager {
      * Remove an IgnoredContact from the ignored table
      *
      * @param ignoredContact contact to be un ignored
+     * @see IgnoreNumbersManager#invalidateIgnoredNumbersCache()
      */
     public void removeIgnoredContact(IgnoredContact ignoredContact) {
         counterDataBase.removeNumberFromIgnore(Long.valueOf(ignoredContact.getId()));
