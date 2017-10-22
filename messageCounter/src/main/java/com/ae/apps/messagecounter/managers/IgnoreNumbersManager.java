@@ -4,17 +4,23 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
-import com.ae.apps.messagecounter.db.CounterDataBaseConstants;
 import com.ae.apps.messagecounter.models.IgnoredContact;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.ae.apps.messagecounter.db.CounterDataBaseConstants.IGNORE_LIST_ID;
+import static com.ae.apps.messagecounter.db.CounterDataBaseConstants.IGNORE_LIST_NAME;
+import static com.ae.apps.messagecounter.db.CounterDataBaseConstants.IGNORE_LIST_NUMBER;
 
 /**
  * Manages the access to Ignore List table and logic for excluding Ignored numbers from
  * being counted by the message counter
  */
 public class IgnoreNumbersManager {
+
+    private static final String SYMBOL_PLUS_SIGN = "\\+";
+    private static final String EMPTY_STRING = "";
 
     private static IgnoreNumbersManager sInstance;
     private final CounterDataBaseAdapter counterDataBase;
@@ -49,9 +55,9 @@ public class IgnoreNumbersManager {
             IgnoredContact ignoredContact;
             do {
                 ignoredContact = new IgnoredContact();
-                ignoredContact.setId(cursor.getString(cursor.getColumnIndex(CounterDataBaseConstants.IGNORE_LIST_ID)));
-                ignoredContact.setName(cursor.getString(cursor.getColumnIndex(CounterDataBaseConstants.IGNORE_LIST_NAME)));
-                ignoredContact.setNumber(cursor.getString(cursor.getColumnIndex(CounterDataBaseConstants.IGNORE_LIST_NUMBER)));
+                ignoredContact.setId(cursor.getString(cursor.getColumnIndex(IGNORE_LIST_ID)));
+                ignoredContact.setName(cursor.getString(cursor.getColumnIndex(IGNORE_LIST_NAME)));
+                ignoredContact.setNumber(cursor.getString(cursor.getColumnIndex(IGNORE_LIST_NUMBER)));
                 ignoredContacts.add(ignoredContact);
             } while (cursor.moveToNext());
             cursor.close();
@@ -65,16 +71,15 @@ public class IgnoreNumbersManager {
      * List and serves from it until the cache is invalidated
      *
      * @return List of Ignored Numbers
-     * @see {IgnoreNumbersManager.invalidateIgnoredNumbersCache()}
      */
-    protected List<String> getIgnoredNumbers() {
+    private List<String> getIgnoredNumbers() {
         if (null == mIgnoredNumbersCache || mIgnoredNumbersCache.isEmpty()) {
             mIgnoredNumbersCache = new ArrayList<>();
             String number;
             Cursor cursor = counterDataBase.allIgnoredContacts();
             if (null != cursor && cursor.moveToFirst()) {
                 do {
-                    number = cursor.getString(cursor.getColumnIndex(CounterDataBaseConstants.IGNORE_LIST_NUMBER));
+                    number = cursor.getString(cursor.getColumnIndex(IGNORE_LIST_NUMBER));
                     mIgnoredNumbersCache.add(number);
                 } while (cursor.moveToNext());
                 cursor.close();
@@ -87,7 +92,7 @@ public class IgnoreNumbersManager {
      * Invalidates the cached Ignored Numbers. Should be called when the database
      * entries are added or removed
      */
-    protected void invalidateIgnoredNumbersCache() {
+    private void invalidateIgnoredNumbersCache() {
         mIgnoredNumbersCache = null;
     }
 
@@ -98,7 +103,8 @@ public class IgnoreNumbersManager {
      * @return Updated IgnoredContact with id
      */
     public IgnoredContact addIgnoredContact(IgnoredContact ignoredContact) {
-        long id = counterDataBase.addNumberToIgnore(ignoredContact.getName(), ignoredContact.getNumber());
+        String ignoredNumber = ignoredContact.getNumber().trim().replaceAll(" ", EMPTY_STRING);
+        long id = counterDataBase.addNumberToIgnore(ignoredContact.getName(), ignoredNumber);
         ignoredContact.setId(String.valueOf(id));
         invalidateIgnoredNumbersCache();
         return ignoredContact;
@@ -127,7 +133,7 @@ public class IgnoreNumbersManager {
         }
         // Checking against a local cache instead of hitting the database
         // as there shouldn't be a lot of IgnoredNumbers in normal use cases
-        return getIgnoredNumbers().contains(number.replaceAll("\\+", ""));
+        return getIgnoredNumbers().contains(number.replaceAll(SYMBOL_PLUS_SIGN, EMPTY_STRING));
     }
 
 }
