@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
         android:background="@drawable/navbar_bg"
         android:padding="@dimen/padding_medium">
 
@@ -19,9 +19,9 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingEnd="0dp"
-            android:paddingLeft="90dip"
+            android:paddingLeft="105dip"
             android:paddingRight="0dp"
-            android:paddingStart="90dip"
+            android:paddingStart="105dip"
             android:text="@string/app_code_name"
             android:textColor="@color/white"
             android:textSize="@dimen/card_title"

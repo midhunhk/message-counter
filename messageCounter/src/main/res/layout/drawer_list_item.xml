@@ -23,9 +23,9 @@
         android:layout_toEndOf="@id/icon"
         android:layout_toRightOf="@id/icon"
         android:gravity="center_vertical"
-        android:padding="@dimen/padding_medium"
+        android:padding="@dimen/padding_small"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/item_title"
+        android:textSize="@dimen/card_title"
         android:textStyle="bold"/>
 
 </RelativeLayout>
