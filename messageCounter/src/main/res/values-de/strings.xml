@@ -81,4 +81,12 @@
     <string name="str_offline_messages">Zählen Sie offline Nachrichten</string>
     <string name="str_pref_offline_message_desc">Überprüfen Sie nach Nachrichten, die gesendet wurden, während der Hintergrunddienst beim nächsten Start offline war</string>
 
+    <!-- added for 3.3.0 -->
+    <string name="str_ignore_title">Ignorieren</string>
+    <string name="str_ignore_add_number">Hinzufügen einer Nummer</string>
+    <string name="str_ignore_add_to_ignore_list">Hinzufügen zur Ignore-Liste</string>
+    <string name="str_ignore_btn_ignore">Ignorieren</string>
+    <string name="str_ignore_name">Name</string>
+    <string name="str_ignore_number">Anzahl</string>
+    <string name="str_ignore_empty_list">Starten Sie durch hinzufügen einer Nummer zu ignorieren</string>
 </resources>
