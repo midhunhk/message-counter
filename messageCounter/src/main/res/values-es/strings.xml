@@ -69,8 +69,8 @@
     <string name="str_donate_title">donar</string>
     <string name="str_donate_text">Contador de Mensajes es un proyecto de código abierto desarrollado en mi tiempo libre. Cualquier tipo de contribución ayuda a añadir características o bugs swat. Gracias!</string>
     <string name="str_donate_disclaimer">Las donaciones no estarán en lugar de características adicionales. Google tiene el 30% de las compras como las comisiones por transacciones.</string>
-	<string name="str_donate_thanks">Gracias por la donación de usted!</string>
-	<string name="str_donate_fail">Donación falló. Por favor, inténtelo de nuevo más tarde.</string>
+    <string name="str_donate_thanks">Gracias por la donación de usted!</string>
+    <string name="str_donate_fail">Donación falló. Por favor, inténtelo de nuevo más tarde.</string>
     <string name="str_donate_small">Cómprame un chocolate</string>
     <string name="str_donate_medium">Cómprame un helado</string>
     <string name="str_donate_large">Cómprame Cena</string>
@@ -81,4 +81,13 @@
     <string name="str_offline_messages">Cuenta mensajes fuera de línea</string>
     <string name="str_pref_offline_message_desc">Para verificar los mensajes enviados mientras que el fondo estaba fuera de línea en el siguiente Inicio</string>
 
+    <!-- added for 3.3.0 -->
+    <string name="str_ignore_title">Ignorar</string>
+    <string name="str_ignore_add_number">Agregar un Número de</string>
+    <string name="str_ignore_add_to_ignore_list">Añadir a la Lista de ignorados</string>
+    <string name="str_ignore_btn_ignore">Ignorar</string>
+    <string name="str_ignore_name">Nombre</string>
+    <string name="str_ignore_number">Número de</string>
+    <string name="str_ignore_empty_list">Empiece por la adición de un número a ignorar</string>
+	
 </resources>
