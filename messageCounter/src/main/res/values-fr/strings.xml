@@ -88,6 +88,6 @@
     <string name="str_ignore_btn_ignore">Ignorer</string>
     <string name="str_ignore_name">Nom</string>
     <string name="str_ignore_number">Nombre</string>
-    <string name="str_ignore_empty_list">Commencez par ajouter un certain nombre d'ignorer</string>
+    <string name="str_ignore_empty_list">Commencez par ajouter un certain nombre d\'ignorer</string>
 	
 </resources>
