@@ -41,13 +41,14 @@ public class IgnoreNumberTest {
 
     @Test
     public void ignoreNumberTest() {
-        ViewInteraction bottomNavigationItemView = onView(withId(R.id.menu_ignore));
-        bottomNavigationItemView.perform(click());
+        // Click on the Ignore Menu
+        onView(withId(R.id.menu_ignore)).perform(click());
+        onView(withId(R.id.menu_ignore)).perform(click());
 
-        ViewInteraction appCompatButton = onView(withId(R.id.btnShowIgnoreDialog));
-        appCompatButton.perform(click());
+        // Click on the Show Dialog button
+        onView(withId(R.id.btnShowIgnoreDialog)).perform(click());
 
-        ViewInteraction textView = onView(
+        /*ViewInteraction textView = onView(
                 allOf(withText("Add To Ignore List"),
                         childAtPosition(
                                 allOf(withId(R.id.addTripDialogHeader),
@@ -56,22 +57,19 @@ public class IgnoreNumberTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("Add To Ignore List")));
+        textView.check(matches(withText("Add To Ignore List")));*/
+        // onView(withId(R.id.buttonDelete)).check(matches(isDisplayed()));
+        
+        // Enter sample data
+        onView(withId(R.id.txtIgnoreNumber)).perform(replaceText(IGNORE_NUMBER), closeSoftKeyboard());
+        onView(withId(R.id.txtIgnoreName)).perform(replaceText(IGNORE_NAME), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText = onView(withId(R.id.txtIgnoreNumber));
-        appCompatEditText.perform(replaceText(IGNORE_NUMBER), closeSoftKeyboard());
+        // Click on the Add Ignore Contact button
+        onView(withId(R.id.btnIgnoreContact)).perform(click());
 
-        ViewInteraction appCompatEditText2 = onView(withId(R.id.txtIgnoreName));
-        appCompatEditText2.perform(replaceText(IGNORE_NAME), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton2 = onView(withId(R.id.btnIgnoreContact));
-        appCompatButton2.perform(click());
-
-        ViewInteraction textView2 = onView(allOf(withId(R.id.ignoreItemNumber), withText(IGNORE_NUMBER)));
-        textView2.check(matches(withText(IGNORE_NUMBER)));
-
-        ViewInteraction textView3 = onView(allOf(withId(R.id.ignoreItemName), withText(IGNORE_NAME)));
-        textView3.check(matches(withText(IGNORE_NAME)));
+        // Check if the data entered exists
+        onView(allOf(withId(R.id.ignoreItemNumber), withText(IGNORE_NUMBER))).check(matches(withText(IGNORE_NUMBER)));
+        onView(allOf(withId(R.id.ignoreItemName), withText(IGNORE_NAME))).check(matches(withText(IGNORE_NAME)));
     }
 
     //@Test
