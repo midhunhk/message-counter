@@ -69,7 +69,7 @@ public class DonationsActivity extends DonationsBaseActivity {
 		@Override
 		public void onClick(View v) {
 			// Identify the donation type
-			String productCode = null;
+			String productCode;
 			switch(v.getId()){
 			case R.id.btnDonateSmall:
 				productCode = SKU_SMALL;
@@ -120,7 +120,7 @@ public class DonationsActivity extends DonationsBaseActivity {
 			sharedPreferences
 				.edit()
 				.putInt(AppConstants.PREF_KEY_DONATIONS_MADE, donationCount)
-				.commit();
+				.apply();
 			DialogUtils.showMaterialInfoDialog(this, R.string.menu_donate, R.string.str_donate_thanks, android.R.string.ok);
 		} else {
 			// handle error scenarios
