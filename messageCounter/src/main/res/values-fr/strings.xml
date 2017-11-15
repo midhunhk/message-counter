@@ -81,4 +81,13 @@
     <string name="str_offline_messages">Nombre de Messages hors ligne</string>
     <string name="str_pref_offline_message_desc">Recherchez les messages envoyés pendant que le service de fond a été déconnecté au prochain démarrage</string>
 
+    <!-- added for 3.3.0 -->
+    <string name="str_ignore_title">Ignorer</string>
+    <string name="str_ignore_add_number">Ajouter un Numéro de</string>
+    <string name="str_ignore_add_to_ignore_list">Ajouter à la Liste des ignorés</string>
+    <string name="str_ignore_btn_ignore">Ignorer</string>
+    <string name="str_ignore_name">Nom</string>
+    <string name="str_ignore_number">Nombre</string>
+    <string name="str_ignore_empty_list">Commencez par ajouter un certain nombre d\'ignorer</string>
+	
 </resources>
