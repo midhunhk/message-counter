@@ -1,6 +1,6 @@
 package com.ae.apps.messagecounter.activities;
 
-
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -41,6 +41,8 @@ public class IgnoreNumberTest {
 
     @Test
     public void ignoreNumberTest() {
+        Espresso.pressBack();
+        
         // Click on the Ignore Menu
         onView(withId(R.id.menu_ignore)).perform(click());
         onView(withId(R.id.menu_ignore)).perform(click());
