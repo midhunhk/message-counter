@@ -5,8 +5,8 @@
     <string name="title_counter">Zähler</string>
 
     <string name="app_name">Nachrichtenzähler</string>
-    <string name="app_version">Version 3.2.1</string>
-    <string name="app_code_name">Einhorn</string>
+    <string name="app_version">Version 3.3.0</string>
+    <string name="app_code_name">Walküre</string>
     <string name="app_release_date">Aug 2017</string>
     <string name="app_desc">Message Counter zeigt Nachrichten Posteingangsstatistiken und Anzahl der Nachrichten von jedem Ihrer Kontakte an.</string>
     <string name="app_disclaim">Haftungsausschluss: Diese App wird für pädagogische Zwecke erstellt und hat daher keine Garantie oder Unterstützung. Da undokumentierte Android-APIs verwendet werden, funktioniert diese App möglicherweise nicht wie erwartet auf allen Geräten.</string>

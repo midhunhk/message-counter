@@ -7,7 +7,7 @@ android {
         applicationId "com.ae.apps.messagecounter"
         minSdkVersion 9
         targetSdkVersion 22
-        versionCode 391
+        versionCode 392
         versionName "3.3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

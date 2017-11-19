@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ae.apps.messagecounter"
-    android:versionCode="391"
+    android:versionCode="392"
     android:versionName="3.3.0" >
 
     <!-- Declare the permissions required -->
