@@ -27,7 +27,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            outputFileName = "message-counter-${variant.name}-${variant.versionName}-build-${variant.versionCode}.apk"
+            outputFileName = "messageCounter-${variant.name}-${variant.versionName}-build-${variant.versionCode}.apk"
         }
     }
 
