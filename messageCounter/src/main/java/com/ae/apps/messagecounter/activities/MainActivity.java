@@ -23,7 +23,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -46,7 +45,6 @@ import com.ae.apps.messagecounter.adapters.NavDrawerListAdapter;
 import com.ae.apps.messagecounter.adapters.SectionsPagerAdapter;
 import com.ae.apps.messagecounter.data.MessageDataConsumer;
 import com.ae.apps.messagecounter.data.MessageDataReader;
-import com.ae.apps.messagecounter.fragments.SentCountFragment;
 import com.ae.apps.messagecounter.managers.ContactMessageDataManager;
 import com.ae.apps.messagecounter.utils.AppConstants;
 import com.ae.apps.messagecounter.utils.BottomNavigationViewHelper;
@@ -68,6 +66,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
     private static final long NAV_MENU_SETTINGS = 4002;
     private static final long NAV_MENU_SHARE = 4003;
     private static final long NAV_MENU_ABOUT = 4004;
+    private static final String BACK_STACK_ROOT_TAG = "root_fragment";
 
     private boolean isDataReady;
     private Handler mHandler;
@@ -86,11 +85,12 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
 
         if (null == savedInstanceState) {
             // Message Counter is the default fragment
-            getSupportFragmentManager()
+            showFragmentContent(R.id.menu_counter);
+            /*getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.container, new SentCountFragment())
                     .commit();
-            setToolbarTitle(mSectionsAdapter.getPageTitle(0));
+            setToolbarTitle(mSectionsAdapter.getPageTitle(0));*/
         }
 
         final SMSManager smsManager = new SMSManager(getBaseContext());
@@ -106,8 +106,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         setupBottomNavigationView();
 
         consumeMessagesDataAsync();
-
-        // getToolBar().inflateMenu(R.menu.activity_main);
 
         showNavDrawerIntro();
     }
@@ -231,7 +229,12 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
             mDrawerLayout.closeDrawers();
             return;
         }
-        super.onBackPressed();
+
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -280,10 +283,11 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         return R.layout.activity_main;
     }
 
-    private void showFragmentContent(@IntegerRes int itemId) {
+    private void showFragmentContent(int itemId) {
         Fragment fragment = mSectionsAdapter.getItem(itemId);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
+                .addToBackStack(BACK_STACK_ROOT_TAG)
                 .commit();
 
         // Display the section header in the title
