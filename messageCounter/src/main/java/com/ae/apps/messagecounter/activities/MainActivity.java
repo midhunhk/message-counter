@@ -168,7 +168,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         });
 
         // Disable shiftingMode for the BottomNavigationView so we can properly display more than 3 items
-        /* Used to work on design lib v25.3.1, not working when upgraded to v25.4.0*/
         BottomNavigationViewHelper.disableShiftingMode(bottomNavigationView);
     }
 

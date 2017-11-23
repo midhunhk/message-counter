@@ -2,6 +2,7 @@ package com.ae.apps.messagecounter.managers;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.ae.apps.messagecounter.db.CounterDataBaseAdapter;
 import com.ae.apps.messagecounter.models.IgnoredContact;
@@ -19,6 +20,7 @@ import static com.ae.apps.messagecounter.db.CounterDataBaseConstants.IGNORE_LIST
  */
 public class IgnoreNumbersManager {
 
+    private static final String TAG = "IgnoreNumbersManager";
     private static final String SYMBOL_PLUS_SIGN = "\\+";
     private static final String EMPTY_STRING = "";
 
@@ -62,6 +64,7 @@ public class IgnoreNumbersManager {
             } while (cursor.moveToNext());
             cursor.close();
         }
+        Log.d(TAG, "IgnoredContactsCount " + ignoredContacts.size());
         return ignoredContacts;
     }
 
@@ -105,8 +108,10 @@ public class IgnoreNumbersManager {
      */
     public IgnoredContact addIgnoredContact(IgnoredContact ignoredContact) {
         String ignoredNumber = ignoredContact.getNumber().trim().replaceAll(" ", EMPTY_STRING);
+        Log.d(TAG, "Add Ignored contact [" + ignoredNumber + "]");
         long id = counterDataBase.addNumberToIgnore(ignoredContact.getName(), ignoredNumber);
         ignoredContact.setId(String.valueOf(id));
+        Log.d(TAG, "Added Ignored contact with id:" + ignoredContact.getId());
         invalidateIgnoredNumbersCache();
         return ignoredContact;
     }
@@ -118,6 +123,7 @@ public class IgnoreNumbersManager {
      * @see IgnoreNumbersManager#invalidateIgnoredNumbersCache()
      */
     public void removeIgnoredContact(IgnoredContact ignoredContact) {
+        Log.d(TAG, "Remove Ignored contact with id" + ignoredContact.getId());
         counterDataBase.removeNumberFromIgnore(Long.valueOf(ignoredContact.getId()));
         invalidateIgnoredNumbersCache();
     }
@@ -128,14 +134,15 @@ public class IgnoreNumbersManager {
      * @param number number to check if its already ignored
      * @return if number is already ignored or not
      */
-    public boolean checkIfNumberIgnored(String number) {
+    public boolean checkIfNumberIgnored(final String number) {
         // If number is not present, we can't check if it present in the ignored list
         if (null == number) {
             return false;
         }
         // Checking against a local cache instead of hitting the database
         // as there shouldn't be a lot of IgnoredNumbers in normal use cases
-        return getIgnoredNumbers().contains(number.replaceAll(SYMBOL_PLUS_SIGN, EMPTY_STRING));
+        String unformattedNumber = number.replaceAll(SYMBOL_PLUS_SIGN, EMPTY_STRING);
+        return getIgnoredNumbers().contains(unformattedNumber);
     }
 
 }
