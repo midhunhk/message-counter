@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/str_ignore_number"
-            android:maxLength="16"
+            android:maxLength="32"
             android:inputType="number|phone"
             tools:ignore="RtlHardcoded"/>
     </LinearLayout>
