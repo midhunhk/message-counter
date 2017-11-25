@@ -50,9 +50,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (i) {
             case R.id.menu_counter:
-                if (null == mSentCountFragment) {
-                    mSentCountFragment = new SentCountFragment();
-                }
+                checkAndCreateSentCountFragment();
                 fragment = mSentCountFragment;
                 break;
             case R.id.menu_ignore:
@@ -75,7 +73,18 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 break;
         }
 
+        if(null == fragment){
+            checkAndCreateSentCountFragment();
+            fragment = mSentCountFragment;
+        }
+
         return fragment;
+    }
+
+    private void checkAndCreateSentCountFragment() {
+        if (null == mSentCountFragment) {
+            mSentCountFragment = new SentCountFragment();
+        }
     }
 
     @Override

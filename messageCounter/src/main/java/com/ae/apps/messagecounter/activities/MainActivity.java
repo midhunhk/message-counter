@@ -55,18 +55,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.ae.apps.messagecounter.utils.AppConstants.NAV_MENU_ABOUT;
+import static com.ae.apps.messagecounter.utils.AppConstants.NAV_MENU_DONATE;
+import static com.ae.apps.messagecounter.utils.AppConstants.NAV_MENU_SETTINGS;
+import static com.ae.apps.messagecounter.utils.AppConstants.NAV_MENU_SHARE;
+
 /**
  * Main Activity and one entry point to this application
  *
  * @author Midhun
  */
 public class MainActivity extends ToolBarBaseActivity implements MessageDataReader {
-
-    private static final long NAV_MENU_DONATE = 4001;
-    private static final long NAV_MENU_SETTINGS = 4002;
-    private static final long NAV_MENU_SHARE = 4003;
-    private static final long NAV_MENU_ABOUT = 4004;
-    private static final String BACK_STACK_ROOT_TAG = "root_fragment";
 
     private boolean isDataReady;
     private Handler mHandler;
@@ -86,11 +85,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         if (null == savedInstanceState) {
             // Message Counter is the default fragment
             showFragmentContent(R.id.menu_counter);
-            /*getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.container, new SentCountFragment())
-                    .commit();
-            setToolbarTitle(mSectionsAdapter.getPageTitle(0));*/
         }
 
         final SMSManager smsManager = new SMSManager(getBaseContext());
@@ -287,7 +281,6 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
         Fragment fragment = mSectionsAdapter.getItem(itemId);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
-                .addToBackStack(BACK_STACK_ROOT_TAG)
                 .commit();
 
         // Display the section header in the title
