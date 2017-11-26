@@ -223,12 +223,7 @@ public class MainActivity extends ToolBarBaseActivity implements MessageDataRead
             mDrawerLayout.closeDrawers();
             return;
         }
-
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        } else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 
     @Override
