@@ -1,21 +1,23 @@
 Message Counter
 ===============
 [![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=unicorn_r2)](https://travis-ci.org/midhunhk/message-counter) 
-[![Release](https://img.shields.io/github/release/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/releases) 
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/v3.2.0.svg)](https://github.com/midhunhk/message-counter) 
-[![Issues](https://img.shields.io/github/issues/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/issues) 
 ![](https://img.shields.io/badge/api-9+-008080.svg)
+[![Release](https://img.shields.io/github/release/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/releases) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/V3.2.1.svg)](https://github.com/midhunhk/message-counter) 
+[![Issues](https://img.shields.io/github/issues/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/issues) 
+[![](https://img.shields.io/badge/codename-valkyrie-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
 
 <img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/master/docs/images/002.png" width="560"/>
 
 [Project Wiki](https://github.com/midhunhk/message-counter/wiki) | [Github Page](http://midhunhk.github.io/message-counter)
 
-Message Counter is an app for Android. It counts the number of SMS sent in a cycle and notifies you when you have reached the cycle limit. It supports API 8 (Froyo) and above.
+Message Counter is an Android app that counts the number of SMS sent in a cycle. It also notifies you when you have reached the cycle limit. It supports API 9 (Gingerbread) and above.
 
 ## Features
-- Shows the number of SMS messages in inbox, sent and total.
+- Shows the SMS messages count in inbox, sent, draft and total.
 - Shows number of SMS sent per each cycle
 - Notify when SMS limit per cycle is reached
+- Ignore SMS sent to configurable numbers
 - Sorted list of contact and message count from them
 - Material Design
 - Widgets!
@@ -35,6 +37,7 @@ Open the project in Android Studio
  
 ## Dependencies
  - ae-apps-library (https://github.com/midhunhk/ae-apps-library)
+The AeAppsLibrary is configured as a compile dependency in gradle file and would be available when you sync the project for the first time.
 
 ## Milestones
 https://github.com/midhunhk/message-counter/milestones

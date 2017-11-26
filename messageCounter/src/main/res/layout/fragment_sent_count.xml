@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginRight="@dimen/margin_small"
-        android:padding="@dimen/padding_small" >
+        android:padding="0dp" >
 
         <!-- enabled layout -->
 

@@ -61,4 +61,13 @@ public class Message {
     String date;
     String person;
     String protocol;
+    private String address;
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }

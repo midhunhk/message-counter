@@ -18,6 +18,7 @@ package com.ae.apps.messagecounter.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.ae.apps.common.db.DataBaseHelper;
 
@@ -28,15 +29,43 @@ import com.ae.apps.common.db.DataBaseHelper;
  */
 public class CounterDataBaseAdapter extends DataBaseHelper {
 
+    private static volatile CounterDataBaseAdapter sInstance;
+    private static final Object sMutex = new Object();
+
+    /**
+     * A thread safe factory method that returns the only instance of the CounterDataBaseAdapter
+     *
+     * @param context context required by the DataBaseHelper
+     * @return Only instance of CounterDataBaseAdapter
+     */
+    public static CounterDataBaseAdapter getInstance(Context context){
+        if(null == sInstance){
+            synchronized (sMutex){
+                if (null == sInstance){
+                    sInstance = new CounterDataBaseAdapter(context);
+                }
+            }
+        }
+        return sInstance;
+    }
 
     /**
      * Create an instance of CounterDataBaseAdapter
      *
      * @param context context
      */
-    public CounterDataBaseAdapter(Context context) {
+    private CounterDataBaseAdapter(Context context) {
         super(context, CounterDataBaseConstants.DATABASE_NAME, null,
                 CounterDataBaseConstants.DATABASE_VERSION, CounterDataBaseConstants.CREATE_TABLES_SQL);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        super.onUpgrade(db, oldVersion, newVersion);
+        if(oldVersion < 2){
+            // Ignore List table added with db version 2
+            db.execSQL(CounterDataBaseConstants.IGNORE_LIST_SQL);
+        }
     }
 
     /**
@@ -45,7 +74,8 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
      * @return cursor
      */
     public Cursor getAllCountInfo() {
-        return query(CounterDataBaseConstants.TABLE_COUNTER, CounterDataBaseConstants.DATA_PROJECTION,
+        return query(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE,
+                CounterDataBaseConstants.MESSAGE_COUNTER_COLUMNS,
                 null, null, null, null, null);
     }
 
@@ -58,13 +88,13 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
     public int getCountValueForDay(long dateIndex) {
         int returnValue;
         String[] args = {String.valueOf(dateIndex)};
-        Cursor cursor = query(CounterDataBaseConstants.TABLE_COUNTER, CounterDataBaseConstants.DATA_PROJECTION,
-                CounterDataBaseConstants.KEY_DATE + " = ? ", args, null, null, null);
+        Cursor cursor = query(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE, CounterDataBaseConstants.MESSAGE_COUNTER_COLUMNS,
+                CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX + " = ? ", args, null, null, null);
         if (null == cursor || cursor.getCount() == 0) {
             returnValue = -1;
         } else {
             cursor.moveToNext();
-            returnValue = cursor.getInt(cursor.getColumnIndex(CounterDataBaseConstants.KEY_COUNT));
+            returnValue = cursor.getInt(cursor.getColumnIndex(CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT));
         }
 
         if(null != cursor) cursor.close();
@@ -91,20 +121,20 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
 
         int currentCount = getCountValueForDay(dateIndex);
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CounterDataBaseConstants.KEY_DATE, dateIndex);
+        contentValues.put(CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX, dateIndex);
         long result;
 
         if (currentCount == -1) {
             // no rows exist for this day, so insert a new row
-            contentValues.put(CounterDataBaseConstants.KEY_COUNT, messageCount);
-            result = insert(CounterDataBaseConstants.TABLE_COUNTER, contentValues);
+            contentValues.put(CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT, messageCount);
+            result = insert(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE, contentValues);
         } else {
             // update the count for this day
             int updatedCount = currentCount + messageCount;
-            contentValues.put(CounterDataBaseConstants.KEY_COUNT, updatedCount);
+            contentValues.put(CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT, updatedCount);
             String[] whereArgs = {dateIndex + ""};
-            result = update(CounterDataBaseConstants.TABLE_COUNTER, contentValues,
-                    CounterDataBaseConstants.KEY_DATE + " = ? ", whereArgs);
+            result = update(CounterDataBaseConstants.MESSAGE_COUNTER_TABLE, contentValues,
+                    CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX + " = ? ", whereArgs);
         }
         return result;
     }
@@ -119,9 +149,9 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
         int count = 0;
         String[] selectionArgs = {startDateIndex + ""};
         Cursor cursor = rawQuery(
-                "SELECT SUM(" + CounterDataBaseConstants.KEY_COUNT + ") FROM "
-                        + CounterDataBaseConstants.TABLE_COUNTER
-                        + " WHERE " + CounterDataBaseConstants.KEY_DATE + " >= ?", selectionArgs);
+                "SELECT SUM(" + CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT + ") FROM "
+                        + CounterDataBaseConstants.MESSAGE_COUNTER_TABLE
+                        + " WHERE " + CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX + " >= ?", selectionArgs);
         if (cursor.moveToFirst()) {
             count = cursor.getInt(0);
         }
@@ -140,15 +170,73 @@ public class CounterDataBaseAdapter extends DataBaseHelper {
     public int getTotalSentCountBetween(long startDateIndex, long endDateIndex) {
         int count = 0;
         String[] selectionArgs = {startDateIndex + "", endDateIndex + ""};
-        Cursor cursor = rawQuery("SELECT SUM(" + CounterDataBaseConstants.KEY_COUNT + ") FROM "
-                + CounterDataBaseConstants.TABLE_COUNTER + " WHERE "
-                + CounterDataBaseConstants.KEY_DATE + " BETWEEN ? AND ?", selectionArgs);
+        Cursor cursor = rawQuery("SELECT SUM(" + CounterDataBaseConstants.MESSAGE_COUNTER_SENT_COUNT + ") FROM "
+                + CounterDataBaseConstants.MESSAGE_COUNTER_TABLE + " WHERE "
+                + CounterDataBaseConstants.MESSAGE_COUNTER_DATE_INDEX + " BETWEEN ? AND ?", selectionArgs);
         if (cursor.moveToFirst()) {
             count = cursor.getInt(0);
         }
         cursor.close();
 
         return count;
+    }
+
+    // ----------------------------------
+    // Operations on Ignore Table
+    // ----------------------------------
+
+    /**
+     * Return all Ignored Numbers
+     *
+     * @return
+     */
+    public Cursor allIgnoredContacts() {
+        return query(CounterDataBaseConstants.IGNORE_LIST_TABLE,
+                CounterDataBaseConstants.IGNORE_LIST_COLUMNS,
+                null, null, null, null, null);
+    }
+
+    /**
+     * Add a number to ignored table
+     *
+     * @param name Name
+     * @param number Number
+     * @return id of the newly inserted row
+     */
+    public long addNumberToIgnore(final String name, final String number){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CounterDataBaseConstants.IGNORE_LIST_NAME, name);
+        contentValues.put(CounterDataBaseConstants.IGNORE_LIST_NUMBER, number);
+        return insert(CounterDataBaseConstants.IGNORE_LIST_TABLE, contentValues);
+    }
+
+    /**
+     * Checks if a number is already ignored
+     *
+     * @param number number to compare
+     * @return true if number is present false otherwise
+     */
+    public boolean checkIgnoredNumber(final String number){
+        String[] selectionArgs = { number };
+        Cursor cursor = rawQuery("SELECT " + CounterDataBaseConstants.IGNORE_LIST_ID + " FROM "
+                + CounterDataBaseConstants.IGNORE_LIST_TABLE + " WHERE "
+                + CounterDataBaseConstants.IGNORE_LIST_NUMBER + " = ?", selectionArgs);
+        int count = cursor.getCount();
+        cursor.close();
+        return count > 0;
+    }
+
+    /**
+     * Removes a contact from Ignored table
+     *
+     * @param id id of ignoredContact to remove
+     */
+    public void removeNumberFromIgnore(long id){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CounterDataBaseConstants.IGNORE_LIST_ID, id);
+        delete(CounterDataBaseConstants.IGNORE_LIST_TABLE,
+                CounterDataBaseConstants.IGNORE_LIST_ID + " = ? ",
+                new String[]{ String.valueOf(id) });
     }
 
 }

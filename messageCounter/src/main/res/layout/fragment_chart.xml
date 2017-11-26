@@ -3,13 +3,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:padding="@dimen/padding_medium">
+              android:padding="@dimen/padding_small">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_margin"
-        android:padding="@dimen/card_padding"
+        app:contentPadding="@dimen/padding_small"
         app:cardUseCompatPadding="true" >
 
         <LinearLayout

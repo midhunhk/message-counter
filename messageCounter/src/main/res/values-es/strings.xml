@@ -5,9 +5,9 @@
 	<string name="title_counter">Contador de</string>
 
 	<string name="app_name">Contador de Mensajes</string>
-	<string name="app_version">versión 3.2.1</string>
-    <string name="app_code_name">Unicornio</string>
-	<string name="app_release_date">Aug 2017</string>
+	<string name="app_version">versión 3.3.0</string>
+    <string name="app_code_name">Valkyrie</string>
+	<string name="app_release_date">Nov 2017</string>
 	<string name="app_desc">Contador de mensajes muestra los mensajes de la bandeja de entrada de estadísticas y el número de mensajes de cada uno de sus contactos. Código fuente de este proyecto está disponible en GitHub. Traducciones utilizando Google Translate.</string>
 	<string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
 	<string name="app_source_code">This project\'s source code is available at GitHub</string>
@@ -69,8 +69,8 @@
     <string name="str_donate_title">donar</string>
     <string name="str_donate_text">Contador de Mensajes es un proyecto de código abierto desarrollado en mi tiempo libre. Cualquier tipo de contribución ayuda a añadir características o bugs swat. Gracias!</string>
     <string name="str_donate_disclaimer">Las donaciones no estarán en lugar de características adicionales. Google tiene el 30% de las compras como las comisiones por transacciones.</string>
-	<string name="str_donate_thanks">Gracias por la donación de usted!</string>
-	<string name="str_donate_fail">Donación falló. Por favor, inténtelo de nuevo más tarde.</string>
+    <string name="str_donate_thanks">Gracias por la donación de usted!</string>
+    <string name="str_donate_fail">Donación falló. Por favor, inténtelo de nuevo más tarde.</string>
     <string name="str_donate_small">Cómprame un chocolate</string>
     <string name="str_donate_medium">Cómprame un helado</string>
     <string name="str_donate_large">Cómprame Cena</string>
@@ -81,4 +81,13 @@
     <string name="str_offline_messages">Cuenta mensajes fuera de línea</string>
     <string name="str_pref_offline_message_desc">Para verificar los mensajes enviados mientras que el fondo estaba fuera de línea en el siguiente Inicio</string>
 
+    <!-- added for 3.3.0 -->
+    <string name="str_ignore_title">Ignorar</string>
+    <string name="str_ignore_add_number">Agregar un Número de</string>
+    <string name="str_ignore_add_to_ignore_list">Añadir a la Lista de ignorados</string>
+    <string name="str_ignore_btn_ignore">Ignorar</string>
+    <string name="str_ignore_name">Nombre</string>
+    <string name="str_ignore_number">Número de</string>
+    <string name="str_ignore_empty_list">Empiece por la adición de un número a ignorar</string>
+	
 </resources>

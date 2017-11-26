@@ -76,7 +76,7 @@ public class SentCountDataManager {
         Date today = Calendar.getInstance().getTime();
 
         // Initialize and open the database
-        CounterDataBaseAdapter counterDataBase = new CounterDataBaseAdapter(context);
+        CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(context);
 
         // Find the no of messages sent today
         int sentTodayCount = counterDataBase.getCountValueForDay(MessageCounterUtils.getIndexFromDate(today));
@@ -94,7 +94,7 @@ public class SentCountDataManager {
         int sentWeekCount = counterDataBase.getTotalSentCountSinceDate(MessageCounterUtils.getIndexFromDate(weekStartDate));
 
         // Close the db connection
-        counterDataBase.close();
+        // counterDataBase.close();
 
         if (sentTodayCount == -1) {
             sentTodayCount = 0;
@@ -145,18 +145,14 @@ public class SentCountDataManager {
             int newMessagesCount = (null != newMessagesCursor) ? newMessagesCursor.getCount() : 0;
             Log.d(TAG, "newMessagesCursor count :" + newMessagesCount);
 
-            CounterDataBaseAdapter counterDataBase = null;
             Calendar messageSentDate = Calendar.getInstance();
             try {
                 if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
                     Log.d(TAG, "Open MessageCounterDatabase");
                     // Connect to the App's database
-                    counterDataBase = new CounterDataBaseAdapter(context);
+                    CounterDataBaseAdapter counterDataBase = CounterDataBaseAdapter.getInstance(context);
+                    IgnoreNumbersManager ignoreNumbersManager = IgnoreNumbersManager.getInstance(context);
 
-                    //Calendar calendar = Calendar.getInstance();
-                    //calendar.setTimeInMillis(Long.valueOf(lastMessageTimeStamp));
-
-                    // Log.d(TAG, "Start loop over result, pos " + newMessagesCursor.getPosition());
                     do {
                         Message message = MessageCounterUtils.getMessageFromCursor(newMessagesCursor);
 
@@ -168,8 +164,11 @@ public class SentCountDataManager {
                             // Count this message against the date it was sent
                             long dateIndex = MessageCounterUtils.getIndexFromDate(messageSentDate.getTime());
 
-                            counterDataBase.addMessageSentCounter(dateIndex, message.getMessagesCount());
-                            newMessagesAdded += message.getMessagesCount();
+                            // Valkyrie - Update the count only if the number is not present in the ignore list
+                            if(!ignoreNumbersManager.checkIfNumberIgnored(message.getAddress())) {
+                                counterDataBase.addMessageSentCounter(dateIndex, message.getMessagesCount());
+                                newMessagesAdded += message.getMessagesCount();
+                            }
                         }
                     } while (newMessagesCursor.moveToNext());
                 }
@@ -179,10 +178,6 @@ public class SentCountDataManager {
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
                 Log.e(TAG, Log.getStackTraceString(e));
-            } finally {
-                if (null != counterDataBase) {
-                    counterDataBase.close();
-                }
             }
         }
         Log.d(TAG, "Exit checkForUnLoggedMessages, added " + newMessagesAdded + " messages");
