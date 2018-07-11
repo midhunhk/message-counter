@@ -7,7 +7,7 @@ android {
         applicationId "com.ae.apps.messagecounter"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 398
+        versionCode 400
         versionName "4.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -36,10 +36,6 @@ android {
     }
     
     testOptions{
-        testLogging {
-            events "passed", "skipped", "failed"
-            exceptionFormat "full"
-        }
         unitTests{
             includeAndroidResources = true
         }
