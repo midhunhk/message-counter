@@ -34,15 +34,12 @@ android {
     android {
         sourceSets.main.res.filter.exclude '**/for-build.txt'
     }
-
-    test {
+    
+    testOptions{
         testLogging {
             events "passed", "skipped", "failed"
             exceptionFormat "full"
         }
-    }
-    
-    testOptions{
         unitTests{
             includeAndroidResources = true
         }
