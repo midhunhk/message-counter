@@ -1,31 +1,11 @@
-# built application files
-*.apk
-*.ap_
 *.iml
-
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
-# generated files
-bin/
-gen/
-build/
-
-# misc folders
-aeAppsLibrary/
-gradle/
-_backs/
-
-# Local configuration file (sdk path, etc)
-local.properties
-
-# Eclipse project files
-.classpath
-.project
 .gradle
-.idea
-/gradlew
-/gradlew.bat
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+/.gradle
+gradlew
+gradlew.bat
+.externalNativeBuild

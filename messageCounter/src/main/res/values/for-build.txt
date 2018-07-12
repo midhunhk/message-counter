@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_lic_cat">license</string>
-    <string name="app_lic_dog">license</string>
-</resources>

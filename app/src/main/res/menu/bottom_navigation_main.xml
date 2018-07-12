@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_ignore"
+        android:enabled="true"
+        android:icon="@drawable/nav_icon_ignore"
+        android:title="@string/title_ignore"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_counter"
+        android:enabled="true"
+        android:icon="@drawable/nav_icon_message"
+        android:title="@string/title_counter"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_chart"
+        android:enabled="true"
+        android:icon="@drawable/nav_icon_chart"
+        android:title="@string/title_chart"
+        app:showAsAction="ifRoom" />
+</menu>
