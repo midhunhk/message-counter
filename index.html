@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="Android, app, message, counter, sms">
+        <meta name="description" content="Page for the Message Counter Android app">
+        <meta name="author" content="Midhun Harikumar">
+
+	      <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+	      <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	      <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	      <link rel="manifest" href="manifest.json">
+
+        <title>Message Counter - App Page</title>
+        <!-- Message Counter App Page Version: 1.1.10 -->
+
+        <!--
+		      Material Design for Bootstrap
+		      Version: MDB Free 4.3.2
+		      Documentation: http://mdbootstrap.com/
+		      Getting started: http://mdbootstrap.com/getting-started/
+		      Icons List https://mdbootstrap.com/css/icons-list/
+		    -->
+
+		    <!-- Font Awesome -->
+		    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet">
+		    <!-- Bootstrap core CSS -->
+		    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+		    <!-- Material Design Bootstrap -->
+		    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.0/css/mdb.min.css" rel="stylesheet">
+
+        <!-- Custom styles -->
+        <style>
+            /* Theme colors */
+            .accent-dark{ background-color:#d98200;}
+            .accent-light{ background-color:#ff9800;}
+            .primary-dark{ background-color:#0c3f39;}
+            .primary-light{ background-color:#009688;}
+            .hero-primary{ background-color:rgba(0, 105, 92, 1); }
+
+            .font-special {font-family: 'Crimson Text', serif !important;}
+
+            footer{color:#ffffff;}
+
+            .right{float:right}
+            .left{float:left}
+
+            ul.footerright li a, ul.footerright li a:visited {color: #fff !important }
+            ul.footerright li a:hover, ul.footerright li a:active {color: #fff !important; }
+            ul.footerright li.active a {color: #fff !important;}
+
+            footer ul.footerright li{display: inline; margin-right: 25px; }
+        </style>
+    </head>
+
+    <body id="top" class="mdb-skin">
+
+		    <!-- Navigation -->
+		    <nav id="mainNav" class="navbar navbar-fixed-top fixed-top navbar-toggleable-md navbar-dark scrolling-navbar accent-light">
+			       <div class="container">
+               <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+               </button>
+				      <a class="navbar-brand font-special page-scroll" href="#top">
+					     <h3 class="text-xs">Message Counter</h3>
+				     </a>
+        <div id="navbarNav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#home"><span>Home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#features"><span>Features</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#contribute"><span>Contribute</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item wow rubberBand" data-wow-delay="0.2s">
+                    <a class="nav-link" href="https://www.facebook.com/AeAppLabs/"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li class="nav-item wow rubberBand" data-wow-delay="0.4s">
+                    <a class="nav-link" href="https://plus.google.com/communities/110966372903178356479"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                </li>
+                <li class="nav-item wow rubberBand" data-wow-delay="0.6s">
+                    <a class="nav-link" href="https://github.com/midhunhk/message-counter"><i class="fa fa-github"></i></a>
+                </li>
+            </ul>
+        </div>
+			</div>
+		</nav>
+		    <!-- End Navigation -->
+
+        <!-- Hero Image -->
+        <div class="primary-light">
+            <div class="container mt-2 pt-2">
+                <div class="row">
+                    <div class="col-md-6 mt-6 pl-4 wow fadeIn" data-wow-delay="0.6s">
+                        <div class="text-white lead mt-4 pl-2">
+                        "An Android app that counts the number of SMS sent in a cycle with notification".
+                        </div>
+                        <br />
+                        <a href='https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' class="ml-0">
+                            <img alt='Get it on Google Play'  width="200px"  src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
+                        </a>
+                    </div>
+                    <div class="col-md-6 flex-center">
+                        <img src="images/001.png" height="440px" class="wow fadeInLeft" data-wow-delay="0.4s"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- End Hero Image -->
+
+        <!-- App Description Section -->
+        <section id="home" class="container p-4">
+
+            <div class="row">
+                <div class="col-md-12 pl-4">
+                    <div class="lead">
+                        <p>Message Counter has been downloaded more than <b>80,000</b> times from the Google Play Store and used in more than 10 countries. It is designed with Google's Material design principles in mind.</p>
+                        <p>The app is both Free and Open Source.</p>
+                        <p>The latest version of Message Counter is <b>Version 3.2</b> and is available from the Google Play Store.</p>
+
+                        <div class="flex-center">
+                        <a class="page-scroll btn accent-light btn-sm wow fadeInUp" data-wow-delay="0.2s" href="#features">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- End App Description Section -->
+
+        <!-- Features Section -->
+        <div id="features" class="primary-light text-white mt-2">
+            <section class="container">
+                <div class="row mt-2">
+                    <div class="col-md-6 flex-center wow fadeInUp" data-wow-delay="0.2s">
+                        <img src="images/002.png" height="450px" />
+                    </div>
+
+                    <div class="col-md-6 pl-4 mt-4 wow fadeIn" data-wow-delay="0.4s">
+                        <h3 class="font-special mt-2 mb-2">Features</h3>
+                        <ul>
+                            <li>Track the number of SMS messages in inbox, sent and total.</li>
+                            <li>Track number of SMS sent per each cycle</li>
+                            <li>Track number of SMS sent each week</li>
+                            <li>Notification when SMS limit per cycle is reached</li>
+                            <li>List of top contacts who have sent you messages</li>
+                            <li>Material Design</li>
+                            <li>Widgets</li>
+                            <li>Multi language support (English, Spanish, French, Portuguese)</li>
+                            <li>No Advertisements</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+        <!-- End Features Section -->
+
+        <!-- License and Contribute Section -->
+        <section class="container wow fadeIn">
+            <div class="row">
+                <div class="col-md-6 p-5" id="license">
+                        <h3 class="font-special">License</h3>
+                    Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+                </div>
+
+                <div class="col-md-6 p-5" id="contribute">
+                    <h3 class="font-special">Contribute</h3>
+                    <div>
+                        <p>
+                        Message Counter is Open Source, with the complete source code hosted online at GitHub. You can contribute to this app by reporting new issues or improving the current code.
+                        </p>
+                        <p>It is developed in native Android technology with the latest version of Android Studio and build tools.</p>
+                    </div>
+                    <a class="btn accent-light waves-effect waves-light right" href="https://github.com/midhunhk/message-counter">
+                        <i class="fa fa-github wow rubberBand" aria-hidden="true"></i>&nbsp;
+                        <span>GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- End License and Contribute Section -->
+
+      <footer class="page-footer center-on-small-only primary-light pt-0">
+          <div class="container mt-1 mb-1 text-center text-md-left">
+              <div class="row pt-2">
+
+                  <div class="col-md-5 col-lg-6 col-xl-5 mb-r">
+                    <h6 class="title font-bold"><strong>Message Counter</strong></h6>
+                    <hr class="accent-light mb-2 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>Google Play and the Google Play logo are trademarks of Google Inc.</p>
+                  </div>
+
+                  <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-r">
+                      <h6 class="title font-bold"><strong>Information</strong></h6>
+                      <hr class="accent-light mb-2 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                      <p><a href="https://github.com/midhunhk/message-counter/wiki">Wiki</a></p>
+                      <p><a href="https://github.com/midhunhk/message-counter/issues">Issue</a></p>
+                      <p><a href="https://github.com/midhunhk/message-counter/wiki/Codenames">Codenames</a></p>
+                  </div>
+
+                  <div class="col-md-4 col-lg-3 col-xl-3">
+                      <h6 class="title font-bold"><strong>Other Links</strong></h6>
+                      <hr class="accent-light mb-2 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                      <p><a href="https://github.com/midhunhk/message-counter/wiki/FAQ">FAQ</a></p>
+                      <p><a href="https://github.com/midhunhk/message-counter/wiki/Privacy-Policy">Privacy Policy</a></p>
+                      <p><a href="http://midhunhk.github.io/dev/2017/05/18/message-counter-unicorn/">Unicorn Release</a></p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="footer-copyright">
+            <div class="container-fluid">
+              &copy; 2017 Copyright: <a href="https://www.facebook.com/AeAppLabs/"> ae app labs</a>
+            </div>
+          </div>
+
+        </footer>
+
+        <!-- Load Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js"></script>
+		    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+        <script>
+            new WOW().init();
+
+            (function($) {
+                "use strict"; // Start of use strict
+
+                // jQuery for page scrolling feature - requires jQuery Easing plugin
+                $('a.page-scroll').bind('click', function(event) {
+                    var $anchor = $(this);
+                    var newTop = $($anchor.attr('href')).offset().top - 100;
+                    $('html, body').stop().animate({
+                        scrollTop: newTop
+                    }, 1250, 'easeInOutExpo');
+                    event.preventDefault();
+                });
+
+                // Highlight the top nav as scrolling occurs
+                $('body').scrollspy({
+                    target: '.navbar-fixed-top',
+                    offset: 51
+                });
+
+                // Closes the Responsive Menu on Menu Item Click
+                $('.navbar-collapse ul li a').click(function(){
+                        $('.navbar-toggle:visible').click();
+                });
+
+                // Offset for Main Navigation
+                $('#mainNav').affix({
+                    offset: {top: 100 }
+                })
+
+            })(jQuery); // End of use strict
+
+        </script>
+
+    </body>
+</html>
