@@ -9,12 +9,12 @@ import android.content.Context
 import com.ae.apps.messagecounter.data.dao.CounterDao
 import com.ae.apps.messagecounter.data.dao.IgnoredNumbersDao
 import com.ae.apps.messagecounter.data.models.Counter
-import com.ae.apps.messagecounter.data.models.IgnoredNumbers
+import com.ae.apps.messagecounter.data.models.IgnoredNumber
 
 /**
  * The database for this app
  */
-@Database(entities = [Counter::class, IgnoredNumbers::class], version = 3)
+@Database(entities = [Counter::class, IgnoredNumber::class], version = 3)
 abstract class AppDatabase : RoomDatabase(){
 
     abstract fun counterDao():CounterDao
