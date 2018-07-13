@@ -7,13 +7,13 @@ import com.ae.apps.messagecounter.data.models.Counter
 interface CounterDao {
 
     @Query("SELECT * from tbl_sms_counter WHERE date_index = :dateIndex")
-    fun getCount(dateIndex:Long): Int
+    fun getCount(dateIndex:String): Int
 
     @Query("SELECT SUM(sent_count) FROM tbl_sms_counter WHERE date_index >= :dateIndex")
-    fun getTotalCountSince(dateIndex: Long): Int
+    fun getTotalCountSince(dateIndex: String): Int
 
     @Query("SELECT SUM(sent_count) FROM tbl_sms_counter WHERE date_index BETWEEN :startIndex AND :endIndex")
-    fun getTotalCountBetween(startIndex: Long, endIndex: Long): Int
+    fun getTotalCountBetween(startIndex: String, endIndex: String): Int
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(counter: Counter): Long
@@ -28,8 +28,7 @@ interface CounterDao {
     fun insertOrUpdate(counter: Counter){
         val id: Long = insert(counter)
         if(id.equals(-1)){
-            val dateIndex = java.lang.Long.parseLong(counter.dateIndex)
-            val currentCount: Int = getCount(dateIndex)
+            val currentCount: Int = getCount(counter.dateIndex)
             val updatedCount = counter.sentCount + currentCount
             val updatedCounter = Counter(counter.dateIndex, updatedCount)
             update(updatedCounter)

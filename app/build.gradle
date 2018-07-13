@@ -12,6 +12,14 @@ android {
         versionName "4.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    flavorDimensions "debugPro"
+
+    productFlavors {
+        debugPro {
+            applicationIdSuffix ".test"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -43,7 +51,6 @@ dependencies {
     implementation "com.android.support:cardview-v7:$support_lib_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.ae.apps:android-libraries:2.2.2'
-
     // Require Android Studio 3.2 for Navigation Architecture Component
     // implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     // implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
@@ -51,16 +58,15 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     implementation "android.arch.work:work-runtime-ktx:$work_version"
-
     implementation 'com.google.dagger:dagger:2.16'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
-
+    // Unit Testing
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:1.10.19'
-    testImplementation "org.robolectric:robolectric:3.8"
+    testImplementation 'org.robolectric:robolectric:3.8'
     testImplementation "android.arch.persistence.room:testing:$room_version"
+    // Instrumentation Testing
     androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
-
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'org.hamcrest:hamcrest-core:1.3'
