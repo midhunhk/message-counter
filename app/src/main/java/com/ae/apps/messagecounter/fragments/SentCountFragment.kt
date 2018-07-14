@@ -10,6 +10,7 @@ import android.view.ViewGroup
 
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.models.Counter
+import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 import kotlinx.android.synthetic.*
 
@@ -48,6 +49,6 @@ class SentCountFragment : Fragment() {
     }
 
     private fun initUI(){
-
+        val details = mViewModel.getSentCountData()
     }
 }

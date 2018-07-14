@@ -2,6 +2,7 @@ package com.ae.apps.messagecounter.data.viewmodels
 
 import android.arch.lifecycle.ViewModel
 import android.content.SharedPreferences
+import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.repositories.*
 import java.util.*
 
@@ -14,12 +15,15 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                         preferences: SharedPreferences) = CounterViewModel(counterRepository, preferences)
     }
 
-    fun getSentCountData(){
+    fun getSentCountData() : SentCountDetails{
         var limit:Int = getMessageLimitValue(preferences)
         var cycleStartDate = getCycleStartDate(preferences)
         val today = Calendar.getInstance().time
 
-        val sentTodayCount = counterRepository.getCount(getIndexFromDate(today))
+        var sentTodayCount = counterRepository.getCount(getIndexFromDate(today))
+        if (sentTodayCount == -1) {
+            sentTodayCount = 0
+        }
 
         val sentCycleCount = counterRepository.getTotalCountSince(getIndexFromDate(cycleStartDate))
 
@@ -27,6 +31,8 @@ class CounterViewModel(private val counterRepository: CounterRepository,
         var cycle = getCycleSentCount(prevCycleStartDate)
         var lastCycleCount = counterRepository.getTotalCountBetween(cycle.startDateIndex, cycle.endDateIndex)
 
-                .knjuygt6r5r5rt67u88uy7y666666666666666666666666666666666666666666666666666666666666
+        val startWeekCount = counterRepository.getTotalCountSince(getIndexFromDate(getWeekStartDate()))
+
+        return SentCountDetails(limit, sentTodayCount, sentCycleCount, startWeekCount, lastCycleCount)
     }
 }
