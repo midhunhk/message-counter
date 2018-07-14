@@ -28,8 +28,8 @@ fun runOnIoThread(f: () -> Unit) {
  * @param date date
  * @return index
  */
-fun getIndexFromDate(date: Date): Long {
-    return java.lang.Long.parseLong(DATE_INDEX_FORMAT.format(date))
+fun getIndexFromDate(date: Date): String {
+    return DATE_INDEX_FORMAT.format(date)
 }
 
 fun getDisplayDateString(cycleStartDate: Date): CharSequence {

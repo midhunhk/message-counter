@@ -1,3 +1,3 @@
 package com.ae.apps.messagecounter.data.models
 
-data class Cycle(val startDateIndex: Long,val endDateIndex: Long)
+data class Cycle(val startDateIndex: String,val endDateIndex: String)
