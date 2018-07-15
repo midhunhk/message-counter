@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.ae.apps.common.utils.CommonUtils
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.AppDatabase
+import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.data.repositories.CounterRepository
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModelFactory
@@ -52,9 +54,15 @@ class SentCountFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val repository = CounterRepository.getInstance(AppDatabase.getInstance(requireContext()).counterDao())
-        val factory = CounterViewModelFactory(repository, PreferenceManager.getDefaultSharedPreferences(requireContext()))
+        val preferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(requireContext()))
+        val counterRepository = CounterRepository.getInstance(AppDatabase.getInstance(requireContext()).counterDao())
+        val factory = CounterViewModelFactory(counterRepository, preferenceRepository)
         mViewModel = ViewModelProviders.of(this, factory).get(CounterViewModel::class.java)
+
+        val firstInstall = CommonUtils.isFirstInstall(requireContext())
+        if(firstInstall && preferenceRepository.historicMessagesIndexed()){
+            mViewModel.checkForUnloggedMessages(requireContext(), "", true)
+        }
     }
 
     private fun initUI() {

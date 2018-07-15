@@ -1,18 +1,12 @@
 package com.ae.apps.messagecounter.data.repositories
 
-import android.content.SharedPreferences
 import android.telephony.SmsMessage
 import com.ae.apps.messagecounter.data.models.Cycle
-import com.ae.apps.messagecounter.data.preferences.PREF_KEY_CYCLE_START_DATE
-import com.ae.apps.messagecounter.data.preferences.PREF_KEY_MESSAGE_LIMIT_VALUE
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
 
 private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
-private val DEFAULT_MESSAGE_LIMIT = 100
-private val NO_LIMIT_SET = "-1"
-private val DEFAULT_CYCLE_START_DATE = "1"
 private val DATE_INDEX_FORMAT = SimpleDateFormat("yyMMdd", Locale.getDefault())
 private val DATE_DISPLAY_FORMAT = SimpleDateFormat("dd MMM", Locale.getDefault())
 /**
@@ -89,29 +83,6 @@ fun getWeekStartDate(): Date {
 fun getYearStartDate(): Date {
     val calendar = Calendar.getInstance()
     calendar.set(Calendar.DAY_OF_YEAR, 1)
-    return calendar.time
-}
-
-fun getMessageLimitValue(preferences: SharedPreferences): Int {
-    val rawVal = preferences.getString(PREF_KEY_MESSAGE_LIMIT_VALUE, NO_LIMIT_SET)
-    var limit: Int
-    try {
-        limit = Integer.valueOf(rawVal!!)
-    } catch (e: NumberFormatException) {
-        limit = DEFAULT_MESSAGE_LIMIT
-    }
-
-    return limit
-}
-
-fun getCycleStartDate(preferences: SharedPreferences): Date {
-    val cycleStart = Integer.valueOf(preferences.getString(PREF_KEY_CYCLE_START_DATE,
-            DEFAULT_CYCLE_START_DATE)!!)
-    val calendar = Calendar.getInstance()
-    if (calendar.get(Calendar.DATE) < cycleStart) {
-        calendar.add(Calendar.MONTH, -1)
-    }
-    calendar.set(Calendar.DATE, cycleStart)
     return calendar.time
 }
 
