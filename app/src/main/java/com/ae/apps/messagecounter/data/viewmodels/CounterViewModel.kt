@@ -74,11 +74,13 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                         }
                     } while (newMessagesCursor.moveToNext())
                 }
-                newMessagesCursor?.close()
             } catch (e: Exception) {
                 Toast.makeText(context, "Exception " + e.message, Toast.LENGTH_SHORT).show()
                 Log.e(TAG, e.message)
                 Log.e(TAG, Log.getStackTraceString(e))
+            } finally {
+                newMessagesCursor?.close()
+                // preferenceRepository.setHistoricMessageIndexed()
             }
 
             runOnIoThread {
