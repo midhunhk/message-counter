@@ -16,6 +16,6 @@ interface IgnoredNumbersDao {
     fun insertIgnoreNumber(ignoredNumber: IgnoredNumber): Long
 
     @Delete
-    fun deleteIgnoredNumber(ignoredNumber: IgnoredNumber): Long
+    fun deleteIgnoredNumber(ignoredNumber: IgnoredNumber)
 
 }

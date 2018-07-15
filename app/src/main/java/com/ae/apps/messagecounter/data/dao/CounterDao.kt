@@ -4,22 +4,22 @@ import android.arch.persistence.room.*
 import com.ae.apps.messagecounter.data.models.Counter
 
 @Dao
-interface CounterDao {
+abstract class CounterDao {
 
     @Query("SELECT * from tbl_sms_counter WHERE date_index = :dateIndex")
-    fun getCount(dateIndex:String): Int
+    abstract fun getCount(dateIndex:String): Int
 
     @Query("SELECT SUM(sent_count) FROM tbl_sms_counter WHERE date_index >= :dateIndex")
-    fun getTotalCountSince(dateIndex: String): Int
+    abstract fun getTotalCountSince(dateIndex: String): Int
 
     @Query("SELECT SUM(sent_count) FROM tbl_sms_counter WHERE date_index BETWEEN :startIndex AND :endIndex")
-    fun getTotalCountBetween(startIndex: String, endIndex: String): Int
+    abstract fun getTotalCountBetween(startIndex: String, endIndex: String): Int
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(counter: Counter): Long
+    abstract fun insert(counter: Counter): Long
 
     @Update
-    fun update(counter: Counter): Int
+    abstract fun update(counter: Counter): Int
 
     /**
      * Inserts a new row for this date index if this is the first count logged,
