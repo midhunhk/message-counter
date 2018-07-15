@@ -1,7 +1,6 @@
 package com.ae.apps.messagecounter.fragments
 
 import android.arch.lifecycle.ViewModelProviders
-import android.os.AsyncTask
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
@@ -12,7 +11,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.AppDatabase
-import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.repositories.CounterRepository
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModelFactory
@@ -35,9 +33,7 @@ class SentCountFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val repository = CounterRepository.getInstance(AppDatabase.getInstance(requireContext()).counterDao())
-        val factory = CounterViewModelFactory(repository, PreferenceManager.getDefaultSharedPreferences(requireContext()))
-        mViewModel = ViewModelProviders.of(this, factory).get(CounterViewModel::class.java)
+        initViewModel()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +49,12 @@ class SentCountFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         clearFindViewByIdCache()
+    }
+
+    private fun initViewModel() {
+        val repository = CounterRepository.getInstance(AppDatabase.getInstance(requireContext()).counterDao())
+        val factory = CounterViewModelFactory(repository, PreferenceManager.getDefaultSharedPreferences(requireContext()))
+        mViewModel = ViewModelProviders.of(this, factory).get(CounterViewModel::class.java)
     }
 
     private fun initUI() {
