@@ -1,19 +1,16 @@
 package com.ae.apps.messagecounter.fragments
 
-
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.ProgressBar
+import android.widget.TextView
 import com.ae.apps.messagecounter.R
-import com.ae.apps.messagecounter.data.models.Counter
-import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 import kotlinx.android.synthetic.*
-
 import kotlinx.android.synthetic.main.fragment_sent_count.*
 
 /**
@@ -26,7 +23,7 @@ class SentCountFragment : Fragment() {
         fun newInstance() = SentCountFragment()
     }
 
-    private lateinit var mViewModel:CounterViewModel
+    private lateinit var mViewModel: CounterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +37,7 @@ class SentCountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUI();
+        initUI()
     }
 
     override fun onDestroyView() {
@@ -48,7 +45,29 @@ class SentCountFragment : Fragment() {
         clearFindViewByIdCache()
     }
 
-    private fun initUI(){
+    private fun initUI() {
         val details = mViewModel.getSentCountData()
+        heroSentTodayText.setText(details.sentToday)
+        heroSentInCycleText.setText(details.sentCycle)
+        countProgressText.setText(details.sentCycle)
+        //cycleDurationText.setText(details.)
+        countSentTodayText.setText(details.sentToday)
+        countSentThisWeekText.setText(details.sentInWeek)
+        prevCycleSentCountText.setText(details.sentLastCycle)
+
+        // set progress bars
+        setProgressInfo(countProgressBar, countProgressText, details.sentCycle, details.cycleLimit)
+        setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
+    }
+
+    private fun setProgressInfo(progressBar: ProgressBar, progressText: TextView, count: Int, limit: Int) {
+        if (limit > 0) {
+            progressBar.max = limit
+            progressBar.progress = 0
+            var progress = count
+            if (count >= limit) progress = limit
+            progressBar.progress = progress
+            progressText.text = count.toString() + " / " + limit
+        }
     }
 }
