@@ -64,9 +64,10 @@ class SentCountFragment : Fragment() {
                 heroSentTodayText.text = details.sentToday.toString()
                 heroSentInCycleText.text = details.sentCycle.toString()
                 countProgressText.text = details.sentCycle.toString()
-                //cycleDurationText.setText(details.)
+                cycleDurationText.setText("Placeholder Text")
                 countSentTodayText.text = details.sentToday.toString()
                 countSentThisWeekText.text = details.sentInWeek.toString()
+                countSentThisYearText.text = details.startYearCount.toString()
                 prevCycleSentCountText.text = details.sentLastCycle.toString()
 
                 // set progress bars

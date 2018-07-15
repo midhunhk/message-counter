@@ -59,6 +59,7 @@
     <string name="str_donate_medium">Buy me an Ice-Cream</string>
     <string name="str_donate_large">Buy me Dinner</string>
     <string name="str_sent_this_week">Sent this Week</string>
+    <string name="str_sent_this_year">Sent this Year</string>
 
     <!-- v4.0.0 -->
     <string name="str_require_permissions">Require permissions to work</string>

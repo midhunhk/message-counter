@@ -27,7 +27,8 @@ class CounterViewModel(private val counterRepository: CounterRepository,
         val lastCycleCount = counterRepository.getTotalCountBetween(cycle.startDateIndex, cycle.endDateIndex)
 
         val startWeekCount = counterRepository.getTotalCountSince(getIndexFromDate(getWeekStartDate()))
+        val startYearCount = counterRepository.getTotalCountSince(getIndexFromDate(getYearStartDate()))
 
-        return SentCountDetails(limit, sentTodayCount, sentCycleCount, startWeekCount, lastCycleCount)
+        return SentCountDetails(limit, sentTodayCount, sentCycleCount, startWeekCount, startYearCount, lastCycleCount)
     }
 }

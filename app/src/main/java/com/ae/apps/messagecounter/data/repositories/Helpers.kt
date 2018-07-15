@@ -83,6 +83,15 @@ fun getWeekStartDate(): Date {
     return calendar.time
 }
 
+/**
+ * Returns the start of the year
+ */
+fun getYearStartDate(): Date {
+    val calendar = Calendar.getInstance()
+    calendar.set(Calendar.DAY_OF_YEAR, 1)
+    return calendar.time
+}
+
 fun getMessageLimitValue(preferences: SharedPreferences): Int {
     val rawVal = preferences.getString(PREF_KEY_MESSAGE_LIMIT_VALUE, NO_LIMIT_SET)
     var limit: Int

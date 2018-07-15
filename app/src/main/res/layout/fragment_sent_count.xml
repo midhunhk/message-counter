@@ -184,6 +184,30 @@
                             android:textSize="18sp"/>
                     </RelativeLayout>
 
+                    <!-- Messages sent this year -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/padding_small">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:text="@string/str_sent_this_year"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/countSentThisYearText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:text="@string/empty_text"
+                            android:textSize="18sp"/>
+                    </RelativeLayout>
+
                     <!-- Current Cycle Progressbar -->
                     <RelativeLayout
                         android:layout_width="match_parent"
