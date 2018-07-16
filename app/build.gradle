@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.ae.apps.messagecounter_v4"
+        applicationId "com.ae.apps.messagecounter"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 400
