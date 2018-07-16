@@ -3,9 +3,11 @@ package com.ae.apps.messagecounter.data.viewmodels
 import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.net.Uri
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import com.ae.apps.common.managers.SMSManager
+import com.ae.apps.common.utils.CommonUtils
 import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.data.repositories.*
@@ -41,6 +43,11 @@ class CounterViewModel(private val counterRepository: CounterRepository,
     }
 
     fun checkForUnloggedMessages(context: Context, messageId: String, indexAllMessages: Boolean) {
+        // Invoked only once per fresh install of the app
+        if (!CommonUtils.isFirstInstall(context) || preferenceRepository.historicMessagesIndexed()) {
+            return
+        }
+
         val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp(getStartTimeStamp(indexAllMessages))
         var newMessagesAdded = 0
 
@@ -51,9 +58,9 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                     SMS_TABLE_PROJECTION,
                     "person is null and $COLUMN_NAME_DATE> ? ",
                     arrayOf(lastMessageTimeStamp), null)
-            val newMessagesCount = newMessagesCursor?.count ?: 0
-            val messageSentDate = Calendar.getInstance()
             try {
+                val newMessagesCount = newMessagesCursor?.count ?: 0
+                val messageSentDate = Calendar.getInstance()
                 if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
                     Log.d(TAG, "Open MessageCounterDatabase")
                     do {
@@ -75,7 +82,7 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                     } while (newMessagesCursor.moveToNext())
                 }
             } catch (e: Exception) {
-                Toast.makeText(context, "Exception " + e.message, Toast.LENGTH_SHORT).show()
+                // Toast.makeText(context, "Exception " + e.message, Toast.LENGTH_SHORT).show()
                 Log.e(TAG, e.message)
                 Log.e(TAG, Log.getStackTraceString(e))
             } finally {
@@ -83,9 +90,12 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                 // preferenceRepository.setHistoricMessageIndexed()
             }
 
+            /*
             runOnIoThread {
+                Looper.prepare();
                 Toast.makeText(context, "Historical indexing ", Toast.LENGTH_SHORT).show()
             }
+            */
         }
     }
 

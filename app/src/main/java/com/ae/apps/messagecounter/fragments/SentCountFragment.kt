@@ -59,10 +59,7 @@ class SentCountFragment : Fragment() {
         val factory = CounterViewModelFactory(counterRepository, preferenceRepository)
         mViewModel = ViewModelProviders.of(this, factory).get(CounterViewModel::class.java)
 
-        val firstInstall = CommonUtils.isFirstInstall(requireContext())
-        if(firstInstall && preferenceRepository.historicMessagesIndexed()){
-            mViewModel.checkForUnloggedMessages(requireContext(), "", true)
-        }
+        mViewModel.checkForUnloggedMessages(requireContext(), "", true)
     }
 
     private fun initUI() {
