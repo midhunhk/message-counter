@@ -7,6 +7,7 @@
 /captures
 /.gradle
 /app/release
+/projectFilesBackup
 gradlew
 gradlew.bat
 .externalNativeBuild
