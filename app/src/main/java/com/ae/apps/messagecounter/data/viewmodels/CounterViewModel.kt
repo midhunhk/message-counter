@@ -56,7 +56,7 @@ class CounterViewModel(private val counterRepository: CounterRepository,
             val newMessagesCursor = context.contentResolver.query(
                     Uri.parse(SMSManager.SMS_URI_ALL),
                     SMS_TABLE_PROJECTION,
-                    "person is null and $COLUMN_NAME_DATE> ? ",
+                    "person is null and protocol is null and $COLUMN_NAME_DATE> ? ",
                     arrayOf(lastMessageTimeStamp), null)
             try {
                 val newMessagesCount = newMessagesCursor?.count ?: 0
@@ -87,7 +87,7 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                 Log.e(TAG, Log.getStackTraceString(e))
             } finally {
                 newMessagesCursor?.close()
-                // preferenceRepository.setHistoricMessageIndexed()
+                preferenceRepository.setHistoricMessageIndexed()
             }
 
             /*
