@@ -36,8 +36,7 @@ Open the project in Android Studio
 ```
  
 ## Dependencies
- - ae-apps-library (https://github.com/midhunhk/ae-apps-library)
-The AeAppsLibrary is configured as a compile dependency in gradle file and would be available when you sync the project for the first time.
+ - lib-ae-apps (https://github.com/midhunhk/ae-apps-library)
  - kotlin-extenssion
  - android-support-library
  - android-architecture-components
