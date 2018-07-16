@@ -1,20 +1,20 @@
 Message Counter
 ===============
 [![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=unicorn_r2)](https://travis-ci.org/midhunhk/message-counter) 
-![](https://img.shields.io/badge/api-9+-008080.svg)
+![](https://img.shields.io/badge/api-16+-008080.svg)
 [![Release](https://img.shields.io/github/release/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/releases) 
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/V3.2.1.svg)](https://github.com/midhunhk/message-counter) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/v3.3.0.svg)](https://github.com/midhunhk/message-counter) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/issues) 
-[![](https://img.shields.io/badge/codename-valkyrie-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
+[![](https://img.shields.io/badge/codename-wyvern-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
 
 <img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/master/docs/images/002.png" width="560"/>
 
 [Project Wiki](https://github.com/midhunhk/message-counter/wiki) | [Github Page](http://midhunhk.github.io/message-counter)
 
-Message Counter is an Android app that counts the number of SMS sent in a cycle. It also notifies you when you have reached the cycle limit. It supports API 9 (Gingerbread) and above.
+Message Counter is a modern Android app that counts the number of SMSes sent in a cycle. It is now entirely rewritten in Kotlin and makes use of Android Architecture Components and Kotlin Extensions.
 
 ## Features
-- Shows the SMS messages count in inbox, sent, draft and total.
+~~- Shows the SMS messages count in inbox, sent, draft and total.~~
 - Shows number of SMS sent per each cycle
 - Notify when SMS limit per cycle is reached
 - Ignore SMS sent to configurable numbers
@@ -24,7 +24,7 @@ Message Counter is an Android app that counts the number of SMS sent in a cycle.
 - No Advertisements
  
 ## Installation
-Clone this repo and import the project as an existing Android project in Android Studio. This is a gradle based Android project that supports API 9 and up.
+Clone this repo and import the project as an existing Android project in Android Studio.
 
 ### Source Code
 Clone this repo and checkout the latest development branch for bleeding edge features.
@@ -38,6 +38,15 @@ Open the project in Android Studio
 ## Dependencies
  - ae-apps-library (https://github.com/midhunhk/ae-apps-library)
 The AeAppsLibrary is configured as a compile dependency in gradle file and would be available when you sync the project for the first time.
+ - kotlin-extenssion
+ - android-support-library
+ - android-architecture-components
+ - anko library
+ - junit
+ - mockito
+ - roboelectric
+ - espresso
+ - hamcrest
 
 ## Milestones
 https://github.com/midhunhk/message-counter/milestones
