@@ -21,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val permissions:Array<String> = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE);
+        val permissions:Array<String> = arrayOf(Manifest.permission.READ_CONTACTS,
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.READ_SMS)
         checkPermissions(permissions)
     }
 
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             if(checkAllPermissions(permissions)){
                 onPermissionGranted()
             } else {
-                requestPermissions(permissions, PERMISSION_CHECK_REQUEST_CODE);
+                requestPermissions(permissions, PERMISSION_CHECK_REQUEST_CODE)
             }
         } else {
             onPermissionGranted()
