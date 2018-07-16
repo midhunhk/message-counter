@@ -6,7 +6,7 @@ import com.ae.apps.messagecounter.data.models.Counter
 @Dao
 abstract class CounterDao {
 
-    @Query("SELECT * from tbl_sms_counter WHERE date_index = :dateIndex")
+    @Query("SELECT sent_count from tbl_sms_counter WHERE date_index = :dateIndex")
     abstract fun getCount(dateIndex:String): Int
 
     @Query("SELECT SUM(sent_count) FROM tbl_sms_counter WHERE date_index >= :dateIndex")
@@ -27,7 +27,7 @@ abstract class CounterDao {
      */
     fun insertOrUpdate(counter: Counter){
         val id: Long = insert(counter)
-        if(id.equals(-1)){
+        if(id == -1L){
             val currentCount: Int = getCount(counter.dateIndex)
             val updatedCount = counter.sentCount + currentCount
             val updatedCounter = Counter(counter.dateIndex, updatedCount)
