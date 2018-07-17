@@ -11,4 +11,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="buttonTintAccent">
+    </style>
 </resources>

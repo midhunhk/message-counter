@@ -12,6 +12,9 @@ interface IgnoredNumbersDao {
     @Query("SELECT * from tbl_ignore_list")
     fun getAllIgnoredNumbers(): List<IgnoredNumber>
 
+    @Query("SELECT EXISTS(SELECT 1 from tbl_ignore_list WHERE ignore_number = :numberToCheck LIMIT 1)")
+    fun checkIfNumberIsIgnored(numberToCheck:String):Int
+
     @Insert
     fun insertIgnoreNumber(ignoredNumber: IgnoredNumber): Long
 

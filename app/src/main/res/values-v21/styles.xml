@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MessageCounterTheme" parent="AppTheme.Base">
+    </style>
+
+    <style name="buttonTintAccent">
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>

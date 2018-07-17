@@ -21,7 +21,6 @@ import com.ae.apps.messagecounter.data.viewmodels.CounterViewModelFactory
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_sent_count.*
 
-
 /**
  * A simple [Fragment] subclass.
  *

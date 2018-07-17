@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dip">
+
+    <com.ae.apps.common.views.RoundedImageView
+        android:id="@+id/ignoreItemImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/margin_small"
+        android:src="@drawable/default_profile_image"
+        android:minWidth="@dimen/image_min_size"
+        android:minHeight="@dimen/image_min_size"
+        android:maxWidth="@dimen/image_max_size"
+        android:maxHeight="@dimen/image_max_size"
+        android:contentDescription="@string/empty_text"/>
+
+    <TextView
+        android:id="@+id/ignoreItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/ignoreItemImage"
+        android:layout_toEndOf="@+id/ignoreItemImage"
+        android:padding="@dimen/card_padding"
+        android:textIsSelectable="false"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/ignoreItemNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ignoreItemImage"
+        android:layout_toEndOf="@+id/ignoreItemImage"
+        android:layout_below="@id/ignoreItemName"
+        android:padding="@dimen/card_padding"
+        android:textIsSelectable="false"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/btnRemoveIgnoredItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_delete"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/empty_text"
+        android:padding="@dimen/card_padding"/>
+
+</RelativeLayout>
