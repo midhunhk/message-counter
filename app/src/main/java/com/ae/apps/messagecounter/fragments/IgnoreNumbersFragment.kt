@@ -60,27 +60,34 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
     }
 
     private fun initUI() {
-        btnShowIgnoreDialog.setOnClickListener(View.OnClickListener {
-            // Show ignore contact dialog
-        })
+        btnShowIgnoreDialog.setOnClickListener { showSelectIgnoreContactDialog() }
 
         val recyclerView = list as EmptyRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = mAdapter
         recyclerView.setEmptyView(empty_view)
 
-        mViewModel.getIgnoredNumbers().observe(this, Observer { items ->
-            run {
-                mAdapter.setItems(items!!)
-            }
-        })
+        mViewModel.getIgnoredNumbers()
+                .observe(this, Observer { items ->
+                    run {
+                        mAdapter.setItems(items!!)
+                    }
+                })
+    }
+
+    private fun showSelectIgnoreContactDialog() {
+        val dialogFragment = IgnoreDialogFragment.newInstance()
+        dialogFragment.setTargetFragment(this@IgnoreNumbersFragment, 300)
+        dialogFragment.show(fragmentManager, "fragment_ignore_contact")
     }
 
     override fun onContactSelected(ignoredContact: IgnoredNumber) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mViewModel.ignoreNumber(ignoredContact)
+        mAdapter.notifyDataSetChanged()
     }
 
     override fun onIgnoredContactRemoved(ignoredContact: IgnoredNumber) {
         mViewModel.unIgnoreNumber(ignoredContact)
+        mAdapter.notifyDataSetChanged()
     }
 }

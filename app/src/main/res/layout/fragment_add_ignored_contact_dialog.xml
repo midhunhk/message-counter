@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              tools:context="com.ae.apps.messagecounter.fragments.IgnoreDialogFragment">
+
+    <RelativeLayout
+        android:id="@+id/addTripDialogHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_header_height"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:gravity="center"
+            android:text="@string/str_ignore_add_to_ignore_list"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/card_title"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_medium">
+
+        <EditText
+            android:id="@+id/txtIgnoreNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/str_ignore_number"
+            android:maxLength="32"
+            android:inputType="number|phone"
+            tools:ignore="RtlHardcoded"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_medium">
+
+        <EditText
+            android:id="@+id/txtIgnoreName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="32"
+            android:hint="@string/str_ignore_name"
+            android:inputType="text|textCapWords"
+            tools:ignore="RtlHardcoded"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_medium">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@android:string/cancel"
+            android:textAllCaps="true"/>
+
+        <Button
+            android:id="@+id/btnIgnoreContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/str_ignore_btn_ignore"/>
+    </LinearLayout>
+
+</LinearLayout>

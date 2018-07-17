@@ -7,8 +7,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
+import com.ae.apps.messagecounter.fragments.IgnoreNumbersFragment
 import com.ae.apps.messagecounter.fragments.NoAccessFragment
+import com.ae.apps.messagecounter.fragments.ReceivedCountFragment
 import com.ae.apps.messagecounter.fragments.SentCountFragment
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 /**
  * Main Entry point to the application
@@ -50,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onPermissionGranted() {
         showFragmentContent(SentCountFragment.newInstance())
+        setupBottomNavigation()
     }
 
     private fun onPermissionNotGranted(requestCode: Int, permissions: Array<String>, grantResults: IntArray){
@@ -60,6 +65,17 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit()
+    }
+
+    private fun setupBottomNavigation() {
+        bottom_navigation.setOnNavigationItemSelectedListener { item ->
+            when {
+                item.itemId == R.id.action_ignore -> showFragmentContent( IgnoreNumbersFragment.newInstance())
+                item.itemId == R.id.action_counter -> showFragmentContent(SentCountFragment.newInstance())
+                item.itemId == R.id.action_chart -> showFragmentContent(ReceivedCountFragment.newInstance())
+            }
+            true
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

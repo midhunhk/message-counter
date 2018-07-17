@@ -18,10 +18,10 @@ class IgnoredNumbersViewModel(private val repository: IgnoredNumbersRepository) 
         }
     }
 
-    fun ignoreNumber(number: String, label: String) {
+    fun ignoreNumber(ignoredContact: IgnoredNumber) {
         doAsync {
-            if (!repository.checkIfNumberIsIgnored(number)) {
-                repository.ignoreNumber(IgnoredNumber(label, number))
+            if (!repository.checkIfNumberIsIgnored(ignoredContact.ignoreNumber)) {
+                repository.ignoreNumber(ignoredContact)
             }
         }
     }
