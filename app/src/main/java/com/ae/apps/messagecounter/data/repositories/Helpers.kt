@@ -107,5 +107,7 @@ fun getCycleSentCount(cycleStartDate: Date): Cycle {
  */
 fun getDurationDateString(startDate: Date): String {
     val endDate = getCycleEndDate(startDate)
-    return "Duration Date" //getDisplayDateString(startDate) + " - " + getDisplayDateString(endDate)
+    val startDateString = getDisplayDateString(startDate)
+    val endDateString = getDisplayDateString(endDate)
+    return  "$startDateString - $endDateString"
 }

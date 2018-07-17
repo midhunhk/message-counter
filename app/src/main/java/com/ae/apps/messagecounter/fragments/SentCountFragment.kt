@@ -1,5 +1,7 @@
 package com.ae.apps.messagecounter.fragments
 
+import android.annotation.SuppressLint
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -9,17 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.ae.apps.common.utils.CommonUtils
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.AppDatabase
+import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.data.repositories.CounterRepository
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModelFactory
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_sent_count.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+
 
 /**
  * A simple [Fragment] subclass.
@@ -43,14 +44,15 @@ class SentCountFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_sent_count, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initUI()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         clearFindViewByIdCache()
+        mViewModel.getSentCountDetails().removeObservers(this)
     }
 
     private fun initViewModel() {
@@ -59,29 +61,33 @@ class SentCountFragment : Fragment() {
         val factory = CounterViewModelFactory(counterRepository, preferenceRepository)
         mViewModel = ViewModelProviders.of(this, factory).get(CounterViewModel::class.java)
 
-        mViewModel.checkForUnloggedMessages(requireContext(), "", true)
+        // Fetch the data that is already in the database
+        mViewModel.getSentCountData()
+
+        // Index messages that were sent before the app was installed
+        // Or sent during the time a background service was not running
+        mViewModel.indexMessages(requireContext())
     }
 
     private fun initUI() {
-        doAsync {
-            val details = mViewModel.getSentCountData()
-            uiThread {
-                heroSentTodayText.text = details.sentToday.toString()
-                heroSentInCycleText.text = details.sentCycle.toString()
-                countProgressText.text = details.sentCycle.toString()
-                cycleDurationText.setText("Placeholder Text")
-                countSentTodayText.text = details.sentToday.toString()
-                countSentThisWeekText.text = details.sentInWeek.toString()
-                countSentThisYearText.text = details.startYearCount.toString()
-                prevCycleSentCountText.text = details.sentLastCycle.toString()
+        mViewModel.getSentCountDetails().observe(this,
+                Observer{details:SentCountDetails? -> run {
+            heroSentTodayText.text = details?.sentToday.toString()
+            heroSentInCycleText.text = details?.sentCycle.toString()
+            countProgressText.text = details?.sentCycle.toString()
+            cycleDurationText.text = details?.cycleDuration
+            countSentTodayText.text = details?.sentToday.toString()
+            countSentThisWeekText.text = details?.sentInWeek.toString()
+            countSentThisYearText.text = details?.startYearCount.toString()
+            prevCycleSentCountText.text = details?.sentLastCycle.toString()
 
-                // set progress bars
-                setProgressInfo(countProgressBar, countProgressText, details.sentCycle, details.cycleLimit)
-                setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
-            }
-        }
+            // set progress bars
+            setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit)
+            setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
+        }})
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setProgressInfo(progressBar: ProgressBar, progressText: TextView, count: Int, limit: Int) {
         if (limit > 0) {
             progressBar.max = limit
@@ -89,7 +95,8 @@ class SentCountFragment : Fragment() {
             var progress = count
             if (count >= limit) progress = limit
             progressBar.progress = progress
-            progressText.text = count.toString() + " / " + limit
+            progressText.text = "$count / $limit"
         }
     }
+
 }

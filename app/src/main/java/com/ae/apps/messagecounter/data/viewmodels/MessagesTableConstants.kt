@@ -4,7 +4,6 @@ import android.database.Cursor
 import com.ae.apps.messagecounter.data.models.Message
 import com.ae.apps.messagecounter.data.repositories.getMessageCount
 
-
 var COLUMN_NAME_PROTOCOL = "protocol"
 var COLUMN_NAME_ID = "_id"
 var COLUMN_NAME_DATE = "date"
@@ -19,6 +18,10 @@ var SMS_TABLE_PROJECTION = arrayOf(COLUMN_NAME_ID,
         COLUMN_NAME_PROTOCOL,
         COLUMN_NAME_ADDRESS)
 
+val SELECT_SENT_MESSAGES_AFTER_DATE = "person is null and protocol is null and $COLUMN_NAME_DATE > ? "
+val SORT_BY_DATE = "$COLUMN_NAME_DATE ASC"
+const val DEFAULT_MESSAGE_COUNT = 1
+
 fun getMessageFromCursor(cursor: Cursor): Message {
     val messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID))
     val protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL))
@@ -28,11 +31,11 @@ fun getMessageFromCursor(cursor: Cursor): Message {
 
 
     // Calculate the messages count for multipart messages
-    var messagesCount = 1
-    try {
-        messagesCount = getMessageCount(body)
+    val messagesCount = try {
+        getMessageCount(body)
     } catch (e: Exception) {
-        // Skip any exceptions
+        // Skip any exceptions and use default value
+        DEFAULT_MESSAGE_COUNT
     }
 
     return Message(messageId, messagesCount, body, sentTime, protocol, address)

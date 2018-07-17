@@ -1,11 +1,12 @@
 package com.ae.apps.messagecounter.data.viewmodels
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.net.Uri
-import android.os.Looper
+import android.text.TextUtils
 import android.util.Log
-import android.widget.Toast
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.common.utils.CommonUtils
 import com.ae.apps.messagecounter.data.models.SentCountDetails
@@ -22,57 +23,76 @@ class CounterViewModel(private val counterRepository: CounterRepository,
 
     val TAG = "CounterViewModel"
 
-    fun getSentCountData(): SentCountDetails {
+    private var mSentCountDetails:MutableLiveData<SentCountDetails> = MutableLiveData()
+
+    fun getSentCountDetails(): LiveData<SentCountDetails> = mSentCountDetails
+
+    fun getSentCountData() {
         val limit: Int = preferenceRepository.getMessageLimitValue()
         val cycleStartDate = preferenceRepository.getCycleStartDate()
         val today = Calendar.getInstance().time
 
-        var sentTodayCount = counterRepository.getCount(getIndexFromDate(today))
-        if (sentTodayCount == -1) sentTodayCount = 0
+        doAsync {
+            val prevCycleStartDate = getPrevCycleStartDate(cycleStartDate)
+            val prevCycle = getCycleSentCount(prevCycleStartDate)
+            var sentTodayCount = counterRepository.getCount(getIndexFromDate(today))
+            if (sentTodayCount == -1) sentTodayCount = 0
+            val sentCycleCount = counterRepository.getTotalCountSince(getIndexFromDate(cycleStartDate))
+            val lastCycleCount = counterRepository.getTotalCountBetween(prevCycle.startDateIndex, prevCycle.endDateIndex)
+            val startWeekCount = counterRepository.getTotalCountSince(getIndexFromDate(getWeekStartDate()))
+            val startYearCount = counterRepository.getTotalCountSince(getIndexFromDate(getYearStartDate()))
 
-        val sentCycleCount = counterRepository.getTotalCountSince(getIndexFromDate(cycleStartDate))
-
-        val prevCycleStartDate = getPrevCycleStartDate(cycleStartDate)
-        val cycle = getCycleSentCount(prevCycleStartDate)
-        val lastCycleCount = counterRepository.getTotalCountBetween(cycle.startDateIndex, cycle.endDateIndex)
-
-        val startWeekCount = counterRepository.getTotalCountSince(getIndexFromDate(getWeekStartDate()))
-        val startYearCount = counterRepository.getTotalCountSince(getIndexFromDate(getYearStartDate()))
-
-        return SentCountDetails(limit, sentTodayCount, sentCycleCount, startWeekCount, startYearCount, lastCycleCount)
+            val sentCountDetails = SentCountDetails(limit, sentTodayCount, sentCycleCount,
+                    startWeekCount, startYearCount, lastCycleCount,
+                    getDurationDateString(cycleStartDate))
+            mSentCountDetails.postValue(sentCountDetails)
+        }
     }
 
-    fun checkForUnloggedMessages(context: Context, messageId: String, indexAllMessages: Boolean) {
-        // Invoked only once per fresh install of the app
-        if (!CommonUtils.isFirstInstall(context) || preferenceRepository.historicMessagesIndexed()) {
+    /**
+     * Index messages that are in the sms database that have not been counted before
+     *
+     * @param context The context used for accessing the SMS API
+     * @param messageId An optional messageId that represents a new SMS which shouldn't be counted
+     *                  by this method
+     */
+    fun indexMessages(context: Context, messageId: String = "") {
+        val defaultTimeStamp = getStartTimeStamp(CommonUtils.isFirstInstall(context))
+        // Returns the last indexed message's time stamp from shared preference
+        val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp(defaultTimeStamp)
+
+        // Need a valid reference time for indexing
+        if(TextUtils.isEmpty(lastMessageTimeStamp)) {
             return
         }
 
-        val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp(getStartTimeStamp(indexAllMessages))
         var newMessagesAdded = 0
+        var lastIndexedTimeStamp = ""
 
         doAsync {
             // Query the SMS Database to read messages
             val newMessagesCursor = context.contentResolver.query(
                     Uri.parse(SMSManager.SMS_URI_ALL),
                     SMS_TABLE_PROJECTION,
-                    "person is null and protocol is null and $COLUMN_NAME_DATE> ? ",
-                    arrayOf(lastMessageTimeStamp), null)
+                    SELECT_SENT_MESSAGES_AFTER_DATE,
+                    arrayOf(lastMessageTimeStamp),
+                    SORT_BY_DATE)
             try {
-                val newMessagesCount = newMessagesCursor?.count ?: 0
                 val messageSentDate = Calendar.getInstance()
+                val newMessagesCount = newMessagesCursor?.count ?: 0
                 if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
-                    Log.d(TAG, "Open MessageCounterDatabase")
+                    Log.d(TAG, "Read from SMS Database")
                     do {
+                        // Convert this row into a Message object and handle multipart messages
                         val message = getMessageFromCursor(newMessagesCursor)
 
                         messageSentDate.timeInMillis = java.lang.Long.parseLong(message.date)
 
-                        // Parse and add to message counter database.
                         // Skip the new message id which will be added by calling method
-                        if (messageId != message.id && null == message.protocol) {
+                        if (messageId != message.id) {
                             // Count this message against the date it was sent
                             val dateIndex = getIndexFromDate(messageSentDate.time)
+                            lastIndexedTimeStamp = message.date
 
                             //if (!ignoreNumbersManager.checkIfNumberIgnored(message.getAddress())) {
                             counterRepository.addCount(dateIndex, message.messageCount)
@@ -82,7 +102,6 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                     } while (newMessagesCursor.moveToNext())
                 }
             } catch (e: Exception) {
-                // Toast.makeText(context, "Exception " + e.message, Toast.LENGTH_SHORT).show()
                 Log.e(TAG, e.message)
                 Log.e(TAG, Log.getStackTraceString(e))
             } finally {
@@ -90,12 +109,11 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                 preferenceRepository.setHistoricMessageIndexed()
             }
 
-            /*
-            runOnIoThread {
-                Looper.prepare();
-                Toast.makeText(context, "Historical indexing ", Toast.LENGTH_SHORT).show()
+            // Update the model
+            if(newMessagesAdded > 0) {
+                preferenceRepository.setLastSentTimeStamp(lastIndexedTimeStamp)
+                getSentCountData()
             }
-            */
         }
     }
 

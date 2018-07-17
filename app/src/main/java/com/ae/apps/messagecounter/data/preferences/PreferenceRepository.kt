@@ -44,4 +44,10 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
     fun getLastSentTimeStamp(defaultTimeStamp:String): String {
         return preferences.getString(PREF_KEY_LAST_SENT_TIME_STAMP, defaultTimeStamp)
     }
+
+    fun setLastSentTimeStamp(timeStamp: String){
+        preferences.edit()
+                .putString(PREF_KEY_LAST_SENT_TIME_STAMP, timeStamp)
+                .apply()
+    }
 }
