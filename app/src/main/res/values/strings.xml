@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MessageCounter</string>
+    <string name="app_name">Message Counter</string>
     <string name="app_version">Version 4.0.0</string>
     <string name="app_code_name">Wyvern</string>
     <string name="app_release_date">Nov 2018</string>
