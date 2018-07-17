@@ -14,14 +14,19 @@ class IgnoredNumbersViewModel(private val repository: IgnoredNumbersRepository) 
 
     init {
         doAsync {
-            mIgnoredNumbers.postValue(repository.getAllIgnoredNumbers())
+            readAllIgnoredNumbers()
         }
+    }
+
+    private fun readAllIgnoredNumbers(){
+        mIgnoredNumbers.postValue(repository.getAllIgnoredNumbers())
     }
 
     fun ignoreNumber(ignoredContact: IgnoredNumber) {
         doAsync {
             if (!repository.checkIfNumberIsIgnored(ignoredContact.ignoreNumber)) {
                 repository.ignoreNumber(ignoredContact)
+                readAllIgnoredNumbers()
             }
         }
     }
@@ -29,6 +34,7 @@ class IgnoredNumbersViewModel(private val repository: IgnoredNumbersRepository) 
     fun unIgnoreNumber(ignoredNumber:IgnoredNumber){
         doAsync {
             repository.unIgnoreNumber(ignoredNumber)
+            readAllIgnoredNumbers()
         }
     }
 

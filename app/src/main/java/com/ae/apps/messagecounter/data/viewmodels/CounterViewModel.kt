@@ -19,11 +19,10 @@ import java.util.*
  * ViewModel for holding the data for SentCountFragment
  */
 class CounterViewModel(private val counterRepository: CounterRepository,
+                       private val ignoreNumbersRepository: IgnoredNumbersRepository,
                        private val preferenceRepository: PreferenceRepository) : ViewModel() {
 
-    val TAG = "CounterViewModel"
-
-    private var mSentCountDetails:MutableLiveData<SentCountDetails> = MutableLiveData()
+    private var mSentCountDetails: MutableLiveData<SentCountDetails> = MutableLiveData()
 
     fun getSentCountDetails(): LiveData<SentCountDetails> = mSentCountDetails
 
@@ -62,7 +61,7 @@ class CounterViewModel(private val counterRepository: CounterRepository,
         val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp(defaultTimeStamp)
 
         // Need a valid reference time for indexing
-        if(TextUtils.isEmpty(lastMessageTimeStamp)) {
+        if (TextUtils.isEmpty(lastMessageTimeStamp)) {
             return
         }
 
@@ -81,7 +80,6 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                 val messageSentDate = Calendar.getInstance()
                 val newMessagesCount = newMessagesCursor?.count ?: 0
                 if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
-                    Log.d(TAG, "Read from SMS Database")
                     do {
                         // Convert this row into a Message object and handle multipart messages
                         val message = getMessageFromCursor(newMessagesCursor)
@@ -94,23 +92,23 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                             val dateIndex = getIndexFromDate(messageSentDate.time)
                             lastIndexedTimeStamp = message.date
 
-                            //if (!ignoreNumbersManager.checkIfNumberIgnored(message.getAddress())) {
-                            counterRepository.addCount(dateIndex, message.messageCount)
-                            newMessagesAdded += message.messageCount
-                            //}
+                            // Only index if the number is not ignored explicitly
+                            if (!ignoreNumbersRepository.checkIfNumberIsIgnored(message.address)) {
+                                counterRepository.addCount(dateIndex, message.messageCount)
+                                newMessagesAdded += message.messageCount
+                            }
                         }
                     } while (newMessagesCursor.moveToNext())
                 }
             } catch (e: Exception) {
-                Log.e(TAG, e.message)
-                Log.e(TAG, Log.getStackTraceString(e))
+                Log.e("CounterViewModel", Log.getStackTraceString(e))
             } finally {
                 newMessagesCursor?.close()
                 preferenceRepository.setHistoricMessageIndexed()
             }
 
             // Update the model
-            if(newMessagesAdded > 0) {
+            if (newMessagesAdded > 0) {
                 preferenceRepository.setLastSentTimeStamp(lastIndexedTimeStamp)
                 getSentCountData()
             }

@@ -16,6 +16,7 @@ import com.ae.apps.messagecounter.data.AppDatabase
 import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.data.repositories.CounterRepository
+import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModelFactory
 import kotlinx.android.synthetic.*
@@ -57,7 +58,8 @@ class SentCountFragment : Fragment() {
     private fun initViewModel() {
         val preferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(requireContext()))
         val counterRepository = CounterRepository.getInstance(AppDatabase.getInstance(requireContext()).counterDao())
-        val factory = CounterViewModelFactory(counterRepository, preferenceRepository)
+        val ignoreNumbersRepository = IgnoredNumbersRepository.getInstance(AppDatabase.getInstance(requireContext()).ignoredNumbersDao())
+        val factory = CounterViewModelFactory(counterRepository, ignoreNumbersRepository, preferenceRepository)
         mViewModel = ViewModelProviders.of(this, factory).get(CounterViewModel::class.java)
 
         // Fetch the data that is already in the database
