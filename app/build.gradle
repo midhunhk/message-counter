@@ -61,8 +61,6 @@ dependencies {
     //annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     implementation 'com.android.support:support-v4:27.1.1'
     implementation "android.arch.work:work-runtime-ktx:$work_version"
-    implementation 'com.google.dagger:dagger:2.16'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
     // Unit Testing
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:1.10.19'
