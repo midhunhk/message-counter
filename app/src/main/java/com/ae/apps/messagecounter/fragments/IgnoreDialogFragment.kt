@@ -30,8 +30,7 @@ class IgnoreDialogFragment : AppCompatDialogFragment() {
     override fun onStart() {
         super.onStart()
         if (null != dialog.window) {
-            dialog.window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
 
