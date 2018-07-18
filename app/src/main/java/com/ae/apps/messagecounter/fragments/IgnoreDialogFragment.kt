@@ -22,8 +22,8 @@ class IgnoreDialogFragment : AppCompatDialogFragment() {
         return inflater.inflate(R.layout.fragment_add_ignored_contact_dialog, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initUI()
     }
 

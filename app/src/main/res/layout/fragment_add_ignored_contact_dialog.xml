@@ -6,10 +6,9 @@
               tools:context="com.ae.apps.messagecounter.fragments.IgnoreDialogFragment">
 
     <RelativeLayout
-        android:id="@+id/addTripDialogHeader"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dialog_header_height"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="-20dp"
         android:background="@color/colorPrimary">
 
         <TextView
@@ -62,15 +61,17 @@
             tools:ignore="RtlHardcoded"/>
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.v7.widget.ButtonBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
+        style="?android:attr/buttonBarStyle"
         android:orientation="horizontal"
         android:padding="@dimen/padding_medium">
 
         <Button
             android:id="@+id/btnCancel"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -79,10 +80,11 @@
 
         <Button
             android:id="@+id/btnIgnoreContact"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="@string/str_ignore_btn_ignore"/>
-    </LinearLayout>
+    </android.support.v7.widget.ButtonBarLayout>
 
 </LinearLayout>

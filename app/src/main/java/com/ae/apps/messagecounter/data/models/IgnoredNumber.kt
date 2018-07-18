@@ -4,13 +4,12 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
-import java.lang.reflect.Constructor
 
 @Entity(tableName = "tbl_ignore_list")
 data class IgnoredNumber(
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "_id")
-        val id: Long,
+        var id: Long = 0,
 
         @ColumnInfo(name = "ignore_name")
         val ignoreName : String,
@@ -22,5 +21,5 @@ data class IgnoredNumber(
         val ignoreCustom : String
 ){
     @Ignore
-    constructor(ignoreName:String, ignoreNumber:String) : this(-1, ignoreName, ignoreNumber, "")
+    constructor(ignoreName:String, ignoreNumber:String) : this(0,ignoreName, ignoreNumber, "")
 }
