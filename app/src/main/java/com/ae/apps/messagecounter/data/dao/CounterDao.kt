@@ -25,7 +25,7 @@ abstract class CounterDao {
      * Inserts a new row for this date index if this is the first count logged,
      * else updates the current count with the new value
      */
-    fun insertOrUpdate(counter: Counter){
+   fun insertOrUpdate(counter: Counter){
         val id: Long = insert(counter)
         if(id == -1L){
             val currentCount: Int = getCount(counter.dateIndex)
