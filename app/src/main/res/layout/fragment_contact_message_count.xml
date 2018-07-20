@@ -9,52 +9,48 @@
     android:orientation="vertical"
     tools:context=".fragments.ContactMessageCountFragment">
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/btnSentList"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginEnd="@dimen/card_padding"
+            android:layout_marginRight="@dimen/card_padding"
+            android:layout_weight="1"
+            android:background="@drawable/radio_group_selector"
+            android:button="@null"
+            android:checked="true"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:padding="@dimen/padding_medium"
+            android:text="@string/str_contact_message_sent"/>
 
-            <RadioButton
-                android:id="@+id/btnSentList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:button="@null"
-                android:checked="true"
-                android:gravity="center"
-                android:background="@drawable/radio_group_selector"
-                android:text="@string/str_contact_message_sent"/>
+        <RadioButton
+            android:id="@+id/btnReceivedList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/card_padding"
+            android:layout_marginStart="@dimen/card_padding"
+            android:layout_weight="1"
+            android:background="@drawable/radio_group_selector"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/str_contact_message_received"/>
 
-            <RadioButton
-                android:id="@+id/btnReceivedList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:button="@null"
-                android:checked="false"
-                android:gravity="center"
-                android:background="@drawable/radio_group_selector"
-                android:text="@string/str_contact_message_received"/>
-
-        </RadioGroup>
-
-    </LinearLayout>
+    </RadioGroup>
 
     <com.ae.apps.common.views.EmptyRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/margin_extra_large"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/list_item_contact_message"/>
 
