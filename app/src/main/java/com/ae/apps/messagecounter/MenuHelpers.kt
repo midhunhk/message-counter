@@ -13,3 +13,12 @@ fun getShareIntent(context: Context): Intent {
     shareIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name))
     return shareIntent
 }
+
+fun getFeedbackIntent(context:Context):Intent{
+    val intent = Intent(Intent.ACTION_SEND)
+    intent.type = "text/html"
+    intent.putExtra(Intent.EXTRA_EMAIL, context.getString(R.string.feedback_email_address))
+    intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.str_about_share_feedback_subject))
+    intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.str_about_share_feedback_body))
+    return intent
+}

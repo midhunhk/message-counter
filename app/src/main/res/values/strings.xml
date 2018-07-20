@@ -2,9 +2,9 @@
     <string name="app_name">Message Counter</string>
     <string name="app_version">Version 4.0.0</string>
     <string name="app_code_name">Wyvern</string>
-    <string name="app_release_date">Nov 2018</string>
-    <string name="app_desc">Message Counter displays messages inbox statistics and number of messages from each of your contacts.</string>
-    <string name="app_disclaim">Disclaimer: This app is created for educational purposes and as such has no guarantee or support. Since undocumented Android APIs are used, this app may not work as expected on all devices.</string>
+    <string name="app_release_date">Sep 2018</string>
+    <string name="app_desc">Message Counter displays counts the messages that you send as well other useful statistics.</string>
+    <string name="app_disclaim">Since this app uses Android standard SMS APIs it may not produce correct statistics for custom ROMS. Do not use the data displayed by the app as an accurate measure for SMS counts.</string>
     <string name="app_source_code">This project\'s source code is available at GitHub</string>
     <string name="app_developer_info">Designed &amp; developed at ae app labs</string>
 
@@ -17,6 +17,7 @@
     <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter</string>
     <string name="github_source_url" translatable="false">https://github.com/midhunhk/message-counter</string>
     <string name="github_source_visible_url" translatable="false">github.com/midhunhk/message-counter</string>
+    <string name="feedback_email_address" translatable="false">aeapplabs-support@live.in</string>
 
     <string name="title_chart">Chart</string>
     <string name="title_counter">Counter</string>
@@ -30,6 +31,11 @@
 
     <string name="str_contact_message_sent">Sent</string>
     <string name="str_contact_message_received">Received</string>
+
+    <string name="str_about_oss_license">Open Source Licenses</string>
+    <string name="str_about_share_feedback">Share Feedback</string>
+    <string name="str_about_share_feedback_subject">Feedback for MessageCounter</string>
+    <string name="str_about_share_feedback_body">AppVersion 4.0.0, build 400</string>
 
     <!-- added for 2.2.0 -->
     <string name="str_messages_sent">Messages sent</string>
