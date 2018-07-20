@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
-import com.ae.apps.messagecounter.fragments.IgnoreNumbersFragment
-import com.ae.apps.messagecounter.fragments.NoAccessFragment
-import com.ae.apps.messagecounter.fragments.ContactMessageCountFragment
-import com.ae.apps.messagecounter.fragments.SentCountFragment
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import com.ae.apps.messagecounter.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val PERMISSION_CHECK_REQUEST_CODE = 8000
+    private var mPreviousFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,31 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.CALL_PHONE,
                 Manifest.permission.READ_SMS)
         checkPermissions(permissions)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item?.itemId
+
+        if (id == android.R.id.home) {
+            if (null != mPreviousFragment) {
+                showFragmentContent(mPreviousFragment!!, true)
+            }
+            return true
+        }
+        if (id == R.id.action_about) {
+            showFragmentContent(AboutFragment.newInstance(), false)
+            return true
+        }
+        if (id == R.id.action_share) {
+            startActivity(getShareIntent(this))
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun checkPermissions(permissions: Array<String>) {
@@ -53,26 +79,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onPermissionGranted() {
-        showFragmentContent(SentCountFragment.newInstance())
+        showFragmentContent(SentCountFragment.newInstance(), true)
         setupBottomNavigation()
     }
 
     private fun onPermissionNotGranted(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        showFragmentContent(NoAccessFragment.newInstance())
+        showFragmentContent(NoAccessFragment.newInstance(), true)
     }
 
-    private fun showFragmentContent(fragment: Fragment) {
+    private fun showFragmentContent(fragment: Fragment, primaryFragment: Boolean) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit()
+        if (primaryFragment) {
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            supportActionBar?.setDisplayShowHomeEnabled(false)
+            bottom_navigation.visibility = View.VISIBLE
+            mPreviousFragment = fragment
+        } else {
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
+            bottom_navigation.visibility = View.INVISIBLE
+        }
     }
 
     private fun setupBottomNavigation() {
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when {
-                item.itemId == R.id.action_ignore -> showFragmentContent(IgnoreNumbersFragment.newInstance())
-                item.itemId == R.id.action_counter -> showFragmentContent(SentCountFragment.newInstance())
-                item.itemId == R.id.action_list -> showFragmentContent(ContactMessageCountFragment.newInstance())
+                item.itemId == R.id.action_ignore -> showFragmentContent(IgnoreNumbersFragment.newInstance(), true)
+                item.itemId == R.id.action_counter -> showFragmentContent(SentCountFragment.newInstance(), true)
+                item.itemId == R.id.action_list -> showFragmentContent(ContactMessageCountFragment.newInstance(), true)
             }
             true
         }

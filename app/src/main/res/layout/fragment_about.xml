@@ -5,5 +5,11 @@
              android:layout_height="match_parent"
              tools:context=".fragments.AboutFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/menu_title_about"/>
+
 
 </FrameLayout>
