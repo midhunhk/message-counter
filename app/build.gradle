@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.oss.licenses.plugin'
 
 android {
     compileSdkVersion 27
@@ -58,6 +59,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.ae.apps:android-libraries:2.2.2'
     implementation "org.jetbrains.anko:anko-commons:0.10.4"
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.0'
+
     // Require Android Studio 3.2 for Navigation Architecture Component
     // implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     // implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"

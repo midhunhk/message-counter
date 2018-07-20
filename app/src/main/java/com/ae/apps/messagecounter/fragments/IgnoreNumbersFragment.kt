@@ -17,6 +17,7 @@ import com.ae.apps.messagecounter.data.models.IgnoredNumber
 import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
 import com.ae.apps.messagecounter.data.viewmodels.IgnoredNumbersViewModel
 import com.ae.apps.messagecounter.data.viewmodels.IgnoredNumbersViewModelFactory
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_ignore_numbers.*
 import java.util.*
 
@@ -48,6 +49,12 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initUI()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mViewModel.getIgnoredNumbers().removeObservers(this)
+        clearFindViewByIdCache()
     }
 
     private fun initViewModel() {

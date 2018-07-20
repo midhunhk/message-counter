@@ -8,9 +8,8 @@
     <string name="app_source_code">This project\'s source code is available at GitHub</string>
     <string name="app_developer_info">Designed &amp; developed at ae app labs</string>
 
-    <string name="empty_text"></string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_text"/>
+    <string name="empty_list">No messages found</string>
 
     <!-- same for all languages - not to be translated -->
     <string name="str_zero" translatable="false">0</string>
@@ -21,6 +20,9 @@
     <string name="title_chart">Chart</string>
     <string name="title_counter">Counter</string>
     <string name="title_ignore">Ignore</string>
+
+    <string name="str_contact_message_sent">Sent</string>
+    <string name="str_contact_message_received">Received</string>
 
     <!-- added for 2.2.0 -->
     <string name="str_messages_sent">Messages sent</string>
@@ -38,9 +40,9 @@
 
     <!-- added for 2.2.7 -->
     <string name="str_notify_on_limit">Notify on reaching limit</string>
-    <string name="str_enble_notify_on_limit">Notify on reaching SMS send limit</string>
-    <string name="str_sms_limit_notif_title">SMS Limit Reached</string>
-    <string name="str_sms_limit_notif_text">SMS limit reached for this cycle</string>
+    <string name="str_enable_notify_on_limit">Notify on reaching SMS send limit</string>
+    <string name="str_sms_limit_notification_title">SMS Limit Reached</string>
+    <string name="str_sms_limit_notification_text">SMS limit reached for this cycle</string>
     <string name="str_current_cycle">CURRENT CYCLE</string>
     <string name="str_previous_cycle">PREVIOUS CYCLE</string>
 
