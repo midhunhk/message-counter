@@ -15,18 +15,18 @@ import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.adapters.ContactMessagesAdapter
 import com.ae.apps.messagecounter.data.viewmodels.ContactMessageViewModel
 import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_received_count.*
+import kotlinx.android.synthetic.main.fragment_contact_message_count.*
 
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class ReceivedCountFragment : Fragment() {
+class ContactMessageCountFragment : Fragment() {
 
     companion object {
-        fun newInstance(): ReceivedCountFragment {
-            return ReceivedCountFragment()
+        fun newInstance(): ContactMessageCountFragment {
+            return ContactMessageCountFragment()
         }
     }
 
@@ -38,7 +38,7 @@ class ReceivedCountFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_received_count, container, false)
+        return inflater.inflate(R.layout.fragment_contact_message_count, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +72,10 @@ class ReceivedCountFragment : Fragment() {
         mViewModel.getReceivedMessageContacts().observe(this, Observer {
             run {
                 mSentMessagesCount = it!!
+                if(!mInitialized){
+                    mInitialized = true
+                    updateAdapter(mSentMessagesCount)
+                }
             }
         })
 
@@ -81,13 +85,21 @@ class ReceivedCountFragment : Fragment() {
             }
         })
 
-        btnSentList.setOnClickListener { mAdapter.setItems(mSentMessagesCount) }
-        btnReceivedList.setOnClickListener { mAdapter.setItems(mReceivedMessagesCount) }
+        btnSentList.setOnClickListener { updateAdapter(mSentMessagesCount) }
+        btnReceivedList.setOnClickListener { updateAdapter(mReceivedMessagesCount) }
 
         // Start to read the data
         mViewModel.getContactMessageData(requireContext())
 
         // When the user selects an option to see the licenses:
         // startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
+    }
+
+    private fun updateAdapter(list:List<ContactMessageVo>){
+        if(list.isEmpty()){
+            emptyListText.setText(R.string.empty_list)
+        } else {
+            mAdapter.setItems(list)
+        }
     }
 }

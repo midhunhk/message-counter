@@ -14,9 +14,9 @@
         android:title="@string/title_counter"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_chart"
+        android:id="@+id/action_list"
         android:enabled="true"
-        android:icon="@drawable/nav_icon_chart"
+        android:icon="@drawable/nav_icon_list"
         android:title="@string/title_chart"
         app:showAsAction="ifRoom" />
 </menu>

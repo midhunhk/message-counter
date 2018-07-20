@@ -10,6 +10,7 @@
 
     <string name="empty_text"/>
     <string name="empty_list">No messages found</string>
+    <string name="loading_list">Counting Messages</string>
 
     <!-- same for all languages - not to be translated -->
     <string name="str_zero" translatable="false">0</string>

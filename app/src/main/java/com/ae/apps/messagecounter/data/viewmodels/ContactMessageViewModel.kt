@@ -14,7 +14,9 @@ import org.jetbrains.anko.doAsync
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+/**
+ * ViewModel that processes and holds the data for showing Sent and Received message counts
+ */
 class ContactMessageViewModel : ViewModel() {
 
     private var mSentMessageContacts: MutableLiveData<List<ContactMessageVo>> = MutableLiveData()
@@ -26,6 +28,12 @@ class ContactMessageViewModel : ViewModel() {
     fun getReceivedMessageContacts(): LiveData<List<ContactMessageVo>> = mReceivedMessageContacts
 
     fun getContactMessageData(context: Context) {
+        if (null == mSentMessageContacts.value || null == mReceivedMessageContacts.value) {
+            computeMessageCounts(context)
+        }
+    }
+
+    private fun computeMessageCounts(context: Context) {
         val contactManager: AeContactManager = ContactManager.Builder(context.contentResolver, context.resources)
                 .addContactsWithPhoneNumbers(true)
                 .build()
@@ -33,12 +41,8 @@ class ContactMessageViewModel : ViewModel() {
         doAsync {
             contactManager.fetchAllContacts()
 
-            val sentMessages = getContactMessageCountMap(context,
-                    contactManager,
-                    SMSManager.SMS_URI_SENT)
-            val receivedMessages = getContactMessageCountMap(context,
-                    contactManager,
-                    SMSManager.SMS_URI_INBOX)
+            val sentMessages = getContactMessageCountMap(context, contactManager, SMSManager.SMS_URI_SENT)
+            val receivedMessages = getContactMessageCountMap(context, contactManager, SMSManager.SMS_URI_INBOX)
 
             val sentContactMessages = getContactMessagesList(contactManager, sentMessages)
             val receivedContactMessages = getContactMessagesList(contactManager, receivedMessages)
@@ -71,9 +75,7 @@ class ContactMessageViewModel : ViewModel() {
         val cursor = context.contentResolver.query(
                 Uri.parse(uri),
                 SMS_TABLE_MINIMAL_PROJECTION,
-                null,
-                null,
-                null)
+                null, null, null)
         if (cursor.count > 0 && cursor.moveToFirst()) {
             val addressIndex: Int = cursor.getColumnIndex(COLUMN_NAME_ADDRESS)
             do {
