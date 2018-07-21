@@ -50,6 +50,12 @@ class MainActivity : AppCompatActivity() {
             showFragmentContent(AboutFragment.newInstance(), false)
             return true
         }
+        if(id == R.id.action_donate){
+            
+        }
+        if(id == R.id.action_settings){
+            showFragmentContent(SettingsFragment.newInstance(), false)
+        }
         if (id == R.id.action_share) {
             startActivity(getShareIntent(this))
             return true

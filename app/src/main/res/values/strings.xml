@@ -94,4 +94,7 @@
 
     <!-- v4.0.0 -->
     <string name="str_require_permissions">Require permissions to work</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

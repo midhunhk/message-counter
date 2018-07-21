@@ -14,10 +14,6 @@
         app:showAsAction="never"
         android:title="@string/menu_title_donate"/>
     <item
-        android:id="@+id/action_feedback"
-        android:orderInCategory="200"
-        android:title="@string/menu_title_feedback"/>
-    <item
         android:id="@+id/action_settings"
         android:orderInCategory="300"
         android:icon="@drawable/ic_settings"
