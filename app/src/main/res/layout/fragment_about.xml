@@ -101,7 +101,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dip"
                 android:layout_marginBottom="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:text="@string/app_desc"/>
@@ -116,25 +115,44 @@
 
             <Button
                 android:id="@+id/viewSourceCode"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/padding_small"
                 android:gravity="center_vertical"
-                android:padding="@dimen/padding_small"
-                android:text="@string/github_source_visible_url"
+                android:padding="@dimen/card_padding"
+                android:text="@string/str_about_view_source"
                 android:textAllCaps="false"/>
-
-            <include layout="@layout/separator_line"/>
 
             <Button
                 android:id="@+id/viewLicense"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/padding_small"
                 android:gravity="center_vertical"
-                android:padding="@dimen/padding_small"
+                android:padding="@dimen/card_padding"
                 android:text="@string/str_about_oss_license"
                 android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/sendFeedback"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="@dimen/card_padding"
+                android:text="@string/str_about_share_feedback"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/viewFAQ"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="@dimen/card_padding"
+                android:text="@string/str_about_view_faq"
+                android:textAllCaps="false"/>
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

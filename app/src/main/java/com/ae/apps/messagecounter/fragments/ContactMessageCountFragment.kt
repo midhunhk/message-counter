@@ -90,9 +90,6 @@ class ContactMessageCountFragment : Fragment() {
 
         // Start to read the data
         mViewModel.getContactMessageData(requireContext())
-
-        // When the user selects an option to see the licenses:
-        // startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
     }
 
     private fun updateAdapter(list:List<ContactMessageVo>){
