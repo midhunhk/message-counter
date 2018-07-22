@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onPermissionNotGranted(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         showFragmentContent(NoAccessFragment.newInstance(), true)
+        bottom_navigation.visibility = View.INVISIBLE
     }
 
     private fun showFragmentContent(fragment: Fragment, primaryFragment: Boolean) {
