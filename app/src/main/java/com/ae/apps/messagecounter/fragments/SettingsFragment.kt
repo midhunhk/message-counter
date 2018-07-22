@@ -2,12 +2,12 @@ package com.ae.apps.messagecounter.fragments
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.preference.PreferenceFragmentCompat
+import com.ae.apps.messagecounter.R
 
 
 /**
- * A simple [Fragment] subclass.
+ * Hosts the Preference fragment for the application
  *
  */
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -17,7 +17,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-
+        addPreferencesFromResource(R.xml.preferences)
     }
 
 }
