@@ -79,9 +79,9 @@
     <string name="str_donate_disclaimer">Donations will not be  in lieu of additional features. Google takes 30% of purchases as transaction fees.</string>
     <string name="str_donate_thanks">Thank you for donating!</string>
     <string name="str_donate_fail">Donation failed. Please try again later.</string>
-    <string name="str_donate_small">Buy me a Chocolate</string>
-    <string name="str_donate_medium">Buy me an Ice-Cream</string>
-    <string name="str_donate_large">Buy me Dinner</string>
+    <string name="str_donate_small">Small Donation</string>
+    <string name="str_donate_medium">Medium Donation</string>
+    <string name="str_donate_large">Large Donation</string>
 
     <!-- added for 3.3.0 -->
     <string name="str_ignore_title">Ignore List</string>

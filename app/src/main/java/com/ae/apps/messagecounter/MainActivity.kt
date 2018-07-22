@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         if(id == R.id.action_donate){
-
+            showFragmentContent(DonationsFragment.newInstance(), false)
         }
         if(id == R.id.action_settings){
             showFragmentContent(SettingsFragment.newInstance(), false)
