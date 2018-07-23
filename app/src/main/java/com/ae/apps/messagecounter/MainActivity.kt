@@ -4,12 +4,14 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -50,10 +52,10 @@ class MainActivity : AppCompatActivity() {
             showFragmentContent(AboutFragment.newInstance(), false)
             return true
         }
-        if(id == R.id.action_donate){
+        if (id == R.id.action_donate) {
             showFragmentContent(DonationsFragment.newInstance(), false)
         }
-        if(id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             showFragmentContent(SettingsFragment.newInstance(), false)
         }
         if (id == R.id.action_share) {
@@ -87,6 +89,17 @@ class MainActivity : AppCompatActivity() {
     private fun onPermissionGranted() {
         showFragmentContent(SentCountFragment.newInstance(), true)
         setupBottomNavigation()
+        manageMessageCounterService()
+    }
+
+    private fun manageMessageCounterService() {
+        val preferenceRepository = PreferenceRepository.newInstance(
+                PreferenceManager.getDefaultSharedPreferences(this))
+        if (preferenceRepository.backgroundServiceEnabled()) {
+            startService(getMessageCounterServiceIntent(this))
+        } else {
+            stopService(getMessageCounterServiceIntent(this))
+        }
     }
 
     private fun onPermissionNotGranted(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {

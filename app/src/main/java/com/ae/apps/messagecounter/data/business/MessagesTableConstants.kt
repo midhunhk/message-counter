@@ -1,4 +1,4 @@
-package com.ae.apps.messagecounter.data.viewmodels
+package com.ae.apps.messagecounter.data.business
 
 import android.database.Cursor
 import com.ae.apps.messagecounter.data.models.Message

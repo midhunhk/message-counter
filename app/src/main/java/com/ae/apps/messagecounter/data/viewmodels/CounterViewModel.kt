@@ -4,11 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.content.Context
-import android.net.Uri
-import android.text.TextUtils
-import android.util.Log
-import com.ae.apps.common.managers.SMSManager
-import com.ae.apps.common.utils.CommonUtils
+import com.ae.apps.messagecounter.data.business.MessageCounter
 import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.data.repositories.*
@@ -20,7 +16,11 @@ import java.util.*
  */
 class CounterViewModel(private val counterRepository: CounterRepository,
                        private val ignoreNumbersRepository: IgnoredNumbersRepository,
-                       private val preferenceRepository: PreferenceRepository) : ViewModel() {
+                       private val preferenceRepository: PreferenceRepository) : ViewModel(), MessageCounter.MessageCounterObserver {
+
+    override fun onIndexCompleted() {
+        getSentCountDetails()
+    }
 
     private var mSentCountDetails: MutableLiveData<SentCountDetails> = MutableLiveData()
 
@@ -52,74 +52,10 @@ class CounterViewModel(private val counterRepository: CounterRepository,
      * Index messages that are in the sms database that have not been counted before
      *
      * @param context The context used for accessing the SMS API
-     * @param messageId An optional messageId that represents a new SMS which shouldn't be counted
-     *                  by this method
      */
-    fun indexMessages(context: Context, messageId: String = "") {
-        val defaultTimeStamp = getStartTimeStamp(CommonUtils.isFirstInstall(context))
-        // Returns the last indexed message's time stamp from shared preference
-        val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp(defaultTimeStamp)
-
-        // Need a valid reference time for indexing
-        if (TextUtils.isEmpty(lastMessageTimeStamp)) {
-            return
-        }
-
-        var newMessagesAdded = 0
-        var lastIndexedTimeStamp = ""
-
-        doAsync {
-            // Query the SMS Database to read messages
-            val newMessagesCursor = context.contentResolver.query(
-                    Uri.parse(SMSManager.SMS_URI_ALL),
-                    SMS_TABLE_PROJECTION,
-                    SELECT_SENT_MESSAGES_AFTER_DATE,
-                    arrayOf(lastMessageTimeStamp),
-                    SORT_BY_DATE)
-            try {
-                val messageSentDate = Calendar.getInstance()
-                val newMessagesCount = newMessagesCursor?.count ?: 0
-                if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
-                    do {
-                        // Convert this row into a Message object and handle multipart messages
-                        val message = getMessageFromCursor(newMessagesCursor)
-
-                        messageSentDate.timeInMillis = java.lang.Long.parseLong(message.date)
-
-                        // Skip the new message id which will be added by calling method
-                        if (messageId != message.id) {
-                            // Count this message against the date it was sent
-                            val dateIndex = getIndexFromDate(messageSentDate.time)
-                            lastIndexedTimeStamp = message.date
-
-                            // Only index if the number is not ignored explicitly
-                            if (!ignoreNumbersRepository.checkIfNumberIsIgnored(message.address)) {
-                                counterRepository.addCount(dateIndex, message.messageCount)
-                                newMessagesAdded += message.messageCount
-                            }
-                        }
-                    } while (newMessagesCursor.moveToNext())
-                }
-            } catch (e: Exception) {
-                Log.e("CounterViewModel", Log.getStackTraceString(e))
-            } finally {
-                newMessagesCursor?.close()
-                preferenceRepository.setHistoricMessageIndexed()
-            }
-
-            // Update the model
-            if (newMessagesAdded > 0) {
-                preferenceRepository.setLastSentTimeStamp(lastIndexedTimeStamp)
-                getSentCountData()
-            }
-        }
+    fun indexMessages(context: Context) {
+        val messageCounter = MessageCounter.newInstance(counterRepository, ignoreNumbersRepository, preferenceRepository)
+        messageCounter.indexMessages(context, this)
     }
 
-    private fun getStartTimeStamp(indexAllMessages: Boolean): String {
-        var defaultTimeStamp = ""
-        if (indexAllMessages) {
-            defaultTimeStamp = "0"
-        }
-        return defaultTimeStamp
-    }
 }

@@ -10,6 +10,8 @@ import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.common.managers.contact.AeContactManager
 import com.ae.apps.common.utils.ValueComparator
 import com.ae.apps.common.vo.ContactMessageVo
+import com.ae.apps.messagecounter.data.business.COLUMN_NAME_ADDRESS
+import com.ae.apps.messagecounter.data.business.SMS_TABLE_MINIMAL_PROJECTION
 import org.jetbrains.anko.doAsync
 import java.util.*
 import kotlin.collections.ArrayList

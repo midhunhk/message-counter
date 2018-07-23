@@ -55,7 +55,8 @@
     <string name="str_enable_sent_count">For keeping track of sent messages count, you can enable this feature in settings and provide the limits</string>
 
     <string name="str_pref_sent_message_count">Sent Message Count</string>
-    <string name="str_pref_sent_message_desc">A background service will be used to monitor sent messages</string>
+    <string name="str_pref_use_background_service">Use background service</string>
+    <string name="str_pref_use_background_service_desc">A background service will be used to monitor sent messages</string>
     <string name="str_pref_cycle_start_desc">The start date for each cycle</string>
     <string name="str_pref_message_limit">Message limit</string>
     <string name="str_pref_message_limit_desc">Limit for messages that can be sent per cycle. Default is 100</string>

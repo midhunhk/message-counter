@@ -3,6 +3,7 @@ package com.ae.apps.messagecounter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import com.ae.apps.messagecounter.services.SMSObserverService
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 
@@ -36,6 +37,10 @@ fun getViewSourceIntent(context: Context): Intent {
 
 fun getViewFaqIntent(context: Context): Intent {
     return createIntentForURI(context.getString(R.string.app_faq_url))
+}
+
+fun getMessageCounterServiceIntent(context:Context):Intent{
+    return Intent(context, SMSObserverService::class.java)
 }
 
 private fun createIntentForURI(url: String): Intent {

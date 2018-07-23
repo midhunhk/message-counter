@@ -2,6 +2,7 @@ package com.ae.apps.messagecounter.data.preferences
 
 /* Preference keys */
 const val PREF_KEY_HIDE_NON_CONTACT_MESSAGES = "pref_key_hide_non_contact_messages"
+const val PREF_KEY_ENABLE_BACKGROUND_SERVICE = "pref_key_enable_sent_message_count"
 const val PREF_KEY_CYCLE_START_DATE = "pref_key_cycle_start_date"
 const val PREF_KEY_MESSAGE_LIMIT_VALUE = "pref_key_message_limit_value"
 const val PREF_KEY_ENABLE_NOTIFICATION = "pref_key_enable_notification"
