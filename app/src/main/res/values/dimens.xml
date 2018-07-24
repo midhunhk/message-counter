@@ -11,4 +11,7 @@
 
     <dimen name="image_min_size">48dp</dimen>
     <dimen name="image_max_size">48dp</dimen>
+
+    <dimen name="widget_min_width">136dp</dimen>
+    <dimen name="widget_min_height">42dp</dimen>
 </resources>
