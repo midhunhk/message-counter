@@ -1,6 +1,7 @@
 package com.ae.apps.messagecounter.data.preferences
 
 import android.content.SharedPreferences
+import com.ae.apps.messagecounter.data.business.DEFAULT_INDEX_TIME_STAMP
 import java.util.*
 
 class PreferenceRepository private constructor(private val preferences: SharedPreferences) {
@@ -31,41 +32,41 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
         return calendar.time
     }
 
-    fun historicMessagesIndexed(): Boolean{
+    fun historicMessagesIndexed(): Boolean {
         return preferences.getBoolean(PREF_KEY_HISTORIC_DATA_INDEXED, false)
     }
 
-    fun setHistoricMessageIndexed(){
+    fun setHistoricMessageIndexed() {
         preferences.edit()
                 .putBoolean(PREF_KEY_HISTORIC_DATA_INDEXED, true)
                 .apply()
     }
 
-    fun getLastSentTimeStamp(defaultTimeStamp:String): String {
-        return preferences.getString(PREF_KEY_LAST_SENT_TIME_STAMP, defaultTimeStamp)
+    fun getLastSentTimeStamp(): String {
+        return preferences.getString(PREF_KEY_LAST_SENT_TIME_STAMP, DEFAULT_INDEX_TIME_STAMP)
     }
 
-    fun getLastSentMessageId(): String{
+    fun getLastSentMessageId(): String {
         return preferences.getString(PREF_KEY_LAST_SENT_MESSAGE_ID, "")
     }
 
-    fun setLastSentTimeStamp(timeStamp: String){
+    fun setLastSentTimeStamp(timeStamp: String) {
         preferences.edit()
                 .putString(PREF_KEY_LAST_SENT_TIME_STAMP, timeStamp)
                 .apply()
     }
 
-    fun messageLimitNotificationEnabled():Boolean{
+    fun messageLimitNotificationEnabled(): Boolean {
         return preferences.getBoolean(PREF_KEY_ENABLE_NOTIFICATION, false)
     }
 
-    fun setLastSentMessageId(lastIndexedMessageId: String) {
+    fun setLastSentMessageId(messageId: String) {
         preferences.edit()
-                .putString(PREF_KEY_LAST_SENT_MESSAGE_ID, lastIndexedMessageId)
+                .putString(PREF_KEY_LAST_SENT_MESSAGE_ID, messageId)
                 .apply()
     }
 
-    fun backgroundServiceEnabled():Boolean{
+    fun backgroundServiceEnabled(): Boolean {
         return preferences.getBoolean(PREF_KEY_ENABLE_BACKGROUND_SERVICE, false)
     }
 }

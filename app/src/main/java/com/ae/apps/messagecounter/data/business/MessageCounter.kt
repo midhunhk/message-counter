@@ -1,9 +1,12 @@
 package com.ae.apps.messagecounter.data.business
 
 import android.content.Context
+import android.database.Cursor
 import android.net.Uri
+import android.preference.PreferenceManager
 import android.util.Log
 import com.ae.apps.common.managers.SMSManager
+import com.ae.apps.messagecounter.data.AppDatabase
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.data.repositories.CounterRepository
 import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
@@ -11,6 +14,10 @@ import com.ae.apps.messagecounter.data.repositories.getIndexFromDate
 import org.jetbrains.anko.doAsync
 import java.util.*
 
+/**
+ * The logic for counting sent messages from SMS API and to update the database
+ * for MessageCounter
+ */
 class MessageCounter(private val counterRepository: CounterRepository,
                      private val ignoreNumbersRepository: IgnoredNumbersRepository,
                      private val preferenceRepository: PreferenceRepository) {
@@ -20,9 +27,14 @@ class MessageCounter(private val counterRepository: CounterRepository,
                         ignoreNumbersRepository: IgnoredNumbersRepository,
                         preferenceRepository: PreferenceRepository) = MessageCounter(counterRepository,
                 ignoreNumbersRepository, preferenceRepository)
-    }
 
-    private val DEFAULT_INDEX_TIME_STAMP = "0"
+        fun newInstance(context: Context): MessageCounter{
+            val preferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(context))
+            val counterRepository = CounterRepository.getInstance(AppDatabase.getInstance(context).counterDao())
+            val ignoreNumbersRepository = IgnoredNumbersRepository.getInstance(AppDatabase.getInstance(context).ignoredNumbersDao())
+            return MessageCounter(counterRepository, ignoreNumbersRepository, preferenceRepository)
+        }
+    }
 
     /**
      * Index messages that are in the sms database that have not been counted before
@@ -33,19 +45,12 @@ class MessageCounter(private val counterRepository: CounterRepository,
         var newMessagesAdded = 0
         var lastIndexedTimeStamp = ""
         var lastIndexedMessageId = ""
-        val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp(DEFAULT_INDEX_TIME_STAMP)
 
         doAsync {
-            // Query the SMS Database to read messages
-            val newMessagesCursor = context.contentResolver.query(
-                    Uri.parse(SMSManager.SMS_URI_ALL),
-                    SMS_TABLE_PROJECTION,
-                    SELECT_SENT_MESSAGES_AFTER_DATE,
-                    arrayOf(lastMessageTimeStamp),
-                    SORT_BY_DATE)
+            val newMessagesCursor = getNewMessagesCursor(context)
+            val messageSentDate = Calendar.getInstance()
             try {
-                val messageSentDate = Calendar.getInstance()
-                val newMessagesCount = newMessagesCursor?.count ?: 0
+                val newMessagesCount = newMessagesCursor.count
                 Log.e("CounterViewModel", "Messages to be processed $newMessagesCount")
                 if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
                     do {
@@ -59,8 +64,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
                         lastIndexedTimeStamp = message.date
                         lastIndexedMessageId = message.id
 
-                        // Only index if the number is not ignored explicitly
-                        if (!ignoreNumbersRepository.checkIfNumberIsIgnored(message.address)) {
+                        if (ignoreNumbersRepository.checkIfNumberIsNotIgnored(message.address)) {
                             counterRepository.addCount(dateIndex, message.messageCount)
                             newMessagesAdded += message.messageCount
                         }
@@ -69,7 +73,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
             } catch (e: Exception) {
                 Log.e("CounterViewModel", Log.getStackTraceString(e))
             } finally {
-                newMessagesCursor?.close()
+                newMessagesCursor.close()
                 preferenceRepository.setHistoricMessageIndexed()
             }
 
@@ -81,6 +85,36 @@ class MessageCounter(private val counterRepository: CounterRepository,
         }
     }
 
+    /**
+     * Checks if there are any sent messages that are yet to be indexed
+     *
+     * @param context The context required fir accessing the SMS API
+     */
+    fun checkIfUnIndexedMessagesExist(context: Context): Boolean {
+        val newMessagesCursor = getNewMessagesCursor(context)
+        val newMessagesExists = newMessagesCursor.count > 0 && newMessagesCursor.moveToFirst()
+        newMessagesCursor.close()
+        return newMessagesExists
+    }
+
+    private fun getNewMessagesCursor(context: Context): Cursor {
+        val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp()
+        return context.contentResolver.query(
+                Uri.parse(SMSManager.SMS_URI_ALL),
+                SMS_TABLE_PROJECTION,
+                SELECT_SENT_MESSAGES_AFTER_DATE,
+                arrayOf(lastMessageTimeStamp),
+                SORT_BY_DATE)
+    }
+
+    fun checkIfMessageLimitCrossed():Boolean{
+        preferenceRepository.messageLimitNotificationEnabled()
+        return false
+    }
+
+    /**
+     * An interface that represents observers who are interested in the completion of indexing
+     */
     interface MessageCounterObserver {
         fun onIndexCompleted()
     }

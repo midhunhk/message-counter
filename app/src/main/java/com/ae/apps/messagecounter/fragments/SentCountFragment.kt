@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_sent_count.*
 
 /**
- * A simple [Fragment] subclass.
+ * Fragment that represents the SentCount state
  *
  */
 class SentCountFragment : Fragment() {
@@ -72,20 +72,22 @@ class SentCountFragment : Fragment() {
 
     private fun initUI() {
         mViewModel.getSentCountDetails().observe(this,
-                Observer{details:SentCountDetails? -> run {
-            heroSentTodayText.text = details?.sentToday.toString()
-            heroSentInCycleText.text = details?.sentCycle.toString()
-            countProgressText.text = details?.sentCycle.toString()
-            cycleDurationText.text = details?.cycleDuration
-            countSentTodayText.text = details?.sentToday.toString()
-            countSentThisWeekText.text = details?.sentInWeek.toString()
-            countSentThisYearText.text = details?.startYearCount.toString()
-            prevCycleSentCountText.text = details?.sentLastCycle.toString()
+                Observer { details: SentCountDetails? ->
+                    run {
+                        heroSentTodayText.text = details?.sentToday.toString()
+                        heroSentInCycleText.text = details?.sentCycle.toString()
+                        countProgressText.text = details?.sentCycle.toString()
+                        cycleDurationText.text = details?.cycleDuration
+                        countSentTodayText.text = details?.sentToday.toString()
+                        countSentThisWeekText.text = details?.sentInWeek.toString()
+                        countSentThisYearText.text = details?.startYearCount.toString()
+                        prevCycleSentCountText.text = details?.sentLastCycle.toString()
 
-            // set progress bars
-            setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit)
-            setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
-        }})
+                        setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit)
+                        setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
+                    }
+                }
+        )
     }
 
     @SuppressLint("SetTextI18n")

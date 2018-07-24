@@ -9,6 +9,7 @@ import java.util.concurrent.Executors
 private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
 private val DATE_INDEX_FORMAT = SimpleDateFormat("yyMMdd", Locale.getDefault())
 private val DATE_DISPLAY_FORMAT = SimpleDateFormat("dd MMM", Locale.getDefault())
+
 /**
  * Utility method to run blocks on a dedicated background thread, used for io/database work.
  */

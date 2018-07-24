@@ -21,6 +21,10 @@ class IgnoredNumbersRepository private constructor(private val dao: IgnoredNumbe
         return dao.checkIfNumberIsIgnored(numberToCheck) == 1
     }
 
+    fun checkIfNumberIsNotIgnored(numberToCheck:String): Boolean{
+        return !checkIfNumberIsIgnored(numberToCheck)
+    }
+
     fun ignoreNumber(numberToIgnore:IgnoredNumber) {
         dao.insertIgnoreNumber(numberToIgnore)
     }

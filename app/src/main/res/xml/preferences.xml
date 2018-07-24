@@ -28,8 +28,8 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="pref_key_enable_sent_message_count"
-            android:summary="str_pref_use_background_service_desc"
-            android:title="str_pref_use_background_service" />
+            android:summary="@string/str_pref_use_background_service_desc"
+            android:title="@string/str_pref_use_background_service" />
     </PreferenceCategory>
 
 </PreferenceScreen>

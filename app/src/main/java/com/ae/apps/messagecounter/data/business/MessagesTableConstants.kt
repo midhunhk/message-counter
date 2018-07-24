@@ -24,7 +24,9 @@ val SMS_TABLE_MINIMAL_PROJECTION = arrayOf(COLUMN_NAME_ID,
 
 val SELECT_SENT_MESSAGES_AFTER_DATE = "person is null and protocol is null and $COLUMN_NAME_DATE > ? "
 val SORT_BY_DATE = "$COLUMN_NAME_DATE ASC"
+
 const val DEFAULT_MESSAGE_COUNT = 1
+const val DEFAULT_INDEX_TIME_STAMP = "0"
 
 fun getMessageFromCursor(cursor: Cursor): Message {
     val messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID))
@@ -33,7 +35,6 @@ fun getMessageFromCursor(cursor: Cursor): Message {
     val body = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_BODY))
     val address = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ADDRESS))
 
-
     // Calculate the messages count for multipart messages
     val messagesCount = try {
         getMessageCount(body)
@@ -41,6 +42,5 @@ fun getMessageFromCursor(cursor: Cursor): Message {
         // Skip any exceptions and use default value
         DEFAULT_MESSAGE_COUNT
     }
-
     return Message(messageId, messagesCount, body, sentTime, protocol, address)
 }
