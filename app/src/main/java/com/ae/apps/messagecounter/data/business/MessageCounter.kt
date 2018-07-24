@@ -108,7 +108,15 @@ class MessageCounter(private val counterRepository: CounterRepository,
     }
 
     fun checkIfMessageLimitCrossed():Boolean{
-        preferenceRepository.messageLimitNotificationEnabled()
+        if(preferenceRepository.messageLimitNotificationEnabled()){
+            val startIndex = getIndexFromDate(preferenceRepository.getCycleStartDate())
+            val currentLimit = preferenceRepository.getMessageLimitValue()
+
+            val currentCount = counterRepository.getTotalCountSince(startIndex)
+            if(currentCount >= currentLimit){
+                return true
+            }
+        }
         return false
     }
 
