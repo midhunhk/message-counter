@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
+import com.ae.apps.messagecounter.services.SMSObserverService
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -96,7 +97,9 @@ class MainActivity : AppCompatActivity() {
         val preferenceRepository = PreferenceRepository.newInstance(
                 PreferenceManager.getDefaultSharedPreferences(this))
         if (preferenceRepository.backgroundServiceEnabled()) {
-            startService(getMessageCounterServiceIntent(this))
+            if(!isServiceRunning(this, SMSObserverService::class.java)){
+                startService(getMessageCounterServiceIntent(this))
+            }
         } else {
             stopService(getMessageCounterServiceIntent(this))
         }
