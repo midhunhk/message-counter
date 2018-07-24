@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
+import com.ae.apps.messagecounter.services.RuntimePermissionsAware
 import com.ae.apps.messagecounter.services.SMSObserverService
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,18 +21,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 /**
  * Main Entry point to the application
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RuntimePermissionsAware {
 
     private val PERMISSION_CHECK_REQUEST_CODE = 8000
     private var mPreviousFragment: Fragment? = null
+    private val permissions: Array<String> = arrayOf(Manifest.permission.READ_CONTACTS,
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.READ_SMS)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val permissions: Array<String> = arrayOf(Manifest.permission.READ_CONTACTS,
-                Manifest.permission.CALL_PHONE,
-                Manifest.permission.READ_SMS)
         checkPermissions(permissions)
     }
 
@@ -66,12 +67,16 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun requestForPermissions() {
+        requestPermissions(permissions, PERMISSION_CHECK_REQUEST_CODE)
+    }
+
     private fun checkPermissions(permissions: Array<String>) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkAllPermissions(permissions)) {
                 onPermissionGranted()
             } else {
-                requestPermissions(permissions, PERMISSION_CHECK_REQUEST_CODE)
+                requestForPermissions()
             }
         } else {
             onPermissionGranted()
