@@ -3,6 +3,7 @@ package com.ae.apps.messagecounter.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -25,9 +26,10 @@ import kotlinx.android.synthetic.main.fragment_contact_message_count.*
 class ContactMessageCountFragment : Fragment() {
 
     companion object {
-        fun newInstance(): ContactMessageCountFragment {
-            return ContactMessageCountFragment()
-        }
+        @Volatile
+        private var instance: ContactMessageCountFragment? = null
+
+        fun newInstance() = ContactMessageCountFragment()
     }
 
     private lateinit var mViewModel: ContactMessageViewModel
@@ -59,7 +61,7 @@ class ContactMessageCountFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        mViewModel = ViewModelProviders.of(this).get(ContactMessageViewModel::class.java)
+        mViewModel = ViewModelProviders.of(requireActivity()).get(ContactMessageViewModel::class.java)
         mAdapter = ContactMessagesAdapter(requireContext())
     }
 
@@ -72,10 +74,7 @@ class ContactMessageCountFragment : Fragment() {
         mViewModel.getReceivedMessageContacts().observe(this, Observer {
             run {
                 mSentMessagesCount = it!!
-                if(!mInitialized){
-                    mInitialized = true
-                    updateAdapter(mSentMessagesCount)
-                }
+                updateAdapter(mSentMessagesCount)
             }
         })
 
@@ -92,8 +91,8 @@ class ContactMessageCountFragment : Fragment() {
         mViewModel.getContactMessageData(requireContext())
     }
 
-    private fun updateAdapter(list:List<ContactMessageVo>){
-        if(list.isEmpty()){
+    private fun updateAdapter(list: List<ContactMessageVo>) {
+        if (list.isEmpty()) {
             emptyListText.setText(R.string.empty_list)
         } else {
             mAdapter.setItems(list)

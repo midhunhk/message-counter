@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import com.ae.apps.common.managers.ContactManager
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.common.managers.contact.AeContactManager
@@ -15,6 +16,7 @@ import com.ae.apps.messagecounter.data.business.SMS_TABLE_MINIMAL_PROJECTION
 import org.jetbrains.anko.doAsync
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.system.measureTimeMillis
 
 /**
  * ViewModel that processes and holds the data for showing Sent and Received message counts
@@ -41,16 +43,22 @@ class ContactMessageViewModel : ViewModel() {
                 .build()
 
         doAsync {
-            contactManager.fetchAllContacts()
+            val timeToFetchAllContacts = measureTimeMillis {
+                contactManager.fetchAllContacts()
+            }
+            val timeToProcessData = measureTimeMillis {
+                val sentMessages = getContactMessageCountMap(context, contactManager, SMSManager.SMS_URI_SENT)
+                val receivedMessages = getContactMessageCountMap(context, contactManager, SMSManager.SMS_URI_INBOX)
 
-            val sentMessages = getContactMessageCountMap(context, contactManager, SMSManager.SMS_URI_SENT)
-            val receivedMessages = getContactMessageCountMap(context, contactManager, SMSManager.SMS_URI_INBOX)
+                val sentContactMessages = getContactMessagesList(contactManager, sentMessages)
+                val receivedContactMessages = getContactMessagesList(contactManager, receivedMessages)
 
-            val sentContactMessages = getContactMessagesList(contactManager, sentMessages)
-            val receivedContactMessages = getContactMessagesList(contactManager, receivedMessages)
+                mSentMessageContacts.postValue(sentContactMessages)
+                mReceivedMessageContacts.postValue(receivedContactMessages)
+            }
 
-            mSentMessageContacts.postValue(sentContactMessages)
-            mReceivedMessageContacts.postValue(receivedContactMessages)
+            Log.d("ContactMessageViewModel", "timeToFetchAllContacts = $timeToFetchAllContacts")
+            Log.d("ContactMessageViewModel", "timeToProcessData = $timeToProcessData")
         }
     }
 
