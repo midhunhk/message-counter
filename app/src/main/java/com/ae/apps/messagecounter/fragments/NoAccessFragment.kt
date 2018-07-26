@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.ae.apps.messagecounter.R
-import com.ae.apps.messagecounter.services.RuntimePermissionsAware
+import com.ae.apps.messagecounter.permissions.PermissionsAwareComponent
 import kotlinx.android.synthetic.main.fragment_no_access.*
 
 /**
@@ -23,7 +23,7 @@ class NoAccessFragment : Fragment() {
         }
     }
 
-    private lateinit var permissionsAwareContext: RuntimePermissionsAware
+    private lateinit var permissionsAwareContext: PermissionsAwareComponent
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -34,9 +34,9 @@ class NoAccessFragment : Fragment() {
         super.onAttach(context)
 
         try {
-            permissionsAwareContext = activity as RuntimePermissionsAware
+            permissionsAwareContext = activity as PermissionsAwareComponent
         } catch (ex: ClassCastException) {
-            throw IllegalAccessException("Parent ${activity.toString()} must implement RuntimePermissionsAware interface")
+            throw IllegalAccessException("Parent ${activity.toString()} must implement PermissionsAwareComponent interface")
         }
     }
 

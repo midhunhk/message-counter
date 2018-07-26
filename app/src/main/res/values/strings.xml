@@ -94,7 +94,7 @@
     <string name="str_ignore_empty_list">Start by adding a number to ignore</string>
 
     <!-- v4.0.0 -->
-    <string name="str_require_permissions_title">Need some permissions</string>
+    <string name="str_require_permissions_title">Need permissions</string>
     <string name="str_require_permissions_description">Message Counter requires permission for reading SMS and Contacts to function</string>
     <string name="str_require_permissions_request_button">Request Permissions</string>
 </resources>

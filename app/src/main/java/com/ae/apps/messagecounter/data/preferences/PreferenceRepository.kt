@@ -32,41 +32,31 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
         return calendar.time
     }
 
-    fun historicMessagesIndexed(): Boolean {
-        return preferences.getBoolean(PREF_KEY_HISTORIC_DATA_INDEXED, false)
-    }
+    fun historicMessagesIndexed() = preferences.getBoolean(PREF_KEY_HISTORIC_DATA_INDEXED, false)
 
-    fun setHistoricMessageIndexed() {
-        preferences.edit()
-                .putBoolean(PREF_KEY_HISTORIC_DATA_INDEXED, true)
-                .apply()
-    }
+    fun setHistoricMessageIndexed() = preferences.edit()
+            .putBoolean(PREF_KEY_HISTORIC_DATA_INDEXED, true)
+            .apply()
 
-    fun getLastSentTimeStamp(): String {
-        return preferences.getString(PREF_KEY_LAST_SENT_TIME_STAMP, DEFAULT_INDEX_TIME_STAMP)
-    }
+    fun getLastSentTimeStamp() = preferences.getString(PREF_KEY_LAST_SENT_TIME_STAMP, DEFAULT_INDEX_TIME_STAMP)!!
 
-    fun getLastSentMessageId(): String {
-        return preferences.getString(PREF_KEY_LAST_SENT_MESSAGE_ID, "")
-    }
+    fun getLastSentMessageId() = preferences.getString(PREF_KEY_LAST_SENT_MESSAGE_ID, "")
 
-    fun setLastSentTimeStamp(timeStamp: String) {
-        preferences.edit()
-                .putString(PREF_KEY_LAST_SENT_TIME_STAMP, timeStamp)
-                .apply()
-    }
+    fun setLastSentTimeStamp(timeStamp: String) = preferences.edit()
+            .putString(PREF_KEY_LAST_SENT_TIME_STAMP, timeStamp)
+            .apply()
 
-    fun messageLimitNotificationEnabled(): Boolean {
-        return preferences.getBoolean(PREF_KEY_ENABLE_NOTIFICATION, false)
-    }
+    fun messageLimitNotificationEnabled() = preferences.getBoolean(PREF_KEY_ENABLE_NOTIFICATION, false)
 
-    fun setLastSentMessageId(messageId: String) {
-        preferences.edit()
-                .putString(PREF_KEY_LAST_SENT_MESSAGE_ID, messageId)
-                .apply()
-    }
+    fun setLastSentMessageId(messageId: String) = preferences.edit()
+            .putString(PREF_KEY_LAST_SENT_MESSAGE_ID, messageId)
+            .apply()
 
-    fun backgroundServiceEnabled(): Boolean {
-        return preferences.getBoolean(PREF_KEY_ENABLE_BACKGROUND_SERVICE, false)
-    }
+    fun backgroundServiceEnabled() = preferences.getBoolean(PREF_KEY_ENABLE_BACKGROUND_SERVICE, false)
+
+    fun hasDonated() = preferences.getBoolean(PREF_KEY_DONATIONS_MADE, false)
+
+    fun donationsMade() = preferences.edit()
+            .putBoolean(PREF_KEY_DONATIONS_MADE, true)
+            .apply()
 }
