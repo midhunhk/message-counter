@@ -1,19 +1,19 @@
 package com.ae.apps.messagecounter
 
 import android.Manifest
-import android.content.pm.PackageManager
+import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
-import android.support.v4.content.PermissionChecker
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
-import com.ae.apps.messagecounter.services.RuntimePermissionsAware
+import com.ae.apps.messagecounter.permissions.PermissionsAwareComponent
+import com.ae.apps.messagecounter.permissions.RuntimePermissionsChecker
 import com.ae.apps.messagecounter.services.SMSObserverService
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,24 +21,64 @@ import kotlinx.android.synthetic.main.activity_main.*
 /**
  * Main Entry point to the application
  */
-class MainActivity : AppCompatActivity(), RuntimePermissionsAware {
+class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
 
     private val PERMISSION_CHECK_REQUEST_CODE = 8000
     private var mPreviousFragment: Fragment? = null
+    private var mSecondaryFragmentDisplayed = false
+    private lateinit var mPermissionChecker: RuntimePermissionsChecker
     private val permissions: Array<String> = arrayOf(Manifest.permission.READ_CONTACTS,
-            Manifest.permission.CALL_PHONE,
             Manifest.permission.READ_SMS)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        checkPermissions(permissions)
+        mPermissionChecker = RuntimePermissionsChecker(this)
+        mPermissionChecker.checkPermissions()
+    }
+
+    override fun requiredPermissions() = permissions
+
+    @TargetApi(Build.VERSION_CODES.M)
+    override fun requestForPermissions() {
+        requestPermissions(permissions, PERMISSION_CHECK_REQUEST_CODE)
+    }
+
+    override fun onPermissionsGranted() {
+        showFragmentContent(SentCountFragment.newInstance(), true)
+        setupBottomNavigation()
+        manageMessageCounterService()
+    }
+
+    override fun onPermissionsDenied() {
+        showFragmentContent(NoAccessFragment.newInstance(), true)
+        bottom_navigation.visibility = View.INVISIBLE
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            PERMISSION_CHECK_REQUEST_CODE -> {
+                mPermissionChecker.handlePermissionsResult(requestCode, permissions, grantResults)
+            }
+            else -> {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    override fun onBackPressed() {
+        if(mSecondaryFragmentDisplayed && null != mPreviousFragment){
+            mSecondaryFragmentDisplayed = false
+            showFragmentContent(mPreviousFragment!!, true)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -67,42 +107,11 @@ class MainActivity : AppCompatActivity(), RuntimePermissionsAware {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun requestForPermissions() {
-        requestPermissions(permissions, PERMISSION_CHECK_REQUEST_CODE)
-    }
-
-    private fun checkPermissions(permissions: Array<String>) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkAllPermissions(permissions)) {
-                onPermissionGranted()
-            } else {
-                requestForPermissions()
-            }
-        } else {
-            onPermissionGranted()
-        }
-    }
-
-    private fun checkAllPermissions(permissions: Array<String>): Boolean {
-        for (permissionName in permissions) {
-            if (PackageManager.PERMISSION_GRANTED != PermissionChecker.checkSelfPermission(this, permissionName)) {
-                return false
-            }
-        }
-        return true
-    }
-
-    private fun onPermissionGranted() {
-        showFragmentContent(SentCountFragment.newInstance(), true)
-        setupBottomNavigation()
-        manageMessageCounterService()
-    }
-
     private fun manageMessageCounterService() {
         val preferenceRepository = PreferenceRepository.newInstance(
                 PreferenceManager.getDefaultSharedPreferences(this))
         if (preferenceRepository.backgroundServiceEnabled()) {
-            if(!isServiceRunning(this, SMSObserverService::class.java)){
+            if (!isServiceRunning(this, SMSObserverService::class.java)) {
                 startService(getMessageCounterServiceIntent(this))
             }
         } else {
@@ -110,21 +119,18 @@ class MainActivity : AppCompatActivity(), RuntimePermissionsAware {
         }
     }
 
-    private fun onPermissionNotGranted(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        showFragmentContent(NoAccessFragment.newInstance(), true)
-        bottom_navigation.visibility = View.INVISIBLE
-    }
-
     private fun showFragmentContent(fragment: Fragment, primaryFragment: Boolean) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit()
         if (primaryFragment) {
+            mSecondaryFragmentDisplayed = false
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setDisplayShowHomeEnabled(false)
             bottom_navigation.visibility = View.VISIBLE
             mPreviousFragment = fragment
         } else {
+            mSecondaryFragmentDisplayed = true
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             supportActionBar?.setDisplayShowHomeEnabled(true)
             bottom_navigation.visibility = View.INVISIBLE
@@ -139,21 +145,6 @@ class MainActivity : AppCompatActivity(), RuntimePermissionsAware {
                 item.itemId == R.id.action_list -> showFragmentContent(ContactMessageCountFragment.newInstance(), true)
             }
             true
-        }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            PERMISSION_CHECK_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    onPermissionGranted()
-                } else {
-                    onPermissionNotGranted(requestCode, permissions, grantResults)
-                }
-            }
-            else -> {
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            }
         }
     }
 }
