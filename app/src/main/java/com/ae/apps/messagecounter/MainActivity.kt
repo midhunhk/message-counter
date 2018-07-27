@@ -10,10 +10,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.ae.apps.common.permissions.PermissionsAwareComponent
+import com.ae.apps.common.permissions.RuntimePermissionChecker
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
-import com.ae.apps.messagecounter.permissions.PermissionsAwareComponent
-import com.ae.apps.messagecounter.permissions.RuntimePermissionsChecker
 import com.ae.apps.messagecounter.services.SMSObserverService
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
     private val PERMISSION_CHECK_REQUEST_CODE = 8000
     private var mPreviousFragment: Fragment? = null
     private var mSecondaryFragmentDisplayed = false
-    private lateinit var mPermissionChecker: RuntimePermissionsChecker
+    private lateinit var mPermissionChecker: RuntimePermissionChecker
     private val permissions: Array<String> = arrayOf(Manifest.permission.READ_CONTACTS,
             Manifest.permission.READ_SMS)
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mPermissionChecker = RuntimePermissionsChecker(this)
+        mPermissionChecker = RuntimePermissionChecker(this)
         mPermissionChecker.checkPermissions()
     }
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_CHECK_REQUEST_CODE -> {
-                mPermissionChecker.handlePermissionsResult(requestCode, permissions, grantResults)
+                mPermissionChecker.handlePermissionsResult(permissions, grantResults)
             }
             else -> {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
     }
 
     override fun onBackPressed() {
-        if(mSecondaryFragmentDisplayed && null != mPreviousFragment){
+        if (mSecondaryFragmentDisplayed && null != mPreviousFragment) {
             mSecondaryFragmentDisplayed = false
             showFragmentContent(mPreviousFragment!!, true)
         } else {
