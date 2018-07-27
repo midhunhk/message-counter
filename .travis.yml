@@ -7,29 +7,28 @@ android:
     - platform-tools
     - build-tools-27.0.3
     - android-27
-    - android-21
+    - android-22
     - Extra-android-support 
     - extra-google-google_play_services 
     - extra-android-m2repository 
     - extra-google-m2repository 
     - addon-google_apis-google-27
-    - sys-img-armeabi-v7a-android-21
+    - sys-img-armeabi-v7a-android-22
   licenses:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
     - google-gdk-license-.+
-BEFORE_INSTALL: 
-- ??chmod + x gradlew 
-- export JAVA8_HOME = / usr / lib / jvm / java-8-oracle 
-- export JAVA_HOME = $ JAVA8_HOME
+
 before_script:
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
+  - wget http://services.gradle.org/distributions/gradle-4.4-bin.zip
+  - unzip gradle-4.4-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-4.4
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
+  
 after_success:
 #- chmod + x ./upload-gh-pages. sh 
 #- ./upload-apk.sh 
-script: 
-#- ./gradlew build
-#- ./gradlew build connectedCheck
