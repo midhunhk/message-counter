@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.ae.apps.messagecounter.R
-import com.ae.apps.messagecounter.permissions.PermissionsAwareComponent
+import com.ae.apps.common.permissions.PermissionsAwareComponent
 import kotlinx.android.synthetic.main.fragment_no_access.*
 
 /**
