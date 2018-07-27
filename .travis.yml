@@ -32,4 +32,4 @@ after_success:
 #- ./upload-apk.sh 
 script: 
 #- ./gradlew build
-- ./gradlew build connectedCheck
+#- ./gradlew build connectedCheck
