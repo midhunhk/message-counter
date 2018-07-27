@@ -18,11 +18,6 @@ android:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
     - google-gdk-license-.+
-    
-before_install: 
-- ??chmod + x gradlew 
-- export JAVA8_HOME = / usr / lib / jvm / java-8-oracle 
-- export JAVA_HOME = $ JAVA8_HOME
 
 before_script:
   - wget http://services.gradle.org/distributions/gradle-4.4-bin.zip
