@@ -33,6 +33,7 @@ android {
             applicationIdSuffix ".test"
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -63,9 +64,10 @@ dependencies {
     implementation "com.android.support:preference-v7:$support_lib_version"
     implementation "com.android.support:cardview-v7:$support_lib_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation 'com.ae.apps:android-libraries:2.2.2'
+    implementation 'com.ae.apps:android-libraries:3.0.0'
     implementation "org.jetbrains.anko:anko-commons:0.10.4"
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.0'
+    implementation 'com.android.billingclient:billing:1.1'
 
     // Require Android Studio 3.2 for Navigation Architecture Component
     // implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
