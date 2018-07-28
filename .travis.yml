@@ -30,5 +30,5 @@ before_script:
   - adb shell input keyevent 82 &
   
 after_success:
-#- chmod + x ./upload-gh-pages. sh 
-#- ./upload-apk.sh 
+  - chmod + x ./upload-apk.sh 
+  - ./upload-apk.sh 
