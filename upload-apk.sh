@@ -13,13 +13,13 @@ git config --global user.name "midhunhk"
 git clone --quiet --branch ci-builds https://midhunhk:$GITHUB_API_KEY@github.com/midhunhk/message-counter.git ci-builds> /dev/null
 
 #go into directory and copy data we're interested
-cd ci-builds cp -Rf $HOME/android/*.
+cd ci-builds cp -Rf $HOME/buildApk/*.
 
 #add, commit and push files
 git add -f. 
 git remote rm origin 
 git remote add origin https://midhunhk:$GITHUB_API_KEY@github.com/midhunhk/message-counter.git
-.git add -f
-git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed [skip ci] "
+git add -f
+git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed [skip ci]"
 git push origin ci-builds -fq> /dev/null
-echo -e" Done \ n "
+echo -e "Done \ n "
