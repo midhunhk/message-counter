@@ -4,51 +4,44 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:layout_marginEnd="8dp"
+              android:layout_marginLeft="8dp"
+              android:layout_marginRight="8dp"
+              android:layout_marginStart="8dp"
               android:orientation="vertical">
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btnShowIgnoreDialog"
+        style="@style/buttonTintAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="vertical">
+        android:text="@string/str_ignore_add_number"/>
 
-        <Button
-            android:id="@+id/btnShowIgnoreDialog"
-            style="@style/buttonTintAccent"
+    <include layout="@layout/separator_line"/>
+
+    <com.ae.apps.common.views.EmptyRecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        tools:listitem="@layout/list_item_ignore"/>
+
+    <RelativeLayout
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:visibility="gone">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/str_ignore_add_number"/>
-
-        <include layout="@layout/separator_line"/>
-
-        <com.ae.apps.common.views.EmptyRecyclerView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/list_item_ignore"/>
-
-        <RelativeLayout
-            android:id="@+id/empty_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_medium"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:drawablePadding="@dimen/padding_medium"
-                android:drawableTop="@drawable/nav_icon_ignore"
-                android:gravity="center"
-                android:text="@string/str_ignore_empty_list"
-                android:textSize="@dimen/card_title"/>
-        </RelativeLayout>
-
-    </LinearLayout>
+            android:layout_alignParentTop="true"
+            android:drawablePadding="@dimen/padding_medium"
+            android:drawableTop="@drawable/nav_icon_ignore"
+            android:gravity="center"
+            android:text="@string/str_ignore_empty_list"
+            android:textSize="@dimen/card_title"/>
+    </RelativeLayout>
 
 </LinearLayout>
