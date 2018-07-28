@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">du Compteur de Messages</string>
+    <string name="app_version">Version 4.0.0</string>
+    <string name="app_release_date">Nov 2019</string>
+    <string name="app_code_name">Wyvern</string>
+    <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>
+    <string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
+    <string name="app_source_code">This project\'s source code is available at GitHub</string>
+    <string name="app_developer_info">Conçu et développé au ae labs</string>
+
+    <string name="empty_list">Aucun message trouvé</string>
+
+    <string name="title_sent_list">Liste</string>
+    <string name="title_counter">Compteur</string>
+    <string name="title_ignore">Ignorer</string>
+
+    <!-- Menu Strings -->
+    <string name="menu_title_feedback">Feedback</string>
+    <string name="menu_title_settings">Réglages</string>
+    <string name="menu_title_donate">Faire un don</string>
+    <string name="menu_title_share">Partagez cette appli</string>
+    <string name="menu_title_about">Sur</string>
+
+    <!-- Strings for Preference -->
+
+    <!-- changes for v2.2 -->
+    <string name="str_messages_sent">Messages envoyés</string>
+    <string name="str_this_cycle">Ce cycle</string>
+    <string name="str_sent_today">Envoyé aujourd\'hui</string>
+    <string name="str_cycle_start_date">Cycle date de début</string>
+    <string name="str_sent_count">Compter les messages envoyés</string>
+    <string name="str_enable_sent_count">Pour garder une trace des messages envoyés compter, vous pouvez activer cette fonctionnalité dans les paramètres et de fournir les limites</string>
+
+    <string name="str_pref_sent_message_count">Nombre de messages envoyés</string>
+    <string name="str_pref_cycle_start_desc">Cycle date de début</string>
+    <string name="str_pref_message_limit">Messages Limites</string>
+    <string name="str_pref_message_limit_desc">Limitez les messages qui peuvent être envoyés dans un cycle. Par défaut est 100</string>
+
+    <!-- added for 2.2.7 -->
+    <string name="str_notify_on_limit">Notifier en arrivant à la limite</string>
+    <string name="str_current_cycle">Cycle actuel</string>
+    <string name="str_previous_cycle">Cycle précédent</string>
+
+    <!-- strings for widgets v2.3 -->
+    <string name="str_messages_sent_caps">MESSAGES ENVOYÉS</string>
+    <string name="str_today">UJOURD\'HUI</string>
+    <string name="str_cycle">CYCLE</string>
+
+    <!-- strings for donate v3.1 -->
+    <string name="str_donate_title">donner</string>
+    <string name="str_donate_text">Compteur de Messages est un projet open source développé dans mon temps libre. Toute sorte de contribution permet d\'ajouter des fonctionnalités ou des bugs de Swat. Merci!</string>
+    <string name="str_donate_disclaimer">Les dons ne seront pas à la place des fonctionnalités supplémentaires. Google prend 30% des achats que des frais de transaction.</string>
+    <string name="str_donate_thanks">Merci pour le don!</string>
+    <string name="str_donate_fail">Donation échoué. S\'il vous plaît réessayer plus tard.</string>
+    <string name="str_donate_small">Achetez-moi un chocolat</string>
+    <string name="str_donate_medium">Achetez-moi une glace</string>
+    <string name="str_donate_large">Achetez-moi Dîner</string>
+    <string name="str_sent_this_week">Envoyé cette semaine</string>
+
+    <!-- added for 3.3.0 -->
+    <string name="str_ignore_title">Ignorer</string>
+    <string name="str_ignore_add_number">Ajouter un Numéro de</string>
+    <string name="str_ignore_add_to_ignore_list">Ajouter à la Liste des ignorés</string>
+    <string name="str_ignore_btn_ignore">Ignorer</string>
+    <string name="str_ignore_name">Nom</string>
+    <string name="str_ignore_number">Nombre</string>
+    <string name="str_ignore_empty_list">Commencez par ajouter un certain nombre d\'ignorer</string>
+
+    <!-- v4.0.0 -->
+    <string name="loading_list">Le Comptage Des Messages</string>
+    <string name="str_require_permissions_title">Besoin d\'autorisations</string>
+    <string name="str_require_permissions_description">Compteur de messages requiert l\'autorisation pour la lecture des SMS et Contacts à la fonction</string>
+    <string name="str_require_permissions_request_button">Demander Des Autorisations</string>
+    <string name="str_contact_message_sent">Envoyé</string>
+    <string name="str_contact_message_received">Reçu</string>
+    <string name="str_about_oss_license">Les Licences Open Source</string>
+    <string name="str_about_view_source">L\'Affichage De La Source</string>
+    <string name="str_about_view_faq">Foire Aux Questions</string>
+    <string name="str_about_share_feedback">Partager Les Commentaires</string>
+    <string name="str_about_share_feedback_subject">Commentaires pour le Compteur de Messages</string>
+    <string name="str_sent_this_year">Envoyé cette Année</string>
+    <string name="str_pref_use_background_service">Utiliser service en arrière-plan</string>
+    <string name="str_pref_use_background_service_desc">Un service d\'arrière-plan sera utilisé pour surveiller les messages envoyés</string>
+    <string name="str_enable_notify_on_limit">Informer sur l\'atteinte d\'envoi de SMS à la limite</string>
+    <string name="str_sms_limit_notification_title">SMS Limite Atteinte</string>
+    <string name="str_sms_limit_notification_text">SMS Limite Atteinte pour ce cycle</string>
+
+</resources>

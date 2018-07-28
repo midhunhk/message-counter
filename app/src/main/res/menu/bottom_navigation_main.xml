@@ -17,6 +17,6 @@
         android:id="@+id/action_list"
         android:enabled="true"
         android:icon="@drawable/nav_icon_list"
-        android:title="@string/title_chart"
+        android:title="@string/title_sent_list"
         app:showAsAction="ifRoom" />
 </menu>
