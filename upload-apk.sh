@@ -2,7 +2,7 @@
 mkdir $HOME/buildApk/
 
 #copy generated apk from build folder to the folder just created
-cp -R app/build/outputs/apk/*.apk $HOME/android/
+cp -R app/build/outputs/*.apk $HOME/android/
 
 #go to home and git setup  
 cd $HOME
@@ -10,7 +10,7 @@ git config --global user.email "midhunhk@gmail.com"
 git config --global user.name "midhunhk"
 
 # Clone the repository in the folder buildApk
-git clone --quiet --branch ci-builds=https://midhunhk:$GITHUB_API_KEY@github.com/midhunhk/message-counter ci-builds> /dev/null
+git clone --quiet --branch ci-builds https://midhunhk:$GITHUB_API_KEY@github.com/midhunhk/message-counter.git ci-builds> /dev/null
 
 #go into directory and copy data we're interested
 cd ci-builds cp -Rf $HOME/android/*.
