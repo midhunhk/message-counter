@@ -29,7 +29,7 @@
                 android:layout_marginStart="0dp"
                 android:contentDescription="@string/empty_text"
                 android:padding="@dimen/padding_small"
-                android:src="@drawable/profile_icon_3"/>
+                android:src="@drawable/ic_app_icon"/>
 
             <TextView
                 android:id="@+id/appVersion"
