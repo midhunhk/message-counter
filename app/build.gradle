@@ -70,7 +70,7 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room_version"
     //annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     implementation 'com.android.support:support-v4:27.1.1'
-    implementation "android.arch.work:work-runtime-ktx:$work_version"
+    // implementation "android.arch.work:work-runtime-ktx:$work_version"
     // Unit Testing
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:1.10.19'
