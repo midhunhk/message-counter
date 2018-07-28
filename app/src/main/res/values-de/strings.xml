@@ -6,7 +6,6 @@
     <string name="app_release_date">Aug 2018</string>
     <string name="app_desc">Message Counter zeigt Nachrichten Posteingangsstatistiken und Anzahl der Nachrichten von jedem Ihrer Kontakte an.</string>
     <string name="app_disclaim">Haftungsausschluss: Diese App wird für pädagogische Zwecke erstellt und hat daher keine Garantie oder Unterstützung. Da undokumentierte Android-APIs verwendet werden, funktioniert diese App möglicherweise nicht wie erwartet auf allen Geräten.</string>
-    <string name="app_source_code">Der Quellcode dieses Projekts steht bei GitHub zur Verfügung</string>
     <string name="app_developer_info">Entworfen und entwickelt bei ae Labs</string>
 
     <string name="empty_list">No messages found</string>
@@ -17,7 +16,6 @@
     <string name="title_ignore">Ignore</string>
 
     <!-- Menu Strings -->
-    <string name="menu_title_feedback">Feedback</string>
     <string name="menu_title_settings">Einstellungen</string>
     <string name="menu_title_donate">Spenden</string>
     <string name="menu_title_share">Sag deinen Freunden</string>
@@ -28,8 +26,6 @@
     <string name="str_this_cycle">Dieser Zyklus</string>
     <string name="str_sent_today">Heute gesendete Nachrichten</string>
     <string name="str_cycle_start_date">Zyklus Startdatum</string>
-    <string name="str_sent_count">Zählen Sie gesendete Nachrichten</string>
-    <string name="str_enable_sent_count">Für die Verfolgung der gesendeten Nachrichten zählen, können Sie diese Funktion in den Einstellungen aktivieren und die Grenzen vorgeben</string>
 
     <string name="str_pref_sent_message_count">Gesendete Nachrichtenzählung</string>
     <string name="str_pref_cycle_start_desc">Der Starttermin für jeden Zyklus</string>
@@ -58,7 +54,6 @@
     <string name="str_sent_this_week">Gesendet diese Woche</string>
 
     <!-- added for 3.3.0 -->
-    <string name="str_ignore_title">Ignorieren</string>
     <string name="str_ignore_add_number">Hinzufügen einer Nummer</string>
     <string name="str_ignore_add_to_ignore_list">Hinzufügen zur Ignore-Liste</string>
     <string name="str_ignore_btn_ignore">Ignorieren</string>

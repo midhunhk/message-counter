@@ -6,7 +6,6 @@
     <string name="app_code_name">Wyvern</string>
     <string name="app_desc">Mensagem Contador exibe mensagens da caixa de entrada estatísticas e número de mensagens de cada um dos seus contatos. Este projeto de código \'s fonte está disponível no GitHub.</string>
     <string name="app_disclaim">Disclaimer: Este aplicativo é criado para fins educativos e como tal tem nenhuma garantia ou apoio. Desde APIs do Android sem documentos são utilizados, este aplicativo pode não funcionar como esperado em todos os dispositivos.</string>
-    <string name="app_source_code">This project\'s source code is available at GitHub</string>
     <string name="app_developer_info">Desenhado e desenvolvido em ae labs</string>
 
     <string name="empty_list">Nenhuma mensagem encontrada</string>
@@ -16,7 +15,6 @@
     <string name="title_ignore">Ignorar</string>
 
     <!-- Menu Strings -->
-    <string name="menu_title_feedback">Feedback</string>
     <string name="menu_title_settings">Configurações</string>
     <string name="menu_title_donate">Doar</string>
     <string name="menu_title_share">Compartilhe este aplicativo</string>
@@ -29,8 +27,6 @@
     <string name="str_this_cycle">este ciclo</string>
     <string name="str_sent_today">As mensagens enviadas hoje</string>
     <string name="str_cycle_start_date">Ciclo data de início</string>
-    <string name="str_sent_count">Contagem mensagens enviadas</string>
-    <string name="str_enable_sent_count">Para manter o controle de mensagens enviadas contar, você pode ativar esse recurso nas configurações e fornecer os limites</string>
 
     <string name="str_pref_sent_message_count">Enviado Contagem Mensagem</string>
     <string name="str_pref_cycle_start_desc">A data de início de cada ciclo</string>
@@ -59,7 +55,6 @@
     <string name="str_sent_this_week">Enviado esta semana</string>
 
     <!-- added for 3.3.0 -->
-    <string name="str_ignore_title">Ignorar</string>
     <string name="str_ignore_add_number">Adicionar um Número</string>
     <string name="str_ignore_add_to_ignore_list">Adicionar à Lista de ignorados.</string>
     <string name="str_ignore_btn_ignore">Ignorar</string>

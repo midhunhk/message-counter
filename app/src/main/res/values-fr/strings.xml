@@ -6,7 +6,6 @@
     <string name="app_code_name">Wyvern</string>
     <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>
     <string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
-    <string name="app_source_code">This project\'s source code is available at GitHub</string>
     <string name="app_developer_info">Conçu et développé au ae labs</string>
 
     <string name="empty_list">Aucun message trouvé</string>
@@ -16,7 +15,6 @@
     <string name="title_ignore">Ignorer</string>
 
     <!-- Menu Strings -->
-    <string name="menu_title_feedback">Feedback</string>
     <string name="menu_title_settings">Réglages</string>
     <string name="menu_title_donate">Faire un don</string>
     <string name="menu_title_share">Partagez cette appli</string>
@@ -29,8 +27,6 @@
     <string name="str_this_cycle">Ce cycle</string>
     <string name="str_sent_today">Envoyé aujourd\'hui</string>
     <string name="str_cycle_start_date">Cycle date de début</string>
-    <string name="str_sent_count">Compter les messages envoyés</string>
-    <string name="str_enable_sent_count">Pour garder une trace des messages envoyés compter, vous pouvez activer cette fonctionnalité dans les paramètres et de fournir les limites</string>
 
     <string name="str_pref_sent_message_count">Nombre de messages envoyés</string>
     <string name="str_pref_cycle_start_desc">Cycle date de début</string>
@@ -59,7 +55,6 @@
     <string name="str_sent_this_week">Envoyé cette semaine</string>
 
     <!-- added for 3.3.0 -->
-    <string name="str_ignore_title">Ignorer</string>
     <string name="str_ignore_add_number">Ajouter un Numéro de</string>
     <string name="str_ignore_add_to_ignore_list">Ajouter à la Liste des ignorés</string>
     <string name="str_ignore_btn_ignore">Ignorer</string>
