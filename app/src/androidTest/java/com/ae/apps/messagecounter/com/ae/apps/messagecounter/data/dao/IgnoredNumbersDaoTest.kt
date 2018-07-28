@@ -3,7 +3,6 @@ package com.ae.apps.messagecounter.com.ae.apps.messagecounter.data.dao
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import android.test.MoreAsserts
 import com.ae.apps.messagecounter.data.AppDatabase
 import com.ae.apps.messagecounter.data.dao.IgnoredNumbersDao
 import com.ae.apps.messagecounter.utils.MockIgnoredNumbers
