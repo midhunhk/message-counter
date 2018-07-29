@@ -9,5 +9,6 @@ data class SentCountDetails(val cycleLimit:Int,
                             val sentInWeek:Int,
                             val startYearCount:Int,
                             val sentLastCycle:Int,
-                            val cycleDuration: String
+                            val cycleDuration: String,
+                            val prevCycleDuration: String
                             )

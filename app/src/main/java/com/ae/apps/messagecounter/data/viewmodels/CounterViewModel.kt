@@ -43,7 +43,8 @@ class CounterViewModel(private val counterRepository: CounterRepository,
 
             val sentCountDetails = SentCountDetails(limit, sentTodayCount, sentCycleCount,
                     startWeekCount, startYearCount, lastCycleCount,
-                    getDurationDateString(cycleStartDate))
+                    getDurationDateString(cycleStartDate),
+                    getDurationDateString(prevCycleStartDate))
             mSentCountDetails.postValue(sentCountDetails)
         }
     }

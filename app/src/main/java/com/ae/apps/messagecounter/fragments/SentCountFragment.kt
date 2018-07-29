@@ -82,6 +82,7 @@ class SentCountFragment : Fragment() {
                         countSentThisWeekText.text = details?.sentInWeek.toString()
                         countSentThisYearText.text = details?.startYearCount.toString()
                         prevCycleSentCountText.text = details?.sentLastCycle.toString()
+                        prevCycleDurationText.text = details?.prevCycleDuration.toString()
 
                         setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit)
                         setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
