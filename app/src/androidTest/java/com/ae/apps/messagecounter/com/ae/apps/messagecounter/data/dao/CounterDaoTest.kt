@@ -61,7 +61,7 @@ open class CounterDaoTest {
 
     //@Test
     fun onGetTotalCountSince(){
-        val list = MockCounters.getCounters(6)
+        val list = MockCounters.getCounters(2)
         val expectedCount = MockCounters.getSentCount(list)
         list.forEach {
             counterDao.insert(it)

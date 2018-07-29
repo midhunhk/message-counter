@@ -12,7 +12,7 @@ class MockIgnoredNumbers {
 
         fun getIgnoredNumbers(size: Int): List<IgnoredNumber> {
             val list:MutableList<IgnoredNumber> = ArrayList(size)
-            for(i in 0..size){
+            for(i in 1..size){
                 list.add(IgnoredNumber("Jane Doe", "+134567"))
             }
             return list

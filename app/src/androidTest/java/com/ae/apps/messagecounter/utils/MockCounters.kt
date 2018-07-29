@@ -2,6 +2,7 @@ package com.ae.apps.messagecounter.utils
 
 import com.ae.apps.messagecounter.data.models.Counter
 import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 
 class MockCounters {
 
@@ -16,9 +17,9 @@ class MockCounters {
 
         fun getCounters(size: Int): List<Counter> {
             val list: MutableList<Counter> = ArrayList(size)
-            val random = Random(10)
             for (i in 0..size) {
-                list.add(Counter("20180716", random.nextInt()))
+                val randomNumber = ThreadLocalRandom.current().nextInt(0, 11)
+                list.add(Counter("20180716", randomNumber))
             }
             return list
         }
