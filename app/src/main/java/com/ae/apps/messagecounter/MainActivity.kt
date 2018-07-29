@@ -111,9 +111,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
         val preferenceRepository = PreferenceRepository.newInstance(
                 PreferenceManager.getDefaultSharedPreferences(this))
         if (preferenceRepository.backgroundServiceEnabled()) {
-            if (!isServiceRunning(this, SMSObserverService::class.java)) {
-                startService(getMessageCounterServiceIntent(this))
-            }
+            startService(getMessageCounterServiceIntent(this))
         } else {
             stopService(getMessageCounterServiceIntent(this))
         }
