@@ -1,12 +1,14 @@
 package com.ae.apps.messagecounter.fragments
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.ae.apps.messagecounter.BuildConfig
 import com.ae.apps.messagecounter.R
+import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
 import kotlinx.android.synthetic.main.fragment_donations.*
@@ -57,6 +59,9 @@ class DonationsFragment : DonationsBaseFragment() {
                 "Thank You for your donation with order id" + purchase.orderId,
                 Toast.LENGTH_SHORT)
                 .show()
+        val preferenceRepository = PreferenceRepository.newInstance(
+                PreferenceManager.getDefaultSharedPreferences(requireContext()))
+        preferenceRepository.saveDonationsMade()
     }
 
     override fun handlePurchaseError(purchases: List<Purchase>?) {
