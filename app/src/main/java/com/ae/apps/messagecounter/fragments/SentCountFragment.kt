@@ -61,13 +61,6 @@ class SentCountFragment : Fragment() {
         val ignoreNumbersRepository = IgnoredNumbersRepository.getInstance(AppDatabase.getInstance(requireContext()).ignoredNumbersDao())
         val factory = CounterViewModelFactory(counterRepository, ignoreNumbersRepository, preferenceRepository)
         mViewModel = ViewModelProviders.of(this, factory).get(CounterViewModel::class.java)
-
-        // Fetch the data that is already in the database
-        mViewModel.getSentCountData()
-
-        // Index messages that were sent before the app was installed
-        // Or sent during the time a background service was not running
-        mViewModel.indexMessages(requireContext())
     }
 
     private fun initUI() {
@@ -82,13 +75,20 @@ class SentCountFragment : Fragment() {
                         countSentThisWeekText.text = details?.sentInWeek.toString()
                         countSentThisYearText.text = details?.startYearCount.toString()
                         prevCycleSentCountText.text = details?.sentLastCycle.toString()
-                        prevCycleDurationText.text = details?.prevCycleDuration.toString()
+                        prevCycleDurationText.text = details?.prevCycleDuration
 
                         setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit)
                         setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
                     }
                 }
         )
+
+        // Fetch the data that is already in the database
+        mViewModel.readSentCountDataFromRepository()
+
+        // Index messages that were sent before the app was installed
+        // Or sent during the time a background service was not running
+        mViewModel.indexMessages(requireContext())
     }
 
     @SuppressLint("SetTextI18n")

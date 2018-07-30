@@ -18,15 +18,11 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                        private val ignoreNumbersRepository: IgnoredNumbersRepository,
                        private val preferenceRepository: PreferenceRepository) : ViewModel(), MessageCounter.MessageCounterObserver {
 
-    override fun onIndexCompleted() {
-        getSentCountDetails()
-    }
-
     private var mSentCountDetails: MutableLiveData<SentCountDetails> = MutableLiveData()
 
     fun getSentCountDetails(): LiveData<SentCountDetails> = mSentCountDetails
 
-    fun getSentCountData() {
+    fun readSentCountDataFromRepository() {
         val limit: Int = preferenceRepository.getMessageLimitValue()
         val cycleStartDate = preferenceRepository.getCycleStartDate()
         val today = Calendar.getInstance().time
@@ -57,6 +53,10 @@ class CounterViewModel(private val counterRepository: CounterRepository,
     fun indexMessages(context: Context) {
         val messageCounter = MessageCounter.newInstance(counterRepository, ignoreNumbersRepository, preferenceRepository)
         messageCounter.indexMessages(context, this)
+    }
+
+    override fun onIndexCompleted() {
+        readSentCountDataFromRepository()
     }
 
 }
