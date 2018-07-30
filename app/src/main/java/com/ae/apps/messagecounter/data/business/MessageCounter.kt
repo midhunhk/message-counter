@@ -49,9 +49,8 @@ class MessageCounter(private val counterRepository: CounterRepository,
         doAsync {
             val newMessagesCursor = getNewMessagesCursor(context)
             try {
-                val newMessagesCount = newMessagesCursor.count
-                Log.e("CounterViewModel", "Messages to be processed $newMessagesCount")
-                if (newMessagesCount > 0 && newMessagesCursor.moveToFirst()) {
+                Log.d("CounterViewModel", "Messages to be processed $newMessagesCursor.count")
+                if (newMessagesCursor.count > 0 && newMessagesCursor.moveToFirst()) {
                     // Since this method would be invoked multiple times when SMS database changes,
                     // updating the lastSentTimeStamp to prevent duplicate reads
                     preferenceRepository.setLastSentTimeStamp( (System.currentTimeMillis() / 1000).toString())
