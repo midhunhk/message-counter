@@ -12,9 +12,11 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/hero_sent_count_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/card_margin"
+            android:layout_marginTop="@dimen/unit_l"
+            android:layout_marginBottom="@dimen/unit_m"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
