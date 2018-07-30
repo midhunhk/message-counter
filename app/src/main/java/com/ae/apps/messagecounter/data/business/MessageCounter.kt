@@ -48,7 +48,6 @@ class MessageCounter(private val counterRepository: CounterRepository,
 
         doAsync {
             val newMessagesCursor = getNewMessagesCursor(context)
-            val messageSentDate = Calendar.getInstance()
             try {
                 val newMessagesCount = newMessagesCursor.count
                 Log.e("CounterViewModel", "Messages to be processed $newMessagesCount")
@@ -56,19 +55,18 @@ class MessageCounter(private val counterRepository: CounterRepository,
                     // Since this method would be invoked multiple times when SMS database changes,
                     // updating the lastSentTimeStamp to prevent duplicate reads
                     preferenceRepository.setLastSentTimeStamp( (System.currentTimeMillis() / 1000).toString())
+                    val messageSentDate = Calendar.getInstance()
                     do {
                         // Convert this row into a Message object and handle multipart messages
                         val message = getMessageFromCursor(newMessagesCursor)
 
                         messageSentDate.timeInMillis = java.lang.Long.parseLong(message.date)
-
-                        // Count this message against the date it was sent
-                        val dateIndex = getIndexFromDate(messageSentDate.time)
                         lastIndexedTimeStamp = message.date
                         lastIndexedMessageId = message.id
 
                         if (ignoreNumbersRepository.checkIfNumberIsNotIgnored(message.address)) {
-                            counterRepository.addCount(dateIndex, message.messageCount)
+                            counterRepository.addCount(getIndexFromDate(messageSentDate.time),
+                                    message.messageCount)
                             newMessagesAdded += message.messageCount
                         }
                     } while (newMessagesCursor.moveToNext())
