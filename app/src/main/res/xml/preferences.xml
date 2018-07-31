@@ -14,7 +14,8 @@
 
         <EditTextPreference
             android:defaultValue="100"
-            android:inputType="number"
+            android:inputType="numberDecimal"
+            android:digits="0123456789"
             android:key="pref_key_message_limit_value"
             android:summary="@string/str_pref_message_limit_desc"
             android:title="@string/str_pref_message_limit"/>
