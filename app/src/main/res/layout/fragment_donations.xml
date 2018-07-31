@@ -130,7 +130,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:text="@string/str_donate_small"/>
+                    android:text="@string/str_donate_large"/>
 
                 <TextView
                     android:id="@+id/txtDonateLargePrice"
