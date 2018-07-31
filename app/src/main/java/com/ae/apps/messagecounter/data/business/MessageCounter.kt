@@ -53,7 +53,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
                 if (newMessagesCursor.count > 0 && newMessagesCursor.moveToFirst()) {
                     // Since this method would be invoked multiple times when SMS database changes,
                     // updating the lastSentTimeStamp to prevent duplicate reads
-                    preferenceRepository.setLastSentTimeStamp( (System.currentTimeMillis() / 1000).toString())
+                    preferenceRepository.setLastSentTimeStamp( System.currentTimeMillis().toString() )
                     val messageSentDate = Calendar.getInstance()
                     do {
                         // Convert this row into a Message object and handle multipart messages
