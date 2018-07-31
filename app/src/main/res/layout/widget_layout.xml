@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
         android:text="@string/str_messages_sent_caps"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textSize="12sp"/>
 
@@ -55,6 +56,7 @@
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_weight="1"
+            android:textColor="@color/white"
             android:gravity="center"
             android:text="@string/str_zero"/>
 
@@ -65,6 +67,7 @@
             android:layout_marginLeft="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/str_zero"/>
