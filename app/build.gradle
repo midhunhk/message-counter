@@ -73,10 +73,11 @@ dependencies {
     implementation "android.arch.work:work-runtime-ktx:$work_version"
     // Unit Testing
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:1.10.19'
+    testImplementation 'org.mockito:mockito-core:2.7.22'
     testImplementation 'org.robolectric:robolectric:3.8'
     testImplementation "android.arch.persistence.room:testing:$room_version"
     // Instrumentation Testing
+    androidTestImplementation 'org.mockito:mockito-android:2.7.22'
     androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
