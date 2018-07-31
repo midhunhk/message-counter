@@ -1,5 +1,6 @@
 package com.ae.apps.messagecounter.observers
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -7,6 +8,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.database.ContentObserver
+import android.os.Build
 import android.os.Handler
 import android.support.v4.app.NotificationCompat
 import com.ae.apps.messagecounter.MainActivity
@@ -22,6 +24,7 @@ import java.util.*
 class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObserver(handler), MessageCounter.MessageCounterObserver {
 
     private lateinit var mMessageCounter: MessageCounter
+    private val CHANNEL_ID = "message_counter"
 
     override fun onChange(selfChange: Boolean) {
         super.onChange(selfChange)
@@ -65,7 +68,18 @@ class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObs
             val resultPendingIntent = PendingIntent
                     .getActivity(mContext, NOTIFICATION_REQUEST_CODE, resultIntent,
                             PendingIntent.FLAG_UPDATE_CURRENT)
-            val notification = NotificationCompat.Builder(mContext)
+
+            // Get an instance of the notification manager service
+            val notificationManager = mContext
+                    .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            // Android O and up must use a notification channel
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(CHANNEL_ID, resources.getString(R.string.app_name), NotificationManager.IMPORTANCE_LOW)
+                notificationManager.createNotificationChannel(channel)
+            }
+
+            val notification = NotificationCompat.Builder(mContext, CHANNEL_ID)
                     .setContentIntent(resultPendingIntent)
                     .setContentTitle(notificationTitle)
                     .setContentText(notificationText)
@@ -73,10 +87,6 @@ class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObs
                     .setSmallIcon(R.drawable.ic_notification_icon)
                     .setAutoCancel(true)
                     .build()
-
-            // Get an instance of the notification manager service
-            val notificationManager = mContext
-                    .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             // Show a notification to the user here "send message for this cycle has reached limit"
             notificationManager.notify(SEND_COUNT_REACHED_ID, notification)
