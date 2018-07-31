@@ -73,16 +73,21 @@ class ContactMessageCountFragment : Fragment() {
 
         mViewModel.getReceivedMessageContacts().observe(this, Observer {
             run {
-                mSentMessagesCount = it!!
-                updateAdapter(mSentMessagesCount)
+                mReceivedMessagesCount = it!!
+                btnReceivedList.isEnabled = true
             }
         })
 
         mViewModel.getSentMessageContacts().observe(this, Observer {
             run {
-                mReceivedMessagesCount = it!!
+                mSentMessagesCount = it!!
+                updateAdapter(mSentMessagesCount)
+                btnSentList.isEnabled = true
             }
         })
+
+        btnSentList.isEnabled = false
+        btnReceivedList.isEnabled = false
 
         btnSentList.setOnClickListener { updateAdapter(mSentMessagesCount) }
         btnReceivedList.setOnClickListener { updateAdapter(mReceivedMessagesCount) }
