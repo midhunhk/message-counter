@@ -23,15 +23,14 @@ import java.util.*
  */
 class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObserver(handler), MessageCounter.MessageCounterObserver {
 
-    private lateinit var mMessageCounter: MessageCounter
     private val CHANNEL_ID = "message_counter"
 
     override fun onChange(selfChange: Boolean) {
         super.onChange(selfChange)
 
-        mMessageCounter = MessageCounter.newInstance(mContext)
-        if (mMessageCounter.checkIfUnIndexedMessagesExist(mContext)) {
-            mMessageCounter.indexMessages(mContext, this)
+        val messageCounter = MessageCounter.newInstance(mContext)
+        if (messageCounter.checkIfUnIndexedMessagesExist(mContext)) {
+            messageCounter.indexMessages(mContext, this)
         }
     }
 
@@ -53,9 +52,9 @@ class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObs
         mContext.sendBroadcast(intent)
     }
 
-    @SuppressWarnings("deprecation")
     private fun showMessageLimitNotification() {
-        if (mMessageCounter.checkIfMessageLimitCrossed()) {
+        val messageCounter = MessageCounter.newInstance(mContext)
+        if (messageCounter.checkIfMessageLimitCrossed()) {
             val NOTIFICATION_REQUEST_CODE = 1042
             val SEND_COUNT_REACHED_ID = 0
 
@@ -74,7 +73,7 @@ class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObs
                     .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
             // Android O and up must use a notification channel
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(CHANNEL_ID, resources.getString(R.string.app_name), NotificationManager.IMPORTANCE_LOW)
                 notificationManager.createNotificationChannel(channel)
             }
