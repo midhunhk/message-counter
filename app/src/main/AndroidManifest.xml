@@ -22,7 +22,22 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.SMSObserverService" android:stopWithTask="false"/>
+        <service android:name=".services.SMSObserverService"
+                 android:stopWithTask="false"/>
+        <service android:name=".services.OreoSMSObserverService"/>
+
+        <receiver android:name=".receivers.BootCompletedReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receivers.PackageReplacedReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" android:path="com.ae.apps.messagecounter"/>
+            </intent-filter>
+        </receiver>
 
         <receiver android:name=".receivers.CounterWidgetReceiver">
             <intent-filter>

@@ -14,7 +14,6 @@ import com.ae.apps.common.permissions.PermissionsAwareComponent
 import com.ae.apps.common.permissions.RuntimePermissionChecker
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
-import com.ae.apps.messagecounter.services.SMSObserverService
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -111,7 +110,11 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
         val preferenceRepository = PreferenceRepository.newInstance(
                 PreferenceManager.getDefaultSharedPreferences(this))
         if (preferenceRepository.backgroundServiceEnabled()) {
-            startService(getMessageCounterServiceIntent(this))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(getMessageCounterServiceIntentForOreo(this))
+            } else {
+                startService(getMessageCounterServiceIntent(this))
+            }
         } else {
             stopService(getMessageCounterServiceIntent(this))
         }

@@ -21,15 +21,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Handler
 import android.os.IBinder
-import com.ae.apps.messagecounter.observers.SMSObserver
 import com.ae.apps.common.managers.SMSManager
+import com.ae.apps.messagecounter.observers.SMSObserver
 
 /**
  * Background service to register an Observer for SMS Content Provider
  */
-class SMSObserverService : Service() {
+open class SMSObserverService : Service() {
 
-    private var mObserver:SMSObserver? = null
+    private var mObserver: SMSObserver? = null
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -42,7 +42,7 @@ class SMSObserverService : Service() {
     override fun onCreate() {
         super.onCreate()
 
-        if(null == mObserver){
+        if (null == mObserver) {
             val smsUri = Uri.parse(SMSManager.SMS_URI_ALL)
             mObserver = SMSObserver(Handler(), baseContext)
 
@@ -52,7 +52,7 @@ class SMSObserverService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(null != mObserver){
+        if (null != mObserver) {
             contentResolver.unregisterContentObserver(mObserver)
         }
     }
