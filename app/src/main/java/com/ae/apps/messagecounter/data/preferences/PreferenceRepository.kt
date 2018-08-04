@@ -52,7 +52,7 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
             .putString(PREF_KEY_LAST_SENT_MESSAGE_ID, messageId)
             .apply()
 
-    fun backgroundServiceEnabled() = preferences.getBoolean(PREF_KEY_ENABLE_BACKGROUND_SERVICE, false)
+    fun backgroundServiceEnabled() = preferences.getBoolean(PREF_KEY_ENABLE_BACKGROUND_SERVICE, true)
 
     fun hasDonated() = preferences.getBoolean(PREF_KEY_DONATIONS_MADE, false)
 

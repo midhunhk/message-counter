@@ -21,7 +21,7 @@
             android:title="@string/str_pref_message_limit"/>
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="pref_key_enable_sent_message_count"
             android:summary="@string/str_pref_use_background_service_desc"
             android:title="@string/str_pref_use_background_service" />
