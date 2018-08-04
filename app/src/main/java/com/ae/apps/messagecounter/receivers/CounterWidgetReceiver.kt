@@ -15,13 +15,18 @@ import com.ae.apps.messagecounter.data.repositories.CounterRepository
 import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 
-
+/**
+ * Update the widget
+ */
 class CounterWidgetReceiver : AppWidgetProvider() {
+
+    companion object {
+        const val METHOD_SET_TEXT = "setText"
+    }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
 
-        val METHOD_SET_TEXT = "setText"
         var remoteView: RemoteViews?
         val intent = Intent(context, MainActivity::class.java)
         intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
@@ -43,8 +48,7 @@ class CounterWidgetReceiver : AppWidgetProvider() {
 
             // update data here
             remoteView.setCharSequence(R.id.widgetSentTodayText, METHOD_SET_TEXT, sentToday.toString())
-            remoteView.setCharSequence(R.id.widgetSentInCycleText, METHOD_SET_TEXT,
-                    "$sentCycle / $cycleLimit")
+            remoteView.setCharSequence(R.id.widgetSentInCycleText, METHOD_SET_TEXT, "$sentCycle / $cycleLimit")
             remoteView.setOnClickPendingIntent(R.id.appWidget, pendingIntent)
 
             appWidgetManager?.updateAppWidget(appWidgetIds[i], remoteView)

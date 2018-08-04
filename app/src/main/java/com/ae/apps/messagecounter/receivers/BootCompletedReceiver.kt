@@ -1,11 +1,10 @@
 package com.ae.apps.messagecounter.receivers
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.preference.PreferenceManager
-import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
-import com.ae.apps.messagecounter.getMessageCounterServiceIntent
+import com.ae.apps.messagecounter.services.CounterServiceHelper
 import org.jetbrains.anko.doAsync
 
 /**
@@ -13,18 +12,17 @@ import org.jetbrains.anko.doAsync
  */
 class BootCompletedReceiver : BroadcastReceiver() {
 
-    val SERVICE_START_DELAY = 1000L
+    companion object {
+        private const val SERVICE_START_DELAY = 1000L
+    }
 
+    @SuppressLint("UnsafeProtectedBroadcastReceiver")
     override fun onReceive(context: Context?, intent: Intent?) {
         doAsync {
             // waiting before starting the service to be fair to other processes on startup
             Thread.sleep(SERVICE_START_DELAY)
 
-            val preferenceRepository = PreferenceRepository.newInstance(
-                    PreferenceManager.getDefaultSharedPreferences(context))
-            if(preferenceRepository.backgroundServiceEnabled()){
-                context?.startService(getMessageCounterServiceIntent(context))
-            }
+            CounterServiceHelper.monitorMessagesInBackground(context!!)
         }
     }
 }

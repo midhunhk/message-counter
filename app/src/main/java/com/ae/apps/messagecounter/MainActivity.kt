@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -12,10 +11,9 @@ import android.view.MenuItem
 import android.view.View
 import com.ae.apps.common.permissions.PermissionsAwareComponent
 import com.ae.apps.common.permissions.RuntimePermissionChecker
-import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
+import com.ae.apps.messagecounter.services.CounterServiceHelper
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
 
 
 /**
@@ -111,20 +109,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
     }
 
     private fun manageMessageCounterService() {
-        // Use a JobService to detect SMS database changes in Nougat and up
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val result = com.ae.apps.messagecounter.services.CounterJobService.registerJob(baseContext)
-            toast("RegisterJobResult: $result" )
-        } else {
-            // Use a background service up to Marshmallow
-            val preferenceRepository = PreferenceRepository.newInstance(
-                    PreferenceManager.getDefaultSharedPreferences(this))
-            if (preferenceRepository.backgroundServiceEnabled()) {
-                startService(getMessageCounterServiceIntent(this))
-            } else {
-                stopService(getMessageCounterServiceIntent(this))
-            }
-        }
+        CounterServiceHelper.monitorMessagesInBackground(this)
     }
 
     private fun showFragmentContent(fragment: Fragment, primaryFragment: Boolean) {
