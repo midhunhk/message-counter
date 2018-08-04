@@ -1,5 +1,11 @@
 ## Message Counter Version History
 
+Version 4.0 (Wyvern)
+----------------------
+**MessageCounter 4.0.0 [Sep 2018]**
+ - Application rewrite and new architecture
+ - Improve performance
+
 Version 3.3 (Valkyrie)
 ----------------------
 **MessageCounter 3.3.0 [Oct 2017]**
