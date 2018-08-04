@@ -3,7 +3,6 @@ package com.ae.apps.messagecounter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.ae.apps.messagecounter.services.OreoSMSObserverService
 import com.ae.apps.messagecounter.services.SMSObserverService
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
@@ -42,10 +41,6 @@ fun getViewFaqIntent(context: Context): Intent {
 
 fun getMessageCounterServiceIntent(context: Context): Intent {
     return Intent(context, SMSObserverService::class.java)
-}
-
-fun getMessageCounterServiceIntentForOreo(context: Context): Intent {
-    return Intent(context, OreoSMSObserverService::class.java)
 }
 
 private fun createIntentForURI(url: String): Intent {
