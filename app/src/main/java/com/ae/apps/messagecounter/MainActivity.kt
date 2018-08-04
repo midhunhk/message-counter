@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -11,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import com.ae.apps.common.permissions.PermissionsAwareComponent
 import com.ae.apps.common.permissions.RuntimePermissionChecker
+import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
 import com.ae.apps.messagecounter.services.CounterServiceHelper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,13 +32,17 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
     private lateinit var mPermissionChecker: RuntimePermissionChecker
     private val permissions: Array<String> = arrayOf(Manifest.permission.READ_CONTACTS,
             Manifest.permission.READ_SMS)
+    private lateinit var mPreferenceRepository: PreferenceRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mPreferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(this))
+
         mPermissionChecker = RuntimePermissionChecker(this)
         mPermissionChecker.checkPermissions()
+
     }
 
     override fun requiredPermissions() = permissions
@@ -47,12 +53,14 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
     }
 
     override fun onPermissionsGranted() {
+        mPreferenceRepository.saveRuntimePermissions(true)
         showFragmentContent(SentCountFragment.newInstance(), true)
         setupBottomNavigation()
         manageMessageCounterService()
     }
 
     override fun onPermissionsDenied() {
+        mPreferenceRepository.saveRuntimePermissions(false)
         showFragmentContent(NoAccessFragment.newInstance(), true)
         bottom_navigation.visibility = View.INVISIBLE
     }

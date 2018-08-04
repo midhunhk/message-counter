@@ -59,4 +59,10 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
     fun saveDonationsMade() = preferences.edit()
             .putBoolean(PREF_KEY_DONATIONS_MADE, true)
             .apply()
+
+    fun hasRuntimePermissions() = preferences.getBoolean(PREF_KEY_VALID_RUN_TIME_PERMISSIONS, false)
+
+    fun saveRuntimePermissions(value: Boolean) = preferences.edit()
+            .putBoolean(PREF_KEY_VALID_RUN_TIME_PERMISSIONS, value)
+            .apply()
 }

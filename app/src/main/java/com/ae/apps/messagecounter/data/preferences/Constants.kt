@@ -9,6 +9,7 @@ const val PREF_KEY_DONATIONS_MADE = "pref_key_donations_made"
 const val PREF_KEY_LAST_SENT_MESSAGE_ID = "pref_key_last_sent_message_id"
 const val PREF_KEY_LAST_SENT_TIME_STAMP = "pref_key_last_sent_message_time_stamp"
 const val PREF_KEY_HISTORIC_DATA_INDEXED = "pref_key_historic_data_indexed"
+const val PREF_KEY_VALID_RUN_TIME_PERMISSIONS = "pref_key_valid_runtime_permissions"
 
 const val DEFAULT_MESSAGE_LIMIT = 100
 const val DEFAULT_CYCLE_START_DATE = "1"

@@ -19,18 +19,21 @@ class CounterServiceHelper {
     companion object {
 
         fun monitorMessagesInBackground(context: Context) {
-            // Use a JobService to detect SMS database changes in Nougat and up
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                val result = com.ae.apps.messagecounter.services.CounterJobService.registerJob(context)
-                Toast.makeText(context, "Starting JobService: $result", Toast.LENGTH_SHORT).show()
-            } else {
-                // Use a background service up to Marshmallow
-                val preferenceRepository = PreferenceRepository.newInstance(
-                        PreferenceManager.getDefaultSharedPreferences(context))
-                if (preferenceRepository.backgroundServiceEnabled()) {
-                    context.startService(getMessageCounterServiceIntent(context))
+            val preferenceRepository = PreferenceRepository.newInstance(
+                    PreferenceManager.getDefaultSharedPreferences(context))
+            // Run the service or job only if we have the required permissions
+            if (preferenceRepository.hasRuntimePermissions()) {
+                // Use a JobService to detect SMS database changes in Nougat and up
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    val result = com.ae.apps.messagecounter.services.CounterJobService.registerJob(context)
+                    Toast.makeText(context, "Starting JobService: $result", Toast.LENGTH_SHORT).show()
                 } else {
-                    context.stopService(getMessageCounterServiceIntent(context))
+                    // Use a background service up to Marshmallow
+                    if (preferenceRepository.backgroundServiceEnabled()) {
+                        context.startService(getMessageCounterServiceIntent(context))
+                    } else {
+                        context.stopService(getMessageCounterServiceIntent(context))
+                    }
                 }
             }
         }
