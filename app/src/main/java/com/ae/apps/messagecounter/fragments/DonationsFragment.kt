@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.ae.apps.messagecounter.BuildConfig
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.android.billingclient.api.Purchase
@@ -16,12 +15,12 @@ import kotlinx.android.synthetic.main.fragment_donations.*
 class DonationsFragment : DonationsBaseFragment() {
 
     companion object {
+        const val SKU_SMALL = "product_small"
+        const val SKU_MEDIUM = "product_medium"
+        const val SKU_LARGE = "product_large"
+
         fun newInstance() = DonationsFragment()
     }
-
-    private val SKU_SMALL = "product_small"
-    private val SKU_MEDIUM = "product_medium"
-    private val SKU_LARGE = "product_large"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_donations, container, false)

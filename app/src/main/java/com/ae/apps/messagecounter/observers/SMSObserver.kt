@@ -25,6 +25,8 @@ class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObs
 
     companion object {
         private const val CHANNEL_ID = "message_counter"
+        private const val NOTIFICATION_REQUEST_CODE = 1042
+        private const val SEND_COUNT_REACHED_ID = 0
     }
 
     override fun onChange(selfChange: Boolean) {
@@ -57,8 +59,6 @@ class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObs
     private fun showMessageLimitNotification() {
         val messageCounter = MessageCounter.newInstance(mContext)
         if (messageCounter.checkIfMessageLimitCrossed()) {
-            val NOTIFICATION_REQUEST_CODE = 1042
-            val SEND_COUNT_REACHED_ID = 0
 
             val resources = mContext.resources
             val notificationTitle = resources.getString(R.string.str_sms_limit_notification_title)
