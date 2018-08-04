@@ -1,5 +1,7 @@
 package com.ae.apps.messagecounter.services
 
+import android.annotation.TargetApi
+import android.app.job.JobScheduler
 import android.content.Context
 import android.os.Build
 import android.preference.PreferenceManager
@@ -36,6 +38,21 @@ class CounterServiceHelper {
                     }
                 }
             }
+        }
+
+        @TargetApi(Build.VERSION_CODES.N)
+        fun isJobRunning(scheduler: JobScheduler, jobId: Int): Boolean {
+            for (jobInfoTemp in scheduler.allPendingJobs) {
+                if (jobInfoTemp.id == jobId) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        @TargetApi(Build.VERSION_CODES.N)
+        fun isJobNotRunning(scheduler: JobScheduler, jobId: Int): Boolean {
+            return !isJobRunning(scheduler, jobId)
         }
 
     }

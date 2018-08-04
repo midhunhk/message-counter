@@ -37,10 +37,11 @@ class CounterJobService : JobService() {
 
             // Schedule a Job if not already done so
             val scheduler: JobScheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-            if (null != scheduler.getPendingJob(JOB_ID)) {
+            if (CounterServiceHelper.isJobNotRunning(scheduler, JOB_ID)) {
                 val result = scheduler.schedule(jobInfo)
                 return (result == JobScheduler.RESULT_SUCCESS)
             }
+
             return false
         }
     }
