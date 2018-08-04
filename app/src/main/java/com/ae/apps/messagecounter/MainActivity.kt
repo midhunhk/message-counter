@@ -15,6 +15,7 @@ import com.ae.apps.common.permissions.RuntimePermissionChecker
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 
 
 /**
@@ -22,7 +23,10 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
 
-    private val PERMISSION_CHECK_REQUEST_CODE = 8000
+    companion object {
+        private const val PERMISSION_CHECK_REQUEST_CODE = 8000
+    }
+
     private var mPreviousFragment: Fragment? = null
     private var mSecondaryFragmentDisplayed = false
     private lateinit var mPermissionChecker: RuntimePermissionChecker
@@ -107,16 +111,19 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
     }
 
     private fun manageMessageCounterService() {
-        val preferenceRepository = PreferenceRepository.newInstance(
-                PreferenceManager.getDefaultSharedPreferences(this))
-        if (preferenceRepository.backgroundServiceEnabled()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(getMessageCounterServiceIntentForOreo(this))
-            } else {
-                startService(getMessageCounterServiceIntent(this))
-            }
+        // Use a JobService to detect SMS database changes in Nougat and up
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val result = com.ae.apps.messagecounter.services.CounterJobService.registerJob(baseContext)
+            toast("RegisterJobResult: $result" )
         } else {
-            stopService(getMessageCounterServiceIntent(this))
+            // Use a background service up to Marshmallow
+            val preferenceRepository = PreferenceRepository.newInstance(
+                    PreferenceManager.getDefaultSharedPreferences(this))
+            if (preferenceRepository.backgroundServiceEnabled()) {
+                startService(getMessageCounterServiceIntent(this))
+            } else {
+                stopService(getMessageCounterServiceIntent(this))
+            }
         }
     }
 

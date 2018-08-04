@@ -23,7 +23,9 @@ import java.util.*
  */
 class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObserver(handler), MessageCounter.MessageCounterObserver {
 
-    private val CHANNEL_ID = "message_counter"
+    companion object {
+        private const val CHANNEL_ID = "message_counter"
+    }
 
     override fun onChange(selfChange: Boolean) {
         super.onChange(selfChange)

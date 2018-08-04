@@ -1,6 +1,7 @@
 package com.ae.apps.messagecounter.fragments
 
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
@@ -19,7 +20,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.preferences)
+        // We have one less preference for Android 7 and up
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            addPreferencesFromResource(R.xml.preferences_n_up)
+        } else {
+            addPreferencesFromResource(R.xml.preferences)
+        }
 
         // Make sure that only valid numeric value is entered for message limit
         val messageLimitPref = preferenceScreen.findPreference(PREF_KEY_MESSAGE_LIMIT_VALUE)
