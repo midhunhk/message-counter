@@ -86,4 +86,5 @@
     <string name="str_about_share_feedback_subject">Feedback for MessageCounter</string>
     <string name="str_about_share_feedback_body" translatable="false">AppVersion 4.0.0, build 400</string>
     <string name="str_notification_foreground_service">MessageCounter Service Running</string>
+    <string name="str_info_review_settings_on_first_run">Review your settings</string>
 </resources>

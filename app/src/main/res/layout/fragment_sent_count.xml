@@ -70,8 +70,34 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- current cycle -->
+        <!-- Informational Card -->
+        <android.support.v7.widget.CardView
+            android:id="@+id/info_card"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:contentPadding="@dimen/padding_small">
 
+            <TextView
+                android:id="@+id/reviewSettingsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:text="@string/str_info_review_settings_on_first_run"
+                android:textSize="@dimen/card_title"
+                android:textColor="@color/color_almost_white"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_settings"
+                android:drawableStart="@drawable/ic_settings"
+                android:drawablePadding="@dimen/padding_medium"
+
+                android:textStyle="bold"/>
+        </android.support.v7.widget.CardView>
+
+        <!-- current cycle -->
         <android.support.v7.widget.CardView
             android:id="@+id/hero_card02"
             android:layout_width="match_parent"

@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 /**
  * Main Entry point to the application
  */
-class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
+class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppController {
 
     companion object {
         private const val PERMISSION_CHECK_REQUEST_CODE = 8000
@@ -121,6 +121,12 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
         CounterServiceHelper.monitorMessagesInBackground(this)
     }
 
+    override fun navigateTo(id:Int){
+        if (id == R.id.action_settings) {
+            showFragmentContent(SettingsFragment.newInstance(), false)
+        }
+    }
+
     private fun showFragmentContent(fragment: Fragment, primaryFragment: Boolean) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
@@ -149,4 +155,8 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
             true
         }
     }
+}
+
+interface AppController {
+    fun navigateTo(id:Int)
 }

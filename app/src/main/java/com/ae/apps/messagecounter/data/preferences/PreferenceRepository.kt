@@ -65,4 +65,10 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
     fun saveRuntimePermissions(value: Boolean) = preferences.edit()
             .putBoolean(PREF_KEY_VALID_RUN_TIME_PERMISSIONS, value)
             .apply()
+
+    fun getSettingsHintReviewed() = preferences.getBoolean(PREF_KEY_SETTINGS_HINT_REVIEWED, false)
+
+    fun setSettingsHintReviewed() = preferences.edit()
+            .putBoolean(PREF_KEY_SETTINGS_HINT_REVIEWED, true)
+            .apply()
 }
