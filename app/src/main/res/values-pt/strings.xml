@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Mensagem Contador</string>
     <string name="app_version">versão 4.0.0 </string>
-    <string name="app_release_date">Nov 2018</string>
+    <string name="app_release_date">Sep 2018</string>
     <string name="app_code_name">Wyvern</string>
     <string name="app_desc">Mensagem Contador exibe mensagens da caixa de entrada estatísticas e número de mensagens de cada um dos seus contatos. Este projeto de código \'s fonte está disponível no GitHub.</string>
     <string name="app_disclaim">Disclaimer: Este aplicativo é criado para fins educativos e como tal tem nenhuma garantia ou apoio. Desde APIs do Android sem documentos são utilizados, este aplicativo pode não funcionar como esperado em todos os dispositivos.</string>
