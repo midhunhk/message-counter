@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent {
         mPreferenceRepository.saveRuntimePermissions(true)
         showFragmentContent(SentCountFragment.newInstance(), true)
         setupBottomNavigation()
+        bottom_navigation.selectedItemId = R.id.action_counter
         manageMessageCounterService()
     }
 
