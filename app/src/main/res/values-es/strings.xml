@@ -79,5 +79,5 @@
     <string name="str_enable_notify_on_limit">Notificar al llegar límite de envío de SMS</string>
     <string name="str_sms_limit_notification_title">SMS ha Alcanzado el Límite de</string>
     <string name="str_sms_limit_notification_text">SMS se ha Alcanzado el Límite para este ciclo</string>
-
+    <string name="str_info_review_settings_on_first_run">Revisa tu configuración</string>
 </resources>

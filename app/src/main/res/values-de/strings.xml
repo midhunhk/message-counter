@@ -79,4 +79,5 @@
     <string name="str_enable_notify_on_limit">Benachrichtigen erreichen SMS senden begrenzen</string>
     <string name="str_sms_limit_notification_title">SMS-Limit Erreicht</string>
     <string name="str_sms_limit_notification_text">SMS-Limit Erreicht für diesen Zyklus</string>
+    <string name="str_info_review_settings_on_first_run">Überprüfen Sie Ihre Einstellungen</string>
 </resources>

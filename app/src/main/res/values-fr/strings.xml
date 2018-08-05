@@ -80,5 +80,5 @@
     <string name="str_enable_notify_on_limit">Informer sur l\'atteinte d\'envoi de SMS à la limite</string>
     <string name="str_sms_limit_notification_title">SMS Limite Atteinte</string>
     <string name="str_sms_limit_notification_text">SMS Limite Atteinte pour ce cycle</string>
-
+    <string name="str_info_review_settings_on_first_run">Vérifiez vos paramètres</string>
 </resources>
