@@ -104,19 +104,25 @@ class SentCountFragment : Fragment() {
     }
 
     private fun manageInfoCard() {
+        if (showInfoCard()) {
+            info_card.visibility = View.VISIBLE
+            info_card.setOnClickListener {
+                if (reviewSettingsText.visibility == View.VISIBLE) {
+                    mAppController.navigateTo(R.id.action_settings)
+                    mPreferenceRepository.setSettingsHintReviewed()
+                }
+                info_card.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showInfoCard(): Boolean {
         if (CommonUtils.isFirstInstall(requireContext())
                 && !mPreferenceRepository.getSettingsHintReviewed()) {
             // show an info message
-            info_card.visibility = View.VISIBLE
+            return true
         }
-
-        info_card.setOnClickListener {
-            if (reviewSettingsText.visibility == View.VISIBLE) {
-                mAppController.navigateTo(R.id.action_settings)
-                mPreferenceRepository.setSettingsHintReviewed()
-            }
-            info_card.visibility = View.GONE
-        }
+        return false
     }
 
     @SuppressLint("SetTextI18n")
