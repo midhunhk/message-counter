@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
             mSecondaryFragmentDisplayed = true
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             supportActionBar?.setDisplayShowHomeEnabled(true)
-            bottom_navigation.visibility = View.INVISIBLE
+            bottom_navigation.visibility = View.GONE
         }
     }
 
