@@ -14,7 +14,7 @@ import android.support.annotation.RequiresApi
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.observers.SMSObserver
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
+//import org.jetbrains.anko.longToast
 
 @RequiresApi(Build.VERSION_CODES.N)
 class CounterJobService : JobService() {
@@ -51,7 +51,7 @@ class CounterJobService : JobService() {
         val handlerThread = HandlerThread(THREAD_NAME)
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
-        longToast("onStartJob")
+        //longToast("onStartJob")
 
         doAsync {
             val observer = SMSObserver(handler, context)
