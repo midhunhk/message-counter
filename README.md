@@ -24,9 +24,7 @@ It is now entirely rewritten in Kotlin and makes use of Android Architecture Com
 - No Advertisements
 
 ## Screenshots
-<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-01.png" width="200"/>
-<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-02.png" width="200"/>
-<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-03.png" width="200"/> 
+<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-01.png" width="200"/> <img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-02.png" width="200"/> <img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-03.png" width="200"/> 
  
 ## Installation
 Clone this repo and import the project as an existing Android project in Android Studio.
