@@ -7,9 +7,9 @@
 [![](https://img.shields.io/badge/codename-wyvern-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
 
 [Project Wiki](https://github.com/midhunhk/message-counter/wiki) | 
-[Github Page](http://midhunhk.github.io/message-counter)  |
-[Contribute](https://github.com/midhunhk/message-counter/wiki/Development#contribute)  |   
-[Milestones](https://github.com/midhunhk/message-counter/milestones)  
+[Github Page](http://midhunhk.github.io/message-counter) | 
+[Contribute](https://github.com/midhunhk/message-counter/wiki/Development#contribute) | 
+[Milestones](https://github.com/midhunhk/message-counter/milestones) 
 
 Message Counter is a modern Android app that counts the number of SMSes sent in a cycle. 
 It is now entirely rewritten in Kotlin and makes use of Android Architecture Components and Kotlin Extensions.
@@ -24,9 +24,9 @@ It is now entirely rewritten in Kotlin and makes use of Android Architecture Com
 - No Advertisements
 
 ## Screenshots
-<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-01.png" width="250"/>
-<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-02.png" width="250"/>
-<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-03.png" width="250"/> 
+<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-01.png" width="200"/>
+<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-02.png" width="200"/>
+<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-03.png" width="200"/> 
  
 ## Installation
 Clone this repo and import the project as an existing Android project in Android Studio.
