@@ -1,15 +1,15 @@
-# Message Counter
+<img alt="message counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/promo_wyvern.png"/>
+
 [![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=master)](https://travis-ci.org/midhunhk/message-counter) 
-![](https://img.shields.io/badge/api-16+-008080.svg)
 [![Release](https://img.shields.io/github/release/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/releases) 
 [![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/v3.3.0.svg)](https://github.com/midhunhk/message-counter) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/issues) 
 [![](https://img.shields.io/badge/codename-wyvern-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
 
-<img alt="message counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/promo_wyvern.png"/>
-
 [Project Wiki](https://github.com/midhunhk/message-counter/wiki) | 
-[Github Page](http://midhunhk.github.io/message-counter)
+[Github Page](http://midhunhk.github.io/message-counter)  |
+[Contribute](https://github.com/midhunhk/message-counter/wiki/Development#contribute)  |   
+[Milestones](https://github.com/midhunhk/message-counter/milestones)  
 
 Message Counter is a modern Android app that counts the number of SMSes sent in a cycle. 
 It is now entirely rewritten in Kotlin and makes use of Android Architecture Components and Kotlin Extensions.
@@ -22,6 +22,11 @@ It is now entirely rewritten in Kotlin and makes use of Android Architecture Com
 - Material Design
 - Widgets!
 - No Advertisements
+
+## Screenshots
+<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-01.png" width="250"/>
+<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-02.png" width="250"/>
+<img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-03.png" width="250"/> 
  
 ## Installation
 Clone this repo and import the project as an existing Android project in Android Studio.
@@ -41,9 +46,6 @@ Open the project in Android Studio
  - android-support-library
  - android-architecture-components
  - anko library
-
-## Milestones
-https://github.com/midhunhk/message-counter/milestones
 
 ## Play Store
 
