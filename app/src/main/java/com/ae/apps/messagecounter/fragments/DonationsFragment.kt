@@ -40,10 +40,10 @@ class DonationsFragment : DonationsBaseFragment() {
     }
 
     override fun skuDetailsResponse(skuDetails: List<SkuDetails>) {
-        Toast.makeText(requireContext(),
+        /*Toast.makeText(requireContext(),
                 "skuDetailsResponse size:" + skuDetails.size,
                 Toast.LENGTH_SHORT)
-                .show()
+                .show()*/
         skuDetails.forEach {
             when {
                 it.sku == SKU_SMALL -> txtDonateSmallPrice.text = it.price
@@ -65,7 +65,7 @@ class DonationsFragment : DonationsBaseFragment() {
 
     override fun handlePurchaseError(purchases: List<Purchase>?) {
         Toast.makeText(requireContext(),
-                "purchase error occured",
+                "purchase error occurred",
                 Toast.LENGTH_SHORT)
                 .show()
     }
