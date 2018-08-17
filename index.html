@@ -70,13 +70,16 @@
                 data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                </button>
-				      <a class="navbar-brand font-special page-scroll" href="#top">
+				      <a class="navbar-brand font-special page-scroll wow fadeInLeft" data-wow-delay="0.6s" href="#top">
 					     <img src="images/header-logo.png" alt="Message Counter" />
 				     </a>
-        <div id="navbarNav" class="collapse navbar-collapse">
+        <div id="navbarNav" class="collapse navbar-collapse  wow fadeIn" data-wow-delay="0.8s">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#home"><span>Home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#screenshots"><span>Screenshots</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#features"><span>Features</span></a>
@@ -279,7 +282,7 @@
                 // jQuery for page scrolling feature - requires jQuery Easing plugin
                 $('a.page-scroll').bind('click', function(event) {
                     var $anchor = $(this);
-                    var newTop = $($anchor.attr('href')).offset().top - 100;
+                    var newTop = $($anchor.attr('href')).offset().top - 10;
                     $('html, body').stop().animate({
                         scrollTop: newTop
                     }, 1250, 'easeInOutExpo');
