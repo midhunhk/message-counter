@@ -81,4 +81,5 @@
     <string name="str_sms_limit_notification_title">SMS Atingido o Limite de</string>
     <string name="str_sms_limit_notification_text">SMS Atingido o Limite para este ciclo</string>
     <string name="str_info_review_settings_on_first_run">Revise suas configurações</string>
+    <string name="str_ignore_number_delete">Apagar</string>
 </resources>

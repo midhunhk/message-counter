@@ -81,4 +81,5 @@
     <string name="str_sms_limit_notification_title">SMS Limite Atteinte</string>
     <string name="str_sms_limit_notification_text">SMS Limite Atteinte pour ce cycle</string>
     <string name="str_info_review_settings_on_first_run">Vérifiez vos paramètres</string>
+    <string name="str_ignore_number_delete">Supprimer</string>
 </resources>

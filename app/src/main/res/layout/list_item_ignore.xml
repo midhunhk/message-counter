@@ -49,7 +49,7 @@
         android:layout_centerVertical="true"
         android:src="@drawable/ic_delete"
         android:background="?attr/selectableItemBackground"
-        android:contentDescription="@string/empty_text"
+        android:contentDescription="@string/str_ignore_number_delete"
         android:padding="@dimen/card_padding"/>
 
 </RelativeLayout>

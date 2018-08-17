@@ -80,4 +80,5 @@
     <string name="str_sms_limit_notification_title">SMS-Limit Erreicht</string>
     <string name="str_sms_limit_notification_text">SMS-Limit Erreicht für diesen Zyklus</string>
     <string name="str_info_review_settings_on_first_run">Überprüfen Sie Ihre Einstellungen</string>
+    <string name="str_ignore_number_delete">Löschen</string>
 </resources>
