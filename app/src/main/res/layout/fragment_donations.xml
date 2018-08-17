@@ -23,6 +23,8 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="@dimen/padding_small">
 
@@ -46,7 +48,8 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/card_margin"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
             app:cardUseCompatPadding="true"
             app:contentPadding="@dimen/padding_small">
 
