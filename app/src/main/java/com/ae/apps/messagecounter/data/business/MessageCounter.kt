@@ -7,10 +7,9 @@ import android.preference.PreferenceManager
 import android.util.Log
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.data.AppDatabase
+import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
-import com.ae.apps.messagecounter.data.repositories.CounterRepository
-import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
-import com.ae.apps.messagecounter.data.repositories.getIndexFromDate
+import com.ae.apps.messagecounter.data.repositories.*
 import org.jetbrains.anko.doAsync
 import java.util.*
 
@@ -28,7 +27,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
                         preferenceRepository: PreferenceRepository) = MessageCounter(counterRepository,
                 ignoreNumbersRepository, preferenceRepository)
 
-        fun newInstance(context: Context): MessageCounter{
+        fun newInstance(context: Context): MessageCounter {
             val preferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(context))
             val counterRepository = CounterRepository.getInstance(AppDatabase.getInstance(context).counterDao())
             val ignoreNumbersRepository = IgnoredNumbersRepository.getInstance(AppDatabase.getInstance(context).ignoredNumbersDao())
@@ -53,7 +52,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
                 if (newMessagesCursor.count > 0 && newMessagesCursor.moveToFirst()) {
                     // Since this method would be invoked multiple times when SMS database changes,
                     // updating the lastSentTimeStamp to prevent duplicate reads
-                    preferenceRepository.setLastSentTimeStamp( System.currentTimeMillis().toString() )
+                    preferenceRepository.setLastSentTimeStamp(System.currentTimeMillis().toString())
                     val messageSentDate = Calendar.getInstance()
                     do {
                         // Convert this row into a Message object and handle multipart messages
@@ -107,17 +106,35 @@ class MessageCounter(private val counterRepository: CounterRepository,
                 SORT_BY_DATE)
     }
 
-    fun checkIfMessageLimitCrossed():Boolean{
-        if(preferenceRepository.messageLimitNotificationEnabled()){
+    fun checkIfMessageLimitCrossed(): Boolean {
+        if (preferenceRepository.messageLimitNotificationEnabled()) {
             val startIndex = getIndexFromDate(preferenceRepository.getCycleStartDate())
             val currentLimit = preferenceRepository.getMessageLimitValue()
 
             val currentCount = counterRepository.getTotalCountSince(startIndex)
-            if(currentCount >= currentLimit){
+            if (currentCount >= currentLimit) {
                 return true
             }
         }
         return false
+    }
+
+    /**
+     * Reads the data from Repositories to be consumed by any widgets
+     * Make sure to call this from another thread since db access on main thread
+     * will not work
+     */
+    fun getSentCountDetailsForWidget():SentCountDetails {
+        val limit: Int = preferenceRepository.getMessageLimitValue()
+        val cycleStartDate = preferenceRepository.getCycleStartDate()
+        val today = Calendar.getInstance().time
+        var sentTodayCount = counterRepository.getCount(getIndexFromDate(today))
+        if (sentTodayCount == -1) sentTodayCount = 0
+        val sentCycleCount = counterRepository.getTotalCountSince(getIndexFromDate(cycleStartDate))
+
+        return SentCountDetails(limit, sentTodayCount, sentCycleCount,
+                0, 0, 0,
+                getDurationDateString(cycleStartDate), "")
     }
 
     /**
@@ -126,4 +143,5 @@ class MessageCounter(private val counterRepository: CounterRepository,
     interface MessageCounterObserver {
         fun onIndexCompleted()
     }
+
 }
