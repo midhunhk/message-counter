@@ -36,7 +36,7 @@ class DonationsFragment : DonationsBaseFragment() {
     }
 
     override fun onBillingClientSetup() {
-        loadingProgressBar.visibility = View.GONE
+        loadingProgressBar?.visibility = View.GONE
     }
 
     override fun skuDetailsResponse(skuDetails: List<SkuDetails>) {
