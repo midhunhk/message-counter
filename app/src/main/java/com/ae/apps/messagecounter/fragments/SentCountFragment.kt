@@ -36,7 +36,7 @@ class SentCountFragment : Fragment() {
     companion object {
         fun newInstance() = SentCountFragment()
         private const val PROGRESS_ANIMATION_DURATION = 800L
-        private const val PROGRESS_ANIMATION_DELAY = 200L
+        private const val PROGRESS_ANIMATION_DELAY = 400L
         private const val PROGRESS_PROPERTY_NAME = "progress"
     }
 
