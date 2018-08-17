@@ -1,5 +1,6 @@
 package com.ae.apps.messagecounter.fragments
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.ae.apps.common.utils.CommonUtils
@@ -33,6 +35,9 @@ class SentCountFragment : Fragment() {
 
     companion object {
         fun newInstance() = SentCountFragment()
+        private const val PROGRESS_ANIMATION_DURATION = 800L
+        private const val PROGRESS_ANIMATION_DELAY = 200L
+        private const val PROGRESS_PROPERTY_NAME = "progress"
     }
 
     private lateinit var mViewModel: CounterViewModel
@@ -87,8 +92,8 @@ class SentCountFragment : Fragment() {
                         prevCycleSentCountText.text = details?.sentLastCycle.toString()
                         prevCycleDurationText.text = details?.prevCycleDuration
 
-                        setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit)
-                        setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
+                        setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit, 0)
+                        setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit, PROGRESS_ANIMATION_DELAY)
                     }
                 }
         )
@@ -126,14 +131,20 @@ class SentCountFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setProgressInfo(progressBar: ProgressBar, progressText: TextView, count: Int, limit: Int) {
+    private fun setProgressInfo(progressBar: ProgressBar, progressText: TextView, count: Int, limit: Int, animationDelay: Long) {
         if (limit > 0) {
             progressBar.max = limit
             progressBar.progress = 0
             var progress = count
             if (count >= limit) progress = limit
-            progressBar.progress = progress
+            //progressBar.progress = progress
             progressText.text = "$count / $limit"
+
+            val animator = ObjectAnimator.ofInt(progressBar, PROGRESS_PROPERTY_NAME, 0, progress)
+            animator.interpolator = DecelerateInterpolator()
+            animator.duration = PROGRESS_ANIMATION_DURATION
+            animator.startDelay = animationDelay
+            animator.start()
         }
     }
 
