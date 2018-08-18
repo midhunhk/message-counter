@@ -33,9 +33,9 @@ Clone this repo and import the project as an existing Android project in Android
 Clone this repo and checkout the latest development branch.
 
 ```
-git clone https://github.com/midhunhk/message-counter.git
+git clone https://github.com/midhunhk/message-counter.git  
 
-Open the project in Android Studio
+Open the project in Android Studio  
 ```
  
 ## Dependencies
