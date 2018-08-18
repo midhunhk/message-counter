@@ -10,7 +10,7 @@ android {
         applicationId "com.ae.apps.messagecounter"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 400
+        versionCode 401
         versionName "4.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -22,11 +22,11 @@ android {
 
     flavorDimensions "debugPro"
 
-    productFlavors {
+    /*productFlavors {
         debugPro {
             applicationIdSuffix ".test"
         }
-    }
+    }*/
 
     buildTypes {
         release {
