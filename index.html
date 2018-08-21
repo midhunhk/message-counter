@@ -52,6 +52,8 @@
 
             .right{float:right}
             .left{float:left}
+			.responsive-image-hero{ width:100%; height:auto; max-width:500px}
+			.responsive-image-screenshot{ width:100%; height:auto; max-width:400px}
 
             ul.footerright li a, ul.footerright li a:visited {color: #fff !important }
             ul.footerright li a:hover, ul.footerright li a:active {color: #fff !important; }
@@ -63,9 +65,9 @@
 
     <body id="top" class="mdb-skin">
 
-		    <!-- Navigation -->
-		    <nav id="mainNav" class="navbar navbar-fixed-top fixed-top navbar-toggleable-md navbar-dark scrolling-navbar primary-light">
-			       <div class="container">
+		<!-- Navigation -->
+		<nav id="mainNav" class="navbar navbar-fixed-top fixed-top navbar-toggleable-md navbar-dark scrolling-navbar primary-light">
+			<div class="container">
                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -73,36 +75,36 @@
 				      <a class="navbar-brand font-special page-scroll wow fadeInLeft" data-wow-delay="0.6s" href="#top">
 					     <img src="images/header-logo.png" alt="Message Counter" />
 				     </a>
-        <div id="navbarNav" class="collapse navbar-collapse  wow fadeIn" data-wow-delay="0.8s">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#home"><span>Home</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#screenshots"><span>Screenshots</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#features"><span>Features</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#contribute"><span>Contribute</span></a>
-                </li>
-            </ul>
-            <ul class="navbar-nav nav-flex-icons">
-                <li class="nav-item wow rubberBand" data-wow-delay="1.2s">
-                    <a class="nav-link" href="https://www.facebook.com/AeAppLabs/"><i class="fa fa-facebook fa-2x"></i></a>
-                </li>
-                <li class="nav-item wow rubberBand" data-wow-delay="1.4s">
-                    <a class="nav-link" href="https://plus.google.com/communities/110966372903178356479"><i class="fa fa-google-plus fa-2x pl-2" aria-hidden="true"></i></a>
-                </li>
-                <li class="nav-item wow rubberBand" data-wow-delay="1.6s">
-                    <a class="nav-link" href="https://www.instagram.com/aeapplabs/"><i class="fa fa-instagram fa-2x pl-2" aria-hidden="true"></i></a>
-                </li>
-                <li class="nav-item wow rubberBand" data-wow-delay="1.8s">
-                    <a class="nav-link" href="https://github.com/midhunhk/message-counter"><i class="fa fa-github fa-2x pl-2"></i></a>
-                </li>
-            </ul>
-        </div>
+				<div id="navbarNav" class="collapse navbar-collapse  wow fadeIn" data-wow-delay="0.8s">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link page-scroll" href="#home"><span>Home</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link page-scroll" href="#screenshots"><span>Screenshots</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link page-scroll" href="#features"><span>Features</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link page-scroll" href="#contribute"><span>Contribute</span></a>
+						</li>
+					</ul>
+					<ul class="navbar-nav nav-flex-icons">
+						<li class="nav-item wow rubberBand" data-wow-delay="1.2s">
+							<a class="nav-link" href="https://www.facebook.com/AeAppLabs/"><i class="fa fa-facebook fa-2x"></i></a>
+						</li>
+						<li class="nav-item wow rubberBand" data-wow-delay="1.4s">
+							<a class="nav-link" href="https://plus.google.com/communities/110966372903178356479"><i class="fa fa-google-plus fa-2x pl-2" aria-hidden="true"></i></a>
+						</li>
+						<li class="nav-item wow rubberBand" data-wow-delay="1.6s">
+							<a class="nav-link" href="https://www.instagram.com/aeapplabs/"><i class="fa fa-instagram fa-2x pl-2" aria-hidden="true"></i></a>
+						</li>
+						<li class="nav-item wow rubberBand" data-wow-delay="1.8s">
+							<a class="nav-link" href="https://github.com/midhunhk/message-counter"><i class="fa fa-github fa-2x pl-2"></i></a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</nav>
 		<!-- End Navigation -->
@@ -129,7 +131,7 @@
                 
                 <div class="row wow fadeInUp" data-wow-delay="0.6s">
                     <div class="col-md-12 flex-center">
-                        <img src="images/half-screen.png" height="420px"/>
+                        <img src="images/half-screen.png" class="responsive-image-hero"/>
                     </div>
                 </div>
             </div>
@@ -172,13 +174,13 @@
             <section class="container pt-4">
                 <div class="row">
                     <div class="col-md-4 flex-center wow fadeInUp" data-wow-delay="0.4s">
-                        <img src="images/screen-01.png"/>
+                        <img src="images/screen-01.png" class="responsive-image-screenshot"/>
                     </div>
                     <div class="col-md-4 flex-center wow fadeInUp" data-wow-delay="0.6s">
-                        <img src="images/screen-02.png"/>
+                        <img src="images/screen-02.png" class="responsive-image-screenshot"/>
                     </div>
                     <div class="col-md-4 flex-center wow fadeInUp" data-wow-delay="0.8s">
-                        <img src="images/screen-03.png"/>
+                        <img src="images/screen-03.png" class="responsive-image-screenshot"/>
                     </div>
                 </div>
             </section>
