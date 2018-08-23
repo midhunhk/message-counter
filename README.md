@@ -41,9 +41,9 @@ Open the project in Android Studio
 ## Dependencies
  - lib-ae-apps (https://github.com/midhunhk/ae-apps-library)
  - kotlin-extension
- - android-support-library
- - android-architecture-components
- - anko library
+ - [android-support-library](https://developer.android.com/topic/libraries/support-library/)
+ - [android-architecture-components](https://developer.android.com/topic/libraries/architecture/)
+ - [anko library](https://github.com/Kotlin/anko)
 
 ## Play Store
 
