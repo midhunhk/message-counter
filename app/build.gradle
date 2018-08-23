@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.ae.apps.messagecounter"
         minSdkVersion 16
-        // Remember to update travis.yaml with android version
+        // Remember to update .travis.yml with android version
         targetSdkVersion 28
         versionCode 401
         versionName "4.0.0"
@@ -67,7 +67,7 @@ dependencies {
     implementation 'com.android.billingclient:billing:1.1'
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation "com.android.support:support-v4:$support_lib_version"
     implementation "android.arch.work:work-runtime-ktx:$work_version"
 
     // Unit Testing
@@ -78,7 +78,6 @@ dependencies {
 
     // Instrumentation Testing
     androidTestImplementation 'org.mockito:mockito-android:2.7.22'
-    androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation "org.hamcrest:hamcrest-core:$hamcrest_version"
