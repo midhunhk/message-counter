@@ -9,6 +9,7 @@ android {
     defaultConfig {
         applicationId "com.ae.apps.messagecounter"
         minSdkVersion 16
+        // Remember to update travis.yaml with android version
         targetSdkVersion 28
         versionCode 401
         versionName "4.0.0"
@@ -64,20 +65,17 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:0.10.4"
     implementation 'com.google.android.gms:play-services-oss-licenses:16.0.0'
     implementation 'com.android.billingclient:billing:1.1'
-
-    // Require Android Studio 3.2 for Navigation Architecture Component
-    // implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-    // implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
-    //annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     implementation 'com.android.support:support-v4:27.1.1'
     implementation "android.arch.work:work-runtime-ktx:$work_version"
+
     // Unit Testing
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.22'
     testImplementation 'org.robolectric:robolectric:3.8'
     testImplementation "android.arch.persistence.room:testing:$room_version"
+
     // Instrumentation Testing
     androidTestImplementation 'org.mockito:mockito-android:2.7.22'
     androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
