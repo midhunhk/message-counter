@@ -49,14 +49,14 @@ class MessageCounter(private val counterRepository: CounterRepository,
             val newMessagesCursor = getNewMessagesCursor(context)
             try {
                 Log.d("CounterViewModel", "Messages to be processed $newMessagesCursor.count")
-                if (newMessagesCursor.count > 0 && newMessagesCursor.moveToFirst()) {
+                if (checkIfRowsPresent(newMessagesCursor)) {
                     // Since this method would be invoked multiple times when SMS database changes,
                     // updating the lastSentTimeStamp to prevent duplicate reads
                     preferenceRepository.setLastSentTimeStamp(System.currentTimeMillis().toString())
                     val messageSentDate = Calendar.getInstance()
                     do {
                         // Convert this row into a Message object and handle multipart messages
-                        val message = getMessageFromCursor(newMessagesCursor)
+                        val message = getMessageFromCursor(newMessagesCursor!!)
 
                         messageSentDate.timeInMillis = java.lang.Long.parseLong(message.date)
                         lastIndexedTimeStamp = message.date
@@ -67,12 +67,12 @@ class MessageCounter(private val counterRepository: CounterRepository,
                                     message.messageCount)
                             newMessagesAdded += message.messageCount
                         }
-                    } while (newMessagesCursor.moveToNext())
+                    } while (newMessagesCursor!!.moveToNext())
                 }
             } catch (e: Exception) {
                 Log.e("CounterViewModel", Log.getStackTraceString(e))
             } finally {
-                newMessagesCursor.close()
+                newMessagesCursor?.close()
                 preferenceRepository.setHistoricMessageIndexed()
             }
 
@@ -91,13 +91,18 @@ class MessageCounter(private val counterRepository: CounterRepository,
      */
     fun checkIfUnIndexedMessagesExist(context: Context): Boolean {
         val newMessagesCursor = getNewMessagesCursor(context)
-        val newMessagesExists = newMessagesCursor.count > 0 && newMessagesCursor.moveToFirst()
-        newMessagesCursor.close()
+        val newMessagesExists = checkIfRowsPresent(newMessagesCursor)
+        newMessagesCursor?.close()
         return newMessagesExists
     }
 
-    private fun getNewMessagesCursor(context: Context): Cursor {
+    private fun checkIfRowsPresent(cursor: Cursor?) = null != cursor &&
+            cursor.count > 0 && cursor.moveToFirst()
+
+    private fun getNewMessagesCursor(context: Context): Cursor? {
         val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp()
+        // val lastSentMessageId = preferenceRepository.getLastSentMessageId()
+        //  + SELECT_SENT_MESSAGES_AFTER_LAST
         return context.contentResolver.query(
                 Uri.parse(SMSManager.SMS_URI_ALL),
                 SMS_TABLE_PROJECTION,
