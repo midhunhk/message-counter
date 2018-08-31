@@ -86,7 +86,7 @@ class ContactMessageViewModel : ViewModel() {
                 Uri.parse(uri),
                 SMS_TABLE_MINIMAL_PROJECTION,
                 null, null, null)
-        if (cursor.count > 0 && cursor.moveToFirst()) {
+        if (null != cursor && cursor.count > 0 && cursor.moveToFirst()) {
             val addressIndex: Int = cursor.getColumnIndex(COLUMN_NAME_ADDRESS)
             do {
                 val address = cursor.getString(addressIndex)
@@ -104,7 +104,7 @@ class ContactMessageViewModel : ViewModel() {
                 }
             } while (cursor.moveToNext())
         }
-        cursor.close()
+        cursor?.close()
         return sort(addressMessageCount)
     }
 

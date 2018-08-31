@@ -18,6 +18,7 @@ package com.ae.apps.messagecounter.services
 
 import android.app.Service
 import android.content.Intent
+import android.database.ContentObserver
 import android.net.Uri
 import android.os.Handler
 import android.os.IBinder
@@ -29,7 +30,7 @@ import com.ae.apps.messagecounter.observers.SMSObserver
  */
 open class SMSObserverService : Service() {
 
-    private var mObserver: SMSObserver? = null
+    private var mObserver: ContentObserver? = null
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -46,14 +47,14 @@ open class SMSObserverService : Service() {
             val smsUri = Uri.parse(SMSManager.SMS_URI_ALL)
             mObserver = SMSObserver(Handler(), baseContext)
 
-            contentResolver.registerContentObserver(smsUri, true, mObserver)
+            contentResolver.registerContentObserver(smsUri, true, mObserver!!)
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         if (null != mObserver) {
-            contentResolver.unregisterContentObserver(mObserver)
+            contentResolver.unregisterContentObserver(mObserver!!)
         }
     }
 
