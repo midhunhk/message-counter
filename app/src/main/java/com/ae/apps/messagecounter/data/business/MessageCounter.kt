@@ -22,6 +22,8 @@ class MessageCounter(private val counterRepository: CounterRepository,
                      private val preferenceRepository: PreferenceRepository) {
 
     companion object {
+        private const val TAG = "MessageCounter"
+        private const val TIME_DELTA = 500
         fun newInstance(counterRepository: CounterRepository,
                         ignoreNumbersRepository: IgnoredNumbersRepository,
                         preferenceRepository: PreferenceRepository) = MessageCounter(counterRepository,
@@ -48,11 +50,11 @@ class MessageCounter(private val counterRepository: CounterRepository,
         doAsync {
             val newMessagesCursor = getNewMessagesCursor(context)
             try {
-                Log.d("CounterViewModel", "Messages to be processed $newMessagesCursor.count")
                 if (checkIfRowsPresent(newMessagesCursor)) {
+                    Log.d(TAG, "Messages to be processed")
                     // Since this method would be invoked multiple times when SMS database changes,
                     // updating the lastSentTimeStamp to prevent duplicate reads
-                    preferenceRepository.setLastSentTimeStamp(System.currentTimeMillis().toString())
+                    preferenceRepository.setLastSentTimeStamp( getDeltaTimeStamp())
                     val messageSentDate = Calendar.getInstance()
                     do {
                         // Convert this row into a Message object and handle multipart messages
@@ -70,7 +72,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
                     } while (newMessagesCursor!!.moveToNext())
                 }
             } catch (e: Exception) {
-                Log.e("CounterViewModel", Log.getStackTraceString(e))
+                Log.e(TAG, Log.getStackTraceString(e))
             } finally {
                 newMessagesCursor?.close()
                 preferenceRepository.setHistoricMessageIndexed()
@@ -101,15 +103,16 @@ class MessageCounter(private val counterRepository: CounterRepository,
 
     private fun getNewMessagesCursor(context: Context): Cursor? {
         val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp()
-        // val lastSentMessageId = preferenceRepository.getLastSentMessageId()
-        //  + SELECT_SENT_MESSAGES_AFTER_LAST
+        val lastSentMessageId = preferenceRepository.getLastSentMessageId()
         return context.contentResolver.query(
                 Uri.parse(SMSManager.SMS_URI_ALL),
                 SMS_TABLE_PROJECTION,
-                SELECT_SENT_MESSAGES_AFTER_DATE,
-                arrayOf(lastMessageTimeStamp),
+                SELECT_SENT_MESSAGES_AFTER_DATE + SELECT_SENT_MESSAGES_AFTER_LAST,
+                arrayOf(lastMessageTimeStamp, lastSentMessageId),
                 SORT_BY_DATE)
     }
+
+    private fun getDeltaTimeStamp() = (System.currentTimeMillis() + TIME_DELTA ).toString()
 
     fun checkIfMessageLimitCrossed(): Boolean {
         if (preferenceRepository.messageLimitNotificationEnabled()) {
