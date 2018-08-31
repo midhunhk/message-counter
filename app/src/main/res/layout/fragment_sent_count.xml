@@ -29,6 +29,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:gravity="center"
                     android:text="@string/str_today"
                     android:textSize="@dimen/item_title"
@@ -38,6 +39,7 @@
                     android:id="@+id/heroSentTodayText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif"
                     android:gravity="center"
                     android:text="@string/str_zero"
                     android:textColor="@color/colorAccent"
