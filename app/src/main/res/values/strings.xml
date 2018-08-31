@@ -84,7 +84,7 @@
     <string name="str_about_view_faq">Frequently Asked Questions</string>
     <string name="str_about_share_feedback">Share Feedback</string>
     <string name="str_about_share_feedback_subject">Feedback for MessageCounter</string>
-    <string name="str_about_share_feedback_body" translatable="false">AppVersion 4.0.0, build 401</string>
+    <string name="str_about_share_feedback_body" translatable="false">AppVersion 4.0.0, build 402</string>
     <string name="str_notification_foreground_service">MessageCounter Service Running</string>
     <string name="str_info_review_settings_on_first_run">Review your settings</string>
     <string name="str_ignore_number_delete">Delete</string>

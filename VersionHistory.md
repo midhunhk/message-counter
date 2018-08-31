@@ -5,6 +5,7 @@ Version 4.0 (Wyvern)
 **MessageCounter 4.0.0 [Sep 2018]**
  - Application rewrite and new architecture
  - Improve performance
+ - Use Material Theme
 
 Version 3.3 (Valkyrie)
 ----------------------

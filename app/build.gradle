@@ -21,13 +21,13 @@ android {
         }
     }
 
-    flavorDimensions "debugPro"
+    /*flavorDimensions "debugPro"
 
     productFlavors {
         debugPro {
             applicationIdSuffix ".test"
         }
-    }
+    }*/
 
     buildTypes {
         release {
