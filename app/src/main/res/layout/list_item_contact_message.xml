@@ -38,6 +38,7 @@
         android:padding="@dimen/card_padding"
         android:layout_margin="@dimen/card_margin"
         android:textIsSelectable="false"
+        android:fontFamily="@font/lora"
         android:textSize="20sp" />
 
 </RelativeLayout>
