@@ -22,7 +22,11 @@
 
         <android.support.design.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small">
 
             <FrameLayout
                 android:layout_width="match_parent"
