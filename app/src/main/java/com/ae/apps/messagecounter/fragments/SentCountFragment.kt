@@ -36,7 +36,7 @@ class SentCountFragment : Fragment() {
     companion object {
         fun newInstance() = SentCountFragment()
         private const val PROGRESS_ANIMATION_DURATION = 800L
-        private const val PROGRESS_ANIMATION_DELAY = 400L
+        // private const val PROGRESS_ANIMATION_DELAY = 400L
         private const val PROGRESS_PROPERTY_NAME = "progress"
     }
 
@@ -92,8 +92,8 @@ class SentCountFragment : Fragment() {
                         prevCycleSentCountText.text = details?.sentLastCycle.toString()
                         prevCycleDurationText.text = details?.prevCycleDuration
 
-                        setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit, 0)
-                        setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit, PROGRESS_ANIMATION_DELAY)
+                        setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit )
+                        setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
                     }
                 }
         )
@@ -131,20 +131,24 @@ class SentCountFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setProgressInfo(progressBar: ProgressBar, progressText: TextView, count: Int, limit: Int, animationDelay: Long) {
+    private fun setProgressInfo(progressBar: ProgressBar, progressText: TextView, count: Int, limit: Int,
+                                animateProgress:Boolean = false, animationDelay: Long = 0) {
         if (limit > 0) {
             progressBar.max = limit
             progressBar.progress = 0
             var progress = count
             if (count >= limit) progress = limit
-            //progressBar.progress = progress
             progressText.text = "$count / $limit"
 
-            val animator = ObjectAnimator.ofInt(progressBar, PROGRESS_PROPERTY_NAME, 0, progress)
-            animator.interpolator = DecelerateInterpolator()
-            animator.duration = PROGRESS_ANIMATION_DURATION
-            animator.startDelay = animationDelay
-            animator.start()
+            if(animateProgress) {
+                val animator = ObjectAnimator.ofInt(progressBar, PROGRESS_PROPERTY_NAME, 0, progress)
+                animator.interpolator = DecelerateInterpolator()
+                animator.duration = PROGRESS_ANIMATION_DURATION
+                animator.startDelay = animationDelay
+                animator.start()
+            } else {
+                progressBar.progress = progress
+            }
         }
     }
 
