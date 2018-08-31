@@ -10,12 +10,14 @@
               android:layout_marginStart="8dp"
               android:orientation="vertical">
 
-    <Button
+    <android.support.design.button.MaterialButton
         android:id="@+id/btnShowIgnoreDialog"
-        style="@style/buttonTintAccent"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/str_ignore_add_number"/>
+        android:text="@string/str_ignore_add_number"
+        android:layout_gravity="center_horizontal"
+        app:backgroundTint="@color/colorAccent"
+        app:cornerRadius="@dimen/button_corner_radius"/>
 
     <include layout="@layout/separator_line"/>
 

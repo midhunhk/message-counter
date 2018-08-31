@@ -20,13 +20,9 @@
             android:layout_margin="@dimen/padding_medium"
             android:indeterminate="true"/>
 
-        <android.support.v7.widget.CardView
+        <android.support.design.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="1dp"
-            app:cardMaxElevation="1dp"
-            app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/padding_small">
+            android:layout_height="wrap_content">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -43,9 +39,9 @@
                     android:drawableTop="@drawable/ic_donate"
                     android:text="@string/str_donate_text"/>
             </FrameLayout>
-        </android.support.v7.widget.CardView>
+        </android.support.design.card.MaterialCardView>
 
-        <android.support.v7.widget.CardView
+        <android.support.design.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="1dp"
@@ -81,16 +77,16 @@
                         android:layout_below="@+id/txtDonateSmall"
                         android:text="@string/empty_text"/>
 
-                    <Button
+                    <android.support.design.button.MaterialButton
                         android:id="@+id/btnDonateSmall"
-                        style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:contentDescription="@string/str_donate_small"
-                        android:padding="@dimen/padding_medium"
-                        android:text="@string/str_donate_title"/>
+                        android:text="@string/str_donate_title"
+                        app:backgroundTint="@color/colorAccent"
+                        app:cornerRadius="@dimen/button_corner_radius"/>
                 </RelativeLayout>
 
                 <!-- Medium Donation -->
@@ -117,16 +113,16 @@
                         android:layout_below="@+id/txtDonateMedium"
                         android:text="@string/empty_text"/>
 
-                    <Button
+                    <android.support.design.button.MaterialButton
                         android:id="@+id/btnDonateMedium"
-                        style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:contentDescription="@string/str_donate_medium"
-                        android:padding="@dimen/padding_medium"
-                        android:text="@string/str_donate_title"/>
+                        android:text="@string/str_donate_title"
+                        app:backgroundTint="@color/colorAccent"
+                        app:cornerRadius="@dimen/button_corner_radius"/>
                 </RelativeLayout>
 
                 <!-- Large Donation -->
@@ -152,16 +148,16 @@
                         android:layout_below="@+id/txtDonateLarge"
                         android:text="@string/empty_text"/>
 
-                    <Button
+                    <android.support.design.button.MaterialButton
                         android:id="@+id/btnDonateLarge"
-                        style="@style/Widget.AppCompat.Button.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:contentDescription="@string/str_donate_large"
-                        android:padding="@dimen/padding_medium"
-                        android:text="@string/str_donate_title"/>
+                        android:text="@string/str_donate_title"
+                        app:backgroundTint="@color/colorAccent"
+                        app:cornerRadius="@dimen/button_corner_radius"/>
                 </RelativeLayout>
 
 
@@ -176,7 +172,7 @@
                     android:text="@string/str_donate_disclaimer"
                     android:textSize="12sp"/>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </android.support.design.card.MaterialCardView>
     </LinearLayout>
 
 </ScrollView>

@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
+        android:gravity="center"
         android:text="@string/str_messages_sent_caps"
         android:textColor="@color/white"
-        android:gravity="center"
         android:textSize="12sp"/>
 
     <LinearLayout
@@ -37,6 +37,7 @@
             android:layout_marginLeft="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_weight="1"
+            android:fontFamily="@font/lora"
             android:gravity="center"
             android:text="@string/str_cycle"
             android:textColor="@color/white"
@@ -56,9 +57,9 @@
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_weight="1"
-            android:textColor="@color/white"
             android:gravity="center"
-            android:text="@string/str_zero"/>
+            android:text="@string/str_zero"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/widgetSentInCycleText"
@@ -67,10 +68,11 @@
             android:layout_marginLeft="@dimen/margin_small"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_small"
-            android:textColor="@color/white"
             android:layout_weight="1"
+            android:fontFamily="@font/lora"
             android:gravity="center"
-            android:text="@string/str_zero"/>
+            android:text="@string/str_zero"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </LinearLayout>

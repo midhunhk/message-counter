@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -11,13 +10,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
+        <android.support.design.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="1dp"
-            app:cardMaxElevation="1dp"
-            app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/padding_small">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -43,6 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_margin="2dip"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:layout_toEndOf="@+id/appIcon"
                     android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_name"
@@ -90,15 +86,11 @@
                     android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_developer_info"/>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </android.support.design.card.MaterialCardView>
 
-        <android.support.v7.widget.CardView
+        <android.support.design.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="1dp"
-            app:cardMaxElevation="1dp"
-            app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/padding_small">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,13 +109,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin_small"
                     android:text="@string/app_disclaim"/>
 
                 <include layout="@layout/separator_line"/>
 
                 <Button
                     android:id="@+id/viewSourceCode"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -133,7 +126,7 @@
 
                 <Button
                     android:id="@+id/viewLicense"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -143,7 +136,7 @@
 
                 <Button
                     android:id="@+id/sendFeedback"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -153,7 +146,7 @@
 
                 <Button
                     android:id="@+id/viewFAQ"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -162,7 +155,7 @@
                     android:textAllCaps="false"/>
 
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </android.support.design.card.MaterialCardView>
 
     </LinearLayout>
 

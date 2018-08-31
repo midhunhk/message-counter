@@ -14,4 +14,6 @@
 
     <dimen name="widget_min_width">136dp</dimen>
     <dimen name="widget_min_height">42dp</dimen>
+
+    <dimen name="button_corner_radius">6dip</dimen>
 </resources>
