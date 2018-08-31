@@ -29,7 +29,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="serif"
+                    android:fontFamily="@font/lato"
                     android:gravity="center"
                     android:text="@string/str_today"
                     android:textSize="@dimen/item_title"
@@ -39,7 +39,7 @@
                     android:id="@+id/heroSentTodayText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="serif"
+                    android:fontFamily="@font/lora"
                     android:gravity="center"
                     android:text="@string/str_zero"
                     android:textColor="@color/colorAccent"
@@ -55,6 +55,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato"
                     android:gravity="center"
                     android:text="@string/str_this_cycle"
                     android:textAllCaps="true"
@@ -65,6 +66,7 @@
                     android:id="@+id/heroSentInCycleText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora"
                     android:gravity="center"
                     android:text="@string/str_zero"
                     android:textColor="@color/colorAccent"
@@ -73,7 +75,7 @@
         </LinearLayout>
 
         <!-- Informational Card -->
-        <android.support.v7.widget.CardView
+        <android.support.design.card.MaterialCardView
             android:id="@+id/info_card"
             android:visibility="gone"
             android:layout_width="match_parent"
@@ -97,10 +99,9 @@
                 android:drawablePadding="@dimen/padding_medium"
 
                 android:textStyle="bold"/>
-        </android.support.v7.widget.CardView>
+        </android.support.design.card.MaterialCardView>
 
-        <!-- current cycle -->
-        <android.support.v7.widget.CardView
+        <android.support.design.card.MaterialCardView
             android:id="@+id/hero_card02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,6 +110,7 @@
             app:cardUseCompatPadding="true"
             app:contentPadding="@dimen/padding_small">
 
+            <!-- current cycle -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -247,18 +249,10 @@
                     android:maxHeight="@dimen/progress_bar_height"
                     android:minHeight="@dimen/progress_bar_height"
                     android:progressDrawable="@drawable/progress_bar"/>
-            </LinearLayout>
 
-            <include layout="@layout/separator_line"/>
-            <!-- prev cycle -->
+                <include layout="@layout/separator_line"/>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin"
-                android:orientation="vertical"
-                android:padding="@dimen/card_padding">
+                <!-- prev cycle -->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -318,7 +312,7 @@
                     android:minHeight="@dimen/progress_bar_height"
                     android:progressDrawable="@drawable/progress_bar"/>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </android.support.design.card.MaterialCardView>
 
     </LinearLayout>
 

@@ -3,7 +3,7 @@
     <!-- text sizes -->
     <dimen name="card_title">16sp</dimen>
     <dimen name="item_title">14sp</dimen>
-    <dimen name="hero_text">48sp</dimen>
+    <dimen name="hero_text">56sp</dimen>
 
     <!-- progress bar size -->
     <dimen name="progress_bar_height">22dip</dimen>
