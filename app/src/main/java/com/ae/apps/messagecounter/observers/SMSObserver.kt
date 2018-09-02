@@ -63,7 +63,7 @@ class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObs
 
             // Crete the intent for running this app when user clicks on the notification
             val resultPendingIntent = getStartActivityIntent(mContext, NOTIFICATION_REQUEST_CODE)
-            
+
             val notification = NotificationCompat.Builder(mContext, CHANNEL_ID)
                     .setContentIntent(resultPendingIntent)
                     .setContentTitle(notificationTitle)
