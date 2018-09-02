@@ -21,15 +21,12 @@ android {
         }
     }
 
-    /*flavorDimensions "debugPro"
-
-    productFlavors {
-        debugPro {
-            applicationIdSuffix ".test"
-        }
-    }*/
-
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+            minifyEnabled false
+        }
         release {
             shrinkResources true
             minifyEnabled true
