@@ -24,6 +24,7 @@ import com.ae.apps.messagecounter.data.repositories.CounterRepository
 import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModelFactory
+import com.ae.apps.messagecounter.getWidgetUpdateIntent
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_sent_count.*
 
@@ -94,6 +95,9 @@ class SentCountFragment : Fragment() {
 
                         setProgressInfo(countProgressBar, countProgressText, details!!.sentCycle, details.cycleLimit )
                         setProgressInfo(prevCountProgressBar, prevCycleSentCountText, details.sentLastCycle, details.cycleLimit)
+
+                        // Update all the widgets
+                        requireContext().sendBroadcast( getWidgetUpdateIntent(requireContext()) )
                     }
                 }
         )

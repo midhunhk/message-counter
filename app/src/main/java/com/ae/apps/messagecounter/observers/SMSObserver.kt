@@ -3,8 +3,6 @@ package com.ae.apps.messagecounter.observers
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.database.ContentObserver
@@ -14,7 +12,7 @@ import android.support.v4.app.NotificationCompat
 import com.ae.apps.messagecounter.MainActivity
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.business.MessageCounter
-import com.ae.apps.messagecounter.receivers.CounterWidgetReceiver
+import com.ae.apps.messagecounter.getWidgetUpdateIntent
 import java.util.*
 
 
@@ -44,16 +42,8 @@ class SMSObserver(handler: Handler?, private val mContext: Context) : ContentObs
     }
 
     private fun sendWidgetUpdateBroadcast() {
-        // We try to send a broadcast to trigger the widget update call
-        val intent = Intent(mContext, CounterWidgetReceiver::class.java)
-        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
-        // Get all the widgetIds
-        val appWidgetIds = AppWidgetManager.getInstance(mContext).getAppWidgetIds(
-                ComponentName(mContext, CounterWidgetReceiver::class.java))
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
-
         // Finally send the broadcast through the system
-        mContext.sendBroadcast(intent)
+        mContext.sendBroadcast( getWidgetUpdateIntent(mContext) )
     }
 
     private fun showMessageLimitNotification() {

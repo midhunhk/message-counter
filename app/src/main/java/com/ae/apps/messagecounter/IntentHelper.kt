@@ -1,8 +1,11 @@
 package com.ae.apps.messagecounter
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import com.ae.apps.messagecounter.receivers.CounterWidgetReceiver
 import com.ae.apps.messagecounter.services.SMSObserverService
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
@@ -24,6 +27,16 @@ fun getFeedbackIntent(context: Context): Intent {
     intent.putExtra(Intent.EXTRA_EMAIL, context.getString(R.string.app_feedback_email_address))
     intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.str_about_share_feedback_subject))
     intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.str_about_share_feedback_body))
+    return intent
+}
+
+fun getWidgetUpdateIntent(context: Context): Intent {
+    val intent = Intent(context, CounterWidgetReceiver::class.java)
+    intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+    // Get all the widgetIds
+    val appWidgetIds = AppWidgetManager.getInstance(context).getAppWidgetIds(
+            ComponentName(context, CounterWidgetReceiver::class.java))
+    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
     return intent
 }
 
