@@ -1,9 +1,22 @@
+/*
+ * Copyright 2018 Midhun Harikumar
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ae.apps.messagecounter.fragments
-
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -18,7 +31,6 @@ import com.ae.apps.messagecounter.data.viewmodels.ContactMessageViewModel
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_contact_message_count.*
 
-
 /**
  * A simple [Fragment] subclass.
  *
@@ -26,9 +38,6 @@ import kotlinx.android.synthetic.main.fragment_contact_message_count.*
 class ContactMessageCountFragment : Fragment() {
 
     companion object {
-        @Volatile
-        private var instance: ContactMessageCountFragment? = null
-
         fun newInstance() = ContactMessageCountFragment()
     }
 
@@ -36,7 +45,6 @@ class ContactMessageCountFragment : Fragment() {
     private lateinit var mAdapter: ContactMessagesAdapter
     private lateinit var mSentMessagesCount: List<ContactMessageVo>
     private lateinit var mReceivedMessagesCount: List<ContactMessageVo>
-    private var mInitialized = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
