@@ -1,5 +1,6 @@
 package com.ae.apps.messagecounter
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
@@ -38,6 +39,12 @@ fun getWidgetUpdateIntent(context: Context): Intent {
             ComponentName(context, CounterWidgetReceiver::class.java))
     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
     return intent
+}
+
+fun getStartActivityIntent(context:Context, requestCode:Int): PendingIntent{
+    val resultIntent = Intent(context, MainActivity::class.java)
+    return PendingIntent
+            .getActivity(context, requestCode, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 }
 
 fun getOpenSourceLicenceDisplayIntent(context: Context): Intent {
