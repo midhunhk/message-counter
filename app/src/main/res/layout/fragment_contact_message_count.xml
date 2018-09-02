@@ -43,6 +43,7 @@
             android:button="@null"
             android:checked="true"
             android:gravity="center"
+            android:textAllCaps="true"
             android:padding="@dimen/padding_medium"
             android:text="@string/str_contact_message_sent"/>
 
@@ -58,6 +59,7 @@
             android:checked="false"
             android:gravity="center"
             android:padding="@dimen/padding_medium"
+            android:textAllCaps="true"
             android:text="@string/str_contact_message_received"/>
 
     </RadioGroup>
