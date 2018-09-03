@@ -184,7 +184,8 @@
                 <!-- Messages sent this week -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -208,7 +209,8 @@
                 <!-- Current Cycle Progress text -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -235,6 +237,7 @@
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:indeterminate="false"
                     android:max="100"
                     android:maxHeight="@dimen/progress_bar_height"
@@ -253,7 +256,7 @@
             app:cardUseCompatPadding="true"
             app:contentPadding="@dimen/padding_small">
 
-            <!-- current cycle -->
+            <!-- prev cycle -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -288,7 +291,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_small">
+                    android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -314,6 +317,7 @@
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
                     android:indeterminate="false"
                     android:max="100"
                     android:maxHeight="@dimen/progress_bar_height"
@@ -323,7 +327,8 @@
                 <!-- Messages sent this year -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
                         android:layout_width="wrap_content"
