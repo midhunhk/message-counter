@@ -19,6 +19,9 @@ git clone --quiet --branch ci-builds https://midhunhk:$GITHUB_API_KEY@github.com
 
 #go into directory and copy data we're interested
 cd ci-builds 
+# delete any existing apks already present
+del *.apk
+# copy the latest debug apk 
 cp -Rf $HOME/buildApk/* ./
 
 #Create a new branch that will contains only latest apk
