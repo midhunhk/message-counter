@@ -29,6 +29,7 @@
         <android.support.design.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius"
             app:cardElevation="1dp"
             app:cardMaxElevation="1dp"
             app:cardUseCompatPadding="true"
@@ -111,6 +112,7 @@
         <android.support.design.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius"
             app:cardElevation="1dp"
             app:cardMaxElevation="1dp"
             app:cardUseCompatPadding="true"
