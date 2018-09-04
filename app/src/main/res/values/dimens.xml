@@ -31,4 +31,8 @@
     <dimen name="widget_min_height">42dp</dimen>
 
     <dimen name="button_corner_radius">6dip</dimen>
+    <dimen name="material_card_radius">4dip</dimen>
+
+    <dimen name="request_permissions_header_height">120dip</dimen>
+    <dimen name="request_permissions_description_width">240dip</dimen>
 </resources>
