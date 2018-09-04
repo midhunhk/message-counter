@@ -35,17 +35,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 /**
  * Main Entry point to the application
  */
-class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppController {
+class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppController, AppRequestPermission {
 
     companion object {
         private const val PERMISSION_CHECK_REQUEST_CODE = 8000
+        private val PERMISSIONS: Array<String> = arrayOf(Manifest.permission.READ_CONTACTS,
+                Manifest.permission.READ_SMS)
     }
 
     private var mPreviousFragment: Fragment? = null
     private var mSecondaryFragmentDisplayed = false
     private lateinit var mPermissionChecker: RuntimePermissionChecker
-    private val permissions: Array<String> = arrayOf(Manifest.permission.READ_CONTACTS,
-            Manifest.permission.READ_SMS)
     private lateinit var mPreferenceRepository: PreferenceRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,15 +56,13 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
 
         mPermissionChecker = RuntimePermissionChecker(this)
         mPermissionChecker.checkPermissions()
-
     }
 
-    override fun requiredPermissions() = permissions
+    override fun requiredPermissions() = PERMISSIONS
 
-    @TargetApi(Build.VERSION_CODES.M)
-    override fun requestForPermissions() {
-        requestPermissions(permissions, PERMISSION_CHECK_REQUEST_CODE)
-    }
+    override fun requestForPermissions()  = showPermissionsRequiredView()
+
+    override fun invokeRequestPermissions() = reallyRequestForPermissions()
 
     override fun onPermissionsGranted() {
         mPreferenceRepository.saveRuntimePermissions(true)
@@ -74,10 +72,14 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
         manageMessageCounterService()
     }
 
-    override fun onPermissionsDenied() {
+    override fun onPermissionsDenied() = showPermissionsRequiredView()
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun reallyRequestForPermissions() = requestPermissions(requiredPermissions(), PERMISSION_CHECK_REQUEST_CODE)
+
+    private fun showPermissionsRequiredView() {
         mPreferenceRepository.saveRuntimePermissions(false)
         showFragmentContent(NoAccessFragment.newInstance(), true)
-        bottom_navigation.visibility = View.INVISIBLE
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -149,7 +151,12 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
             mSecondaryFragmentDisplayed = false
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setDisplayShowHomeEnabled(false)
-            bottom_navigation.visibility = View.VISIBLE
+            // We don't show the bottom nav for NoAccessFragment
+            if(fragment::class.java == NoAccessFragment::class.java){
+                bottom_navigation.visibility = View.GONE
+            } else {
+                bottom_navigation.visibility = View.VISIBLE
+            }
             mPreviousFragment = fragment
         } else {
             mSecondaryFragmentDisplayed = true
@@ -173,4 +180,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
 
 interface AppController {
     fun navigateTo(id:Int)
+}
+interface AppRequestPermission {
+    fun invokeRequestPermissions()
 }

@@ -21,9 +21,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import com.ae.apps.messagecounter.AppRequestPermission
 import com.ae.apps.messagecounter.R
-import com.ae.apps.common.permissions.PermissionsAwareComponent
 import kotlinx.android.synthetic.main.fragment_no_access.*
 
 /**
@@ -38,7 +37,7 @@ class NoAccessFragment : Fragment() {
         }
     }
 
-    private lateinit var permissionsAwareContext: PermissionsAwareComponent
+    private lateinit var permissionsAwareContext: AppRequestPermission
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -49,9 +48,9 @@ class NoAccessFragment : Fragment() {
         super.onAttach(context)
 
         try {
-            permissionsAwareContext = activity as PermissionsAwareComponent
+            permissionsAwareContext = activity as AppRequestPermission
         } catch (ex: ClassCastException) {
-            throw IllegalAccessException("Parent ${activity.toString()} must implement PermissionsAwareComponent interface")
+            throw IllegalAccessException("Parent ${activity.toString()} must implement AppRequestPermission interface")
         }
     }
 
@@ -59,7 +58,7 @@ class NoAccessFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         btnRequestPermissions.setOnClickListener {
-            permissionsAwareContext.requestForPermissions()
+            permissionsAwareContext.invokeRequestPermissions()
         }
     }
 
