@@ -135,13 +135,12 @@
                 <!-- Current Cycle Header -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:fontFamily="@font/lato"
                         android:text="@string/str_current_cycle"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/card_title"
@@ -153,7 +152,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:padding="@dimen/padding_small"
                         android:text="@string/empty_text"/>
                 </RelativeLayout>
 
@@ -161,6 +159,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
                     android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
@@ -186,6 +185,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
                     android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
@@ -211,6 +211,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
                     android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
@@ -238,6 +239,7 @@
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
                     android:layout_marginTop="@dimen/margin_small"
                     android:indeterminate="false"
                     android:max="100"
@@ -268,7 +270,8 @@
                 <!-- prev cycle Header -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -293,6 +296,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
                     android:layout_marginTop="@dimen/margin_small">
 
                     <TextView
@@ -319,6 +323,7 @@
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
                     android:layout_marginTop="@dimen/margin_small"
                     android:indeterminate="false"
                     android:max="100"
