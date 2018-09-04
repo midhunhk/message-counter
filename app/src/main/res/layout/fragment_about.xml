@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:layout_margin="2dip"
+                    android:layout_margin="@dimen/unit_s"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_toEndOf="@+id/appIcon"
                     android:layout_toRightOf="@+id/appIcon"
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/appVersion"
                     android:layout_gravity="start"
-                    android:layout_margin="2dip"
+                    android:layout_margin="@dimen/unit_s"
                     android:layout_toEndOf="@+id/appIcon"
                     android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_version"/>
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/appVersion"
                     android:layout_gravity="start"
-                    android:layout_margin="2dip"
+                    android:layout_margin="@dimen/unit_s"
                     android:layout_toEndOf="@+id/appDeveloper"
                     android:layout_toRightOf="@+id/appDeveloper"
                     android:text="@string/app_code_name"/>
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/appDeveloper"
                     android:layout_gravity="start"
-                    android:layout_margin="2dip"
+                    android:layout_margin="@dimen/unit_s"
                     android:layout_toEndOf="@+id/appIcon"
                     android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_release_date"/>
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/appReleaseDate"
                     android:layout_gravity="start"
-                    android:layout_margin="2dip"
+                    android:layout_margin="@dimen/unit_s"
                     android:layout_toEndOf="@+id/appIcon"
                     android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_developer_info"/>
@@ -146,7 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/card_padding"
+                    android:padding="@dimen/unit_xs"
                     android:text="@string/str_about_view_source"
                     android:textAllCaps="false"/>
 
@@ -156,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/card_padding"
+                    android:padding="@dimen/unit_xs"
                     android:text="@string/str_about_oss_license"
                     android:textAllCaps="false"/>
 
@@ -166,7 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/card_padding"
+                    android:padding="@dimen/unit_xs"
                     android:text="@string/str_about_share_feedback"
                     android:textAllCaps="false"/>
 
@@ -176,7 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/card_padding"
+                    android:padding="@dimen/unit_xs"
                     android:text="@string/str_about_view_faq"
                     android:textAllCaps="false"/>
 
