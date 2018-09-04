@@ -3,9 +3,6 @@
 #create new directory to store the generated apk
 mkdir $HOME/buildApk/
 
-pwd
-ls
-
 #copy generated apk from build folder to the folder just created
 cp -R app/build/outputs/apk/debug/*.apk $HOME/buildApk/
 
@@ -20,7 +17,7 @@ git clone --quiet --branch ci-builds https://midhunhk:$GITHUB_API_KEY@github.com
 #go into directory and copy data we're interested
 cd ci-builds 
 # delete any existing apks already present
-del *.apk
+rm *.apk
 # copy the latest debug apk 
 cp -Rf $HOME/buildApk/* ./
 
