@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Midhun Harikumar
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".fragments.AboutFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_small">
+
+                <ImageView
+                    android:id="@+id/appIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginStart="0dp"
+                    android:contentDescription="@string/empty_text"
+                    android:padding="@dimen/padding_small"
+                    android:src="@drawable/ic_app_icon"/>
+
+                <TextView
+                    android:id="@+id/appVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/unit_s"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_toEndOf="@+id/appIcon"
+                    android:layout_toRightOf="@+id/appIcon"
+                    android:text="@string/app_name"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/appDeveloper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/appVersion"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/unit_s"
+                    android:layout_toEndOf="@+id/appIcon"
+                    android:layout_toRightOf="@+id/appIcon"
+                    android:text="@string/app_version"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/appVersion"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/unit_s"
+                    android:layout_toEndOf="@+id/appDeveloper"
+                    android:layout_toRightOf="@+id/appDeveloper"
+                    android:text="@string/app_code_name"/>
+
+                <TextView
+                    android:id="@+id/appReleaseDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/appDeveloper"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/unit_s"
+                    android:layout_toEndOf="@+id/appIcon"
+                    android:layout_toRightOf="@+id/appIcon"
+                    android:text="@string/app_release_date"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/appReleaseDate"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/unit_s"
+                    android:layout_toEndOf="@+id/appIcon"
+                    android:layout_toRightOf="@+id/appIcon"
+                    android:text="@string/app_developer_info"/>
+            </RelativeLayout>
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_medium">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="@string/app_desc"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:text="@string/app_disclaim"/>
+
+                <include layout="@layout/separator_line"/>
+
+                <Button
+                    android:id="@+id/viewSourceCode"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/unit_xs"
+                    android:text="@string/str_about_view_source"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:id="@+id/viewLicense"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/unit_xs"
+                    android:text="@string/str_about_oss_license"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:id="@+id/sendFeedback"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/unit_xs"
+                    android:text="@string/str_about_share_feedback"
+                    android:textAllCaps="false"/>
+
+                <Button
+                    android:id="@+id/viewFAQ"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/unit_xs"
+                    android:text="@string/str_about_view_faq"
+                    android:textAllCaps="false"/>
+
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

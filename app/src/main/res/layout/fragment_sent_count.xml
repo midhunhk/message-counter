@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Midhun Harikumar
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/sentCounterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/hero_sent_count_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/unit_m"
+            android:layout_marginTop="@dimen/unit_l"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+            <!-- Sent Today -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/str_today"
+                    android:textSize="@dimen/item_title"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/heroSentTodayText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora"
+                    android:gravity="center"
+                    android:text="@string/str_zero"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/hero_text"/>
+            </LinearLayout>
+
+            <!-- Sent This Cycle -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/str_this_cycle"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/item_title"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/heroSentInCycleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lora"
+                    android:gravity="center"
+                    android:text="@string/str_zero"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/hero_text"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Informational Card -->
+        <android.support.design.card.MaterialCardView
+            android:id="@+id/info_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/card_margin"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small">
+
+            <TextView
+                android:id="@+id/reviewSettingsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:drawableLeft="@drawable/ic_settings"
+                android:drawablePadding="@dimen/padding_medium"
+                android:drawableStart="@drawable/ic_settings"
+                android:gravity="center_vertical"
+                android:text="@string/str_info_review_settings_on_first_run"
+                android:textColor="@color/color_almost_white"
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold"/>
+        </android.support.design.card.MaterialCardView>
+
+        <!-- Sent Count Details Card -->
+        <android.support.design.card.MaterialCardView
+            android:id="@+id/details_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small">
+
+            <!-- current cycle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                android:orientation="vertical"
+                android:padding="@dimen/card_padding">
+
+                <!-- Current Cycle Header -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_current_cycle"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/card_title"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/cycleDurationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/empty_text"/>
+                </RelativeLayout>
+
+                <!-- Messages sent today -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
+                    android:layout_marginTop="@dimen/margin_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/str_sent_today"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/countSentTodayText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/lora"
+                        android:text="@string/empty_text"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+
+                <!-- Messages sent this week -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
+                    android:layout_marginTop="@dimen/margin_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/str_sent_this_week"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/countSentThisWeekText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/lora"
+                        android:text="@string/empty_text"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+
+                <!-- Current Cycle Progress text -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
+                    android:layout_marginTop="@dimen/margin_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/str_this_cycle"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/countProgressText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/lora"
+                        android:text="@string/empty_text"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+
+                <!-- Current Cycle Progress bar -->
+                <ProgressBar
+                    android:id="@+id/countProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:maxHeight="@dimen/progress_bar_height"
+                    android:minHeight="@dimen/progress_bar_height"
+                    android:progressDrawable="@drawable/progress_bar"/>
+
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.design.card.MaterialCardView
+            android:id="@+id/prev_details_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small">
+
+            <!-- prev cycle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_margin"
+                android:orientation="vertical"
+                android:padding="@dimen/card_padding">
+                <!-- prev cycle Header -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_previous_cycle"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/card_title"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/prevCycleDurationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:padding="@dimen/padding_small"
+                        android:text="@string/empty_text"/>
+                </RelativeLayout>
+
+                <!-- Sent count in previous cycle -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
+                    android:layout_marginTop="@dimen/margin_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/str_messages_sent"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/prevCycleSentCountText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/lora"
+                        android:text="@string/empty_text"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/prevCountProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:maxHeight="@dimen/progress_bar_height"
+                    android:minHeight="@dimen/progress_bar_height"
+                    android:progressDrawable="@drawable/progress_bar"/>
+
+                <!-- Messages sent this year -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/unit_s"
+                    android:layout_marginTop="@dimen/margin_small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/str_sent_this_year"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/countSentThisYearText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/lora"
+                        android:text="@string/empty_text"
+                        android:textSize="18sp"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,45 +1,34 @@
 language: android
-dist: precise
+sudo: required
 jdk: oraclejdk8
-
-# Install Dependencies
-before_install:
-    # we should be at /home/travis/build/midhunhk/message-counter
-    - cd 'messageCounter'
-    - cd 'src'
-    - cd 'main'
-    - cd 'res'
-    - cd 'values'
-    - ls
-    - mv for-build.txt for-build.xml
-    #- mv /messageCounter/src/main/res/values/values-for-build.txt /messageCounter/src/main/res/values/for-build.xml
-    - cd ../../../../..
-    #- cd '/messageCounter/src/main/res/values/'
-# Android settings
-android:
-  components:
+android: 
+  components: 
     - tools
-    # Same version as specified in build.gradle
-    - build-tools-26.0.2
-    - android-25
-    - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-21
+    - platform-tools
+    - build-tools-27.0.3
+    - android-28
+    - android-22
+    - Extra-android-support 
+    - extra-google-google_play_services 
+    - extra-android-m2repository 
+    - extra-google-m2repository 
+    - addon-google_apis-google-27
+    - sys-img-armeabi-v7a-android-22
   licenses:
-    - '.+'
-     
-# Run before runnig the build script
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+
 before_script:
-    - wget http://services.gradle.org/distributions/gradle-4.1-bin.zip
-    - unzip gradle-4.1-bin.zip
-    - export GRADLE_HOME=$PWD/gradle-4.1
-    - export PATH=$GRADLE_HOME/bin:$PATH
-    - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-    - emulator -avd test -no-skin -no-audio -no-window &
-    - android-wait-for-emulator
-    - adb shell input keyevent 82 &
-    
-# Licenses to be accepted
-licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+  - wget http://services.gradle.org/distributions/gradle-4.4-bin.zip
+  - unzip gradle-4.4-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-4.4
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+  
+after_success:
+  - chmod +x ./upload-apk.sh 
+  - ./upload-apk.sh 

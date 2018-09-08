@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Midhun Harikumar
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<resources>
+    <string name="app_name">Contador de Mensajes</string>
+    <string name="app_version">versión 4.0.0</string>
+    <string name="app_code_name">Draco</string>
+    <string name="app_release_date">Sep 2018</string>
+    <string name="app_desc">Contador de mensajes muestra los mensajes de la bandeja de entrada de estadísticas y el número de mensajes de cada uno de sus contactos. Código fuente de este proyecto está disponible en GitHub. Traducciones utilizando Google Translate.</string>
+    <string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
+    <string name="app_developer_info">diseñado, desarrollado por ae labs</string>
+
+    <string name="empty_list">No se han encontrado mensajes de</string>
+
+    <!-- Titles displayed in Bottom Navigation Menu -->
+    <string name="title_sent_list">Lista</string>
+    <string name="title_counter">Contador de</string>
+    <string name="title_ignore">Ignore</string>
+
+    <!-- Menu Strings -->
+    <string name="menu_title_settings">Configuración</string>
+    <string name="menu_title_donate">Donar</string>
+    <string name="menu_title_share">Comparte esta aplicación</string>
+    <string name="menu_title_about">Acerca de</string>
+
+    <!-- changes for v2.2 -->
+    <string name="str_messages_sent">mensajes enviados</string>
+    <string name="str_this_cycle">Este ciclo</string>
+    <string name="str_sent_today">Enviado hoy</string>
+    <string name="str_cycle_start_date">Ciclo de la fecha de inicio</string>
+
+    <string name="str_pref_sent_message_count">Número de mensajes enviados</string>
+    <string name="str_pref_cycle_start_desc">Ciclo de la fecha de inicio</string>
+    <string name="str_pref_message_limit">mensajes límites</string>
+    <string name="str_pref_message_limit_desc">Limite para los mensajes que se pueden enviar en un ciclo. El valor predeterminado es 100</string>
+
+    <!-- added for 2.2.7 -->
+    <string name="str_notify_on_limit">Notifique al llegar a límite</string>
+    <string name="str_current_cycle">Ciclo actual</string>
+    <string name="str_previous_cycle">Ciclo anterior</string>
+
+    <!-- strings for widgets v2.3 -->
+    <string name="str_messages_sent_caps">MENSAJES ENVIADOS</string>
+    <string name="str_today">HOY</string>
+    <string name="str_cycle">CICLO</string>
+
+    <!-- strings for donate v3.1 -->
+    <string name="str_donate_title">donar</string>
+    <string name="str_donate_text">Contador de Mensajes es un proyecto de código abierto desarrollado en mi tiempo libre. Cualquier tipo de contribución ayuda a añadir características o bugs swat. Gracias!</string>
+    <string name="str_donate_disclaimer">Las donaciones no estarán en lugar de características adicionales. Google tiene el 30% de las compras como las comisiones por transacciones.</string>
+    <string name="str_donate_thanks">Gracias por la donación de usted!</string>
+    <string name="str_donate_fail">Donación falló. Por favor, inténtelo de nuevo más tarde.</string>
+    <string name="str_donate_small">Cómprame un chocolate</string>
+    <string name="str_donate_medium">Cómprame un helado</string>
+    <string name="str_donate_large">Cómprame Cena</string>
+    <string name="str_sent_this_week">Enviada esta semana</string>
+
+    <!-- added for 3.3.0 -->
+    <string name="str_ignore_add_number">Agregar un Número de</string>
+    <string name="str_ignore_add_to_ignore_list">Añadir a la Lista de ignorados</string>
+    <string name="str_ignore_btn_ignore">Ignorar</string>
+    <string name="str_ignore_name">Nombre</string>
+    <string name="str_ignore_number">Número de</string>
+    <string name="str_ignore_empty_list">Empiece por la adición de un número a ignorar</string>
+
+    <!-- v4.0.0 -->
+    <string name="loading_list">Conteo De Mensajes</string>
+    <string name="str_require_permissions_title">Necesitan permisos</string>
+    <string name="str_require_permissions_description">Contador de mensajes, se requiere un permiso para la lectura de SMS y Contactos a la función</string>
+    <string name="str_require_permissions_request_button">Solicitud De Permisos</string>
+    <string name="str_contact_message_sent">Enviado</string>
+    <string name="str_contact_message_received">Recibido</string>
+    <string name="str_about_oss_license">Las Licencias De Código Abierto</string>
+    <string name="str_about_view_source">Ver Código Fuente</string>
+    <string name="str_about_view_faq">Preguntas Frecuentes</string>
+    <string name="str_about_share_feedback">Compartir Opiniones Y Comentarios</string>
+    <string name="str_about_share_feedback_subject">Comentarios para el Contador de Mensajes</string>
+    <string name="str_sent_this_year">Envió de este Año</string>
+    <string name="str_pref_use_background_service">El uso de un servicio en segundo plano</string>
+    <string name="str_pref_use_background_service_desc">Un servicio en segundo plano se utilizará para controlar los mensajes enviados</string>
+    <string name="str_enable_notify_on_limit">Notificar al llegar límite de envío de SMS</string>
+    <string name="str_sms_limit_notification_title">SMS ha Alcanzado el Límite de</string>
+    <string name="str_sms_limit_notification_text">SMS se ha Alcanzado el Límite para este ciclo</string>
+    <string name="str_info_review_settings_on_first_run">Revisa tu configuración</string>
+    <string name="str_ignore_number_delete">Eliminar</string>
+</resources>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Midhun Harikumar
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".fragments.AboutFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/padding_medium"
+            android:indeterminate="true"/>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_medium">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dip"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:drawablePadding="@dimen/padding_small"
+                    android:drawableTop="@drawable/ic_donate"
+                    android:text="@string/str_donate_text"/>
+            </FrameLayout>
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/material_card_radius"
+            app:cardElevation="1dp"
+            app:cardMaxElevation="1dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/padding_small">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_medium">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtDonateSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/str_donate_small"/>
+
+                    <TextView
+                        android:id="@+id/txtDonateSmallPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/txtDonateSmall"
+                        android:text="@string/empty_text"/>
+
+                    <android.support.design.button.MaterialButton
+                        android:id="@+id/btnDonateSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:contentDescription="@string/str_donate_small"
+                        android:text="@string/str_donate_title"
+                        app:backgroundTint="@color/colorAccent"
+                        app:cornerRadius="@dimen/button_corner_radius"/>
+                </RelativeLayout>
+
+                <!-- Medium Donation -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtDonateMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/str_donate_medium"/>
+
+                    <TextView
+                        android:id="@+id/txtDonateMediumPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/txtDonateMedium"
+                        android:text="@string/empty_text"/>
+
+                    <android.support.design.button.MaterialButton
+                        android:id="@+id/btnDonateMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:contentDescription="@string/str_donate_medium"
+                        android:text="@string/str_donate_title"
+                        app:backgroundTint="@color/colorAccent"
+                        app:cornerRadius="@dimen/button_corner_radius"/>
+                </RelativeLayout>
+
+                <!-- Large Donation -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/txtDonateLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/str_donate_large"/>
+
+                    <TextView
+                        android:id="@+id/txtDonateLargePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/txtDonateLarge"
+                        android:text="@string/empty_text"/>
+
+                    <android.support.design.button.MaterialButton
+                        android:id="@+id/btnDonateLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:contentDescription="@string/str_donate_large"
+                        android:text="@string/str_donate_title"
+                        app:backgroundTint="@color/colorAccent"
+                        app:cornerRadius="@dimen/button_corner_radius"/>
+                </RelativeLayout>
+
+
+                <include layout="@layout/separator_line"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dip"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="@string/str_donate_disclaimer"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+    </LinearLayout>
+
+</ScrollView>
