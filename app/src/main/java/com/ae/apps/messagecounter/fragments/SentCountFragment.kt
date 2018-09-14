@@ -91,7 +91,7 @@ class SentCountFragment : Fragment() {
         val counterRepository = CounterRepository.getInstance(AppDatabase.getInstance(requireContext()).counterDao())
         val ignoreNumbersRepository = IgnoredNumbersRepository.getInstance(AppDatabase.getInstance(requireContext()).ignoredNumbersDao())
         val factory = CounterViewModelFactory(counterRepository, ignoreNumbersRepository, mPreferenceRepository)
-        mViewModel = ViewModelProviders.of(this, factory).get(CounterViewModel::class.java)
+        mViewModel = ViewModelProviders.of(requireActivity(), factory).get(CounterViewModel::class.java)
     }
 
     private fun initUI() {
