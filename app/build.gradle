@@ -11,8 +11,8 @@ android {
         minSdkVersion 16
         // Remember to update .travis.yml with android version
         targetSdkVersion 28
-        versionCode 402
-        versionName "4.0.0"
+        versionCode 403
+        versionName "4.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
