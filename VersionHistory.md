@@ -2,6 +2,11 @@
 
 Version 4.0 (Wyvern)
 ----------------------
+**MessageCounter 4.0.1 [Sep 2018]**
+ - Prevent multiple indexing at same time
+ - Set LaunchMode for MainActivity
+ - Handle IllegalStateException when setting Fragment 
+ 
 **MessageCounter 4.0.0 [Sep 2018]**
  - Application rewrite and new architecture
  - Improve performance
