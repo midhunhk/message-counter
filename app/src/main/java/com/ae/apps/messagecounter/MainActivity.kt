@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
     private fun showFragmentContent(fragment: Fragment, primaryFragment: Boolean) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
-                .commit()
+                .commitAllowingStateLoss()
         if (primaryFragment) {
             mSecondaryFragmentDisplayed = false
             supportActionBar?.setDisplayHomeAsUpEnabled(false)

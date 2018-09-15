@@ -24,8 +24,12 @@ import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.data.AppDatabase
 import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
-import com.ae.apps.messagecounter.data.repositories.*
+import com.ae.apps.messagecounter.data.repositories.CounterRepository
+import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
+import com.ae.apps.messagecounter.data.repositories.getDurationDateString
+import com.ae.apps.messagecounter.data.repositories.getIndexFromDate
 import org.jetbrains.anko.doAsync
+import java.lang.Long
 import java.util.*
 
 /**
@@ -58,6 +62,15 @@ class MessageCounter(private val counterRepository: CounterRepository,
      * @param context The context used for accessing the SMS API
      */
     fun indexMessages(context: Context, observer: MessageCounterObserver?) {
+        // Prevent multiple indexing process to run at the same time
+        if(!preferenceRepository.isIndexInProcess()){
+            doMessageIndex(context, observer)
+        } else {
+            Log.d(TAG, "Message Indexing in Process")
+        }
+    }
+
+    private fun doMessageIndex(context: Context, observer: MessageCounterObserver?) {
         var newMessagesAdded = 0
         var lastIndexedTimeStamp = ""
         var lastIndexedMessageId = ""
@@ -67,15 +80,16 @@ class MessageCounter(private val counterRepository: CounterRepository,
             try {
                 if (checkIfRowsPresent(newMessagesCursor)) {
                     Log.d(TAG, "Messages to be processed")
+                    preferenceRepository.setIndexInProcess(true)
                     // Since this method would be invoked multiple times when SMS database changes,
                     // updating the lastSentTimeStamp to prevent duplicate reads
-                    preferenceRepository.setLastSentTimeStamp( getDeltaTimeStamp())
+                    preferenceRepository.setLastSentTimeStamp(getDeltaTimeStamp())
                     val messageSentDate = Calendar.getInstance()
                     do {
                         // Convert this row into a Message object and handle multipart messages
                         val message = getMessageFromCursor(newMessagesCursor!!)
 
-                        messageSentDate.timeInMillis = java.lang.Long.parseLong(message.date)
+                        messageSentDate.timeInMillis = Long.parseLong(message.date)
                         lastIndexedTimeStamp = message.date
                         lastIndexedMessageId = message.id
 
@@ -91,6 +105,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
             } finally {
                 newMessagesCursor?.close()
                 preferenceRepository.setHistoricMessageIndexed()
+                preferenceRepository.setIndexInProcess(false)
             }
 
             if (newMessagesAdded > 0) {
@@ -104,7 +119,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
     /**
      * Checks if there are any sent messages that are yet to be indexed
      *
-     * @param context The context required fir accessing the SMS API
+     * @param context The context required for accessing the SMS API
      */
     fun checkIfUnIndexedMessagesExist(context: Context): Boolean {
         val newMessagesCursor = getNewMessagesCursor(context)

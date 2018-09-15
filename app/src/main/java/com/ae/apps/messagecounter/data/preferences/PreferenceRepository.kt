@@ -86,4 +86,10 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
     fun setSettingsHintReviewed() = preferences.edit()
             .putBoolean(PREF_KEY_SETTINGS_HINT_REVIEWED, true)
             .apply()
+
+    fun isIndexInProcess() = preferences.getBoolean(PREF_KEY_INDEX_IN_PROCESS, false)
+
+    fun setIndexInProcess(indexStatus:Boolean) = preferences.edit()
+            .putBoolean(PREF_KEY_INDEX_IN_PROCESS, indexStatus)
+            .apply()
 }
