@@ -59,7 +59,7 @@ class CounterJobService : JobService() {
                 val result = scheduler.schedule(jobInfo)
                 return (result == JobScheduler.RESULT_SUCCESS)
             } else {
-                Toast.makeText(context, "Job already scheduled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Job already scheduled", Toast.LENGTH_SHORT).show()
             }
 
             return false

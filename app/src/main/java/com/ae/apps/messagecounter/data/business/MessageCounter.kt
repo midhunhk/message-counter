@@ -29,7 +29,6 @@ import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
 import com.ae.apps.messagecounter.data.repositories.getDurationDateString
 import com.ae.apps.messagecounter.data.repositories.getIndexFromDate
 import org.jetbrains.anko.doAsync
-import java.lang.Long
 import java.util.*
 
 /**
@@ -90,7 +89,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
                         // Convert this row into a Message object and handle multipart messages
                         val message = getMessageFromCursor(newMessagesCursor!!)
 
-                        messageSentDate.timeInMillis = Long.parseLong(message.date)
+                        messageSentDate.timeInMillis = message.date.toLong()
                         lastIndexedTimeStamp = message.date
                         lastIndexedMessageId = message.id
 
