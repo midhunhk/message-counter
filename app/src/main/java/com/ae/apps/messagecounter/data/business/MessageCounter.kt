@@ -61,9 +61,10 @@ class MessageCounter(private val counterRepository: CounterRepository,
      *
      * @param context The context used for accessing the SMS API
      */
+    @Synchronized
     fun indexMessages(context: Context, observer: MessageCounterObserver?) {
         // Prevent multiple indexing process to run at the same time
-        if(!preferenceRepository.isIndexInProcess()){
+        if (!preferenceRepository.isIndexInProcess()) {
             doMessageIndex(context, observer)
         } else {
             Log.d(TAG, "Message Indexing in Process")
@@ -142,7 +143,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
                 SORT_BY_DATE)
     }
 
-    private fun getDeltaTimeStamp() = (System.currentTimeMillis() + TIME_DELTA ).toString()
+    private fun getDeltaTimeStamp() = (System.currentTimeMillis() + TIME_DELTA).toString()
 
     fun checkIfMessageLimitCrossed(): Boolean {
         if (preferenceRepository.messageLimitNotificationEnabled()) {
@@ -162,7 +163,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
      * Make sure to call this from another thread since db access on main thread
      * will not work
      */
-    fun getSentCountDetailsForWidget():SentCountDetails {
+    fun getSentCountDetailsForWidget(): SentCountDetails {
         val limit: Int = preferenceRepository.getMessageLimitValue()
         val cycleStartDate = preferenceRepository.getCycleStartDate()
         val today = Calendar.getInstance().time
