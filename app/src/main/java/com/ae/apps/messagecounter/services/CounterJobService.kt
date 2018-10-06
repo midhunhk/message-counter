@@ -26,10 +26,11 @@ import android.os.Build
 import android.os.Handler
 import android.os.HandlerThread
 import android.support.annotation.RequiresApi
+import android.widget.Toast
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.observers.SMSObserver
 import org.jetbrains.anko.doAsync
-//import org.jetbrains.anko.longToast
+import org.jetbrains.anko.longToast
 
 @RequiresApi(Build.VERSION_CODES.N)
 class CounterJobService : JobService() {
@@ -48,6 +49,8 @@ class CounterJobService : JobService() {
                     .addTriggerContentUri(contentUri)
                     .setTriggerContentUpdateDelay(DELAY_MIN)
                     .setTriggerContentMaxDelay(DELAY_MAX)
+                    // .setMinimumLatency(DELAY_MIN)
+                    // .setBackoffCriteria(DELAY_MAX, JobInfo.BACKOFF_POLICY_LINEAR)
                     .build()
 
             // Schedule a Job if not already done so
@@ -55,6 +58,8 @@ class CounterJobService : JobService() {
             if (CounterServiceHelper.isJobNotRunning(scheduler, JOB_ID)) {
                 val result = scheduler.schedule(jobInfo)
                 return (result == JobScheduler.RESULT_SUCCESS)
+            } else {
+                Toast.makeText(context, "Job already scheduled", Toast.LENGTH_SHORT).show();
             }
 
             return false
@@ -66,19 +71,23 @@ class CounterJobService : JobService() {
         val handlerThread = HandlerThread(THREAD_NAME)
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
-        //longToast("onStartJob")
+        longToast("onStartJob")
 
         doAsync {
             val observer = SMSObserver(handler, context)
             observer.onChange(false)
 
             jobFinished(params, true)
+
+            // Try to Register another job to monitor
+            // registerJob(context)
         }
 
         return true
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {
+        longToast("onStopJob")
         return true
     }
 
