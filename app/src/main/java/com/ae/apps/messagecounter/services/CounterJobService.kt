@@ -45,7 +45,7 @@ class CounterJobService : JobService() {
         private const val THREAD_NAME = "AnotherThread"
         private const val JOB_ID = 180803
         private const val DELAY_MIN: Long = 500
-        private const val DELAY_MAX: Long = 1000 * 3
+        private const val DELAY_MAX: Long = 1000 * 4
 
         fun registerJob(context: Context, cancelAndReschedule: Boolean = false): Boolean {
             val component = ComponentName(context, CounterJobService::class.java)
@@ -64,14 +64,15 @@ class CounterJobService : JobService() {
 
             if (isJobRunning) {
                 if (cancelAndReschedule) {
-                    Toast.makeText(context, "Cancelling current job", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(context, "Cancelling current job", Toast.LENGTH_SHORT).show()
+                    scheduler.cancel(JOB_ID)
                     scheduler.cancelAll()
                 } else {
                     return true
                 }
             }
             val result = scheduler.schedule(jobInfo)
-            Toast.makeText(context, "Job scheduled ${result == 1}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Job scheduled ${result == 1}, total jobs $scheduler.allPendingJobs.size", Toast.LENGTH_SHORT).show()
             return (result == JobScheduler.RESULT_SUCCESS)
         }
     }
