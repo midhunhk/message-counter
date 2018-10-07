@@ -64,36 +64,36 @@ class CounterJobService : JobService() {
 
             if (isJobRunning) {
                 if (cancelAndReschedule) {
-                    // Toast.makeText(context, "Cancelling current job", Toast.LENGTH_SHORT).show()
                     scheduler.cancel(JOB_ID)
-                    scheduler.cancelAll()
                 } else {
                     return true
                 }
             }
             val result = scheduler.schedule(jobInfo)
-            Toast.makeText(context, "Job scheduled ${result == 1}, total jobs $scheduler.allPendingJobs.size", Toast.LENGTH_SHORT).show()
+            // val pendingJobsCount = scheduler.allPendingJobs.size
+            // Toast.makeText(context, "Job scheduled ${result == 1}, total jobs $pendingJobsCount", Toast.LENGTH_SHORT).show()
             return (result == JobScheduler.RESULT_SUCCESS)
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.O)
+    // @TargetApi(Build.VERSION_CODES.O)
     override fun onStartJob(params: JobParameters?): Boolean {
         val context = baseContext
         val handlerThread = HandlerThread(THREAD_NAME)
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
 
-        // Debug toast with JobStart time
+        /* Debug toast with JobStart time
         if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val timeNow = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))
             longToast("onStartJob at $timeNow")
-        }
+        }*/
 
         doAsync {
             val observer = SMSObserver(handler, context)
             observer.onChange(false)
 
+            // Mark this job as completed
             jobFinished(params, false)
 
             // Reschedule another job to monitor SMS Content Provider

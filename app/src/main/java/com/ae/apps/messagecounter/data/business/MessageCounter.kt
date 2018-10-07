@@ -60,7 +60,6 @@ class MessageCounter(private val counterRepository: CounterRepository,
      *
      * @param context The context used for accessing the SMS API
      */
-    // @Synchronized
     fun indexMessages(context: Context, observer: MessageCounterObserver?) {
         // Prevent multiple indexing process to run at the same time
         if (!preferenceRepository.isIndexInProcess()) {
