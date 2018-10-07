@@ -15,6 +15,7 @@
  */
 package com.ae.apps.messagecounter.services
 
+import android.annotation.TargetApi
 import android.app.job.JobInfo
 import android.app.job.JobParameters
 import android.app.job.JobScheduler
@@ -28,10 +29,14 @@ import android.os.HandlerThread
 import android.support.annotation.RequiresApi
 import android.widget.Toast
 import com.ae.apps.common.managers.SMSManager
+import com.ae.apps.messagecounter.BuildConfig
 import com.ae.apps.messagecounter.observers.SMSObserver
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
-import java.util.*
+import org.jetbrains.anko.runOnUiThread
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 @RequiresApi(Build.VERSION_CODES.N)
 class CounterJobService : JobService() {
@@ -42,7 +47,7 @@ class CounterJobService : JobService() {
         private const val DELAY_MIN: Long = 500
         private const val DELAY_MAX: Long = 1000 * 3
 
-        fun registerJob(context: Context, reschedule:Boolean = false): Boolean {
+        fun registerJob(context: Context): Boolean {
             val component = ComponentName(context, CounterJobService::class.java)
             val contentUri = JobInfo.TriggerContentUri(Uri.parse(SMSManager.SMS_URI_ALL),
                     JobInfo.TriggerContentUri.FLAG_NOTIFY_FOR_DESCENDANTS)
@@ -56,40 +61,40 @@ class CounterJobService : JobService() {
 
             // Schedule a Job if not already done so
             val scheduler: JobScheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-            if (CounterServiceHelper.isJobNotRunning(scheduler, JOB_ID)) {
-                val result = scheduler.schedule(jobInfo)
-                Toast.makeText(context, "Job scheduled $result", Toast.LENGTH_SHORT).show()
-                return (result == JobScheduler.RESULT_SUCCESS)
-            } else {
-                if(reschedule) {
-                    scheduler.cancel(JOB_ID)
-                    val result = scheduler.schedule(jobInfo)
-                    Toast.makeText(context, "Job re-scheduled $result", Toast.LENGTH_SHORT).show()
-                    return (result == JobScheduler.RESULT_SUCCESS)
-                }
-                Toast.makeText(context, "Job already scheduled", Toast.LENGTH_SHORT).show()
+            if (CounterServiceHelper.isJobRunning(scheduler, JOB_ID)) {
+                Toast.makeText(context, "Cancelling current job", Toast.LENGTH_SHORT).show()
+                scheduler.cancelAll()
             }
 
-            return false
+            val result = scheduler.schedule(jobInfo)
+            Toast.makeText(context, "Job scheduled ${result == 1}", Toast.LENGTH_SHORT).show()
+            return (result == JobScheduler.RESULT_SUCCESS)
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.O)
     override fun onStartJob(params: JobParameters?): Boolean {
         val context = baseContext
         val handlerThread = HandlerThread(THREAD_NAME)
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
-        longToast("onStartJob " + Date().time)
+
+        // Debug toast with JobStart time
+        if ( BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val timeNow = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))
+            longToast("onStartJob at $timeNow")
+        }
 
         doAsync {
             val observer = SMSObserver(handler, context)
             observer.onChange(false)
 
-            jobFinished(params, true)
+            jobFinished(params, false)
 
-            // Try to Register another job to monitor
-            longToast("Register a new Job")
-            registerJob(context, true)
+            // Reschedule another job to monitor SMS Content Provider
+            runOnUiThread {
+                registerJob(context)
+            }
         }
 
         return true
