@@ -2,6 +2,9 @@
 
 Version 4.0 (Wyvern)
 ----------------------
+**MessageCounter 4.0.2 [Oct 2018]**
+ - Fix for JobService scheduling issues
+ 
 **MessageCounter 4.0.1 [Sep 2018]**
  - Prevent multiple indexing at same time
  - Set LaunchMode for MainActivity
