@@ -1,34 +1,34 @@
 language: android
 sudo: required
 jdk: oraclejdk8
-android: 
-  components: 
+android:
+  components:
     - tools
     - platform-tools
-    - build-tools-27.0.3
-    - android-28
-    - android-22
-    - Extra-android-support 
-    - extra-google-google_play_services 
-    - extra-android-m2repository 
-    - extra-google-m2repository 
+    - build-tools-28.0.2              # Same version as specified in build.gradle
+    - android-28                      # SDK version
+    - android-22                      # For Emulator
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - Extra-android-support
+    - extra-google-google_play_services
     - addon-google_apis-google-27
-    - sys-img-armeabi-v7a-android-22
+    - sys-img-armeabi-v7a-android-22  # Android Image
+
   licenses:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
     - google-gdk-license-.+
 
+before_install:
+ - chmod +x gradlew
+
 before_script:
-  - wget http://services.gradle.org/distributions/gradle-4.4-bin.zip
-  - unzip gradle-4.4-bin.zip
-  - export GRADLE_HOME=$PWD/gradle-4.4
-  - export PATH=$GRADLE_HOME/bin:$PATH
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
-  
+
 after_success:
   - chmod +x ./upload-apk.sh 
   - ./upload-apk.sh 
