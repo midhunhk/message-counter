@@ -47,7 +47,7 @@ class CounterJobService : JobService() {
         private const val DELAY_MIN: Long = 500
         private const val DELAY_MAX: Long = 1000 * 3
 
-        fun registerJob(context: Context): Boolean {
+        fun registerJob(context: Context, cancelAndReschedule: Boolean = false): Boolean {
             val component = ComponentName(context, CounterJobService::class.java)
             val contentUri = JobInfo.TriggerContentUri(Uri.parse(SMSManager.SMS_URI_ALL),
                     JobInfo.TriggerContentUri.FLAG_NOTIFY_FOR_DESCENDANTS)
@@ -59,13 +59,17 @@ class CounterJobService : JobService() {
                     .setBackoffCriteria(DELAY_MAX, JobInfo.BACKOFF_POLICY_LINEAR)
                     .build()
 
-            // Schedule a Job if not already done so
             val scheduler: JobScheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-            if (CounterServiceHelper.isJobRunning(scheduler, JOB_ID)) {
-                Toast.makeText(context, "Cancelling current job", Toast.LENGTH_SHORT).show()
-                scheduler.cancelAll()
-            }
+            val isJobRunning = CounterServiceHelper.isJobRunning(scheduler, JOB_ID)
 
+            if (isJobRunning) {
+                if (cancelAndReschedule) {
+                    Toast.makeText(context, "Cancelling current job", Toast.LENGTH_SHORT).show()
+                    scheduler.cancelAll()
+                } else {
+                    return true
+                }
+            }
             val result = scheduler.schedule(jobInfo)
             Toast.makeText(context, "Job scheduled ${result == 1}", Toast.LENGTH_SHORT).show()
             return (result == JobScheduler.RESULT_SUCCESS)
@@ -80,7 +84,7 @@ class CounterJobService : JobService() {
         val handler = Handler(handlerThread.looper)
 
         // Debug toast with JobStart time
-        if ( BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val timeNow = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))
             longToast("onStartJob at $timeNow")
         }
@@ -93,7 +97,7 @@ class CounterJobService : JobService() {
 
             // Reschedule another job to monitor SMS Content Provider
             runOnUiThread {
-                registerJob(context)
+                registerJob(context, true)
             }
         }
 
