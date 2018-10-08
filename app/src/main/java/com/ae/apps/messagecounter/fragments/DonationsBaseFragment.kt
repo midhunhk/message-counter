@@ -37,7 +37,7 @@ abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
 
     protected abstract fun getSkus(): List<String>
 
-    protected abstract fun handlePurchaseError(purchases: List<Purchase>?)
+    protected abstract fun handlePurchaseError(purchases: List<Purchase>?, responseCode: Int)
 
     protected abstract fun handleUserCancelled(purchases: List<Purchase>?)
 
@@ -50,7 +50,7 @@ abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
     protected abstract fun skuDetailsResponse(skuDetails: List<SkuDetails>)
 
     /**
-     * A successful purchase
+     * Method invoked on a successful purchase
      *
      * @param purchase purchase details
      */
@@ -114,6 +114,16 @@ abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
         }
     }
 
+    /**
+     * Consume the Purchase so that it could be bought again
+     *
+     * @param purchaseToken the purchase token
+     * @param listener a callback when the purchase is consumed
+     */
+    fun consumeAsync(purchaseToken:String, listener:ConsumeResponseListener){
+        mBillingClient!!.consumeAsync(purchaseToken, listener)
+    }
+
     override fun onPurchasesUpdated(responseCode: Int, purchases: List<Purchase>?) {
         if (responseCode == BillingClient.BillingResponse.OK && null != purchases) {
             for (purchase in purchases) {
@@ -124,7 +134,7 @@ abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
             handleUserCancelled(purchases)
         } else {
             // Handle an error flow
-            handlePurchaseError(purchases)
+            handlePurchaseError(purchases, responseCode)
         }
     }
 

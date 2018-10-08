@@ -23,14 +23,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
+import com.android.billingclient.api.ConsumeResponseListener
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
 import kotlinx.android.synthetic.main.fragment_donations.*
 
-class DonationsFragment : DonationsBaseFragment() {
+class DonationsFragment : DonationsBaseFragment(), ConsumeResponseListener {
 
     companion object {
-        const val SKU_SMALL = "product_small"
+        const val SKU_SMALL = "product_smalldium"
         const val SKU_MEDIUM = "product_medium"
         const val SKU_LARGE = "product_large"
 
@@ -55,10 +56,6 @@ class DonationsFragment : DonationsBaseFragment() {
     }
 
     override fun skuDetailsResponse(skuDetails: List<SkuDetails>) {
-        /*Toast.makeText(requireContext(),
-                "skuDetailsResponse size:" + skuDetails.size,
-                Toast.LENGTH_SHORT)
-                .show()*/
         skuDetails.forEach {
             when {
                 it.sku == SKU_SMALL -> txtDonateSmallPrice.text = it.price
@@ -69,18 +66,27 @@ class DonationsFragment : DonationsBaseFragment() {
     }
 
     override fun handlePurchase(purchase: Purchase) {
+        // Consume the Purchase so that it can be bought again
+        consumeAsync(purchase.purchaseToken, this)
+
         Toast.makeText(requireContext(),
-                "Thank You for your donation with order id" + purchase.orderId,
-                Toast.LENGTH_SHORT)
-                .show()
+                "Thank You for your donation, order id " + purchase.orderId,
+                Toast.LENGTH_SHORT).show()
         val preferenceRepository = PreferenceRepository.newInstance(
                 PreferenceManager.getDefaultSharedPreferences(requireContext()))
         preferenceRepository.saveDonationsMade()
     }
 
-    override fun handlePurchaseError(purchases: List<Purchase>?) {
+    override fun onConsumeResponse(responseCode: Int, purchaseToken: String?) {
+        /*Toast.makeText(requireContext(),
+                "Purchase Confirmed",
+                Toast.LENGTH_SHORT).show()
+                */
+    }
+
+    override fun handlePurchaseError(purchases: List<Purchase>?, responseCode: Int) {
         Toast.makeText(requireContext(),
-                "purchase error occurred",
+                "Purchase error occurred. Code $responseCode",
                 Toast.LENGTH_SHORT)
                 .show()
     }
