@@ -31,9 +31,9 @@ import kotlinx.android.synthetic.main.fragment_donations.*
 class DonationsFragment : DonationsBaseFragment(), ConsumeResponseListener {
 
     companion object {
-        const val SKU_SMALL = "product_smalldium"
-        const val SKU_MEDIUM = "product_medium"
-        const val SKU_LARGE = "product_large"
+        const val SKU_SMALL = "product_small2"
+        const val SKU_MEDIUM = "product_medium2"
+        const val SKU_LARGE = "product_large2"
 
         fun newInstance() = DonationsFragment()
     }
