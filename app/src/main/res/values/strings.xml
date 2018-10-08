@@ -16,9 +16,9 @@
   -->
 <resources>
     <string name="app_name">Message Counter</string>
-    <string name="app_version">Version 4.0.1</string>
+    <string name="app_version">Version 4.0.2</string>
     <string name="app_code_name">(Wyvern)</string>
-    <string name="app_release_date">Sep 2018</string>
+    <string name="app_release_date">Oct 2018</string>
     <string name="app_desc">Message Counter is an open source app that displays useful statistics about your SMS.</string>
     <string name="app_disclaim">Since this app uses Android standard SMS API, it may not produce correct statistics for all devices. Do not use the data displayed by the app as an accurate measure for SMS counts.</string>
     <string name="app_developer_info">Designed, developed at ae app labs</string>
