@@ -59,7 +59,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation "com.ae.apps:android-libraries:$ae_apps_lib_version"
     implementation 'org.jetbrains.anko:anko-commons:0.10.4'
-    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.0'
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.1'
     implementation 'com.android.billingclient:billing:1.1'
     implementation "android.arch.persistence.room:runtime:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
