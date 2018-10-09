@@ -15,7 +15,6 @@
  */
 package com.ae.apps.messagecounter.services
 
-import android.annotation.TargetApi
 import android.app.job.JobInfo
 import android.app.job.JobParameters
 import android.app.job.JobScheduler
@@ -27,16 +26,10 @@ import android.os.Build
 import android.os.Handler
 import android.os.HandlerThread
 import android.support.annotation.RequiresApi
-import android.widget.Toast
 import com.ae.apps.common.managers.SMSManager
-import com.ae.apps.messagecounter.BuildConfig
 import com.ae.apps.messagecounter.observers.SMSObserver
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.runOnUiThread
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 @RequiresApi(Build.VERSION_CODES.N)
 class CounterJobService : JobService() {
@@ -106,7 +99,7 @@ class CounterJobService : JobService() {
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {
-        longToast("onStopJob")
+        // longToast("onStopJob")
         return true
     }
 
