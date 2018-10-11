@@ -38,7 +38,7 @@ val SMS_TABLE_MINIMAL_PROJECTION = arrayOf(COLUMN_NAME_ID,
         COLUMN_NAME_PERSON)
 
 val SELECT_SENT_MESSAGES_AFTER_DATE = "person is null and protocol is null and $COLUMN_NAME_DATE > ? "
-val SELECT_SENT_MESSAGES_AFTER_LAST = "and _id > ?"
+const val SELECT_SENT_MESSAGES_AFTER_LAST = "and _id > ?"
 val SORT_BY_DATE = "$COLUMN_NAME_DATE ASC"
 
 const val DEFAULT_MESSAGE_COUNT = 1

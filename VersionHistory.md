@@ -2,20 +2,25 @@
 
 Version 4.0 (Wyvern)
 ----------------------
+**MessageCounter 4.0.2 [Oct 2018]**
+ - Fix for JobService scheduling issues #55
+ - Consume In-App Purchases #57
+ - Use new In-App products 
+ 
 **MessageCounter 4.0.1 [Sep 2018]**
  - Prevent multiple indexing at same time
  - Set LaunchMode for MainActivity
  - Handle IllegalStateException when setting Fragment 
  
 **MessageCounter 4.0.0 [Sep 2018]**
- - Application rewrite and new architecture
+ - Application rewrite and new architecture #43
  - Improve performance
  - Use Material Theme
 
 Version 3.3 (Valkyrie)
 ----------------------
 **MessageCounter 3.3.0 [Oct 2017]**
- - Bottom Navigation View
+ - Bottom Navigation View #25
  - Ignore List
  
 Version 3.2 (Unicorn)
@@ -26,7 +31,7 @@ Version 3.2 (Unicorn)
  - Experimental Feature to count messages sent when service is not running
 
 **MessageCounter 3.2.1 [Aug 2017]**
- - Support for German
+ - Support for German #15
  - Multi Length message support
 
 Version 3.0 (Talisman)

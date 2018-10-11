@@ -29,7 +29,7 @@ import android.support.annotation.RequiresApi
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.observers.SMSObserver
 import org.jetbrains.anko.doAsync
-//import org.jetbrains.anko.longToast
+import org.jetbrains.anko.runOnUiThread
 
 @RequiresApi(Build.VERSION_CODES.N)
 class CounterJobService : JobService() {
@@ -38,9 +38,9 @@ class CounterJobService : JobService() {
         private const val THREAD_NAME = "AnotherThread"
         private const val JOB_ID = 180803
         private const val DELAY_MIN: Long = 500
-        private const val DELAY_MAX: Long = 1000 * 5
+        private const val DELAY_MAX: Long = 1000 * 4
 
-        fun registerJob(context: Context): Boolean {
+        fun registerJob(context: Context, cancelAndReschedule: Boolean = false): Boolean {
             val component = ComponentName(context, CounterJobService::class.java)
             val contentUri = JobInfo.TriggerContentUri(Uri.parse(SMSManager.SMS_URI_ALL),
                     JobInfo.TriggerContentUri.FLAG_NOTIFY_FOR_DESCENDANTS)
@@ -48,37 +48,58 @@ class CounterJobService : JobService() {
                     .addTriggerContentUri(contentUri)
                     .setTriggerContentUpdateDelay(DELAY_MIN)
                     .setTriggerContentMaxDelay(DELAY_MAX)
+                    .setMinimumLatency(DELAY_MIN)
+                    .setBackoffCriteria(DELAY_MAX, JobInfo.BACKOFF_POLICY_LINEAR)
                     .build()
 
-            // Schedule a Job if not already done so
             val scheduler: JobScheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
-            if (CounterServiceHelper.isJobNotRunning(scheduler, JOB_ID)) {
-                val result = scheduler.schedule(jobInfo)
-                return (result == JobScheduler.RESULT_SUCCESS)
-            }
+            val isJobRunning = CounterServiceHelper.isJobRunning(scheduler, JOB_ID)
 
-            return false
+            if (isJobRunning) {
+                if (cancelAndReschedule) {
+                    scheduler.cancel(JOB_ID)
+                } else {
+                    return true
+                }
+            }
+            val result = scheduler.schedule(jobInfo)
+            // val pendingJobsCount = scheduler.allPendingJobs.size
+            // Toast.makeText(context, "Job scheduled ${result == 1}, total jobs $pendingJobsCount", Toast.LENGTH_SHORT).show()
+            return (result == JobScheduler.RESULT_SUCCESS)
         }
     }
 
+    // @TargetApi(Build.VERSION_CODES.O)
     override fun onStartJob(params: JobParameters?): Boolean {
         val context = baseContext
         val handlerThread = HandlerThread(THREAD_NAME)
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
-        //longToast("onStartJob")
+
+        /* Debug toast with JobStart time
+        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val timeNow = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))
+            longToast("onStartJob at $timeNow")
+        }*/
 
         doAsync {
             val observer = SMSObserver(handler, context)
             observer.onChange(false)
 
-            jobFinished(params, true)
+            // Mark this job as completed
+            jobFinished(params, false)
+
+            // Reschedule another job to monitor SMS Content Provider
+            runOnUiThread {
+                registerJob(context, true)
+            }
         }
 
         return true
     }
 
     override fun onStopJob(params: JobParameters?): Boolean {
+        // longToast("onStopJob")
         return true
     }
 
