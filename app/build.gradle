@@ -12,8 +12,7 @@ android {
         // Remember to update .travis.yml with android version
         targetSdkVersion 28
         versionCode 405
-        //versionName "4.1.0"
-        versionName "4_1_0"
+        versionName "4.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -39,7 +38,8 @@ android {
     }
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            outputFileName = "messageCounter-${variant.name}-${variant.versionName}-build-${variant.versionCode}.apk"
+            def galaxyVersionName = variant.versionName.replaceAll('.','_')
+            outputFileName = "messageCounter-${variant.name}-${galaxyVersionName}-build-${variant.versionCode}.apk"
         }
     }
     testOptions {
