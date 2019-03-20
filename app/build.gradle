@@ -38,7 +38,7 @@ android {
     }
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            def galaxyVersionName = variant.versionName.replaceAll('.','_')
+            def galaxyVersionName = variant.versionName.replaceAll('\\.','_')
             outputFileName = "messageCounter-${variant.name}-${galaxyVersionName}-build-${variant.versionCode}.apk"
         }
     }
