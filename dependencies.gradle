@@ -1,0 +1,54 @@
+ext {
+    // Setup
+    minSdkVersion = 16
+    targetSdkVersion = 28
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.1"
+
+    kotlin_version = '1.3.21'
+    support_lib_version = '28.0.0'
+    lifecycle_version = '1.1.1'
+    room_version = '1.1.1'
+    work_version = '1.0.0'
+    hamcrest_version = '1.3'
+    ae_apps_lib_version = '3.0.2'
+
+    supportLibraryVersion = "28.0.0"
+    espressoVersion = "3.1.0-beta02"
+    gradleBuildToolVersion = '3.3.2'
+    androidMavenPluginVersion = "2.1"
+    junitVersion = "4.12"
+    mockitoCoreVersion = "2.8.9"
+    roboElectricVersion = "3.8"
+}
+
+ext.mainApp = [
+    appVersionCode : 405,
+    appVersionName : "4.1.0"
+]
+
+ext.legacyApp = [
+    appVersionCode : 405,
+    appVersionName : "4.1.0"
+]
+
+// Dependencies
+ext.deps = [
+        // compile
+        appcompat           : "com.android.support:appcompat-v7:$support_lib_version",
+        design              : "com.android.support:design:$support_lib_version",
+        palette             : "com.android.support:palette-v7:$support_lib_version",
+        preference          : "com.android.support:preference-v7:$support_lib_version",
+        cardview            : "com.android.support:cardview-v7:$support_lib_version",
+        supportv4           : "com.android.support:support-v4:$support_lib_version",
+        aeappslib           : "com.ae.apps:android-libraries:$ae_apps_lib_version",
+        constraintlayout    : 'com.android.support.constraint:constraint-layout:1.1.3',
+        ankocommons         : 'org.jetbrains.anko:anko-commons:0.10.4',
+        osslicenses         : 'com.google.android.gms:play-services-oss-licenses:16.0.2',
+        billingclient       : 'com.android.billingclient:billing:1.1',
+
+        // testCompile
+        junit                : "junit:junit:$junitVersion",
+        mockitoCore          : "org.mockito:mockito-core:$mockitoCoreVersion",
+        roboElectric         : "org.robolectric:robolectric:$roboElectricVersion"
+]
