@@ -3,10 +3,11 @@
 
     <string name="str_migrate_title">Attention!</string>
     <string name="str_migrate_description">
-Due to circumstances beyond our control, Google Play requires us to remove the permission to read the SMS database for this app.\n\n
-If you want to continue using this app, you need to install it from another source.
+Due to circumstances beyond our control, Google Play requires us to remove the permission to access the SMS database.\n\n
+If you want to continue using this app, you need to install it from another source (Alternate AppStores).
     </string>
     <string name="str_migrate_alternate">View alternate sources</string>
     <string name="str_migrate_alternate_description">Alternate sources for the app</string>
     <string name="str_migrate_view_details">View more details</string>
+    <string name="str_migrate_view_source">View Source</string>
 </resources>

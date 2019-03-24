@@ -20,7 +20,7 @@
     <string name="app_feedback_email_address" translatable="false">aeapplabs-support@live.in</string>
     <string name="app_faq_url" translatable="false">https://github.com/midhunhk/message-counter/wiki/FAQ</string>
 
-    <!-- -->
+    <!-- Used in the legacy app -->
     <string name="app_migrate_alternates" translatable="false">https://www.google.com</string>
     <string name="app_migrate_more_details" translatable="false">https://www.bing.com</string>
 

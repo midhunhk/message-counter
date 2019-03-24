@@ -57,6 +57,11 @@ class MigrateFragment : Fragment() {
             val alternatesUrl = requireContext().getString(R.string.app_migrate_more_details)
             startActivity(createIntentForURI(alternatesUrl))
         }
+
+        btnViewSource.setOnClickListener {
+            val viewSourceUrl = requireContext().getString(R.string.app_github_source_url)
+            startActivity(createIntentForURI(viewSourceUrl))
+        }
     }
 
     private fun createIntentForURI(url: String): Intent {

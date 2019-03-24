@@ -61,7 +61,6 @@ dependencies {
     //
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation deps.palette
-    implementation deps.preference
     implementation deps.cardview
     implementation deps.supportv4
     implementation deps.aeappslib
