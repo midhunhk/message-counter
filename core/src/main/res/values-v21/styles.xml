@@ -15,7 +15,12 @@
   ~ limitations under the License.
   -->
 <resources>
+    <style name="MessageCounterTheme" parent="AppTheme.Base">
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
 
-    <!-- Theme and styles defined in core module -->
-
+    <style name="buttonTintAccent">
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

@@ -1,13 +1,46 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.ae.apps.messagecounter.fragments.MigrateFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              tools:context="com.ae.apps.messagecounter.fragments.MigrateFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:text="@string/str_migrate_title"/>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/str_migrate_description"/>
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btnExportSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_migrate_export"
+        android:contentDescription="@string/str_migrate_export_description"
+        app:backgroundTint="@color/colorAccent"
+        app:cornerRadius="@dimen/button_corner_radius"/>
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btnViewAlternates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_migrate_alternate"
+        android:contentDescription="@string/str_migrate_alternate_description"
+        app:backgroundTint="@color/colorAccent"
+        app:cornerRadius="@dimen/button_corner_radius"/>
+
+    <Button
+        android:id="@+id/viewFAQ"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/unit_xs"
+        android:text="@string/str_migrate_view_details"/>
+
+</LinearLayout>

@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">app-legacy</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_migrate_title">Attention</string>
+    <string name="str_migrate_description">str_migrate_description</string>
+    <string name="str_migrate_export">Export Configuration</string>
+    <string name="str_migrate_export_description">Export current configuration</string>
+    <string name="str_migrate_alternate">View alternate sources</string>
+    <string name="str_migrate_alternate_description">Alternate sources for the app</string>
+    <string name="str_migrate_view_details">View more details</string>
 </resources>
