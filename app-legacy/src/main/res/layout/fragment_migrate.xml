@@ -35,7 +35,7 @@
         app:cornerRadius="@dimen/button_corner_radius"/>
 
     <Button
-        android:id="@+id/viewFAQ"
+        android:id="@+id/btnMoreDetails"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

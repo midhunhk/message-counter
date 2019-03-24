@@ -39,6 +39,8 @@ dependencies {
     // Dependent Libraries
     //
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation deps.ankocommons
+    implementation deps.design
     implementation deps.appcompat
     implementation deps.aeappslib
     implementation deps.constraintlayout

@@ -15,17 +15,26 @@
  */
 package com.ae.apps.messagecounter.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.ae.apps.messagecounter.R
+import kotlinx.android.synthetic.main.fragment_migrate.*
 
 /**
  * Migration Fragment
  */
 class MigrateFragment : Fragment() {
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = MigrateFragment()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,8 +42,31 @@ class MigrateFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_migrate, container, false)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = MigrateFragment()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initUI()
+    }
+
+    private fun initUI() {
+
+        btnExportSettings.setOnClickListener {
+            Toast.makeText(requireContext(), "Export Current Settings", Toast.LENGTH_SHORT).show()
+        }
+
+        btnViewAlternates.setOnClickListener {
+            val alternatesUrl = requireContext().getString(R.string.app_migrate_alternates)
+            startActivity(createIntentForURI(alternatesUrl))
+        }
+
+        btnMoreDetails.setOnClickListener {
+            val alternatesUrl = requireContext().getString(R.string.app_migrate_more_details)
+            startActivity(createIntentForURI(alternatesUrl))
+        }
+    }
+
+    private fun createIntentForURI(url: String): Intent {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        return intent
     }
 }
