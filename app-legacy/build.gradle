@@ -23,8 +23,7 @@ android {
         release {
             shrinkResources true
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro',
-                    'android-architecture-components.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     lintOptions {
@@ -39,9 +38,5 @@ dependencies {
     //
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation deps.ankocommons
-    implementation deps.design
-    implementation deps.appcompat
-    implementation deps.aeappslib
-    implementation deps.constraintlayout
     implementation deps.supportv4
 }

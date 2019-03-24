@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               tools:context="com.ae.apps.messagecounter.fragments.MigrateFragment">
 
@@ -17,9 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/unit_m"
+        android:fontFamily="@font/lora"
         android:gravity="center"
         android:text="@string/str_migrate_title"
-        android:fontFamily="@font/lora"
         android:textSize="@dimen/text_title"
         android:textStyle="bold"/>
 
@@ -27,37 +27,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/unit_l"
-        android:textSize="@dimen/item_title"
-        android:text="@string/str_migrate_description"/>
+        android:text="@string/str_migrate_description"
+        android:textSize="@dimen/item_title"/>
 
     <android.support.design.button.MaterialButton
-        android:id="@+id/btnExportSettings"
+        android:id="@+id/btnViewAlternates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/str_migrate_export"
-        android:contentDescription="@string/str_migrate_export_description"
+        android:contentDescription="@string/str_migrate_alternate_description"
+        android:text="@string/str_migrate_alternate"
         app:backgroundTint="@color/colorAccent"
         app:cornerRadius="@dimen/button_corner_radius"/>
-
-    <Button
-        android:id="@+id/btnViewAlternates"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:padding="@dimen/unit_xs"
-        android:text="@string/str_migrate_alternate"
-        android:contentDescription="@string/str_migrate_alternate_description"/>
 
     <Button
         android:id="@+id/btnMoreDetails"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_gravity="center"
+        android:gravity="center"
         android:padding="@dimen/unit_xs"
         android:text="@string/str_migrate_view_details"/>
 

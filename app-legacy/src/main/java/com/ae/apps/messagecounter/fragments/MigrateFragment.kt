@@ -22,7 +22,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.ae.apps.messagecounter.R
 import kotlinx.android.synthetic.main.fragment_migrate.*
 
@@ -48,10 +47,6 @@ class MigrateFragment : Fragment() {
     }
 
     private fun initUI() {
-
-        btnExportSettings.setOnClickListener {
-            Toast.makeText(requireContext(), "Export Current Settings", Toast.LENGTH_SHORT).show()
-        }
 
         btnViewAlternates.setOnClickListener {
             val alternatesUrl = requireContext().getString(R.string.app_migrate_alternates)

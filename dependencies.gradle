@@ -46,6 +46,9 @@ ext.deps = [
         ankocommons         : 'org.jetbrains.anko:anko-commons:0.10.8',
         osslicenses         : 'com.google.android.gms:play-services-oss-licenses:16.0.2',
         billingclient       : 'com.android.billingclient:billing:1.1',
+        roomRuntime         : "android.arch.persistence.room:runtime:$room_version",
+        roomCompiler        : "android.arch.persistence.room:compiler:$room_version",
+        workRuntime         : "android.arch.work:work-runtime-ktx:$work_version",
 
         // testCompile
         junit               : "junit:junit:$junitVersion",

@@ -60,8 +60,6 @@ dependencies {
     // Dependent Libraries
     //
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation deps.appcompat
-    implementation deps.design
     implementation deps.palette
     implementation deps.preference
     implementation deps.cardview
@@ -71,9 +69,9 @@ dependencies {
     implementation deps.ankocommons
     implementation deps.osslicenses
     implementation deps.billingclient
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
-    implementation "android.arch.work:work-runtime-ktx:$work_version"
+    implementation deps.roomRuntime
+    implementation deps.workRuntime
+    kapt deps.roomCompiler
     //
     // Unit Testing
     //
