@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.ae.apps.messagecounter"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_SMS" android:required="true" />
     <uses-permission android:name="android.permission.READ_CONTACTS" android:required="true" />
@@ -8,6 +9,8 @@
     <uses-permission android:name="com.android.vending.BILLING" />
     <!-- Required to upload apk to Galaxy Store -->
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+
+    <uses-sdk tools:overrideLibrary="android.support.v7.preference" />
 
     <application
         android:icon="@mipmap/ic_launcher"
