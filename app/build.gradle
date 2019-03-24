@@ -6,6 +6,7 @@ apply plugin: 'com.google.gms.oss.licenses.plugin'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.ae.apps.messagecounter"
@@ -41,7 +42,7 @@ android {
     }
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            def galaxyVersionName = variant.versionName.replaceAll('\\.','_')
+            def galaxyVersionName = variant.versionName.replaceAll('\\.', '_')
             outputFileName = "messageCounter-${variant.name}-${galaxyVersionName}-build-${variant.versionCode}.apk"
         }
     }
@@ -79,7 +80,7 @@ dependencies {
     testImplementation deps.junit
     testImplementation deps.mockitoCore
     testImplementation deps.roboElectric
-    testImplementation "android.arch.persistence.room:testing:$room_version"
+    testImplementation deps.roomTesting
     //
     // Instrumentation Testing
     //
