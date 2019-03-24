@@ -6,6 +6,10 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
