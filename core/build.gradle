@@ -8,8 +8,10 @@ android {
 }
 
 dependencies {
-    implementation deps.appcompat
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation deps.appcompat
+    implementation deps.design
+    implementation deps.preference
 }
 repositories {
     mavenCentral()

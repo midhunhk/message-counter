@@ -1,2 +1,8 @@
 <manifest package="com.ae.apps.messagecounter.core"
-          xmlns:android="http://schemas.android.com/apk/res/android"/>
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <meta-data
+        android:name="preloaded_fonts"
+        android:resource="@array/preloaded_fonts"/>
+</manifest>
