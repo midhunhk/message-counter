@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=master)](https://travis-ci.org/midhunhk/message-counter) 
 [![Release](https://img.shields.io/github/release/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/releases) 
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/v3.3.0.svg)](https://github.com/midhunhk/message-counter) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/v4.0.2.svg)](https://github.com/midhunhk/message-counter) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/issues) 
-[![](https://img.shields.io/badge/codename-wyvern-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
+[![](https://img.shields.io/badge/codename-xingtian-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
 
 [Project Wiki](https://github.com/midhunhk/message-counter/wiki) | 
 [Github Page](http://midhunhk.github.io/message-counter) | 
@@ -39,17 +39,15 @@ Open the project in Android Studio
 ```
  
 ## Dependencies
- - lib-ae-apps (https://github.com/midhunhk/ae-apps-library)
- - kotlin-extension
+ - kotlin-extensions
+ - [lib-ae-apps](https://github.com/midhunhk/ae-apps-library)
  - [android-support-library](https://developer.android.com/topic/libraries/support-library/)
  - [android-architecture-components](https://developer.android.com/topic/libraries/architecture/)
  - [anko library](https://github.com/Kotlin/anko)
 
-## Play Store
-
-<a href="https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter">
- <img alt="Get it on Google Play" width="200px" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">
-</a>
+## How to get it
+From March 18 2019, this app is no longer available on the Google Play Store. [See Why.](https://github.com/midhunhk/message-counter/wiki/Permissions#removal-from-google-play)   
+Click [here](https://github.com/midhunhk/message-counter/wiki/Alternate-Sources) to see how to get this app.
  
 ## License
  Licensed under the Apache License, Version 2.0 (the "License");
