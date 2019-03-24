@@ -23,12 +23,12 @@ ext {
 }
 
 ext.mainApp = [
-    appVersionCode : 405,
+    appVersionCode : 410,
     appVersionName : "4.1.0"
 ]
 
 ext.legacyApp = [
-    appVersionCode : 405,
+    appVersionCode : 406,
     appVersionName : "4.1.0"
 ]
 
