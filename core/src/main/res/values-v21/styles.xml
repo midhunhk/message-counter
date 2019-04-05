@@ -15,8 +15,12 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="app_play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter</string>
-    <string name="app_github_source_url" translatable="false">https://github.com/midhunhk/message-counter</string>
-    <string name="app_feedback_email_address" translatable="false">aeapplabs-support@live.in</string>
-    <string name="app_faq_url" translatable="false">https://github.com/midhunhk/message-counter/wiki/FAQ</string>
+    <style name="MessageCounterTheme" parent="AppTheme.Base">
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="buttonTintAccent">
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

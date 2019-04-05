@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.ae.apps.messagecounter"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        versionCode rootProject.ext.legacyApp.appVersionCode
+        versionName rootProject.ext.legacyApp.appVersionName
+    }
+    buildTypes {
+        debug {
+            applicationIdSuffix '.legacy.debug'
+            versionNameSuffix "-DEBUG"
+            minifyEnabled false
+        }
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "messageCounterLegacy-${variant.name}-${variant.versionName}-build-${variant.versionCode}.apk"
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation project(':core')
+    //
+    // Dependent Libraries
+    //
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation deps.ankocommons
+    implementation deps.supportv4
+    implementation deps.constraintlayout
+}
