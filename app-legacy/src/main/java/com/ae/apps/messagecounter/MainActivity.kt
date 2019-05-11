@@ -18,6 +18,7 @@ package com.ae.apps.messagecounter
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.ae.apps.messagecounter.core.analytics.AppAnalytics
 import com.ae.apps.messagecounter.fragments.MigrateFragment
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         init()
+
+        AppAnalytics.newInstance(baseContext)
+            .logAppStart(resources.getString(R.string.app_name))
     }
 
     private fun init() {

@@ -22,6 +22,6 @@
 
     <!-- Used in the legacy app -->
     <string name="app_migrate_alternates" translatable="false">https://github.com/midhunhk/message-counter/wiki/Alternate-Sources</string>
-    <string name="app_migrate_more_details" translatable="false">https://github.com/midhunhk/message-counter/wiki/Permissions#removal-from-google-play</string>
+    <string name="app_migrate_more_details" translatable="false">https://github.com/midhunhk/message-counter/wiki/Permissions#google-play-policies</string>
 
 </resources>

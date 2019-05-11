@@ -1,7 +1,16 @@
 ## Message Counter Version History
 
-Version 4.0 (Wyvern)
-----------------------
+### Version 4.1 (Xingtian)
+**MessageCounter 4.1.1 [May 2019]**
+ - Update Translations for legacy app
+ - Integrate with Firebase Analytics #64
+
+**MessageCounter 4.1.0 [Mar 2019]**
+ - 'READ_SMS' permission removed for compliance with Google Play Policies
+ - Created a new app with all features for Alternate App Stores #61
+ 
+### Version 4.0 (Wyvern)
+ 
 **MessageCounter 4.0.2 [Oct 2018]**
  - Fix for JobService scheduling issues #55
  - Consume In-App Purchases #57
@@ -17,8 +26,7 @@ Version 4.0 (Wyvern)
  - Improve performance
  - Use Material Theme
 
-Version 3.3 (Valkyrie)
-----------------------
+### Version 3.3 (Valkyrie)
 **MessageCounter 3.3.0 [Oct 2017]**
  - Bottom Navigation View #25
  - Ignore List

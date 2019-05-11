@@ -11,8 +11,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        versionCode rootProject.ext.legacyApp.appVersionCode
-        versionName rootProject.ext.legacyApp.appVersionName
+        versionCode rootProject.ext.appVersions.versionCode
+        versionName rootProject.ext.appVersions.versionName
     }
     buildTypes {
         debug {
@@ -22,6 +22,10 @@ android {
         }
         release {
             shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        dev {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -36,7 +40,26 @@ android {
     }
 }
 
+def build_param = "${build}"
+
+if (build_param != "dev") {
+    //exclude production build
+    android.variantFilter { variant ->
+        if (variant.buildType.name == 'dev') {
+            variant.setIgnore(true)
+        }
+    }
+} else {
+    //exclude all except production build
+    android.variantFilter { variant ->
+        if (!variant.buildType.name == 'dev') {
+            variant.setIgnore(true)
+        }
+    }
+}
+
 dependencies {
+    //implementation project(path: ':core', configuration: 'default')
     implementation project(':core')
     //
     // Dependent Libraries
@@ -46,3 +69,4 @@ dependencies {
     implementation deps.supportv4
     implementation deps.constraintlayout
 }
+apply plugin: 'com.google.gms.google-services'

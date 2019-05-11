@@ -27,6 +27,7 @@ import android.view.MenuItem
 import android.view.View
 import com.ae.apps.common.permissions.PermissionsAwareComponent
 import com.ae.apps.common.permissions.RuntimePermissionChecker
+import com.ae.apps.messagecounter.core.analytics.AppAnalytics
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.fragments.*
 import com.ae.apps.messagecounter.services.CounterServiceHelper
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
     private var mSecondaryFragmentDisplayed = false
     private lateinit var mPermissionChecker: RuntimePermissionChecker
     private lateinit var mPreferenceRepository: PreferenceRepository
+    private lateinit var appAnalytics: AppAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,9 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
 
         mPermissionChecker = RuntimePermissionChecker(this)
         mPermissionChecker.checkPermissions()
+
+        appAnalytics = AppAnalytics.newInstance(baseContext)
+        appAnalytics.logAppStart(resources.getString(R.string.app_name))
     }
 
     override fun requiredPermissions() = PERMISSIONS
@@ -117,13 +122,16 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
             return true
         }
         if (id == R.id.action_about) {
+            appAnalytics.logScreenView(AboutFragment::class.java.name)
             showFragmentContent(AboutFragment.newInstance(), false)
             return true
         }
         if (id == R.id.action_donate) {
+            appAnalytics.logScreenView(DonationsFragment::class.java.name)
             showFragmentContent(DonationsFragment.newInstance(), false)
         }
         if (id == R.id.action_settings) {
+            appAnalytics.logScreenView(SettingsFragment::class.java.name)
             showFragmentContent(SettingsFragment.newInstance(), false)
         }
         if (id == R.id.action_share) {

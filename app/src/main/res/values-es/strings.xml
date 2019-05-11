@@ -16,9 +16,9 @@
   -->
 <resources>
     <string name="app_name">Contador de Mensajes</string>
-    <string name="app_version">versión 4.0.2</string>
-    <string name="app_code_name">Draco</string>
-    <string name="app_release_date">Oct 2018</string>
+    <string name="app_version">Versión 4.1.1</string>
+    <string name="app_code_name">Xingtian</string>
+    <string name="app_release_date">May 2019</string>
     <string name="app_desc">Contador de mensajes muestra los mensajes de la bandeja de entrada de estadísticas y el número de mensajes de cada uno de sus contactos. Código fuente de este proyecto está disponible en GitHub. Traducciones utilizando Google Translate.</string>
     <string name="app_disclaim">negante: Está creado esta aplicación para los propósitos educativos y, como tal, no tiene ninguna garantía o soporte. Dado que se utilizan las API de Android indocumentados, esta aplicación puede no funcionar como se espera en todos los dispositivos.</string>
     <string name="app_developer_info">diseñado, desarrollado por ae labs</string>
@@ -35,6 +35,7 @@
     <string name="menu_title_donate">Donar</string>
     <string name="menu_title_share">Comparte esta aplicación</string>
     <string name="menu_title_about">Acerca de</string>
+    <string name="menu_title_license">Licensia</string>
 
     <!-- changes for v2.2 -->
     <string name="str_messages_sent">mensajes enviados</string>

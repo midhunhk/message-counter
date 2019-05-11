@@ -23,7 +23,7 @@ import android.content.Intent
 import android.net.Uri
 import com.ae.apps.messagecounter.receivers.CounterWidgetReceiver
 import com.ae.apps.messagecounter.services.SMSObserverService
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+//import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 fun getShareIntent(context: Context): Intent {
     val shareIntent = Intent()
@@ -60,11 +60,11 @@ fun getStartActivityIntent(context:Context, requestCode:Int): PendingIntent{
     return PendingIntent
             .getActivity(context, requestCode, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 }
-
+/*
 fun getOpenSourceLicenceDisplayIntent(context: Context): Intent {
     return Intent(context, OssLicensesMenuActivity::class.java)
 }
-
+*/
 fun getViewSourceIntent(context: Context): Intent {
     return createIntentForURI(context.getString(R.string.app_github_source_url))
 }

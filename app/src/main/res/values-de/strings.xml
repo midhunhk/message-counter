@@ -16,9 +16,9 @@
   -->
 <resources>
     <string name="app_name">Nachrichtenzähler</string>
-    <string name="app_version">Version 4.0.2</string>
-    <string name="app_code_name">Wyvern</string>
-    <string name="app_release_date">Oct 2018</string>
+    <string name="app_version">Version 4.1.1</string>
+    <string name="app_code_name">Xingtian</string>
+    <string name="app_release_date">May 2019</string>
     <string name="app_desc">Message Counter zeigt Nachrichten Posteingangsstatistiken und Anzahl der Nachrichten von jedem Ihrer Kontakte an.</string>
     <string name="app_disclaim">Haftungsausschluss: Diese App wird für pädagogische Zwecke erstellt und hat daher keine Garantie oder Unterstützung. Da undokumentierte Android-APIs verwendet werden, funktioniert diese App möglicherweise nicht wie erwartet auf allen Geräten.</string>
     <string name="app_developer_info">Entworfen und entwickelt bei ae Labs</string>
@@ -35,6 +35,7 @@
     <string name="menu_title_donate">Spenden</string>
     <string name="menu_title_share">Sag deinen Freunden</string>
     <string name="menu_title_about">Über</string>
+    <string name="menu_title_license">Lizenz</string>
 
     <!-- added for v2.2 -->
     <string name="str_messages_sent">Gesendete Nachrichten</string>

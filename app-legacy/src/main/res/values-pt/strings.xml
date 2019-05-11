@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contador de mensagens legado</string>
+    <string name="str_migrate_title">Atenção!</string>
+    <string name="str_migrate_description">Devido a circunstâncias além do nosso controle, o Google Play nos obriga a remover a permissão para acessar o banco de dados do SMS.\n\n Se você deseja continuar usando este aplicativo, você precisará instalá-lo a partir de outra fonte (Suplente AppStores).</string>
+    <string name="str_migrate_alternate">Visualizar fontes alternativas</string>
+    <string name="str_migrate_alternate_description">Fontes alternativas para a aplicação</string>
+    <string name="str_migrate_view_details">Ver mais detalhes</string>
+    <string name="str_migrate_view_source">Ver Fonte</string>
+</resources>

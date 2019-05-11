@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.oss.licenses.plugin'
+//apply plugin: 'com.google.gms.oss.licenses.plugin'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -14,8 +14,8 @@ android {
         // update .travis.yml with android version
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        versionCode rootProject.ext.mainApp.appVersionCode
-        versionName rootProject.ext.mainApp.appVersionName
+        versionCode rootProject.ext.appVersions.versionCode
+        versionName rootProject.ext.appVersions.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -36,6 +36,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro',
                     'android-architecture-components.pro'
         }
+        dev {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
     lintOptions {
         abortOnError false
@@ -51,10 +55,28 @@ android {
             includeAndroidResources = true
         }
     }
+}
 
+def build_param = "${build}"
+
+if (build_param != "dev") {
+    //exclude production build
+    android.variantFilter { variant ->
+        if (variant.buildType.name == 'dev') {
+            variant.setIgnore(true)
+        }
+    }
+} else {
+    //exclude all except production build
+    android.variantFilter { variant ->
+        if (!variant.buildType.name == 'dev') {
+            variant.setIgnore(true)
+        }
+    }
 }
 
 dependencies {
+    //implementation project(path: ':core', configuration: 'default')
     implementation project(':core')
     //
     // Dependent Libraries
@@ -66,7 +88,7 @@ dependencies {
     implementation deps.aeappslib
     implementation deps.constraintlayout
     implementation deps.ankocommons
-    implementation deps.osslicenses
+//    implementation deps.osslicenses
     implementation deps.billingclient
     implementation deps.roomRuntime
     implementation deps.workRuntime
@@ -88,3 +110,4 @@ dependencies {
     androidTestImplementation "org.hamcrest:hamcrest-integration:$hamcrest_version"
     androidTestImplementation "org.hamcrest:hamcrest-library:$hamcrest_version"
 }
+apply plugin: 'com.google.gms.google-services'

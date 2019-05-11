@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nachricht Counter legacy</string>
+    <string name="str_migrate_title">Achtung!</string>
+    <string name="str_migrate_description">Aufgrund von Umständen außerhalb unserer Kontrolle, Google Play von uns verlangt, entfernen Sie die Berechtigung zum Zugriff auf die SMS-Datenbank.\n\n Wenn Sie fortfahren möchten, diese app zu verwenden, müssen Sie installieren Sie es von einer anderen Quelle (Alternative AppStores).</string>
+    <string name="str_migrate_alternate">Anzeigen Alternative Quellen</string>
+    <string name="str_migrate_alternate_description">Alternative Quellen für die app</string>
+    <string name="str_migrate_view_details">Mehr details</string>
+    <string name="str_migrate_view_source">View Source</string>
+</resources>

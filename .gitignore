@@ -9,3 +9,7 @@
 /projectFilesBackup
 .externalNativeBuild
 /gradle.properties
+
+# Google Services (e.g. APIs or Firebase)
+app/google-services.json
+app-legacy/google-services.json

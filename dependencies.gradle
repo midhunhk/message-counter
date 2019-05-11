@@ -14,6 +14,7 @@ ext {
     ae_apps_lib_version = '3.0.2'
 
     supportLibraryVersion = "28.0.0"
+    firebaseCoreVersion = "16.0.1"
     espressoVersion = "3.1.0-beta02"
     gradleBuildToolVersion = '3.3.2'
     androidMavenPluginVersion = "2.1"
@@ -22,14 +23,9 @@ ext {
     roboElectricVersion = "3.8"
 }
 
-ext.mainApp = [
-    appVersionCode : 410,
-    appVersionName : "4.1.0"
-]
-
-ext.legacyApp = [
-    appVersionCode : 406,
-    appVersionName : "4.1.0"
+ext.appVersions = [
+    versionCode : 410,
+    versionName : "4.1.1"
 ]
 
 // Dependencies
@@ -49,6 +45,7 @@ ext.deps = [
         roomRuntime         : "android.arch.persistence.room:runtime:$room_version",
         roomCompiler        : "android.arch.persistence.room:compiler:$room_version",
         workRuntime         : "android.arch.work:work-runtime-ktx:$work_version",
+        firebaseCore        : "com.google.firebase:firebase-core:$firebaseCoreVersion",
 
         // testCompile
         junit               : "junit:junit:$junitVersion",

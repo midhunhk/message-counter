@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="@dimen/unit_xs"
-                    android:text="@string/str_about_oss_license"
+                    android:text="@string/menu_title_license"
                     android:textAllCaps="false"/>
 
                 <Button
