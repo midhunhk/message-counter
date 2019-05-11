@@ -12,6 +12,12 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
     }
 
+    buildTypes {
+        debug { }
+        release { }
+        dev{ }
+    }
+
     lintOptions {
         abortOnError false
     }

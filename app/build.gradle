@@ -76,7 +76,8 @@ if (build_param != "dev") {
 }
 
 dependencies {
-    implementation project(path: ':core', configuration: 'default')
+    //implementation project(path: ':core', configuration: 'default')
+    implementation project(':core')
     //
     // Dependent Libraries
     //
