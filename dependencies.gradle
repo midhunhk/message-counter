@@ -23,14 +23,9 @@ ext {
     roboElectricVersion = "3.8"
 }
 
-ext.mainApp = [
-    appVersionCode : 410,
-    appVersionName : "4.1.0"
-]
-
-ext.legacyApp = [
-    appVersionCode : 406,
-    appVersionName : "4.1.0"
+ext.appVersions = [
+    versionCode : 410,
+    versionName : "4.1.0"
 ]
 
 // Dependencies
@@ -50,6 +45,7 @@ ext.deps = [
         roomRuntime         : "android.arch.persistence.room:runtime:$room_version",
         roomCompiler        : "android.arch.persistence.room:compiler:$room_version",
         workRuntime         : "android.arch.work:work-runtime-ktx:$work_version",
+        firebaseCore        : "com.google.firebase:firebase-core:$firebaseCoreVersion",
 
         // testCompile
         junit               : "junit:junit:$junitVersion",

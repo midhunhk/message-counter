@@ -14,8 +14,8 @@ android {
         // update .travis.yml with android version
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        versionCode rootProject.ext.mainApp.appVersionCode
-        versionName rootProject.ext.mainApp.appVersionName
+        versionCode rootProject.ext.appVersions.versionCode
+        versionName rootProject.ext.appVersions.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -51,7 +51,24 @@ android {
             includeAndroidResources = true
         }
     }
+}
 
+def build_param = "${build}"
+
+if (build_param != "dev") {
+    //exclude production build
+    android.variantFilter { variant ->
+        if (variant.buildType.name == 'dev') {
+            variant.setIgnore(true)
+        }
+    }
+} else {
+    //exclude all except production build
+    android.variantFilter { variant ->
+        if (!variant.buildType.name == 'dev') {
+            variant.setIgnore(true)
+        }
+    }
 }
 
 dependencies {
@@ -88,3 +105,4 @@ dependencies {
     androidTestImplementation "org.hamcrest:hamcrest-integration:$hamcrest_version"
     androidTestImplementation "org.hamcrest:hamcrest-library:$hamcrest_version"
 }
+apply plugin: 'com.google.gms.google-services'
