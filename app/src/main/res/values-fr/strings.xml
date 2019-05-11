@@ -16,7 +16,7 @@
   -->
 <resources>
     <string name="app_name">du Compteur de Messages</string>
-    <string name="app_version">Version 4.1.0</string>
+    <string name="app_version">Version 4.1.1</string>
     <string name="app_release_date">May 2019</string>
     <string name="app_code_name">Xingtian</string>
     <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>

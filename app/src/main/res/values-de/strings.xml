@@ -16,7 +16,7 @@
   -->
 <resources>
     <string name="app_name">Nachrichtenzähler</string>
-    <string name="app_version">Version 4.1.0</string>
+    <string name="app_version">Version 4.1.1</string>
     <string name="app_code_name">Xingtian</string>
     <string name="app_release_date">May 2019</string>
     <string name="app_desc">Message Counter zeigt Nachrichten Posteingangsstatistiken und Anzahl der Nachrichten von jedem Ihrer Kontakte an.</string>
