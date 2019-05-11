@@ -16,9 +16,9 @@
   -->
 <resources>
     <string name="app_name">du Compteur de Messages</string>
-    <string name="app_version">Version 4.0.2</string>
-    <string name="app_release_date">Oct 2018</string>
-    <string name="app_code_name">Wyvern</string>
+    <string name="app_version">Version 4.1.0</string>
+    <string name="app_release_date">May 2019</string>
+    <string name="app_code_name">Xingtian</string>
     <string name="app_desc">Compteur de messages affiche les messages statistiques de la boîte de réception et le nombre de messages à partir de chacun de vos contacts. Le code source de ce projet est disponible à GitHub. Tra en utilisant Google Translate.</string>
     <string name="app_disclaim">Avertissement: Cette application est créé à des fins éducatives et en tant que telle n\'a pas de garantie ou de soutien. Depuis papiers API Android sont utilisées, cette application peut ne pas fonctionner comme prévu sur tous les appareils.</string>
     <string name="app_developer_info">Conçu et développé au ae labs</string>
@@ -34,6 +34,7 @@
     <string name="menu_title_donate">Faire un don</string>
     <string name="menu_title_share">Partagez cette appli</string>
     <string name="menu_title_about">Sur</string>
+    <string name="menu_title_license">Licence</string>
 
     <!-- Strings for Preference -->
 
