@@ -149,7 +149,7 @@
                     android:padding="@dimen/unit_xs"
                     android:text="@string/str_about_view_source"
                     android:textAllCaps="false"/>
-
+<!--
                 <Button
                     android:id="@+id/viewLicense"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -159,7 +159,7 @@
                     android:padding="@dimen/unit_xs"
                     android:text="@string/str_about_oss_license"
                     android:textAllCaps="false"/>
-
+-->
                 <Button
                     android:id="@+id/sendFeedback"
                     style="@style/Widget.MaterialComponents.Button.TextButton"

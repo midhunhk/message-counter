@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.oss.licenses.plugin'
+//apply plugin: 'com.google.gms.oss.licenses.plugin'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -66,7 +66,7 @@ dependencies {
     implementation deps.aeappslib
     implementation deps.constraintlayout
     implementation deps.ankocommons
-    implementation deps.osslicenses
+//    implementation deps.osslicenses
     implementation deps.billingclient
     implementation deps.roomRuntime
     implementation deps.workRuntime

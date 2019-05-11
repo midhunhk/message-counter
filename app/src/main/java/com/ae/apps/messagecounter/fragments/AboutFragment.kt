@@ -46,7 +46,7 @@ class AboutFragment : Fragment() {
 
     private fun initUI() {
         viewLicense.setOnClickListener {
-            startActivity(getOpenSourceLicenceDisplayIntent(requireContext()))
+            // startActivity(getOpenSourceLicenceDisplayIntent(requireContext()))
         }
         viewSourceCode.setOnClickListener {
             startActivity(getViewSourceIntent(requireContext()))
