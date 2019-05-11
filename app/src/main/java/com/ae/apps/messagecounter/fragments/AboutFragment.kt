@@ -20,6 +20,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ae.apps.common.utils.DialogUtils
 import com.ae.apps.messagecounter.*
 import kotlinx.android.synthetic.main.fragment_about.*
 
@@ -45,11 +46,13 @@ class AboutFragment : Fragment() {
     }
 
     private fun initUI() {
-        /*
+
         viewLicense.setOnClickListener {
-            startActivity(getOpenSourceLicenceDisplayIntent(requireContext()))
+            // startActivity(getOpenSourceLicenceDisplayIntent(requireContext()))
+            DialogUtils.showMaterialInfoDialog(context, R.string.menu_title_license, R.string.str_license_desc,
+                    android.R.string.ok)
         }
-        */
+
         viewSourceCode.setOnClickListener {
             startActivity(getViewSourceIntent(requireContext()))
         }
