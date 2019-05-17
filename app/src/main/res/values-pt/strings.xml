@@ -16,7 +16,7 @@
   -->
 <resources>
     <string name="app_name">Mensagem Contador</string>
-    <string name="app_version">versão 4.1.1</string>
+    <string name="app_version">versão 4.1.2</string>
     <string name="app_release_date">May 2019</string>
     <string name="app_code_name">Xingtian</string>
     <string name="app_desc">Mensagem Contador exibe mensagens da caixa de entrada estatísticas e número de mensagens de cada um dos seus contatos. Este projeto de código \'s fonte está disponível no GitHub.</string>

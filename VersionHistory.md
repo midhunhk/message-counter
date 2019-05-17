@@ -1,6 +1,9 @@
 ## Message Counter Version History
 
 ### Version 4.1 (Xingtian)
+**MessageCounter 4.1.2 [May 2019]**
+ - VersionCode bump #66
+ 
 **MessageCounter 4.1.1 [May 2019]**
  - Update Translations for legacy app
  - Integrate with Firebase Analytics #64
