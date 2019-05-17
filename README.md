@@ -25,12 +25,15 @@ It is now entirely rewritten in Kotlin and makes use of Android Architecture Com
 
 ## Screenshots
 <img alt="Message Counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-01.png" width="250"/> <img alt="Ignore Numbers" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-02.png" width="250"/> <img alt="Message Statistics" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/screenshots/en/en-03.png" width="250"/> 
- 
-## Installation
-Clone this repo and import the project as an existing Android project in Android Studio.
 
+## Google Play Compliance
+In order to comply with the latest Google Play policies surrounding the use of certain permissions, 
+the core functionality of the app cannot be published on Google Play. [See more details](https://github.com/midhunhk/message-counter/wiki/Permissions#removal-from-google-play)   
+To make the app available to all users, it needs to be installed from an [alternate source](https://github.com/midhunhk/message-counter/wiki/Alternate-Sources).  
+Note that restriction applies to all apps on Google Play Store. 
+ 
 ### Source Code
-Clone this repo and checkout the latest development branch.
+Clone this repo and import the project as an existing Android project in Android Studio.
 
 ```
 git clone https://github.com/midhunhk/message-counter.git  
@@ -45,10 +48,6 @@ Open the project in Android Studio
  - [android-architecture-components](https://developer.android.com/topic/libraries/architecture/)
  - [anko library](https://github.com/Kotlin/anko)
 
-## How to get it
-From March 18 2019, this app is no longer available on the Google Play Store. [See Why.](https://github.com/midhunhk/message-counter/wiki/Permissions#removal-from-google-play)   
-Click [here](https://github.com/midhunhk/message-counter/wiki/Alternate-Sources) to see how to get this app.
- 
 ## License
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
