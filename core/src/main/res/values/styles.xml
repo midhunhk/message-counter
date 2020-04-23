@@ -20,6 +20,9 @@
     <style name="MessageCounterTheme" parent="AppTheme.Base">
     </style>
 
+    <style name="MessageCounterTheme.Yeti" parent="AppTheme.LightAndDark.Base">
+    </style>
+
     <style name="AppTheme.Base" parent="Base.Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -28,6 +31,13 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="android:textViewStyle">@style/AppTextViewStyle</item>
         <item name="actionBarStyle">@style/MyActionBarStyle</item>
+    </style>
+
+    <style name="AppTheme.LightAndDark.Base" parent="Theme.AppCompat.DayNight">
+        <item name="colorPrimary">@color/teal_light</item>
+        <item name="colorPrimaryDark">@color/teal_dark</item>
+        <item name="colorAccent">@color/orange</item>
+        <item name="colorSecondary">@color/rocket_red</item>
     </style>
 
     <style name="buttonTintAccent">

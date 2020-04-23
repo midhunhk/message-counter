@@ -1,1 +1,2 @@
 include ':app', ':core', ':app-legacy'
+include ':sms-backup'

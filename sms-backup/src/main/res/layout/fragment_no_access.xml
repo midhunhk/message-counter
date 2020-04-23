@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2018 Midhun Harikumar
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/no_access_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/request_permissions_header_height"
+        android:background="@drawable/request_permissions_bg"
+        android:contentDescription="@string/empty_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.card.MaterialCardView
+        android:layout_width="@dimen/request_permissions_description_width"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        app:cardCornerRadius="@dimen/material_card_radius"
+        app:cardElevation="2dp"
+        app:cardMaxElevation="1dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/padding_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_access_header"
+        app:layout_constraintVertical_bias="0.2">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtNoAccessTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:text="@string/str_require_permissions_title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    app:layout_constraintBottom_toTopOf="@+id/txtNoAccessText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread_inside" />
+
+                <TextView
+                    android:id="@+id/txtNoAccessText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:gravity="center"
+                    android:padding="@dimen/unit_s"
+                    android:text="@string/str_require_permissions_description"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnRequestPermissions"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txtNoAccessTitle" />
+
+                <Button
+                    android:id="@+id/btnRequestPermissions"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/unit_m"
+                    android:text="@string/str_require_permissions_request_button"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtNoAccessText" />
+
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+    </android.support.design.card.MaterialCardView>
+
+</android.support.constraint.ConstraintLayout>

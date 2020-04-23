@@ -18,4 +18,10 @@
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00695C</color>
     <color name="colorAccent">#FF9800</color>
+
+    <color name="teal_light">#009688</color>
+    <color name="teal_dark">#00695C</color>
+    <color name="orange">#FF9800</color>
+    <color name="rocket_red">#CC5656</color>
+    <color name="dayglo_red">#FF1111</color>
 </resources>

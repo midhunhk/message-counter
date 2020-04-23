@@ -176,10 +176,10 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
 
     private fun setupBottomNavigation() {
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
-            when {
-                item.itemId == R.id.action_ignore -> showFragmentContent(IgnoreNumbersFragment.newInstance(), true)
-                item.itemId == R.id.action_counter -> showFragmentContent(SentCountFragment.newInstance(), true)
-                item.itemId == R.id.action_list -> showFragmentContent(ContactMessageCountFragment.newInstance(), true)
+            when (item.itemId) {
+                R.id.action_ignore -> showFragmentContent(IgnoreNumbersFragment.newInstance(), true)
+                R.id.action_counter -> showFragmentContent(SentCountFragment.newInstance(), true)
+                R.id.action_list -> showFragmentContent(ContactMessageCountFragment.newInstance(), true)
             }
             true
         }
