@@ -6,42 +6,49 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.R
+import com.ae.apps.messagecounter.smsbackup.*
 import com.ae.apps.messagecounter.smsbackup.backup.BackupMethod
 import com.ae.apps.messagecounter.smsbackup.backup.DeviceBackup
 import com.ae.apps.messagecounter.smsbackup.models.Message
+import kotlinx.android.synthetic.main.fragment_sms_backup.*
 
 class SmsBackupFragment : Fragment() {
-
-    var COLUMN_NAME_PROTOCOL = "protocol"
-    var COLUMN_NAME_ID = "_id"
-    var COLUMN_NAME_DATE = "date"
-    var COLUMN_NAME_PERSON = "person"
-    var COLUMN_NAME_BODY = "body"
-    var COLUMN_NAME_ADDRESS = "address"
-
-    var SMS_TABLE_PROJECTION = arrayOf(
-            COLUMN_NAME_ID,
-            COLUMN_NAME_DATE,
-            COLUMN_NAME_PERSON,
-            COLUMN_NAME_BODY,
-            COLUMN_NAME_PROTOCOL,
-            COLUMN_NAME_ADDRESS)
 
     companion object {
         @JvmStatic
         fun newInstance() = SmsBackupFragment()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_sms_backup, container, false)
+    }
 
-        val messages = copyMessages()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-        // Create a list of backupMethods
-        val backupMethods = listOf<BackupMethod>(DeviceBackup())
-        backupMethods.forEach{ it.performBackup(context!!, messages) }
+        initUI()
+    }
+
+    private fun initUI() {
+        btnBackup.setOnClickListener {
+            Thread(Runnable {
+                run {
+                    val messages = copyMessages()
+
+                    // Create a list of backupMethods
+                    val backupMethods = listOf<BackupMethod>(DeviceBackup())
+                    backupMethods.forEach { it.performBackup(context!!, messages) }
+                }
+            }).start()
+        }
+
+        btnRestore.setOnClickListener {
+            Toast.makeText(context, "Restore Button clicked", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun copyMessages(): List<Message> {
@@ -58,15 +65,11 @@ class SmsBackupFragment : Fragment() {
             val sentTime = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE))
             val body = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_BODY))
 
-            messages.add( Message(messageId, person, body, sentTime,protocol,address) )
+            messages.add(Message(messageId, person, body, sentTime, protocol, address))
         }
         cursor?.close()
 
         return messages
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_sms_backup, container, false)
-    }
 }

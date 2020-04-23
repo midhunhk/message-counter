@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".smsbackup.fragments.SmsBackupFragment">
 
     <TextView
+        android:id="@+id/txtTitle"
+        android:text="@string/str_sms_backup_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</FrameLayout>
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btnBackup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/unit_m"
+        android:layout_marginTop="@dimen/unit_xl"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:text="@string/str_btn_backup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/btnRestore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/unit_m"
+        android:layout_marginTop="@dimen/unit_xl"
+        android:text="@string/str_btn_restore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toEndOf="@+id/btnBackup"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <View
+        android:id="@+id/separator1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?colorAccent"
+        android:layout_marginTop="@dimen/unit_m"
+        android:layout_marginBottom="@dimen/unit_m"
+        app:layout_constraintTop_toBottomOf="@+id/btnBackup"/>
+
+    <TextView
+        android:id="@+id/textScheduleBackup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/str_sms_backup_schedule_backups"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintTop_toBottomOf="@+id/separator1" />
+
+</android.support.constraint.ConstraintLayout>

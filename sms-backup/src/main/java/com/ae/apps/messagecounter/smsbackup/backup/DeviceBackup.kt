@@ -7,20 +7,23 @@ import java.io.ObjectOutputStream
 
 class DeviceBackup : BackupMethod {
 
-    companion object{
+    companion object {
         const val FILE_NAME = "messagesBackup.backup"
     }
 
     override fun performBackup(context: Context, messages: List<Message>) {
         // Run IO on a background thread
         Thread(Runnable {
-            val fos:FileOutputStream = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
+            run {
+                // Delete any existing backups
+                context.deleteFile(FILE_NAME)
 
-            // val baos = ByteArrayOutputStream()
-            val oos = ObjectOutputStream(fos)
-            oos.writeObject(messages)
-            oos.flush()
-        })
+                val fileOutputStream: FileOutputStream = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)
+                val objectOutputStream = ObjectOutputStream(fileOutputStream)
+                objectOutputStream.writeObject(messages)
+                objectOutputStream.flush()
+            }
+        }).start()
     }
 
 }
