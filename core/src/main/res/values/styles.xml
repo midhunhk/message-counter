@@ -34,7 +34,7 @@
     </style>
 
     <style name="AppTheme.LightAndDark.Base" parent="Theme.AppCompat.DayNight">
-        <item name="colorPrimary">@color/teal_light</item>
+        <item name="colorPrimary">@color/teal_dark</item>
         <item name="colorPrimaryDark">@color/teal_dark</item>
         <item name="colorAccent">@color/orange</item>
         <item name="colorSecondary">@color/rocket_red</item>

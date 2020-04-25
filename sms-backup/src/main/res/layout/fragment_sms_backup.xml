@@ -15,10 +15,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <android.support.design.button.MaterialButton
+    <Button
         android:id="@+id/btnBackup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:padding="@dimen/unit_m"
         android:layout_marginTop="@dimen/unit_xl"
         android:layout_marginStart="72dp"
@@ -27,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
-    <android.support.design.button.MaterialButton
+    <Button
         android:id="@+id/btnRestore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
     <View
         android:id="@+id/separator1"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="?colorAccent"
         android:layout_marginTop="@dimen/unit_m"
         android:layout_marginBottom="@dimen/unit_m"
@@ -54,6 +55,8 @@
         android:layout_height="wrap_content"
         android:text="@string/str_sms_backup_schedule_backups"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/separator1" />
 
 </android.support.constraint.ConstraintLayout>

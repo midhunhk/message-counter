@@ -12,6 +12,8 @@ import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.smsbackup.*
 import com.ae.apps.messagecounter.smsbackup.backup.BackupMethod
 import com.ae.apps.messagecounter.smsbackup.backup.DeviceBackup
+import com.ae.apps.messagecounter.smsbackup.backup.encryptMsg
+import com.ae.apps.messagecounter.smsbackup.backup.generateKey
 import com.ae.apps.messagecounter.smsbackup.models.Message
 import kotlinx.android.synthetic.main.fragment_sms_backup.*
 
@@ -20,6 +22,7 @@ class SmsBackupFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = SmsBackupFragment()
+        const val DOG_NAME = "Cassiopedia"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -58,17 +61,27 @@ class SmsBackupFragment : Fragment() {
                 null, null, null)
         val messages = mutableListOf<Message>()
         if (null != cursor && cursor.count > 0 && cursor.moveToFirst()) {
-            val messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID))
-            val address = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ADDRESS))
-            val person = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PERSON))
-            val protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL))
-            val sentTime = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE))
-            val body = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_BODY))
+            val key = generateKey(DOG_NAME)
+            do {
+               val messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID))
+               val address = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ADDRESS))
+               var person = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PERSON))
+               val protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL))
+               val sentTime = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE))
+               val body = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_BODY))
 
-            messages.add(Message(messageId, person, body, sentTime, protocol, address))
+               // person is null when they are not in the address book, eg: OTPs, Financial institutions etc
+               if( null == person) person = ""
+
+               val eBody = encryptMsg(body, key).toString()
+               messages.add(Message(messageId, person, eBody, sentTime, protocol, address))
+            } while( cursor.moveToNext() )
         }
         cursor?.close()
 
+        activity!!.runOnUiThread( Runnable {
+            Toast.makeText(activity, "Saving ${messages.size} messages", Toast.LENGTH_SHORT).show()
+        })
         return messages
     }
 
