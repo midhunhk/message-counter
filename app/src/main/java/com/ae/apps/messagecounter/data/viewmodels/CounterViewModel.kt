@@ -33,9 +33,9 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                        private val ignoreNumbersRepository: IgnoredNumbersRepository,
                        private val preferenceRepository: PreferenceRepository) : ViewModel(), MessageCounter.MessageCounterObserver {
 
-    private var mSentCountDetails: MutableLiveData<SentCountDetails> = MutableLiveData()
+    private var sentCountDetails1: MutableLiveData<SentCountDetails> = MutableLiveData()
 
-    fun getSentCountDetails(): LiveData<SentCountDetails> = mSentCountDetails
+    fun getSentCountDetails(): LiveData<SentCountDetails> = sentCountDetails1
 
     fun readSentCountDataFromRepository() {
         val limit: Int = preferenceRepository.getMessageLimitValue()
@@ -56,7 +56,7 @@ class CounterViewModel(private val counterRepository: CounterRepository,
                     startWeekCount, startYearCount, lastCycleCount,
                     getDurationDateString(cycleStartDate),
                     getDurationDateString(prevCycleStartDate))
-            mSentCountDetails.postValue(sentCountDetails)
+            sentCountDetails1.postValue(sentCountDetails)
         }
     }
 

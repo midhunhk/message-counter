@@ -56,9 +56,9 @@ class SentCountFragment : Fragment() {
         private const val PROGRESS_PROPERTY_NAME = "progress"
     }
 
-    private lateinit var mViewModel: CounterViewModel
-    private lateinit var mAppController: AppController
-    private lateinit var mPreferenceRepository: PreferenceRepository
+    private lateinit var viewModel: CounterViewModel
+    private lateinit var appController: AppController
+    private lateinit var preferenceRepository: PreferenceRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,25 +77,25 @@ class SentCountFragment : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        mAppController = activity as AppController
+        appController = activity as AppController
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         clearFindViewByIdCache()
-        mViewModel.getSentCountDetails().removeObservers(this)
+        viewModel.getSentCountDetails().removeObservers(this)
     }
 
     private fun initViewModel() {
-        mPreferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(requireContext()))
+        preferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(requireContext()))
         val counterRepository = CounterRepository.getInstance(AppDatabase.getInstance(requireContext()).counterDao())
         val ignoreNumbersRepository = IgnoredNumbersRepository.getInstance(AppDatabase.getInstance(requireContext()).ignoredNumbersDao())
-        val factory = CounterViewModelFactory(counterRepository, ignoreNumbersRepository, mPreferenceRepository)
-        mViewModel = ViewModelProviders.of(requireActivity(), factory).get(CounterViewModel::class.java)
+        val factory = CounterViewModelFactory(counterRepository, ignoreNumbersRepository, preferenceRepository)
+        viewModel = ViewModelProviders.of(requireActivity(), factory).get(CounterViewModel::class.java)
     }
 
     private fun initUI() {
-        mViewModel.getSentCountDetails().observe(this,
+        viewModel.getSentCountDetails().observe(this,
                 Observer { details: SentCountDetails? ->
                     run {
                         heroSentTodayText.text = details?.sentToday.toString()
@@ -118,11 +118,11 @@ class SentCountFragment : Fragment() {
         )
 
         // Fetch the data that is already in the database
-        mViewModel.readSentCountDataFromRepository()
+        viewModel.readSentCountDataFromRepository()
 
         // Index messages that were sent before the app was installed
         // Or sent during the time a background service was not running
-        mViewModel.indexMessages(requireContext())
+        viewModel.indexMessages(requireContext())
 
         manageInfoCard()
     }
@@ -132,8 +132,8 @@ class SentCountFragment : Fragment() {
             info_card.visibility = View.VISIBLE
             info_card.setOnClickListener {
                 if (reviewSettingsText.visibility == View.VISIBLE) {
-                    mAppController.navigateTo(R.id.action_settings)
-                    mPreferenceRepository.setSettingsHintReviewed()
+                    appController.navigateTo(R.id.action_settings)
+                    preferenceRepository.setSettingsHintReviewed()
                 }
                 info_card.visibility = View.GONE
             }
@@ -142,7 +142,7 @@ class SentCountFragment : Fragment() {
 
     private fun showInfoCard(): Boolean {
         if (CommonUtils.isFirstInstall(requireContext())
-                && !mPreferenceRepository.getSettingsHintReviewed()) {
+                && !preferenceRepository.getSettingsHintReviewed()) {
             // show an info message
             return true
         }

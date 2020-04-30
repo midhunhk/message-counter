@@ -38,16 +38,16 @@ import kotlin.system.measureTimeMillis
  */
 class ContactMessageViewModel : ViewModel() {
 
-    private var mSentMessageContacts: MutableLiveData<List<ContactMessageVo>> = MutableLiveData()
+    private var sentMessageContacts: MutableLiveData<List<ContactMessageVo>> = MutableLiveData()
 
-    private var mReceivedMessageContacts: MutableLiveData<List<ContactMessageVo>> = MutableLiveData()
+    private var receivedMessageContacts: MutableLiveData<List<ContactMessageVo>> = MutableLiveData()
 
-    fun getSentMessageContacts(): LiveData<List<ContactMessageVo>> = mSentMessageContacts
+    fun getSentMessageContacts(): LiveData<List<ContactMessageVo>> = sentMessageContacts
 
-    fun getReceivedMessageContacts(): LiveData<List<ContactMessageVo>> = mReceivedMessageContacts
+    fun getReceivedMessageContacts(): LiveData<List<ContactMessageVo>> = receivedMessageContacts
 
     fun getContactMessageData(context: Context) {
-        if (null == mSentMessageContacts.value || null == mReceivedMessageContacts.value) {
+        if (null == sentMessageContacts.value || null == receivedMessageContacts.value) {
             computeMessageCounts(context)
         }
     }
@@ -68,8 +68,8 @@ class ContactMessageViewModel : ViewModel() {
                 val sentContactMessages = getContactMessagesList(contactManager, sentMessages)
                 val receivedContactMessages = getContactMessagesList(contactManager, receivedMessages)
 
-                mSentMessageContacts.postValue(sentContactMessages)
-                mReceivedMessageContacts.postValue(receivedContactMessages)
+                sentMessageContacts.postValue(sentContactMessages)
+                receivedMessageContacts.postValue(receivedContactMessages)
             }
 
             Log.d("ContactMessageViewModel", "timeToFetchAllContacts = $timeToFetchAllContacts")

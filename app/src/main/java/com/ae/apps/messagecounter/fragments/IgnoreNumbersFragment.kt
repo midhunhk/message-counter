@@ -48,8 +48,8 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
         }
     }
 
-    private lateinit var mViewModel: IgnoredNumbersViewModel
-    private lateinit var mAdapter: IgnoredNumbersAdapter
+    private lateinit var viewModel: IgnoredNumbersViewModel
+    private lateinit var adapter: IgnoredNumbersAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -68,7 +68,7 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        mViewModel.getIgnoredNumbers().removeObservers(this)
+        viewModel.getIgnoredNumbers().removeObservers(this)
         clearFindViewByIdCache()
     }
 
@@ -76,8 +76,8 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
         val repository = IgnoredNumbersRepository.getInstance(AppDatabase
                 .getInstance(requireContext()).ignoredNumbersDao())
         val factory = IgnoredNumbersViewModelFactory(repository)
-        mViewModel = ViewModelProviders.of(this, factory).get(IgnoredNumbersViewModel::class.java)
-        mAdapter = IgnoredNumbersAdapter(Collections.emptyList(), requireContext(), this)
+        viewModel = ViewModelProviders.of(this, factory).get(IgnoredNumbersViewModel::class.java)
+        adapter = IgnoredNumbersAdapter(Collections.emptyList(), requireContext(), this)
     }
 
     private fun initUI() {
@@ -85,13 +85,13 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
 
         val recyclerView = list as EmptyRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = mAdapter
+        recyclerView.adapter = adapter
         recyclerView.setEmptyView(empty_view)
 
-        mViewModel.getIgnoredNumbers()
+        viewModel.getIgnoredNumbers()
                 .observe(this, Observer { items ->
                     run {
-                        mAdapter.setItems(items!!)
+                        adapter.setItems(items!!)
                     }
                 })
     }
@@ -103,12 +103,12 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
     }
 
     override fun onContactSelected(ignoredContact: IgnoredNumber) {
-        mViewModel.ignoreNumber(ignoredContact)
-        mAdapter.notifyDataSetChanged()
+        viewModel.ignoreNumber(ignoredContact)
+        adapter.notifyDataSetChanged()
     }
 
     override fun onIgnoredContactRemoved(ignoredContact: IgnoredNumber) {
-        mViewModel.unIgnoreNumber(ignoredContact)
-        mAdapter.notifyDataSetChanged()
+        viewModel.unIgnoreNumber(ignoredContact)
+        adapter.notifyDataSetChanged()
     }
 }
