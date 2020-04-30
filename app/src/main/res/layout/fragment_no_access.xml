@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Midhun Harikumar
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,11 @@
   ~ limitations under the License.
   -->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             tools:context=".fragments.NoAccessFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.NoAccessFragment">
 
     <View
         android:id="@+id/no_access_header"
@@ -27,7 +26,7 @@
         android:layout_height="@dimen/request_permissions_header_height"
         android:background="@drawable/request_permissions_bg"
         android:contentDescription="@string/empty_text"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.card.MaterialCardView
         android:layout_width="@dimen/request_permissions_description_width"
@@ -66,7 +65,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="spread_inside"/>
+                    app:layout_constraintVertical_chainStyle="spread_inside" />
 
                 <TextView
                     android:id="@+id/txtNoAccessText"
@@ -80,7 +79,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/btnRequestPermissions"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/txtNoAccessTitle"/>
+                    app:layout_constraintTop_toTopOf="@+id/txtNoAccessTitle" />
 
                 <Button
                     android:id="@+id/btnRequestPermissions"
@@ -92,7 +91,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtNoAccessText"/>
+                    app:layout_constraintTop_toBottomOf="@+id/txtNoAccessText" />
 
             </android.support.constraint.ConstraintLayout>
         </ScrollView>
