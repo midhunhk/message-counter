@@ -44,20 +44,20 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
                 Manifest.permission.READ_SMS)
     }
 
-    private var mPreviousFragment: Fragment? = null
-    private var mSecondaryFragmentDisplayed = false
-    private lateinit var mPermissionChecker: RuntimePermissionChecker
-    private lateinit var mPreferenceRepository: PreferenceRepository
+    private var previousFragment: Fragment? = null
+    private var isSecondaryFragmentDisplayed = false
+    private lateinit var permissionChecker: RuntimePermissionChecker
+    private lateinit var preferenceRepository: PreferenceRepository
     private lateinit var appAnalytics: AppAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mPreferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(this))
+        preferenceRepository = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(this))
 
-        mPermissionChecker = RuntimePermissionChecker(this)
-        mPermissionChecker.checkPermissions()
+        permissionChecker = RuntimePermissionChecker(this)
+        permissionChecker.checkPermissions()
 
         appAnalytics = AppAnalytics.newInstance(baseContext)
         appAnalytics.logAppStart(resources.getString(R.string.app_name))
@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
     override fun invokeRequestPermissions() = reallyRequestForPermissions()
 
     override fun onPermissionsGranted() {
-        mPreferenceRepository.saveRuntimePermissions(true)
-        showFragmentContent(SentCountFragment.newInstance(), true)
+        preferenceRepository.saveRuntimePermissions(true)
+        showFragmentContent(SentCountFragment.newInstance())
         setupBottomNavigation()
         bottom_navigation.selectedItemId = R.id.action_counter
         manageMessageCounterService()
@@ -83,14 +83,14 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
     private fun reallyRequestForPermissions() = requestPermissions(requiredPermissions(), PERMISSION_CHECK_REQUEST_CODE)
 
     private fun showPermissionsRequiredView() {
-        mPreferenceRepository.saveRuntimePermissions(false)
-        showFragmentContent(NoAccessFragment.newInstance(), true)
+        preferenceRepository.saveRuntimePermissions(false)
+        showFragmentContent(NoAccessFragment.newInstance())
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_CHECK_REQUEST_CODE -> {
-                mPermissionChecker.handlePermissionsResult(permissions, grantResults)
+                permissionChecker.handlePermissionsResult(permissions, grantResults)
             }
             else -> {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -104,9 +104,9 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
     }
 
     override fun onBackPressed() {
-        if (mSecondaryFragmentDisplayed && null != mPreviousFragment) {
-            mSecondaryFragmentDisplayed = false
-            showFragmentContent(mPreviousFragment!!, true)
+        if (isSecondaryFragmentDisplayed && null != previousFragment) {
+            isSecondaryFragmentDisplayed = false
+            showFragmentContent(previousFragment!!)
         } else {
             super.onBackPressed()
         }
@@ -116,8 +116,8 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
         val id = item?.itemId
 
         if (id == android.R.id.home) {
-            if (null != mPreviousFragment) {
-                showFragmentContent(mPreviousFragment!!, true)
+            if (null != previousFragment) {
+                showFragmentContent(previousFragment!!)
             }
             return true
         }
@@ -151,12 +151,12 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
         }
     }
 
-    private fun showFragmentContent(fragment: Fragment, primaryFragment: Boolean) {
+    private fun showFragmentContent(fragment: Fragment, primaryFragment: Boolean = true) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commitAllowingStateLoss()
         if (primaryFragment) {
-            mSecondaryFragmentDisplayed = false
+            isSecondaryFragmentDisplayed = false
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setDisplayShowHomeEnabled(false)
             // We don't show the bottom nav for NoAccessFragment
@@ -165,9 +165,9 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
             } else {
                 bottom_navigation.visibility = View.VISIBLE
             }
-            mPreviousFragment = fragment
+            previousFragment = fragment
         } else {
-            mSecondaryFragmentDisplayed = true
+            isSecondaryFragmentDisplayed = true
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             supportActionBar?.setDisplayShowHomeEnabled(true)
             bottom_navigation.visibility = View.GONE
@@ -177,9 +177,10 @@ class MainActivity : AppCompatActivity(), PermissionsAwareComponent, AppControll
     private fun setupBottomNavigation() {
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.action_ignore -> showFragmentContent(IgnoreNumbersFragment.newInstance(), true)
-                R.id.action_counter -> showFragmentContent(SentCountFragment.newInstance(), true)
-                R.id.action_list -> showFragmentContent(ContactMessageCountFragment.newInstance(), true)
+                R.id.action_ignore -> showFragmentContent(IgnoreNumbersFragment.newInstance())
+                R.id.action_counter -> showFragmentContent(SentCountFragment.newInstance())
+                R.id.action_list -> showFragmentContent(SmsBackupFragment.newInstance())
+                // R.id.action_list -> showFragmentContent(ContactMessageCountFragment.newInstance())
             }
             true
         }

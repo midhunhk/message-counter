@@ -1,7 +1,7 @@
-package com.ae.apps.messagecounter.smsbackup.backup
+package com.ae.apps.messagecounter.data.smsbackup
 
 import android.content.Context
-import com.ae.apps.messagecounter.smsbackup.models.Message
+import com.ae.apps.messagecounter.data.models.Message
 
 interface BackupMethod {
 

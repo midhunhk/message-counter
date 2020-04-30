@@ -1,4 +1,4 @@
-package com.ae.apps.messagecounter.smsbackup.fragments
+package com.ae.apps.messagecounter.fragments
 
 import android.net.Uri
 import android.os.Bundle
@@ -9,12 +9,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.R
-import com.ae.apps.messagecounter.smsbackup.*
-import com.ae.apps.messagecounter.smsbackup.backup.BackupMethod
-import com.ae.apps.messagecounter.smsbackup.backup.DeviceBackup
-import com.ae.apps.messagecounter.smsbackup.backup.encryptMsg
-import com.ae.apps.messagecounter.smsbackup.backup.generateKey
-import com.ae.apps.messagecounter.smsbackup.models.Message
+import com.ae.apps.messagecounter.data.business.SMS_TABLE_ALL_PROJECTION
+import com.ae.apps.messagecounter.data.business.getMessageForBackupFromCursor
+import com.ae.apps.messagecounter.data.models.Message
+import com.ae.apps.messagecounter.data.smsbackup.BackupMethod
+import com.ae.apps.messagecounter.data.smsbackup.DeviceBackup
+import com.ae.apps.messagecounter.data.smsbackup.encryptMsg
+import com.ae.apps.messagecounter.data.smsbackup.generateKey
 import kotlinx.android.synthetic.main.fragment_sms_backup.*
 
 class SmsBackupFragment : Fragment() {
@@ -57,24 +58,23 @@ class SmsBackupFragment : Fragment() {
     private fun copyMessages(): List<Message> {
         val cursor = context?.contentResolver?.query(
                 Uri.parse(SMSManager.SMS_URI_INBOX),
-                SMS_TABLE_PROJECTION,
+                SMS_TABLE_ALL_PROJECTION,
                 null, null, null)
         val messages = mutableListOf<Message>()
         if (null != cursor && cursor.count > 0 && cursor.moveToFirst()) {
             val key = generateKey(DOG_NAME)
             do {
-               val messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID))
-               val address = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ADDRESS))
-               var person = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PERSON))
-               val protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL))
-               val sentTime = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE))
-               val body = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_BODY))
-
-               // person is null when they are not in the address book, eg: OTPs, Financial institutions etc
-               if( null == person) person = ""
-
-               val eBody = encryptMsg(body, key).toString()
-               messages.add(Message(messageId, person, eBody, sentTime, protocol, address))
+                val message = getMessageForBackupFromCursor(cursor)
+                val encryptedMessage = Message(
+                        message.id,
+                        message.messageCount,
+                        encryptMsg(message.body, key).toString(),
+                        message.date,
+                        message.protocol,
+                        message.address,
+                        message.person
+                )
+               messages.add(encryptedMessage)
             } while( cursor.moveToNext() )
         }
         cursor?.close()

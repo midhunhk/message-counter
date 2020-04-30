@@ -38,6 +38,7 @@
         <item name="colorPrimaryDark">@color/teal_dark</item>
         <item name="colorAccent">@color/orange</item>
         <item name="colorSecondary">@color/rocket_red</item>
+        <item name="android:textViewStyle">@style/AppTextViewStyle</item>
     </style>
 
     <style name="buttonTintAccent">

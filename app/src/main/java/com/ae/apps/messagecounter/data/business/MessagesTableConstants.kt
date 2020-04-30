@@ -19,14 +19,14 @@ import android.database.Cursor
 import com.ae.apps.messagecounter.data.models.Message
 import com.ae.apps.messagecounter.data.repositories.getMessageCount
 
-var COLUMN_NAME_PROTOCOL = "protocol"
-var COLUMN_NAME_ID = "_id"
-var COLUMN_NAME_DATE = "date"
-var COLUMN_NAME_PERSON = "person"
-var COLUMN_NAME_BODY = "body"
-var COLUMN_NAME_ADDRESS = "address"
+const val COLUMN_NAME_PROTOCOL = "protocol"
+const val COLUMN_NAME_ID = "_id"
+const val COLUMN_NAME_DATE = "date"
+const val COLUMN_NAME_PERSON = "person"
+const val COLUMN_NAME_BODY = "body"
+const val COLUMN_NAME_ADDRESS = "address"
 
-var SMS_TABLE_PROJECTION = arrayOf(COLUMN_NAME_ID,
+val SMS_TABLE_PROJECTION = arrayOf(COLUMN_NAME_ID,
         COLUMN_NAME_DATE,
         COLUMN_NAME_PERSON,
         COLUMN_NAME_BODY,
@@ -37,9 +37,17 @@ val SMS_TABLE_MINIMAL_PROJECTION = arrayOf(COLUMN_NAME_ID,
         COLUMN_NAME_ADDRESS,
         COLUMN_NAME_PERSON)
 
-val SELECT_SENT_MESSAGES_AFTER_DATE = "person is null and protocol is null and $COLUMN_NAME_DATE > ? "
+val SMS_TABLE_ALL_PROJECTION = arrayOf(
+        COLUMN_NAME_ID,
+        COLUMN_NAME_DATE,
+        COLUMN_NAME_PERSON,
+        COLUMN_NAME_BODY,
+        COLUMN_NAME_PROTOCOL,
+        COLUMN_NAME_ADDRESS)
+
+const val SELECT_SENT_MESSAGES_AFTER_DATE = "person is null and protocol is null and $COLUMN_NAME_DATE > ? "
 const val SELECT_SENT_MESSAGES_AFTER_LAST = "and _id > ?"
-val SORT_BY_DATE = "$COLUMN_NAME_DATE ASC"
+const val SORT_BY_DATE = "$COLUMN_NAME_DATE ASC"
 
 const val DEFAULT_MESSAGE_COUNT = 1
 const val DEFAULT_INDEX_TIME_STAMP = "0"
@@ -59,4 +67,16 @@ fun getMessageFromCursor(cursor: Cursor): Message {
         DEFAULT_MESSAGE_COUNT
     }
     return Message(messageId, messagesCount, body, sentTime, protocol, address)
+}
+
+fun getMessageForBackupFromCursor(cursor: Cursor): Message {
+    val messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID))
+    val address = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ADDRESS))
+    // person is null when they are not in the address book, eg: OTPs, Financial institutions etc
+    val person = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PERSON))?: ""
+    val protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL))
+    val sentTime = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE))
+    val body = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_BODY))
+
+    return Message(messageId, 0, body, sentTime, protocol, address, person)
 }

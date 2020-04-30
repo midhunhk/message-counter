@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".smsbackup.fragments.SmsBackupFragment">
+    tools:context=".fragments.SmsBackupFragment">
 
     <TextView
         android:id="@+id/txtTitle"
@@ -24,7 +24,7 @@
         android:layout_marginTop="@dimen/unit_xl"
         android:layout_marginStart="72dp"
         android:layout_marginLeft="72dp"
-        android:text="@string/str_btn_backup"
+        android:text="@string/str_sms_backup_btn_backup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/unit_m"
         android:layout_marginTop="@dimen/unit_xl"
-        android:text="@string/str_btn_restore"
+        android:text="@string/str_sms_backup_btn_restore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toEndOf="@+id/btnBackup"

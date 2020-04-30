@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2018 Midhun Harikumar
+  ~ Copyright 2020 Midhun Harikumar
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
   -->
 <resources>
     <string name="app_name">Message Counter</string>
-    <string name="app_version">Version 4.1.2</string>
-    <string name="app_code_name">(Xingtian)</string>
-    <string name="app_release_date">May 2019</string>
+    <string name="app_version">Version 4.2.0</string>
+    <string name="app_code_name">(Yeti)</string>
+    <string name="app_release_date">May 2020</string>
     <string name="app_desc">Message Counter is an open source app that displays useful statistics about your SMS.</string>
     <string name="app_disclaim">Since this app uses Android standard SMS API, it may not produce correct statistics for all devices. Do not use the data displayed by the app as an accurate measure for SMS counts.</string>
     <string name="app_developer_info">Designed, developed at ae app labs</string>
@@ -100,7 +100,7 @@
     <string name="str_about_view_faq">Frequently Asked Questions</string>
     <string name="str_about_share_feedback">Share Feedback</string>
     <string name="str_about_share_feedback_subject">Feedback for MessageCounter</string>
-    <string name="str_about_share_feedback_body" translatable="false">AppVersion 4.1.1, build 410</string>
+    <string name="str_about_share_feedback_body" translatable="false">AppVersion 4.2.0, build 411</string>
     <string name="str_info_review_settings_on_first_run">Review your settings</string>
     <string name="str_ignore_number_delete">Delete</string>
 
@@ -114,4 +114,10 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</string>
+
+    <!-- 4.2.0 -->
+    <string name="str_sms_backup_btn_backup">Backup</string>
+    <string name="str_sms_backup_btn_restore">Restore</string>
+    <string name="str_sms_backup_title">SMS Backup</string>
+    <string name="str_sms_backup_schedule_backups">Schedule Backups</string>
 </resources>

@@ -15,9 +15,12 @@
  */
 package com.ae.apps.messagecounter.data.models
 
+import java.io.Serializable
+
 data class Message(val id: String,
                    val messageCount: Int,
                    val body: String,
                    val date: String,
                    val protocol: String?,
-                   val address: String)
+                   val address: String,
+                   val person: String? = null) : Serializable
