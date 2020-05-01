@@ -21,7 +21,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.business.SMS_TABLE_ALL_PROJECTION
@@ -69,10 +68,6 @@ class SmsBackupFragment : Fragment() {
                 }
             }
 
-        }
-
-        btnRestore.setOnClickListener {
-            Toast.makeText(context, "Restore Button clicked", Toast.LENGTH_SHORT).show()
         }
     }
 
