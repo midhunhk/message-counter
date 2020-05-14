@@ -2,12 +2,9 @@
     <string name="app_name">Message Counter legacy</string>
 
     <string name="str_migrate_title">Attention!</string>
-    <string name="str_migrate_description">
-Due to circumstances beyond our control, Google Play requires us to remove the permission to access the SMS database.\n\n
-If you want to continue using this app, you need to install it from another source (Alternate AppStores).
-    </string>
-    <string name="str_migrate_alternate">View alternate sources</string>
+    <string name="str_migrate_description">Current Google Play Policies, prevents us from accessing the SMS database which is the core functionality. Unfortunately you need to install this app from another source if you need to continue using the feature.</string>
+    <string name="str_migrate_alternate">Alternate Sources</string>
+    <string name="str_migrate_view_details">More details and FAQ</string>
+    <string name="str_migrate_view_source">Project Source</string>
     <string name="str_migrate_alternate_description">Alternate sources for the app</string>
-    <string name="str_migrate_view_details">View more details</string>
-    <string name="str_migrate_view_source">View Source</string>
 </resources>
