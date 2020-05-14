@@ -97,4 +97,14 @@
     <string name="str_sms_limit_notification_text">SMS-Limit Erreicht für diesen Zyklus</string>
     <string name="str_info_review_settings_on_first_run">Überprüfen Sie Ihre Einstellungen</string>
     <string name="str_ignore_number_delete">Löschen</string>
+
+    <!-- 4.2.0 -->
+    <string name="str_sms_backup_btn_backup">Jetzt Sichern</string>
+    <string name="str_sms_backup_btn_restore">Wiederherstellen</string>
+    <string name="str_sms_backup_title">BACKUP</string>
+    <string name="str_sms_backup_schedule_backups">BACKUP-ZEITPLAN</string>
+    <string name="str_sms_backup_schedule_status_none">Nicht Geplant</string>
+    <string name="str_sms_backup_status">Backup Status : Keine backups</string>
+    <string name="str_sms_backup_locations">Sichern auf : Gerät</string>
+    <string name="str_sms_backup_encryption_note">Nachrichten, die Informationen intern gespeichert und verschlüsselt.</string>
 </resources>
