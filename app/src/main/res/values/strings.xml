@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="app_name">Message Counter</string>
+    <string name="app_name">Message Counter &amp; Backup</string>
     <string name="app_version">Version 4.2.0</string>
     <string name="app_code_name">(Yeti)</string>
     <string name="app_release_date">May 2020</string>
@@ -32,6 +32,7 @@
     <string name="title_sent_list">List</string>
     <string name="title_counter">Counter</string>
     <string name="title_ignore">Ignore</string>
+    <string name="title_backup">Backup</string>
 
     <!-- Menu Strings -->
     <string name="menu_title_settings">Settings</string>
@@ -116,7 +117,7 @@ See the License for the specific language governing permissions and
 limitations under the License.</string>
 
     <!-- 4.2.0 -->
-    <string name="str_sms_backup_method_name" translatable="false">WILLBEREPLACEDLATER</string>
+    <string name="str_sms_backup_method_name" translatable="false">TOBEREPLACEDLA8R</string>
     <string name="str_sms_backup_btn_backup">Backup Now</string>
     <string name="str_sms_backup_btn_restore">Restore</string>
     <string name="str_sms_backup_title">BACKUP</string>

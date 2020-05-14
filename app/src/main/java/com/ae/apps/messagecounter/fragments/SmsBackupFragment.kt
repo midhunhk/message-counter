@@ -42,6 +42,8 @@ class SmsBackupFragment : Fragment() {
         fun newInstance() = SmsBackupFragment()
     }
 
+    var isBackupRunning = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_sms_backup, container, false)
@@ -55,19 +57,39 @@ class SmsBackupFragment : Fragment() {
 
     private fun initUI() {
         btnBackup.setOnClickListener {
-            doAsync {
-                val messages = readAllMessages()
+            if(!isBackupRunning) {
+                isBackupRunning = true
+                progressBarBackup.visibility = View.VISIBLE
+                btnBackup.isEnabled = false
 
-                // Create a list of backupMethods
-                val backupMethods = listOf<BackupMethod>(DeviceBackup())
-                backupMethods.forEach { it.performBackup(context!!, messages) }
+                doAsync {
+                    var errorMessage:String? = null
+                    val messages = readAllMessages()
+                    try {
 
-                uiThread {
-                    context?.longToast("Saved ${messages.size} messages")
+                        // Create a list of backupMethods
+                        val backupMethods = listOf<BackupMethod>(DeviceBackup())
+                        backupMethods.forEach { it.performBackup(context!!, messages) }
+                    } catch (e:Exception){
+                        errorMessage = e.message
+                    }
+
+                    uiThread {
+                        isBackupRunning = false
+                        btnBackup.isEnabled = true
+                        progressBarBackup.visibility = View.GONE
+                        if (errorMessage == null) {
+                            context?.longToast("Saved ${messages.size} messages")
+                        } else {
+                            context?.longToast("Error Occurred: $errorMessage")
+                        }
+                    }
                 }
             }
 
         }
+
+        progressBarBackup.visibility = View.GONE
     }
 
     private fun readAllMessages(): List<Message> {

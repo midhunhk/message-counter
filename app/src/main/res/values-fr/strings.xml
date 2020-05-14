@@ -28,6 +28,7 @@
     <string name="title_sent_list">Liste</string>
     <string name="title_counter">Compteur</string>
     <string name="title_ignore">Ignorer</string>
+    <string name="title_backup">Sauvegarde</string>
 
     <!-- Menu Strings -->
     <string name="menu_title_settings">Réglages</string>

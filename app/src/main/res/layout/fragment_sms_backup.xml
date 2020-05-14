@@ -13,107 +13,134 @@
   ~  See the License for the specific language governing permissions and
   ~  limitations under the License.
   -->
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.SmsBackupFragment">
 
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/str_sms_backup_title"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/card_title"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textBackupStatus"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dip"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/unit_s"
+        android:layout_marginStart="@dimen/unit_m"
+        android:layout_marginEnd="@dimen/unit_m"
+        android:contentDescription="@string/empty_text"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/hero_message_sent"/>
 
-    <TextView
-        android:id="@+id/textBackupStatus"
-        android:layout_width="0dp"
+    <android.support.design.card.MaterialCardView
+        android:id="@+id/details_card"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/unit_m"
-        android:text="@string/str_sms_backup_status"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+        app:cardCornerRadius="@dimen/material_card_radius"
+        app:cardElevation="1dp"
+        app:cardMaxElevation="1dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/padding_small">
 
-    <TextView
-        android:id="@+id/textBackupLocations"
-        android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_margin"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/str_sms_backup_title"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textBackupStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_m"
+                android:padding="@dimen/unit_s"
+                android:text="@string/str_sms_backup_status" />
+
+            <TextView
+                android:id="@+id/textBackupLocations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/unit_s"
+                android:layout_marginTop="@dimen/unit_m"
+                android:text="@string/str_sms_backup_locations" />
+
+            <Button
+                android:id="@+id/btnBackup"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_m"
+                android:padding="@dimen/unit_m"
+                android:text="@string/str_sms_backup_btn_backup" />
+
+            <ProgressBar
+                android:id="@+id/progressBarBackup"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/unit_m"
+                android:layout_marginBottom="@dimen/unit_m"
+                android:indeterminate="true"/>
+
+            <TextView
+                android:id="@+id/txtBackupNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_m"
+                android:textSize="12sp"
+                android:padding="@dimen/unit_s"
+                android:text="@string/str_sms_backup_encryption_note" />
+
+        </LinearLayout>
+    </android.support.design.card.MaterialCardView>
+
+    <android.support.design.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/unit_m"
-        android:text="@string/str_sms_backup_locations"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/textBackupStatus" />
+        app:cardCornerRadius="@dimen/material_card_radius"
+        app:cardElevation="1dp"
+        app:cardMaxElevation="1dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/padding_small">
 
-    <Button
-        android:id="@+id/btnBackup"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/unit_m"
-        android:text="@string/str_sms_backup_btn_backup"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintTop_toBottomOf="@+id/textBackupLocations" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/card_margin"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding">
 
-    <TextView
-        android:id="@+id/textScheduleBackup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/unit_m"
-        android:text="@string/str_sms_backup_schedule_backups"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/card_title"
-        android:textStyle="bold"
-        app:layout_goneMarginTop="@dimen/unit_xl"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/btnBackup" />
+            <TextView
+                android:id="@+id/textScheduleBackup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_m"
+                android:text="@string/str_sms_backup_schedule_backups"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtBackupNote"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/str_sms_backup_encryption_note"
-        app:layout_constraintBottom_toTopOf="@+id/textScheduleBackup"
-        app:layout_constraintEnd_toStartOf="@+id/btnBackup"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/textBackupLocations" />
+            <TextView
+                android:id="@+id/txtCurrentSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/unit_m"
+                android:padding="@dimen/unit_s"
+                android:text="@string/str_sms_backup_schedule_status_none" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        </LinearLayout>
+    </android.support.design.card.MaterialCardView>
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="20dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/unit_m"
-        android:text="@string/str_sms_backup_schedule_status_none"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/textScheduleBackup" />
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
