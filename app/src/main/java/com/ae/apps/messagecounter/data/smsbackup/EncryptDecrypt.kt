@@ -32,7 +32,7 @@ fun generateKey(password: String): SecretKey? {
 fun encryptMsg(message: String, secret: SecretKey?): ByteArray? {
     /* Encrypt the message. */
     var cipher: Cipher? = null
-    cipher = Cipher.getInstance("AES/PKCS5Padding")
+    cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
     cipher.init(Cipher.ENCRYPT_MODE, secret)
     return cipher.doFinal(message.toByteArray(charset("UTF-8")))
 }
@@ -41,7 +41,7 @@ fun encryptMsg(message: String, secret: SecretKey?): ByteArray? {
 fun decryptMsg(cipherText: ByteArray?, secret: SecretKey?): String? {
     /* Decrypt the message, given derived encContentValues and initialization vector. */
     var cipher: Cipher? = null
-    cipher = Cipher.getInstance("AES/PKCS5Padding")
+    cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
     cipher.init(Cipher.DECRYPT_MODE, secret)
     return String(cipher.doFinal(cipherText), charset("UTF-8"))
 }

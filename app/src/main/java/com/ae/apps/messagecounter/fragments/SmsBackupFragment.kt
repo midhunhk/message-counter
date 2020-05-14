@@ -40,7 +40,6 @@ class SmsBackupFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = SmsBackupFragment()
-        const val BACKUP_FRAGMENT_NAME = "Cassiopeia"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -80,17 +79,13 @@ class SmsBackupFragment : Fragment() {
 
         cursor.use {
             if (null != cursor && cursor.count > 0 && cursor.moveToFirst()) {
-                val key = generateKey(BACKUP_FRAGMENT_NAME)
+                val backupName = getString(R.string.str_sms_backup_method_name)
+                val key = generateKey(backupName)
                 do {
                     val message = getMessageForBackupFromCursor(cursor)
-                    val encryptedMessage = Message(
-                            message.id,
-                            message.messageCount,
-                            encryptMsg(message.body, key).toString(),
-                            message.date,
-                            message.protocol,
-                            message.address,
-                            message.person
+                    val encryptedMessage = message.copy(
+                            address = encryptMsg(message.address, key).toString(),
+                            body = encryptMsg(message.body, key).toString()
                     )
                     messages.add(encryptedMessage)
                 } while (cursor.moveToNext())

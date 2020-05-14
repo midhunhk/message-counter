@@ -35,7 +35,7 @@ if (build_param != "dev") {
 } else {
     //exclude all except production build
     android.variantFilter { variant ->
-        if (!variant.buildType.name == 'dev') {
+        if (!(variant.buildType.name == 'dev')) {
             variant.setIgnore(true)
         }
     }
@@ -43,7 +43,7 @@ if (build_param != "dev") {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    //implementation "com.google.android.material:material:1.1.0-rc02"
+    //implementation "com.google.android.material:material:1.2.0-alpha06"
 
     api deps.appcompat
     api deps.preference
