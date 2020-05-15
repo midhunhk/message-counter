@@ -106,7 +106,8 @@
     <string name="str_sms_backup_title">CÓPIA de segurança</string>
     <string name="str_sms_backup_schedule_backups">AGENDAMENTO DE CÓPIAS DE SEGURANÇA</string>
     <string name="str_sms_backup_schedule_status_none">Não Agendada</string>
-    <string name="str_sms_backup_status">Estado da cópia de segurança : cópias de segurança</string>
+    <string name="str_sms_backup_status">Estado da cópia de segurança : %1$s</string>
+    <string name="str_sms_backup_status_none">cópias de segurança</string>
     <string name="str_sms_backup_locations">Backup em : Dispositivo</string>
     <string name="str_sms_backup_encryption_note">Mensagens de informação é armazenada internamente e criptografada.</string>
 </resources>

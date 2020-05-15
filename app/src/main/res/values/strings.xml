@@ -123,7 +123,8 @@ limitations under the License.</string>
     <string name="str_sms_backup_title">BACKUP</string>
     <string name="str_sms_backup_schedule_backups">BACKUP SCHEDULE</string>
     <string name="str_sms_backup_schedule_status_none">Not Scheduled</string>
-    <string name="str_sms_backup_status">Backup Status : No backups</string>
+    <string name="str_sms_backup_status">Backup Status : %1$s</string>
+    <string name="str_sms_backup_status_none">No backups</string>
     <string name="str_sms_backup_locations">Backing up to : Device</string>
     <string name="str_sms_backup_encryption_note">Messages information is stored internally and encrypted.</string>
 </resources>

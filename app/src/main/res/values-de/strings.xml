@@ -105,7 +105,8 @@
     <string name="str_sms_backup_title">BACKUP</string>
     <string name="str_sms_backup_schedule_backups">BACKUP-ZEITPLAN</string>
     <string name="str_sms_backup_schedule_status_none">Nicht Geplant</string>
-    <string name="str_sms_backup_status">Backup Status : Keine backups</string>
+    <string name="str_sms_backup_status">Backup Status : %1$s</string>
+    <string name="str_sms_backup_status_none">Keine backups</string>
     <string name="str_sms_backup_locations">Sichern auf : Gerät</string>
     <string name="str_sms_backup_encryption_note">Nachrichten, die Informationen intern gespeichert und verschlüsselt.</string>
 </resources>

@@ -106,7 +106,8 @@
     <string name="str_sms_backup_title">SAUVEGARDE</string>
     <string name="str_sms_backup_schedule_backups">PLANIFICATION DE LA SAUVEGARDE</string>
     <string name="str_sms_backup_schedule_status_none">Pas Prévu</string>
-    <string name="str_sms_backup_status">L\'État de la sauvegarde : Pas de sauvegardes</string>
+    <string name="str_sms_backup_status">L\'État de la sauvegarde : %1$s</string>
+    <string name="str_sms_backup_status_none">Pas de sauvegardes</string>
     <string name="str_sms_backup_locations">La sauvegarde de l\'Appareil</string>
     <string name="str_sms_backup_encryption_note">Les Messages d\'information est stockée en interne et chiffré.</string>
 </resources>

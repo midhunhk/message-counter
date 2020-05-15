@@ -17,6 +17,7 @@ package com.ae.apps.messagecounter.fragments
 
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.business.SMS_TABLE_ALL_PROJECTION
 import com.ae.apps.messagecounter.data.business.getMessageForBackupFromCursor
 import com.ae.apps.messagecounter.data.models.Message
+import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.data.smsbackup.BackupMethod
 import com.ae.apps.messagecounter.data.smsbackup.DeviceBackup
 import com.ae.apps.messagecounter.data.smsbackup.encryptMsg
@@ -34,15 +36,19 @@ import kotlinx.android.synthetic.main.fragment_sms_backup.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.uiThread
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SmsBackupFragment : Fragment() {
 
     companion object {
         @JvmStatic
         fun newInstance() = SmsBackupFragment()
+        const val DATE_FORMAT = "dd-MMM-YYYY hh:mm a"
     }
 
     var isBackupRunning = false
+    lateinit var preferences: PreferenceRepository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -52,33 +58,33 @@ class SmsBackupFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        preferences = PreferenceRepository.newInstance(PreferenceManager.getDefaultSharedPreferences(requireContext()))
+
         initUI()
     }
 
     private fun initUI() {
         btnBackup.setOnClickListener {
-            if(!isBackupRunning) {
-                isBackupRunning = true
-                progressBarBackup.visibility = View.VISIBLE
-                btnBackup.isEnabled = false
+            if (!isBackupRunning) {
+                updateUIForStartBackup()
 
                 doAsync {
-                    var errorMessage:String? = null
+                    var errorMessage: String? = null
                     val messages = readAllMessages()
-                    try {
 
+                    try {
                         // Create a list of backupMethods
                         val backupMethods = listOf<BackupMethod>(DeviceBackup())
                         backupMethods.forEach { it.performBackup(context!!, messages) }
-                    } catch (e:Exception){
+                    } catch (e: Exception) {
                         errorMessage = e.message
                     }
 
                     uiThread {
-                        isBackupRunning = false
-                        btnBackup.isEnabled = true
-                        progressBarBackup.visibility = View.GONE
+                        updateUIForEndBackup()
                         if (errorMessage == null) {
+                            preferences.setLastBackupTime( Calendar.getInstance().timeInMillis )
+                            updateBackupStatus()
                             context?.longToast("Saved ${messages.size} messages")
                         } else {
                             context?.longToast("Error Occurred: $errorMessage")
@@ -89,7 +95,35 @@ class SmsBackupFragment : Fragment() {
 
         }
 
+        // Hide the progressbar on load
         progressBarBackup.visibility = View.GONE
+
+        updateBackupStatus()
+    }
+
+    private fun updateBackupStatus() {
+        val storedBackupTime = preferences.getLastBackupTime()
+        if (storedBackupTime == 0L) {
+            val textNone = getString(R.string.str_sms_backup_status_none)
+            textBackupStatus.text = getString(R.string.str_sms_backup_status, textNone)
+        } else {
+            val lastBackupDate = Calendar.getInstance()
+            lastBackupDate.timeInMillis = storedBackupTime
+            val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+            textBackupStatus.text = getString(R.string.str_sms_backup_status, dateFormat.format(lastBackupDate.time))
+        }
+    }
+
+    private fun updateUIForEndBackup() {
+        isBackupRunning = false
+        btnBackup.isEnabled = true
+        progressBarBackup.visibility = View.GONE
+    }
+
+    private fun updateUIForStartBackup() {
+        isBackupRunning = true
+        progressBarBackup.visibility = View.VISIBLE
+        btnBackup.isEnabled = false
     }
 
     private fun readAllMessages(): List<Message> {

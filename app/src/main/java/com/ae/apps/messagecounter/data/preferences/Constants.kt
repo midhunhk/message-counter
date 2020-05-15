@@ -28,5 +28,7 @@ const val PREF_KEY_VALID_RUN_TIME_PERMISSIONS = "pref_key_valid_runtime_permissi
 const val PREF_KEY_SETTINGS_HINT_REVIEWED = "pref_key_settings_hint_reviewed"
 const val PREF_KEY_INDEX_IN_PROCESS = "pref_key_index_in_process"
 
+const val PREF_KEY_LAST_BACKUP_TIME = "pref_key_last_backup_time"
+
 const val DEFAULT_MESSAGE_LIMIT = 100
 const val DEFAULT_CYCLE_START_DATE = "1"

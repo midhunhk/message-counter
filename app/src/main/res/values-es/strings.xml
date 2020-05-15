@@ -105,7 +105,8 @@
     <string name="str_sms_backup_title">COPIA de seguridad</string>
     <string name="str_sms_backup_schedule_backups">PROGRAMACIÓN DE COPIA DE SEGURIDAD</string>
     <string name="str_sms_backup_schedule_status_none">No Programado</string>
-    <string name="str_sms_backup_status">Estado de la copia : No hay copias de seguridad</string>
+    <string name="str_sms_backup_status">Estado de la copia : %1$s</string>
+    <string name="str_sms_backup_status_none">No hay copias de seguridad</string>
     <string name="str_sms_backup_locations">La copia de seguridad : Dispositivo de</string>
     <string name="str_sms_backup_encryption_note">Los mensajes de información se almacena internamente y cifrados.</string>
 </resources>
