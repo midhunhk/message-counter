@@ -43,3 +43,16 @@ fun decryptMsg(cipherText: ByteArray?, secret: SecretKey?): String? {
     cipher.init(Cipher.DECRYPT_MODE, secret)
     return String(cipher.doFinal(cipherText), charset("UTF-8"))
 }
+
+fun ensureKeyLength(suppliedKey:String):String {
+    val paddingString = "sdlhfgdfvjklfrhgsdjfhbxcnb"
+    val keyLength = 16
+
+    return if(suppliedKey.length == keyLength)
+        suppliedKey;
+    else if (suppliedKey.length > keyLength)
+        suppliedKey.substring(0, keyLength)
+    else
+        suppliedKey + paddingString.substring(0, keyLength - suppliedKey.length)
+}
+

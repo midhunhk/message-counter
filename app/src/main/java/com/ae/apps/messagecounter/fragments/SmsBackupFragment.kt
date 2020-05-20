@@ -92,7 +92,6 @@ class SmsBackupFragment : Fragment() {
                     }
                 }
             }
-
         }
 
         // Hide the progressbar on load
