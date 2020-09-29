@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Nachricht Counter legacy</string>
     <string name="str_migrate_title">Achtung!</string>
-    <string name="str_migrate_description">Aktuelle Google Play-Richtlinien, die uns daran hindert, den Zugriff auf die SMS-Datenbank, die den Kern der Funktionalität. Leider müssen Sie installieren Sie diese app aus einer anderen Quelle, wenn Sie benötigen, um weiter mit der Funktion.</string>
+    <string name="str_migrate_description">Um den aktuellen Google Play Richtlinien zu entsprechen, musste die Kernfunktionalität für den Zugriff auf die CMS-Datenbank entfernt werden, um diese app im Play Store zu behalten. \n\nSie können die Vorherige Version der app jedoch aus einem anderen App Store oder der Github-Seite des Projekts installieren.</string>
     <string name="str_migrate_alternate">Alternative Quellen</string>
     <string name="str_migrate_view_details">Weitere details und FAQ</string>
     <string name="str_migrate_view_source">Projekt Quelle</string>

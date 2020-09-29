@@ -24,8 +24,8 @@ ext {
 }
 
 ext.appVersions = [
-    versionCode : 413,
-    versionName : "4.2.0"
+    versionCode : 414,
+    versionName : "4.1.4"
 ]
 
 // Dependencies

@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Compteur de messages héritage</string>
     <string name="str_migrate_title">Attention!</string>
-    <string name="str_migrate_description">Google Play Politiques, nous empêche d\'accéder à la base de données SMS, qui est la fonctionnalité de base. Malheureusement, vous devez installer cette application à partir d\'une autre source si vous avez besoin de continuer à utiliser la fonctionnalité.</string>
+    <string name="str_migrate_description">Afin de se conformer aux politiques actuelles de Google Play, la fonctionnalité de base d\'accès à la base de données CMS a dû être supprimée afin de conserver cette application sur le Play Store. \n\nCependant, vous pouvez installer la version précédente de l\'application à partir d\'un autre App Store ou de la page Github du projet.</string>
     <string name="str_migrate_alternate">D\'Autres Sources</string>
     <string name="str_migrate_view_details">Plus de détails et FAQ</string>
     <string name="str_migrate_view_source">Source Du Projet</string>

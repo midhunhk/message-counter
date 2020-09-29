@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Contador de mensajes legado</string>
     <string name="str_migrate_title">Atención!</string>
-    <string name="str_migrate_description">Actual de Google Play Políticas, nos impide acceder a la base de datos de SMS, que es el núcleo de la funcionalidad. Desafortunadamente, usted necesita para instalar esta aplicación desde otra fuente si usted necesita para continuar con el uso de la característica.</string>
+    <string name="str_migrate_description">Para cumplir con las políticas actuales de Google Play, la funcionalidad principal para acceder a la base de datos CMS tuvo que ser eliminada para mantener esta aplicación en Play Store. \n\nSin embargo, puede instalar la versión anterior de la aplicación desde otra App Store o la página Github del proyecto.</string>
     <string name="str_migrate_alternate">Fuentes Alternativas</string>
     <string name="str_migrate_view_details">Más detalles y preguntas más frecuentes</string>
     <string name="str_migrate_view_source">Origen Del Proyecto</string>

@@ -2,7 +2,7 @@
     <string name="app_name">Message Counter legacy</string>
 
     <string name="str_migrate_title">Attention!</string>
-    <string name="str_migrate_description">Current Google Play Policies, prevents us from accessing the SMS database which is the core functionality. Unfortunately you need to install this app from another source if you need to continue using the feature.</string>
+    <string name="str_migrate_description">Inorder to comply with the current "Google Play Policies", the core functionality to access the SMS database had to be removed inorder to keep this app on the Play Store. \n\nHowever you may install the previous version of the app from another App Store or the project\'s Github page.</string>
     <string name="str_migrate_alternate">Alternate Sources</string>
     <string name="str_migrate_view_details">More details and FAQ</string>
     <string name="str_migrate_view_source">Project Source</string>
