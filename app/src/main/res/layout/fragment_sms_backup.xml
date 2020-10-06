@@ -30,7 +30,7 @@
         android:layout_marginEnd="@dimen/unit_m"
         android:contentDescription="@string/empty_text"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/hero"/>
+        android:src="@drawable/img_hero"/>
 
     <android.support.design.card.MaterialCardView
         android:id="@+id/details_card"
