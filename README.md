@@ -1,3 +1,4 @@
+<p><strong>Note: </strong> This project is currently on hold due to the updated Google Play Policies preventing apps to read from the SMS Database. <br /><a href="https://github.com/midhunhk/message-counter/wiki/FAQ">Read more on the project's FAQ.</a></p> 
 <img alt="message counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/promo_wyvern.png"/>
 
 [![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=master)](https://travis-ci.org/midhunhk/message-counter) 
