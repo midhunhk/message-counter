@@ -51,7 +51,7 @@
             #hero{ background-color: #A7798E; background-image: url(images/bg-blur.png); background-size: cover}
 
             .right{float:right}
-            .left{float:left}
+            .left{float:left;)}
 			.responsive-image-hero{ width:100%; height:auto; max-width:500px}
 			.responsive-image-screenshot{ width:100%; height:auto; max-width:400px}
 
@@ -60,6 +60,8 @@
             ul.footerright li.active a {color: #fff !important;}
 
             footer ul.footerright li{display: inline; margin-right: 25px; }
+
+            .card { background-color: rgba(75, 35, 53, 0.6); color: #fff;}
         </style>
     </head>
 
@@ -112,26 +114,40 @@
         <!-- Hero Image -->
         <div id="hero">
             <div class="container">
+                <!--
                 <div class="row wow fadeIn" data-wow-delay="0.4s">
-                    <div class="col-md-12 mt-6 flex-center">
+                    <div class="col-md-6 mt-6 flex-start">
                         <div class="text-white lead">
                         A Modern Android app for counting SMS sent in a cycle
                         </div>
                         
                     </div>
                 </div>
-                
+
                 <div class="row wow fadeIn" data-wow-delay="0.6s">
-                    <div class="col-md-12 mt-1 mb-1 flex-center">
+                    <div class="col-md-6 mt-1 mb-1 flex-center">
                         <a href='https://play.google.com/store/apps/details?id=com.ae.apps.messagecounter&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
                             <img alt='Get it on Google Play'  width="200px"  src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
                         </a>
                     </div>                    
                 </div>
-                
-                <div class="row wow fadeInUp" data-wow-delay="0.6s">
-                    <div class="col-md-12 flex-center">
+                -->
+                <div class="row wow fadeInUp mt-2 pt-4" data-wow-delay="0.2s">
+                    <div class="col-md-6 flex-start">
                         <img src="images/half-screen.png" class="responsive-image-hero"/>
+                    </div>
+                    <div class="col-md-6 flex-end" data-wow-delay="0.8s">
+                        <div class="card wow fadeIn mt-4">
+                            <div class="card-body p-4">
+                              <h2 class="card-title">Important Information</h2>
+                              <p class="card-text">In order to comply with the current Google Play Policy restrictions, the core functionality to access the SMS database had to be removed so as to keep this app on the Play Store. 
+                            </p>
+                            <p>Please install the previous version which has the feature to count messages enabled.</p>
+                              <a class="card-link btn btn-amber btn-rounded" href="https://github.com/midhunhk/message-counter/wiki/Permissions#google-play-policies" target="_blank">
+                                Read More <i class="fa fa-external-link"></i></a>
+                              <a class="card-link btn btn-dark-green btn-rounded waves-effect" href="#home">Alternate Sources</a>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -139,35 +155,86 @@
 
         <!-- End Hero Image -->
 
+        <section class="container p-4">
+
+            <div class="row mt-2 mb-2">
+                <div class="col-md-12">
+                    <div class="flex-center">
+                        <a class="page-scroll btn accent-light btn-sm wow fadeInUp" data-wow-delay="0.2s" href="#home">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
         <!-- App Description Section -->
         <section id="home" class="container p-4">
 
             <div class="row">
-                <div class="col-md-2 pl-4"></div>
-                <div class="col-md-8 pl-4">
+                <div class="col-md-12">
                     <div class="text-center">
-                        <h3>Summary</h3>
+                        <h3>Information</h3>
                         <hr class="accent-light mb-2 mt-0 d-inline-block mx-auto" style="width: 60px;">
                     </div>
-                    <div class="lead mt-2">
+                </div>
+            </div>
+            <div class="row" #id="info">
+                <div class="col-md-6">
+                    <div class="lead">
                         <p>Message Counter is a Free and Open Source Android App that counts your Text (SMS) Messages.</p>
-                        
                         <p>It has been downloaded more than <b>100,000</b> times from the Google Play Store, translated into 5 languages and used in more than 10 countries.</p>
-                        
                         <p>Message Counter <b>Version 4.0</b> is now available from the Google Play Store.</p>
-
-                        <div class="flex-center">
-                        <a class="page-scroll btn accent-light btn-sm wow fadeInUp" data-wow-delay="0.2s" href="#features">
-                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                        </a>
-                    </div>
                     </div>
                 </div>
-                <div class="col-md-2 pl-4"></div>
+
+                <div class="col-md-6 flex-center">
+                    <table class="table ">
+                        <thead>
+                        <tr>
+                            <th scope="col">Location</th>
+                            <th scope="col">Version</th>
+                            <th scope="col">Link</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Github Releases</th>
+                            <td>4.1.2</td>
+                            <td><a href="https://github.com/midhunhk/message-counter/releases">Link</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Samsung App Store</th>
+                            <td>4.1.1</td>
+                            <td><a href="http://apps.samsung.com/appquery/appDetail.as?appId=com.ae.apps.messagecounter">Link</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Amazon AppStore</th>
+                            <td>4.1.0</td>
+                            <td><a href="http://www.amazon.com/dp/B07PYJ11C3/ref=sr_1_1?keywords=message+counter+-+sms+counter&qid=1553200743&s=gateway&sr=8-1">Amazon AppStore</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">UptoDown</th>
+                            <td>4.1.0</td>
+                            <td><a href="https://message-counter-sms-counter.en.uptodown.com/android">Amazon AppStore</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <a href="https://github.com/midhunhk/message-counter/wiki/Alternate-Sources">Alternate-Sources</a> 
+                                <i class="fa fa-external-link"></i>
+                            </td>
+                        </tr>
+                        </tbody>
+                    
+                    </table>
+
+                </div>
+                
             </div>
 
         </section>
-        <!-- End App Description Section -->
+        <!-- End App Description Section -->s
 
         <!-- Features Section -->
         <div id="screenshots" class="accent-light text-white mt-2">
