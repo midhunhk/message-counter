@@ -1,11 +1,12 @@
-<p><strong>Note: </strong> This project is currently on hold due to the updated Google Play Policies preventing apps to read from the SMS Database. <br /><a href="https://github.com/midhunhk/message-counter/wiki/FAQ">Read more on the project's FAQ.</a></p> 
+<p><strong>Note: This project is currently on hold due to the updated Google Play Policies preventing apps to read from the SMS Database. </strong>
+<br /><a href="https://github.com/midhunhk/message-counter/wiki/FAQ">Read more on the project's FAQ.</a></p> 
+<br />
 <img alt="message counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/promo_wyvern.png"/>
 
-[![Build Status](https://travis-ci.org/midhunhk/message-counter.svg?branch=master)](https://travis-ci.org/midhunhk/message-counter) 
 [![Release](https://img.shields.io/github/release/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/releases) 
-[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/v4.0.2.svg)](https://github.com/midhunhk/message-counter) 
+[![GitHub commits](https://img.shields.io/github/commits-since/midhunhk/message-counter/v4.1.2.svg)](https://github.com/midhunhk/message-counter) 
 [![Issues](https://img.shields.io/github/issues/midhunhk/message-counter.svg)](https://github.com/midhunhk/message-counter/issues) 
-[![](https://img.shields.io/badge/codename-xingtian-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
+[![](https://img.shields.io/badge/codename-yeti-FF9800.svg)](https://github.com/midhunhk/message-counter/wiki/Codenames)
 
 [Project Wiki](https://github.com/midhunhk/message-counter/wiki) | 
 [Github Page](http://midhunhk.github.io/message-counter) | 
