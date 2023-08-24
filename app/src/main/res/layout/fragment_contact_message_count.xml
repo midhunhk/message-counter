@@ -36,35 +36,33 @@
             android:id="@+id/btnSentList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/card_padding"
-            android:layout_marginRight="@dimen/card_padding"
+            android:layout_marginEnd="@dimen/unit_m"
             android:layout_weight="1"
             android:background="@drawable/radio_group_selector"
             android:button="@null"
             android:checked="true"
             android:gravity="center"
             android:textAllCaps="true"
-            android:padding="@dimen/padding_medium"
+            android:padding="@dimen/unit_m"
             android:text="@string/str_contact_message_sent"/>
 
         <RadioButton
             android:id="@+id/btnReceivedList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/card_padding"
-            android:layout_marginStart="@dimen/card_padding"
+            android:layout_marginStart="@dimen/unit_m"
             android:layout_weight="1"
             android:background="@drawable/radio_group_selector"
             android:button="@null"
             android:checked="false"
             android:gravity="center"
-            android:padding="@dimen/padding_medium"
+            android:padding="@dimen/unit_m"
             android:textAllCaps="true"
             android:text="@string/str_contact_message_received"/>
 
     </RadioGroup>
 
-    <com.ae.apps.common.views.EmptyRecyclerView
+    <com.ae.apps.lib.custom.views.EmptyRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -75,7 +73,7 @@
         android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_extra_large"
+        android:layout_marginTop="@dimen/unit_xl"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
@@ -85,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/padding_medium"
+            android:layout_margin="@dimen/unit_m"
             android:indeterminate="true"/>
 
         <TextView
@@ -93,9 +91,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/card_margin"
+            android:layout_margin="@dimen/unit_m"
             android:gravity="center_vertical"
-            android:padding="@dimen/padding_medium"
+            android:padding="@dimen/unit_m"
             android:text="@string/loading_list"
             android:textSize="14sp"/>
     </LinearLayout>

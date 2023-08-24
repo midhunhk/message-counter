@@ -15,28 +15,32 @@
  */
 package com.ae.apps.messagecounter.data.viewmodels
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.ae.apps.messagecounter.data.business.MessageCounter
 import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
 import com.ae.apps.messagecounter.data.repositories.*
+import kotlinx.coroutines.DelicateCoroutinesApi
 import org.jetbrains.anko.doAsync
 import java.util.*
 
 /**
  * ViewModel for holding the data for SentCountFragment
  */
-class CounterViewModel(private val counterRepository: CounterRepository,
-                       private val ignoreNumbersRepository: IgnoredNumbersRepository,
-                       private val preferenceRepository: PreferenceRepository) : ViewModel(), MessageCounter.MessageCounterObserver {
+class CounterViewModel(
+    private val counterRepository: CounterRepository,
+    private val ignoreNumbersRepository: IgnoredNumbersRepository,
+    private val preferenceRepository: PreferenceRepository
+) : ViewModel(), MessageCounter.MessageCounterObserver {
 
     private var sentCountDetails1: MutableLiveData<SentCountDetails> = MutableLiveData()
 
     fun getSentCountDetails(): LiveData<SentCountDetails> = sentCountDetails1
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun readSentCountDataFromRepository() {
         val limit: Int = preferenceRepository.getMessageLimitValue()
         val cycleStartDate = preferenceRepository.getCycleStartDate()
@@ -47,15 +51,23 @@ class CounterViewModel(private val counterRepository: CounterRepository,
             val prevCycle = getCycleSentCount(prevCycleStartDate)
             var sentTodayCount = counterRepository.getCount(getIndexFromDate(today))
             if (sentTodayCount == -1) sentTodayCount = 0
-            val sentCycleCount = counterRepository.getTotalCountSince(getIndexFromDate(cycleStartDate))
-            val lastCycleCount = counterRepository.getTotalCountBetween(prevCycle.startDateIndex, prevCycle.endDateIndex)
-            val startWeekCount = counterRepository.getTotalCountSince(getIndexFromDate(getWeekStartDate()))
-            val startYearCount = counterRepository.getTotalCountSince(getIndexFromDate(getYearStartDate()))
+            val sentCycleCount =
+                counterRepository.getTotalCountSince(getIndexFromDate(cycleStartDate))
+            val lastCycleCount = counterRepository.getTotalCountBetween(
+                prevCycle.startDateIndex,
+                prevCycle.endDateIndex
+            )
+            val startWeekCount =
+                counterRepository.getTotalCountSince(getIndexFromDate(getWeekStartDate()))
+            val startYearCount =
+                counterRepository.getTotalCountSince(getIndexFromDate(getYearStartDate()))
 
-            val sentCountDetails = SentCountDetails(limit, sentTodayCount, sentCycleCount,
-                    startWeekCount, startYearCount, lastCycleCount,
-                    getDurationDateString(cycleStartDate),
-                    getDurationDateString(prevCycleStartDate))
+            val sentCountDetails = SentCountDetails(
+                limit, sentTodayCount, sentCycleCount,
+                startWeekCount, startYearCount, lastCycleCount,
+                getDurationDateString(cycleStartDate),
+                getDurationDateString(prevCycleStartDate)
+            )
             sentCountDetails1.postValue(sentCountDetails)
         }
     }
@@ -66,7 +78,11 @@ class CounterViewModel(private val counterRepository: CounterRepository,
      * @param context The context used for accessing the SMS API
      */
     fun indexMessages(context: Context) {
-        val messageCounter = MessageCounter.newInstance(counterRepository, ignoreNumbersRepository, preferenceRepository)
+        val messageCounter = MessageCounter.newInstance(
+            counterRepository,
+            ignoreNumbersRepository,
+            preferenceRepository
+        )
         messageCounter.indexMessages(context, this)
     }
 

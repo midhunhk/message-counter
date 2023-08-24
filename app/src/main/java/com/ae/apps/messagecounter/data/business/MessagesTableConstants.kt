@@ -15,6 +15,7 @@
  */
 package com.ae.apps.messagecounter.data.business
 
+import android.annotation.SuppressLint
 import android.database.Cursor
 import com.ae.apps.messagecounter.data.models.Message
 import com.ae.apps.messagecounter.data.repositories.getMessageCount
@@ -52,6 +53,7 @@ const val SORT_BY_DATE = "$COLUMN_NAME_DATE ASC"
 const val DEFAULT_MESSAGE_COUNT = 1
 const val DEFAULT_INDEX_TIME_STAMP = "0"
 
+@SuppressLint("Range")
 fun getMessageFromCursor(cursor: Cursor): Message {
     val messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID))
     val protocol = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_PROTOCOL))
@@ -69,6 +71,7 @@ fun getMessageFromCursor(cursor: Cursor): Message {
     return Message(messageId, messagesCount, body, sentTime, protocol, address)
 }
 
+@SuppressLint("Range")
 fun getMessageForBackupFromCursor(cursor: Cursor): Message {
     val messageId = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID))
     val address = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ADDRESS))

@@ -16,17 +16,14 @@
 package com.ae.apps.messagecounter.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.android.billingclient.api.*
 
 /**
  * Google Play Billing Library based on
  * https://developer.android.com/google/play/billing/billing_library_overview#java
- *
- * Use below in build.gradle for dependencies
- * implementation 'com.android.billingclient:billing:1.1'
  */
-abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
+abstract class DonationsBaseFragment(fragmentLayoutResId: Int) : Fragment(fragmentLayoutResId), PurchasesUpdatedListener {
 
     private var mBillingClient: BillingClient? = null
 
@@ -79,14 +76,17 @@ abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
      * @param skuId id of the sku
      */
     protected fun launchBillingFlow(skuId: String) {
+        /*
         val flowParams = BillingFlowParams.newBuilder()
                 .setSku(skuId)
                 .setType(BillingClient.SkuType.INAPP)
                 .build()
         mBillingClient!!.launchBillingFlow(requireActivity(), flowParams)
+         */
     }
 
     private fun startServiceConnection() {
+        /*
         mBillingClient!!.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(responseCode: Int) {
                 if (responseCode == BillingClient.BillingResponse.OK) {
@@ -99,10 +99,12 @@ abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
 
             override fun onBillingServiceDisconnected() {}
         })
+         */
     }
 
     private fun querySkuDetails() {
-        val params = SkuDetailsParams.newBuilder()
+    /*
+            val params = SkuDetailsParams.newBuilder()
                 .setSkusList(getSkus())
                 .setType(BillingClient.SkuType.INAPP)
                 .build()
@@ -112,6 +114,7 @@ abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
                 skuDetailsResponse(skuDetailsList)
             }
         }
+     */
     }
 
     /**
@@ -121,20 +124,20 @@ abstract class DonationsBaseFragment : Fragment(), PurchasesUpdatedListener {
      * @param listener a callback when the purchase is consumed
      */
     fun consumeAsync(purchaseToken:String, listener:ConsumeResponseListener){
-        mBillingClient!!.consumeAsync(purchaseToken, listener)
+        // mBillingClient!!.consumeAsync(purchaseToken, listener)
     }
 
-    override fun onPurchasesUpdated(responseCode: Int, purchases: List<Purchase>?) {
-        if (responseCode == BillingClient.BillingResponse.OK && null != purchases) {
+    override fun onPurchasesUpdated(response: BillingResult, purchases: MutableList<Purchase>?) {
+        if (response.responseCode == BillingClient.BillingResponseCode.OK && null != purchases) {
             for (purchase in purchases) {
                 handlePurchase(purchase)
             }
-        } else if (responseCode == BillingClient.BillingResponse.USER_CANCELED) {
+        } else if (response.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
             // Handle user cancelled case
             handleUserCancelled(purchases)
         } else {
             // Handle an error flow
-            handlePurchaseError(purchases, responseCode)
+            handlePurchaseError(purchases, response.responseCode)
         }
     }
 

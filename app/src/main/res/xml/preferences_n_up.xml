@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- preferences for sent message counter -->
-    <PreferenceCategory android:title="@string/str_pref_sent_message_count"
-                        app:iconSpaceReserved="false">
+    <PreferenceCategory android:title="@string/str_pref_sent_message_count">
 
         <ListPreference
             android:defaultValue="1"
@@ -12,24 +10,21 @@
             android:entryValues="@array/pick_day_values"
             android:key="pref_key_cycle_start_date"
             android:summary="@string/str_pref_cycle_start_desc"
-            android:title="@string/str_cycle_start_date"
-            app:iconSpaceReserved="false"/>
+            android:title="@string/str_cycle_start_date" />
 
         <EditTextPreference
             android:defaultValue="100"
-            android:inputType="numberDecimal"
             android:digits="0123456789"
+            android:inputType="numberDecimal"
             android:key="pref_key_message_limit_value"
             android:summary="@string/str_pref_message_limit_desc"
-            android:title="@string/str_pref_message_limit"
-            app:iconSpaceReserved="false"/>
+            android:title="@string/str_pref_message_limit" />
 
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="pref_key_enable_notification"
             android:summary="@string/str_enable_notify_on_limit"
-            android:title="@string/str_notify_on_limit"
-            app:iconSpaceReserved="false"/>
+            android:title="@string/str_notify_on_limit" />
 
     </PreferenceCategory>
 

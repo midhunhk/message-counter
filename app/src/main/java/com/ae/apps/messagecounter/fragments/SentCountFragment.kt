@@ -17,19 +17,17 @@ package com.ae.apps.messagecounter.fragments
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.ae.apps.common.utils.CommonUtils
+import androidx.fragment.app.Fragment
+import com.ae.apps.lib.common.utils.CommonUtils
 import com.ae.apps.messagecounter.AppController
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.AppDatabase
@@ -40,14 +38,12 @@ import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModel
 import com.ae.apps.messagecounter.data.viewmodels.CounterViewModelFactory
 import com.ae.apps.messagecounter.getWidgetUpdateIntent
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_sent_count.*
 
 /**
  * Fragment that represents the SentCount state
  *
  */
-class SentCountFragment : Fragment() {
+class SentCountFragment : Fragment(R.layout.fragment_sent_count) {
 
     companion object {
         fun newInstance() = SentCountFragment()
@@ -65,25 +61,14 @@ class SentCountFragment : Fragment() {
         initViewModel()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_sent_count, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initUI()
-    }
-
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         appController = activity as AppController
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        clearFindViewByIdCache()
-        viewModel.getSentCountDetails().removeObservers(this)
+        // viewModel.getSentCountDetails().removeObservers(this)
     }
 
     private fun initViewModel() {
@@ -91,10 +76,13 @@ class SentCountFragment : Fragment() {
         val counterRepository = CounterRepository.getInstance(AppDatabase.getInstance(requireContext()).counterDao())
         val ignoreNumbersRepository = IgnoredNumbersRepository.getInstance(AppDatabase.getInstance(requireContext()).ignoredNumbersDao())
         val factory = CounterViewModelFactory(counterRepository, ignoreNumbersRepository, preferenceRepository)
-        viewModel = ViewModelProviders.of(requireActivity(), factory).get(CounterViewModel::class.java)
+        // FIXME
+        // viewModel = ViewModelProviders.of(requireActivity(), factory).get(CounterViewModel::class.java)
     }
 
     private fun initUI() {
+        // TODO
+        /*
         viewModel.getSentCountDetails().observe(this,
                 Observer { details: SentCountDetails? ->
                     run {
@@ -116,6 +104,7 @@ class SentCountFragment : Fragment() {
                     }
                 }
         )
+         */
 
         // Fetch the data that is already in the database
         viewModel.readSentCountDataFromRepository()
@@ -129,6 +118,7 @@ class SentCountFragment : Fragment() {
 
     private fun manageInfoCard() {
         if (showInfoCard()) {
+            /*
             info_card.visibility = View.VISIBLE
             info_card.setOnClickListener {
                 if (reviewSettingsText.visibility == View.VISIBLE) {
@@ -137,12 +127,13 @@ class SentCountFragment : Fragment() {
                 }
                 info_card.visibility = View.GONE
             }
+
+             */
         }
     }
 
     private fun showInfoCard(): Boolean {
-        if (CommonUtils.isFirstInstall(requireContext())
-                && !preferenceRepository.getSettingsHintReviewed()) {
+        if (CommonUtils.isFirstInstall(requireContext())  && !preferenceRepository.getSettingsHintReviewed()) {
             // show an info message
             return true
         }

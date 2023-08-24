@@ -1,17 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.ae.apps.messagecounter.fragments.MigrateFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ae.apps.messagecounter.fragments.MigrateFragment">
 
     <View
         android:id="@+id/no_access_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/request_permissions_header_height"
         android:background="@drawable/request_permissions_bg"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="match_parent"
@@ -21,16 +21,18 @@
         android:gravity="center"
         android:text="@string/str_migrate_title"
         android:textSize="@dimen/text_title"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/unit_l"
+        android:paddingStart="@dimen/unit_m"
+        android:paddingEnd="@dimen/unit_m"
         android:text="@string/str_migrate_description"
-        android:textSize="@dimen/item_title"/>
+        android:textSize="@dimen/item_title" />
 
-    <android.support.design.button.MaterialButton
+    <Button
         android:id="@+id/btnViewAlternates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +40,7 @@
         android:contentDescription="@string/str_migrate_alternate_description"
         android:text="@string/str_migrate_alternate"
         app:backgroundTint="@color/colorAccent"
-        app:cornerRadius="@dimen/button_corner_radius"/>
+        app:cornerRadius="@dimen/button_corner_radius" />
 
     <Button
         android:id="@+id/btnMoreDetails"
@@ -48,7 +50,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/unit_xs"
-        android:text="@string/str_migrate_view_details"/>
+        android:text="@string/str_migrate_view_details" />
 
     <Button
         android:id="@+id/btnViewSource"
@@ -58,6 +60,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/unit_xs"
-        android:text="@string/str_migrate_view_source"/>
+        android:text="@string/str_migrate_view_source" />
 
 </LinearLayout>

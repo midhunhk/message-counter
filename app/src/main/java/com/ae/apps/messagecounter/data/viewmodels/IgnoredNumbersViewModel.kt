@@ -15,10 +15,13 @@
  */
 package com.ae.apps.messagecounter.data.viewmodels
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.ae.apps.messagecounter.data.models.IgnoredNumber
 import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.doAsync
 
 class IgnoredNumbersViewModel(private val repository: IgnoredNumbersRepository) : ViewModel() {
@@ -28,17 +31,17 @@ class IgnoredNumbersViewModel(private val repository: IgnoredNumbersRepository) 
     fun getIgnoredNumbers() = ignoredNumbers
 
     init {
-        doAsync {
+        doAsync{
             readAllIgnoredNumbers()
         }
     }
 
     private fun readAllIgnoredNumbers(){
-        ignoredNumbers.postValue(repository.getAllIgnoredNumbers())
+        getIgnoredNumbers().postValue(repository.getAllIgnoredNumbers())
     }
 
     fun ignoreNumber(ignoredContact: IgnoredNumber) {
-        doAsync {
+        doAsync{
             if (!repository.checkIfNumberIsIgnored(ignoredContact.ignoreNumber)) {
                 repository.ignoreNumber(ignoredContact)
                 readAllIgnoredNumbers()

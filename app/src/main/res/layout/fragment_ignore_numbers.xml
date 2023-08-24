@@ -25,7 +25,7 @@
               android:layout_marginStart="8dp"
               android:orientation="vertical">
 
-    <android.support.design.button.MaterialButton
+    <Button
         android:id="@+id/btnShowIgnoreDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,9 +34,11 @@
         app:backgroundTint="@color/colorAccent"
         app:cornerRadius="@dimen/button_corner_radius"/>
 
+    <!--
     <include layout="@layout/separator_line"/>
+    -->
 
-    <com.ae.apps.common.views.EmptyRecyclerView
+    <com.ae.apps.lib.custom.views.EmptyRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,14 +49,14 @@
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_medium"
+        android:layout_margin="@dimen/unit_m"
         android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:drawablePadding="@dimen/padding_medium"
+            android:drawablePadding="@dimen/unit_m"
             android:drawableTop="@drawable/nav_icon_ignore"
             android:gravity="center"
             android:text="@string/str_ignore_empty_list"

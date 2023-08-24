@@ -15,16 +15,14 @@
  */
 package com.ae.apps.messagecounter.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ae.apps.common.views.EmptyRecyclerView
-import com.ae.apps.messagecounter.R
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ae.apps.messagecounter.adapters.IgnoredNumbersAdapter
 import com.ae.apps.messagecounter.data.AppDatabase
 import com.ae.apps.messagecounter.data.listeners.IgnoreContactListener
@@ -32,14 +30,9 @@ import com.ae.apps.messagecounter.data.models.IgnoredNumber
 import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
 import com.ae.apps.messagecounter.data.viewmodels.IgnoredNumbersViewModel
 import com.ae.apps.messagecounter.data.viewmodels.IgnoredNumbersViewModelFactory
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_ignore_numbers.*
+import com.ae.apps.messagecounter.databinding.FragmentIgnoreNumbersBinding
 import java.util.*
 
-/**
- * [Fragment] subclass that shows IgnoredNumbers
- *
- */
 class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
 
     companion object {
@@ -50,10 +43,15 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
 
     private lateinit var viewModel: IgnoredNumbersViewModel
     private lateinit var adapter: IgnoredNumbersAdapter
+    private lateinit var binding: FragmentIgnoreNumbersBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_ignore_numbers, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentIgnoreNumbersBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,54 +59,57 @@ class IgnoreNumbersFragment : Fragment(), IgnoreContactListener {
         initViewModel()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initUI()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.getIgnoredNumbers().removeObservers(this)
-        clearFindViewByIdCache()
+        //viewModel.getIgnoredNumbers().removeObservers(this)
     }
 
     private fun initViewModel() {
-        val repository = IgnoredNumbersRepository.getInstance(AppDatabase
-                .getInstance(requireContext()).ignoredNumbersDao())
+        val repository = IgnoredNumbersRepository.getInstance(
+            AppDatabase
+                .getInstance(requireContext()).ignoredNumbersDao()
+        )
+        with(this){
+
+        }
         val factory = IgnoredNumbersViewModelFactory(repository)
-        viewModel = ViewModelProviders.of(this, factory).get(IgnoredNumbersViewModel::class.java)
-        adapter = IgnoredNumbersAdapter(Collections.emptyList(), requireContext(), this)
+
+        // viewModel = ViewModelProviders.of(this, factory).get(IgnoredNumbersViewModel::class.java)
+        adapter = IgnoredNumbersAdapter(Collections.emptyList(),this)
     }
 
     private fun initUI() {
-        btnShowIgnoreDialog.setOnClickListener { showSelectIgnoreContactDialog() }
+        binding.btnShowIgnoreDialog.setOnClickListener { showSelectIgnoreContactDialog() }
 
-        val recyclerView = list as EmptyRecyclerView
+        val recyclerView = binding.list
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
-        recyclerView.setEmptyView(empty_view)
+        recyclerView.setEmptyView(binding.emptyView)
 
+        // TODO
+        /*
         viewModel.getIgnoredNumbers()
                 .observe(this, Observer { items ->
                     run {
                         adapter.setItems(items!!)
                     }
                 })
+         */
     }
 
     private fun showSelectIgnoreContactDialog() {
         val dialogFragment = IgnoreDialogFragment.newInstance()
-        dialogFragment.setTargetFragment(this@IgnoreNumbersFragment, 300)
-        dialogFragment.show(fragmentManager, "fragment_ignore_contact")
+        //dialogFragment.setTargetFragment(this@IgnoreNumbersFragment, 300)
+        //dialogFragment.show(fragmentManager, "fragment_ignore_contact")
     }
 
     override fun onContactSelected(ignoredContact: IgnoredNumber) {
         viewModel.ignoreNumber(ignoredContact)
-        adapter.notifyDataSetChanged()
+        //adapter.notifyDataSetChanged()
     }
 
     override fun onIgnoredContactRemoved(ignoredContact: IgnoredNumber) {
         viewModel.unIgnoreNumber(ignoredContact)
-        adapter.notifyDataSetChanged()
+        //adapter.notifyDataSetChanged()
     }
 }

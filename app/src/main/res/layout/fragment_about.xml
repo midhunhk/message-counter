@@ -26,31 +26,29 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.design.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/material_card_radius"
             app:cardElevation="1dp"
             app:cardMaxElevation="1dp"
             app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/padding_small">
+            app:contentPadding="@dimen/unit_m">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_small">
+                android:padding="@dimen/unit_m">
 
                 <ImageView
                     android:id="@+id/appIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_gravity="start"
-                    android:layout_marginLeft="0dp"
                     android:layout_marginStart="0dp"
                     android:contentDescription="@string/empty_text"
-                    android:padding="@dimen/padding_small"
+                    android:padding="@dimen/unit_m"
                     android:src="@drawable/ic_app_icon"/>
 
                 <TextView
@@ -59,9 +57,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_margin="@dimen/unit_s"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/unit_m"
                     android:layout_toEndOf="@+id/appIcon"
-                    android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_name"
                     android:textStyle="bold"/>
 
@@ -73,7 +70,6 @@
                     android:layout_gravity="start"
                     android:layout_margin="@dimen/unit_s"
                     android:layout_toEndOf="@+id/appIcon"
-                    android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_version"/>
 
                 <TextView
@@ -83,7 +79,6 @@
                     android:layout_gravity="start"
                     android:layout_margin="@dimen/unit_s"
                     android:layout_toEndOf="@+id/appDeveloper"
-                    android:layout_toRightOf="@+id/appDeveloper"
                     android:text="@string/app_code_name"/>
 
                 <TextView
@@ -94,7 +89,6 @@
                     android:layout_gravity="start"
                     android:layout_margin="@dimen/unit_s"
                     android:layout_toEndOf="@+id/appIcon"
-                    android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_release_date"/>
 
                 <TextView
@@ -104,41 +98,42 @@
                     android:layout_gravity="start"
                     android:layout_margin="@dimen/unit_s"
                     android:layout_toEndOf="@+id/appIcon"
-                    android:layout_toRightOf="@+id/appIcon"
                     android:text="@string/app_developer_info"/>
             </RelativeLayout>
-        </android.support.design.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.design.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/material_card_radius"
             app:cardElevation="1dp"
             app:cardMaxElevation="1dp"
             app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/padding_small">
+            app:contentPadding="@dimen/unit_m">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="@dimen/padding_medium">
+                android:padding="@dimen/unit_m">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/unit_m"
+                    android:layout_marginTop="@dimen/unit_m"
                     android:text="@string/app_desc"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/unit_m"
                     android:text="@string/app_disclaim"/>
 
+                <!--
                 <include layout="@layout/separator_line"/>
+                -->
 
                 <Button
                     android:id="@+id/viewSourceCode"
@@ -181,7 +176,7 @@
                     android:textAllCaps="false"/>
 
             </LinearLayout>
-        </android.support.design.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

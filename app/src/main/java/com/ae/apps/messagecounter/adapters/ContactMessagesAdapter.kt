@@ -15,22 +15,24 @@
  */
 package com.ae.apps.messagecounter.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ae.apps.common.vo.ContactMessageVo
+import androidx.recyclerview.widget.RecyclerView
+import com.ae.apps.lib.common.models.ContactInfo
+import com.ae.apps.lib.common.models.MessageInfo
 import com.ae.apps.messagecounter.R
-import kotlinx.android.synthetic.main.list_item_contact_message.view.*
 import java.util.*
 
 class ContactMessagesAdapter(private val context: Context) :
         RecyclerView.Adapter<ContactMessagesAdapter.ViewHolder>() {
 
-    private var mItems: List<ContactMessageVo> = Collections.emptyList()
+    private var mItems: List<MessageInfo> = Collections.emptyList()
 
-    fun setItems(items: List<ContactMessageVo>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItems(items: List<MessageInfo>) {
         mItems = items
         notifyDataSetChanged()
     }
@@ -45,6 +47,8 @@ class ContactMessagesAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ContactMessagesAdapter.ViewHolder, position: Int) {
+        // TODO
+        /*
         val item = mItems[position]
         if (null == item.photo) {
             holder.userProfile.setImageResource(R.drawable.profile_icon_4)
@@ -53,11 +57,17 @@ class ContactMessagesAdapter(private val context: Context) :
         }
         holder.contactName.text = item.contactVo.name
         holder.messageCount.text = item.messageCount.toString()
+
+         */
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // TODO
+        /*
         val userProfile = view.userProfileImage
         val contactName = view.contactNameText
         val messageCount = view.contactMessageCountText
+
+         */
     }
 }

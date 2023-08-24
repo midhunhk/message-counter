@@ -17,19 +17,15 @@ package com.ae.apps.messagecounter.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.DefaultLifecycleObserver
 import com.ae.apps.messagecounter.AppRequestPermission
-import com.ae.apps.messagecounter.R
-import kotlinx.android.synthetic.main.fragment_no_access.*
+import com.ae.apps.messagecounter.databinding.FragmentNoAccessBinding
 
-/**
- * A simple [Fragment] subclass.
- *
- */
-class NoAccessFragment : Fragment() {
+class NoAccessFragment : Fragment(), DefaultLifecycleObserver {
 
     companion object {
         fun newInstance(): NoAccessFragment {
@@ -38,13 +34,18 @@ class NoAccessFragment : Fragment() {
     }
 
     private lateinit var permissionsAwareContext: AppRequestPermission
+    private lateinit var binding: FragmentNoAccessBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_no_access, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentNoAccessBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
         try {
@@ -54,10 +55,10 @@ class NoAccessFragment : Fragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super<Fragment>.onCreate(savedInstanceState)
 
-        btnRequestPermissions.setOnClickListener {
+        binding.btnRequestPermissions.setOnClickListener {
             permissionsAwareContext.invokeRequestPermissions()
         }
     }

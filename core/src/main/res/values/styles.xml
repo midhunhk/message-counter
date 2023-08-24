@@ -23,12 +23,13 @@
     <style name="MessageCounterTheme.Yeti" parent="AppTheme.LightAndDark.Base">
     </style>
 
-    <style name="AppTheme.Base" parent="Base.Theme.MaterialComponents.Light.DarkActionBar">
+    <!-- Base.Theme.Material3.Light.DarkActionBar -->
+    <style name="AppTheme.Base" parent="Theme.Material3.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <!-- <item name="preferenceTheme">@style/PreferenceThemeOverlay</item> -->
         <item name="android:textViewStyle">@style/AppTextViewStyle</item>
         <item name="actionBarStyle">@style/MyActionBarStyle</item>
     </style>

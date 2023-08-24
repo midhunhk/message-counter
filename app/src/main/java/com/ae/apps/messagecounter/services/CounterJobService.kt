@@ -25,13 +25,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.HandlerThread
-import android.support.annotation.RequiresApi
-import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.observers.SMSObserver
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
 
-@RequiresApi(Build.VERSION_CODES.N)
 class CounterJobService : JobService() {
 
     companion object {
@@ -42,7 +39,9 @@ class CounterJobService : JobService() {
 
         fun registerJob(context: Context, cancelAndReschedule: Boolean = false): Boolean {
             val component = ComponentName(context, CounterJobService::class.java)
-            val contentUri = JobInfo.TriggerContentUri(Uri.parse(SMSManager.SMS_URI_ALL),
+            // TODO
+            /*
+                        val contentUri = JobInfo.TriggerContentUri(Uri.parse(SMSManager.SMS_URI_ALL),
                     JobInfo.TriggerContentUri.FLAG_NOTIFY_FOR_DESCENDANTS)
             val jobInfo = JobInfo.Builder(JOB_ID, component)
                     .addTriggerContentUri(contentUri)
@@ -51,6 +50,7 @@ class CounterJobService : JobService() {
                     .setMinimumLatency(DELAY_MIN)
                     .setBackoffCriteria(DELAY_MAX, JobInfo.BACKOFF_POLICY_LINEAR)
                     .build()
+             */
 
             val scheduler: JobScheduler = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
             val isJobRunning = CounterServiceHelper.isJobRunning(scheduler, JOB_ID)
@@ -62,10 +62,12 @@ class CounterJobService : JobService() {
                     return true
                 }
             }
-            val result = scheduler.schedule(jobInfo)
+            // TODO
+            // val result = scheduler.schedule(jobInfo)
             // val pendingJobsCount = scheduler.allPendingJobs.size
             // Toast.makeText(context, "Job scheduled ${result == 1}, total jobs $pendingJobsCount", Toast.LENGTH_SHORT).show()
-            return (result == JobScheduler.RESULT_SUCCESS)
+            // return (result == JobScheduler.RESULT_SUCCESS)
+            return false
         }
     }
 
@@ -82,6 +84,8 @@ class CounterJobService : JobService() {
             longToast("onStartJob at $timeNow")
         }*/
 
+        // TODO
+        /*
         doAsync {
             val observer = SMSObserver(handler, context)
             observer.onChange(false)
@@ -94,6 +98,8 @@ class CounterJobService : JobService() {
                 registerJob(context, true)
             }
         }
+
+         */
 
         return true
     }

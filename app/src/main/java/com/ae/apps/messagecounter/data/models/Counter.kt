@@ -15,9 +15,7 @@
  */
 package com.ae.apps.messagecounter.data.models
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = "tbl_sms_counter")
 data class Counter (

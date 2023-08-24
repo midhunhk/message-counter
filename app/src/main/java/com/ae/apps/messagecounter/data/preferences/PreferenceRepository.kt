@@ -27,8 +27,7 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
 
     fun getMessageLimitValue(): Int {
         val rawVal = preferences.getString(PREF_KEY_MESSAGE_LIMIT_VALUE, DEFAULT_MESSAGE_LIMIT.toString())
-        val limit: Int
-        limit = try {
+        val limit: Int = try {
             Integer.valueOf(rawVal!!)
         } catch (e: NumberFormatException) {
             DEFAULT_MESSAGE_LIMIT

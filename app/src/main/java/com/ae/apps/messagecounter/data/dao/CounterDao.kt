@@ -15,7 +15,7 @@
  */
 package com.ae.apps.messagecounter.data.dao
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.ae.apps.messagecounter.data.models.Counter
 
 @Dao

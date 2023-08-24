@@ -1,5 +1,16 @@
 ## Message Counter Version History
 
+### Version 4.2 & 5.0 (Yeti)
+**MessageCounter 5.0**
+ - Huge effort to migrate to new target API 33 and dependent libraries
+ - So much changes have happened in the framework in the last 4 years, 
+   that message counter is essentially broken and needs to be considerably 
+   worked to be usable
+
+**MessageCounter 4.2 [unreleased]**
+ - Add a feature for backing up SMS to be able to update on the play store
+ - Unreleased due to risk of ban from Google Play for the developer account
+
 ### Version 4.1 (Xingtian)
 **MessageCounter 4.1.2 [May 2019]**
  - VersionCode bump #66

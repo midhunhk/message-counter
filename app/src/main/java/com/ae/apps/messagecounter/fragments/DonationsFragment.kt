@@ -20,15 +20,15 @@ import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
+import com.ae.apps.messagecounter.databinding.FragmentDonationsBinding
+import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.ConsumeResponseListener
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.SkuDetails
-import kotlinx.android.synthetic.main.fragment_donations.*
 
-class DonationsFragment : DonationsBaseFragment(), ConsumeResponseListener {
+class DonationsFragment : DonationsBaseFragment(R.layout.fragment_donations), ConsumeResponseListener {
 
     companion object {
         const val SKU_SMALL = "product_small2"
@@ -38,13 +38,11 @@ class DonationsFragment : DonationsBaseFragment(), ConsumeResponseListener {
         fun newInstance() = DonationsFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_donations, container, false)
-    }
+    private lateinit var binding:FragmentDonationsBinding
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initUI()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentDonationsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun getSkus(): List<String> {
@@ -52,32 +50,41 @@ class DonationsFragment : DonationsBaseFragment(), ConsumeResponseListener {
     }
 
     override fun onBillingClientSetup() {
-        loadingProgressBar?.visibility = View.GONE
+//        loadingProgressBar?.visibility = View.GONE
     }
 
     override fun skuDetailsResponse(skuDetails: List<SkuDetails>) {
+        /*
         skuDetails.forEach {
-            when {
-                it.sku == SKU_SMALL -> txtDonateSmallPrice.text = it.price
-                it.sku == SKU_MEDIUM -> txtDonateMediumPrice.text = it.price
-                it.sku == SKU_LARGE -> txtDonateLargePrice.text = it.price
+            when (it.sku) {
+                SKU_SMALL -> txtDonateSmallPrice.text = it.price
+                SKU_MEDIUM -> txtDonateMediumPrice.text = it.price
+                SKU_LARGE -> txtDonateLargePrice.text = it.price
             }
         }
+         */
     }
 
     override fun handlePurchase(purchase: Purchase) {
         // Consume the Purchase so that it can be bought again
         consumeAsync(purchase.purchaseToken, this)
 
-        Toast.makeText(requireContext(),
+        // FIXME
+    /*
+            Toast.makeText(baseContext,
                 "Thank You for your donation, order id " + purchase.orderId,
                 Toast.LENGTH_SHORT).show()
+     */
         val preferenceRepository = PreferenceRepository.newInstance(
                 PreferenceManager.getDefaultSharedPreferences(requireContext()))
         preferenceRepository.saveDonationsMade()
     }
 
-    override fun onConsumeResponse(responseCode: Int, purchaseToken: String?) {
+    override fun onPurchasesUpdated(p0: BillingResult, p1: MutableList<Purchase>?) {
+        TODO("Not yet implemented")
+    }
+
+    fun onConsumeResponse(responseCode: Int, purchaseToken: String?) {
         /*Toast.makeText(requireContext(),
                 "Purchase Confirmed",
                 Toast.LENGTH_SHORT).show()
@@ -85,10 +92,12 @@ class DonationsFragment : DonationsBaseFragment(), ConsumeResponseListener {
     }
 
     override fun handlePurchaseError(purchases: List<Purchase>?, responseCode: Int) {
-        Toast.makeText(requireContext(),
+        /*
+                Toast.makeText(requireContext(),
                 "Purchase error occurred. Code $responseCode",
                 Toast.LENGTH_SHORT)
                 .show()
+         */
     }
 
     override fun handleUserCancelled(purchases: List<Purchase>?) {
@@ -96,14 +105,18 @@ class DonationsFragment : DonationsBaseFragment(), ConsumeResponseListener {
     }
 
     private fun initUI() {
-        btnDonateSmall.setOnClickListener {
+        binding.btnDonateSmall.setOnClickListener {
             launchBillingFlow(SKU_SMALL)
         }
-        btnDonateMedium.setOnClickListener {
+        binding.btnDonateMedium.setOnClickListener {
             launchBillingFlow(SKU_MEDIUM)
         }
-        btnDonateLarge.setOnClickListener {
+        binding.btnDonateLarge.setOnClickListener {
             launchBillingFlow(SKU_LARGE)
         }
+    }
+
+    override fun onConsumeResponse(p0: BillingResult, p1: String) {
+        TODO("Not yet implemented")
     }
 }

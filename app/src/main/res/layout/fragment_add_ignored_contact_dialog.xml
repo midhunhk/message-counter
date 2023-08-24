@@ -30,10 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/unit_m"
             android:gravity="center"
             android:text="@string/str_ignore_add_to_ignore_list"
-            android:textColor="@color/white"
+            android:textColor="@color/color_white"
             android:textSize="@dimen/card_title"
             android:textStyle="bold"/>
     </RelativeLayout>
@@ -44,7 +44,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="horizontal"
-        android:padding="@dimen/padding_medium">
+        android:padding="@dimen/unit_m">
 
         <EditText
             android:id="@+id/txtIgnoreNumber"
@@ -63,7 +63,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="horizontal"
-        android:padding="@dimen/padding_medium">
+        android:padding="@dimen/unit_m">
 
         <EditText
             android:id="@+id/txtIgnoreName"
@@ -76,13 +76,13 @@
             tools:ignore="RtlHardcoded"/>
     </LinearLayout>
 
-    <android.support.v7.widget.ButtonBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
         style="?android:attr/buttonBarStyle"
         android:orientation="horizontal"
-        android:padding="@dimen/padding_medium">
+        android:padding="@dimen/unit_m">
 
         <Button
             android:id="@+id/btnCancel"
@@ -100,6 +100,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="@string/str_ignore_btn_ignore"/>
-    </android.support.v7.widget.ButtonBarLayout>
+    </LinearLayout>
 
 </LinearLayout>

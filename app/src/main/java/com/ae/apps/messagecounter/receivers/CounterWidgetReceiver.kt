@@ -41,16 +41,18 @@ class CounterWidgetReceiver : AppWidgetProvider() {
         val intent = Intent(context, MainActivity::class.java)
         intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent,
+            PendingIntent.FLAG_IMMUTABLE)
 
         val messageCounter = MessageCounter.newInstance(context)
+
         doAsync {
             var remoteView: RemoteViews?
             val sentDetails = messageCounter.getSentCountDetailsForWidget()
             val sentCycle = sentDetails.sentCycle
             val cycleLimit = sentDetails.cycleLimit
 
-            for (i in 0 until appWidgetIds.size) {
+            for (element in appWidgetIds) {
                 remoteView = RemoteViews(context.packageName, R.layout.widget_layout)
 
                 // update data here
@@ -58,7 +60,7 @@ class CounterWidgetReceiver : AppWidgetProvider() {
                 remoteView.setCharSequence(R.id.widgetSentInCycleText, METHOD_SET_TEXT, "$sentCycle / $cycleLimit")
                 remoteView.setOnClickPendingIntent(R.id.appWidget, pendingIntent)
 
-                appWidgetManager?.updateAppWidget(appWidgetIds[i], remoteView)
+                appWidgetManager?.updateAppWidget(element, remoteView)
             }
         }
 

@@ -15,9 +15,9 @@
  */
 package com.ae.apps.messagecounter.com.ae.apps.messagecounter.data.dao
 
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import com.ae.apps.messagecounter.data.AppDatabase
 import com.ae.apps.messagecounter.data.dao.CounterDao
 import com.ae.apps.messagecounter.utils.MockCounters
@@ -35,7 +35,8 @@ open class CounterDaoTest {
 
     @Before
     fun setUp(){
-        appDatabase = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
+        appDatabase = Room.inMemoryDatabaseBuilder(
+            InstrumentationRegistry.getContext(),
                 AppDatabase::class.java)
                 .allowMainThreadQueries()
                 .build()
