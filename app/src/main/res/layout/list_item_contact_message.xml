@@ -21,12 +21,12 @@
                 android:padding="5dip">
 
     <!-- profile image -->
-    <com.ae.apps.common.views.RoundedImageView
+    <com.ae.apps.lib.custom.views.RoundedImageView
         android:id="@+id/userProfileImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/card_margin"
+        android:layout_margin="@dimen/unit_m"
         android:minWidth="@dimen/image_min_size"
         android:minHeight="@dimen/image_min_size"
         android:maxWidth="@dimen/image_max_size"
@@ -37,11 +37,10 @@
         android:id="@+id/contactNameText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/card_margin"
+        android:layout_margin="@dimen/unit_m"
         android:gravity="center"
-        android:layout_toRightOf="@+id/userProfileImage"
         android:layout_toEndOf="@+id/userProfileImage"
-        android:padding="@dimen/card_padding"
+        android:padding="@dimen/unit_m"
         android:textIsSelectable="false"
         android:textSize="16sp" />
 
@@ -49,10 +48,9 @@
         android:id="@+id/contactMessageCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:padding="@dimen/card_padding"
-        android:layout_margin="@dimen/card_margin"
+        android:padding="@dimen/unit_m"
+        android:layout_margin="@dimen/unit_m"
         android:textIsSelectable="false"
         android:fontFamily="@font/lora"
         android:textSize="20sp" />

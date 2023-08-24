@@ -20,7 +20,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.preference.PreferenceManager
 import android.util.Log
-import com.ae.apps.common.managers.SMSManager
+import com.ae.apps.lib.api.sms.utils.SmsApiConstants
 import com.ae.apps.messagecounter.data.AppDatabase
 import com.ae.apps.messagecounter.data.models.SentCountDetails
 import com.ae.apps.messagecounter.data.preferences.PreferenceRepository
@@ -28,6 +28,9 @@ import com.ae.apps.messagecounter.data.repositories.CounterRepository
 import com.ae.apps.messagecounter.data.repositories.IgnoredNumbersRepository
 import com.ae.apps.messagecounter.data.repositories.getDurationDateString
 import com.ae.apps.messagecounter.data.repositories.getIndexFromDate
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.doAsync
 import java.util.*
 
@@ -134,7 +137,7 @@ class MessageCounter(private val counterRepository: CounterRepository,
         val lastMessageTimeStamp = preferenceRepository.getLastSentTimeStamp()
         val lastSentMessageId = preferenceRepository.getLastSentMessageId()
         return context.contentResolver.query(
-                Uri.parse(SMSManager.SMS_URI_ALL),
+            Uri.parse(SmsApiConstants.URI_ALL),
                 SMS_TABLE_PROJECTION,
                 SELECT_SENT_MESSAGES_AFTER_DATE + SELECT_SENT_MESSAGES_AFTER_LAST,
                 arrayOf(lastMessageTimeStamp, lastSentMessageId),

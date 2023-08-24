@@ -19,6 +19,10 @@
         <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
+    <style name="MessageCounterTheme.Yeti" parent="AppTheme.LightAndDark.Base">
+        <item name="android:statusBarColor">@color/teal_dark</item>
+    </style>
+
     <style name="buttonTintAccent">
         <item name="android:backgroundTint">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>

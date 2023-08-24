@@ -20,13 +20,13 @@
                 android:orientation="horizontal"
                 android:padding="5dip">
 
-    <com.ae.apps.common.views.RoundedImageView
+    <com.ae.apps.lib.custom.views.RoundedImageView
         android:id="@+id/ignoreItemImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/margin_small"
-        android:src="@drawable/default_profile_image"
+        android:layout_margin="@dimen/unit_m"
+        android:src="@drawable/profile_icon_1"
         android:minWidth="@dimen/image_min_size"
         android:minHeight="@dimen/image_min_size"
         android:maxWidth="@dimen/image_max_size"
@@ -38,9 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_toRightOf="@+id/ignoreItemImage"
         android:layout_toEndOf="@+id/ignoreItemImage"
-        android:padding="@dimen/card_padding"
+        android:padding="@dimen/unit_m"
         android:textIsSelectable="false"
         android:textSize="18sp" />
 
@@ -48,10 +47,9 @@
         android:id="@+id/ignoreItemNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ignoreItemImage"
         android:layout_toEndOf="@+id/ignoreItemImage"
         android:layout_below="@id/ignoreItemName"
-        android:padding="@dimen/card_padding"
+        android:padding="@dimen/unit_m"
         android:textIsSelectable="false"
         android:textSize="16sp" />
 
@@ -59,12 +57,11 @@
         android:id="@+id/btnRemoveIgnoredItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_delete"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/str_ignore_number_delete"
-        android:padding="@dimen/card_padding"/>
+        android:padding="@dimen/unit_m"/>
 
 </RelativeLayout>

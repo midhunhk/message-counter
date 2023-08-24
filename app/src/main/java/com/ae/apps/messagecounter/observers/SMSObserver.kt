@@ -21,7 +21,7 @@ import android.content.Context
 import android.database.ContentObserver
 import android.os.Build
 import android.os.Handler
-import android.support.v4.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.business.MessageCounter
 import com.ae.apps.messagecounter.getStartActivityIntent

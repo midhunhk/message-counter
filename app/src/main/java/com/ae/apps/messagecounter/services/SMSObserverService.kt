@@ -22,7 +22,6 @@ import android.database.ContentObserver
 import android.net.Uri
 import android.os.Handler
 import android.os.IBinder
-import com.ae.apps.common.managers.SMSManager
 import com.ae.apps.messagecounter.observers.SMSObserver
 
 /**
@@ -44,10 +43,13 @@ open class SMSObserverService : Service() {
         super.onCreate()
 
         if (null == mObserver) {
-            val smsUri = Uri.parse(SMSManager.SMS_URI_ALL)
+            // FIXME
+            /*
+            val smsUri =  Uri.parse(SMSManager.SMS_URI_ALL)
             mObserver = SMSObserver(Handler(), baseContext)
 
             contentResolver.registerContentObserver(smsUri, true, mObserver!!)
+             */
         }
     }
 

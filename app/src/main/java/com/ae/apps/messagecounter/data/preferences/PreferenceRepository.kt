@@ -27,8 +27,7 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
 
     fun getMessageLimitValue(): Int {
         val rawVal = preferences.getString(PREF_KEY_MESSAGE_LIMIT_VALUE, DEFAULT_MESSAGE_LIMIT.toString())
-        val limit: Int
-        limit = try {
+        val limit: Int = try {
             Integer.valueOf(rawVal!!)
         } catch (e: NumberFormatException) {
             DEFAULT_MESSAGE_LIMIT
@@ -91,5 +90,11 @@ class PreferenceRepository private constructor(private val preferences: SharedPr
 
     fun setIndexInProcess(indexStatus:Boolean) = preferences.edit()
             .putBoolean(PREF_KEY_INDEX_IN_PROCESS, indexStatus)
+            .apply()
+
+    fun getLastBackupTime() = preferences.getLong(PREF_KEY_LAST_BACKUP_TIME, 0)
+
+    fun setLastBackupTime(backupTime:Long) = preferences.edit()
+            .putLong(PREF_KEY_LAST_BACKUP_TIME, backupTime)
             .apply()
 }

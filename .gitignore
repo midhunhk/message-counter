@@ -10,6 +10,9 @@
 .externalNativeBuild
 /gradle.properties
 
+app-legacy/release
+app/release
+
 # Google Services (e.g. APIs or Firebase)
 app/google-services.json
 app-legacy/google-services.json

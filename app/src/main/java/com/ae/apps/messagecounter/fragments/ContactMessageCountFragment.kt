@@ -15,26 +15,16 @@
  */
 package com.ae.apps.messagecounter.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ae.apps.common.views.EmptyRecyclerView
-import com.ae.apps.common.vo.ContactMessageVo
+import androidx.fragment.app.Fragment
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.adapters.ContactMessagesAdapter
 import com.ae.apps.messagecounter.data.viewmodels.ContactMessageViewModel
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_contact_message_count.*
+import com.ae.apps.messagecounter.models.ContactMessageInfo
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class ContactMessageCountFragment : Fragment() {
 
     companion object {
@@ -43,8 +33,8 @@ class ContactMessageCountFragment : Fragment() {
 
     private lateinit var mViewModel: ContactMessageViewModel
     private lateinit var mAdapter: ContactMessagesAdapter
-    private lateinit var mSentMessagesCount: List<ContactMessageVo>
-    private lateinit var mReceivedMessagesCount: List<ContactMessageVo>
+    private lateinit var mSentMessagesCount: List<ContactMessageInfo>
+    private lateinit var mReceivedMessagesCount: List<ContactMessageInfo>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -56,24 +46,20 @@ class ContactMessageCountFragment : Fragment() {
         initViewModel()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initUI()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         mViewModel.getReceivedMessageContacts().removeObservers(this)
         mViewModel.getSentMessageContacts().removeObservers(this)
-        clearFindViewByIdCache()
     }
 
     private fun initViewModel() {
-        mViewModel = ViewModelProviders.of(requireActivity()).get(ContactMessageViewModel::class.java)
+        // mViewModel = ViewModelProviders.of(requireActivity())[ContactMessageViewModel::class.java]
         mAdapter = ContactMessagesAdapter(requireContext())
     }
 
     private fun initUI() {
+        //FIXME Fix later
+        /*
         val recyclerView = list as EmptyRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = mAdapter
@@ -102,13 +88,18 @@ class ContactMessageCountFragment : Fragment() {
 
         // Start to read the data
         mViewModel.getContactMessageData(requireContext())
+         */
     }
 
-    private fun updateAdapter(list: List<ContactMessageVo>) {
+    private fun updateAdapter(list: List<ContactMessageInfo>) {
+        //FIXME No time to fix
+        /*
         if (list.isEmpty()) {
             emptyListText.setText(R.string.empty_list)
         } else {
             mAdapter.setItems(list)
         }
+
+         */
     }
 }

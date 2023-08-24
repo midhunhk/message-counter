@@ -1,54 +1,23 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.devtools.ksp'
+
+apply from: '../android_common.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
-
-    defaultConfig{
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-    }
+    namespace 'com.ae.apps.messagecounter.core'
 
     buildTypes {
         debug { }
         release { }
         dev{ }
     }
-
-    lintOptions {
-        abortOnError false
-    }
-}
-
-def build_param = "${build}"
-
-if (build_param != "dev") {
-    //exclude production build
-    android.variantFilter { variant ->
-        if (variant.buildType.name == 'dev') {
-            variant.setIgnore(true)
-        }
-    }
-} else {
-    //exclude all except production build
-    android.variantFilter { variant ->
-        if (!variant.buildType.name == 'dev') {
-            variant.setIgnore(true)
-        }
-    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation deps.material
 
-    api deps.appcompat
-    api deps.preference
-    api deps.design
     api deps.firebaseCore
-}
-repositories {
-    mavenCentral()
 }

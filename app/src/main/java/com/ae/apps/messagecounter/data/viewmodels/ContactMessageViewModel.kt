@@ -15,61 +15,69 @@
  */
 package com.ae.apps.messagecounter.data.viewmodels
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import com.ae.apps.common.managers.ContactManager
-import com.ae.apps.common.managers.SMSManager
-import com.ae.apps.common.managers.contact.AeContactManager
-import com.ae.apps.common.utils.ValueComparator
-import com.ae.apps.common.vo.ContactMessageVo
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.ae.apps.lib.api.contacts.ContactsApiGateway
+import com.ae.apps.lib.api.contacts.impl.ContactsApiGatewayImpl
+import com.ae.apps.lib.api.contacts.types.ContactInfoFilterOptions
+import com.ae.apps.lib.api.sms.utils.SmsApiConstants
+import com.ae.apps.lib.common.models.ContactInfo
+import com.ae.apps.lib.common.utils.ValueComparator
 import com.ae.apps.messagecounter.data.business.COLUMN_NAME_ADDRESS
 import com.ae.apps.messagecounter.data.business.SMS_TABLE_MINIMAL_PROJECTION
+import com.ae.apps.messagecounter.models.ContactMessageInfo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.doAsync
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.system.measureTimeMillis
+
 
 /**
  * ViewModel that processes and holds the data for showing Sent and Received message counts
  */
 class ContactMessageViewModel : ViewModel() {
 
-    private var mSentMessageContacts: MutableLiveData<List<ContactMessageVo>> = MutableLiveData()
+    private var sentMessageContacts: MutableLiveData<List<ContactMessageInfo>> = MutableLiveData()
 
-    private var mReceivedMessageContacts: MutableLiveData<List<ContactMessageVo>> = MutableLiveData()
+    private var receivedMessageContacts: MutableLiveData<List<ContactMessageInfo>> = MutableLiveData()
 
-    fun getSentMessageContacts(): LiveData<List<ContactMessageVo>> = mSentMessageContacts
+    fun getSentMessageContacts(): LiveData<List<ContactMessageInfo>> = sentMessageContacts
 
-    fun getReceivedMessageContacts(): LiveData<List<ContactMessageVo>> = mReceivedMessageContacts
+    fun getReceivedMessageContacts(): LiveData<List<ContactMessageInfo>> = receivedMessageContacts
 
     fun getContactMessageData(context: Context) {
-        if (null == mSentMessageContacts.value || null == mReceivedMessageContacts.value) {
+        if (null == sentMessageContacts.value || null == receivedMessageContacts.value) {
             computeMessageCounts(context)
         }
     }
 
     private fun computeMessageCounts(context: Context) {
+        /*
         val contactManager: AeContactManager = ContactManager.Builder(context.contentResolver, context.resources)
                 .addContactsWithPhoneNumbers(true)
                 .build()
-
+        */
+        val contactsApi: ContactsApiGateway = ContactsApiGatewayImpl.Builder(context)
+            .build()
         doAsync {
             val timeToFetchAllContacts = measureTimeMillis {
-                contactManager.fetchAllContacts()
+                contactsApi.initialize(ContactInfoFilterOptions.of(false))
             }
             val timeToProcessData = measureTimeMillis {
-                val sentMessages = getContactMessageCountMap(context, contactManager, SMSManager.SMS_URI_SENT)
-                val receivedMessages = getContactMessageCountMap(context, contactManager, SMSManager.SMS_URI_INBOX)
+                val sentMessages = getContactMessageCountMap(context, contactsApi, SmsApiConstants.URI_SENT) // SMSManager.SMS_URI_SENT
+                val receivedMessages = getContactMessageCountMap(context, contactsApi, SmsApiConstants.URI_INBOX) // SMSManager.SMS_URI_INBOX
 
-                val sentContactMessages = getContactMessagesList(contactManager, sentMessages)
-                val receivedContactMessages = getContactMessagesList(contactManager, receivedMessages)
+                val sentContactMessages = getContactMessagesList(contactsApi, sentMessages)
+                val receivedContactMessages = getContactMessagesList(contactsApi, receivedMessages)
 
-                mSentMessageContacts.postValue(sentContactMessages)
-                mReceivedMessageContacts.postValue(receivedContactMessages)
+                sentMessageContacts.postValue(sentContactMessages)
+                receivedMessageContacts.postValue(receivedContactMessages)
             }
 
             Log.d("ContactMessageViewModel", "timeToFetchAllContacts = $timeToFetchAllContacts")
@@ -77,14 +85,12 @@ class ContactMessageViewModel : ViewModel() {
         }
     }
 
-    private fun getContactMessagesList(contactManager: AeContactManager,
-                                       messageCountMap: MutableMap<String, Int>): List<ContactMessageVo> {
-        val contactMessages: MutableList<ContactMessageVo> = ArrayList()
+    private fun getContactMessagesList(contactsApi: ContactsApiGateway,
+                                       messageCountMap: MutableMap<String, Int>): List<ContactMessageInfo> {
+        val contactMessages: MutableList<ContactMessageInfo> = ArrayList()
         messageCountMap.onEach {
-            val contactMessageVo = ContactMessageVo()
-            contactMessageVo.messageCount = it.value
-            contactMessageVo.contactVo = contactManager.getContactInfo(it.key)
-            contactMessageVo.photo = contactManager.getContactPhoto(it.key)
+            // ContactMessageInfo
+            val contactMessageVo = ContactMessageInfo(contactsApi.getContactInfo(it.key), it.value)
             contactMessages.add(contactMessageVo)
         }
         return contactMessages
@@ -94,7 +100,7 @@ class ContactMessageViewModel : ViewModel() {
      * Returns a sorted map of ContactId and MessageCount for the URI specified
      */
     private fun getContactMessageCountMap(context: Context,
-                                          contactManager: AeContactManager,
+                                          contactsApi: ContactsApiGateway,
                                           uri: String): MutableMap<String, Int> {
         val addressMessageCount = mutableMapOf<String, Int>()
         val cursor = context.contentResolver.query(
@@ -106,7 +112,7 @@ class ContactMessageViewModel : ViewModel() {
             do {
                 val address = cursor.getString(addressIndex)
                 // Converting an address from SMS table to corresponding ContactID from Contacts table
-                val contactId: String? = contactManager.getContactIdFromAddress(address)
+                val contactId: String? = contactsApi.getContactIdFromAddress(address)
                 // contactId would be null when the contact is not a saved contact
                 if (null != contactId) {
                     if (addressMessageCount.containsKey(contactId)) {

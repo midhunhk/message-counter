@@ -40,21 +40,11 @@ class CounterServiceHelper {
             // Run the service or job only if we have the required permissions
             if (preferenceRepository.hasRuntimePermissions()) {
                 // Use a JobService to detect SMS database changes in Nougat and up
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    com.ae.apps.messagecounter.services.CounterJobService.registerJob(context)
-                    // longToast("Starting JobService: $result")
-                } else {
-                    // Use a background service up to Marshmallow
-                    if (preferenceRepository.backgroundServiceEnabled()) {
-                        context.startService(getMessageCounterServiceIntent(context))
-                    } else {
-                        context.stopService(getMessageCounterServiceIntent(context))
-                    }
-                }
+                com.ae.apps.messagecounter.services.CounterJobService.registerJob(context)
+                // longToast("Starting JobService: $result")
             }
         }
 
-        @TargetApi(Build.VERSION_CODES.N)
         fun isJobRunning(scheduler: JobScheduler, jobId: Int): Boolean {
             for (jobInfoTemp in scheduler.allPendingJobs) {
                 if (jobInfoTemp.id == jobId) {
@@ -64,7 +54,6 @@ class CounterServiceHelper {
             return false
         }
 
-        @TargetApi(Build.VERSION_CODES.N)
         fun isJobNotRunning(scheduler: JobScheduler, jobId: Int): Boolean {
             return !isJobRunning(scheduler, jobId)
         }

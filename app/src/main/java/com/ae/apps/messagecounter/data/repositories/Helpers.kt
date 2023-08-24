@@ -15,6 +15,7 @@
  */
 package com.ae.apps.messagecounter.data.repositories
 
+import android.annotation.SuppressLint
 import android.telephony.SmsMessage
 import com.ae.apps.messagecounter.data.models.Cycle
 import java.text.SimpleDateFormat

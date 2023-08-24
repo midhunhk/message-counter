@@ -16,18 +16,13 @@
 package com.ae.apps.messagecounter.fragments
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ae.apps.common.utils.DialogUtils
+import androidx.fragment.app.Fragment
+import com.ae.apps.lib.common.utils.DialogUtils
 import com.ae.apps.messagecounter.*
-import kotlinx.android.synthetic.main.fragment_about.*
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class AboutFragment : Fragment() {
 
     companion object {
@@ -40,13 +35,9 @@ class AboutFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initUI()
-    }
-
     private fun initUI() {
-
+        // TODO
+        /*
         viewLicense.setOnClickListener {
             // startActivity(getOpenSourceLicenceDisplayIntent(requireContext()))
             DialogUtils.showMaterialInfoDialog(context, R.string.menu_title_license, R.string.str_license_desc,
@@ -62,6 +53,8 @@ class AboutFragment : Fragment() {
         sendFeedback.setOnClickListener {
             startActivity(getFeedbackIntent(requireContext()))
         }
+
+         */
     }
 
 

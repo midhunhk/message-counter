@@ -1,18 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.devtools.ksp'
+apply from: '../android_common.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    namespace 'com.ae.apps.messagecounter'
 
     defaultConfig {
         applicationId "com.ae.apps.messagecounter"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-
-        versionCode rootProject.ext.appVersions.versionCode
-        versionName rootProject.ext.appVersions.versionName
     }
     buildTypes {
         debug {
@@ -30,43 +26,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    applicationVariants.all { variant ->
+    applicationVariants.configureEach { variant ->
         variant.outputs.all { output ->
             outputFileName = "messageCounterLegacy-${variant.name}-${variant.versionName}-build-${variant.versionCode}.apk"
-        }
-    }
-    lintOptions {
-        abortOnError false
-    }
-}
-
-def build_param = "${build}"
-
-if (build_param != "dev") {
-    //exclude production build
-    android.variantFilter { variant ->
-        if (variant.buildType.name == 'dev') {
-            variant.setIgnore(true)
-        }
-    }
-} else {
-    //exclude all except production build
-    android.variantFilter { variant ->
-        if (!variant.buildType.name == 'dev') {
-            variant.setIgnore(true)
         }
     }
 }
 
 dependencies {
-    //implementation project(path: ':core', configuration: 'default')
     implementation project(':core')
-    //
-    // Dependent Libraries
-    //
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation deps.ankocommons
-    implementation deps.supportv4
-    implementation deps.constraintlayout
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
+
+    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+    implementation deps.material
 }
-apply plugin: 'com.google.gms.google-services'

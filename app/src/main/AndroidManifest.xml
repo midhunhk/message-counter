@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.ae.apps.messagecounter"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Needs to be removed when publishing to the play store -->
+    <!--
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
     <uses-permission android:name="android.permission.READ_SMS" android:required="true" />
+    -->
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" android:required="true" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.android.vending.BILLING" />
+
     <!-- Required to upload apk to Galaxy Store -->
+    <!--
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
+    -->
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -16,34 +26,35 @@
         android:supportsRtl="true"
         android:theme="@style/MessageCounterTheme"
         android:allowBackup="true">
-        <activity android:name=".MainActivity" android:launchMode="singleInstance">
+        <activity android:name=".MainActivity" android:launchMode="singleInstance" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
+        <!-- app is bwoken -->
+        <!--
         <service android:name=".services.SMSObserverService"
                  android:stopWithTask="false"/>
         <service android:name=".services.CounterJobService"
                  android:permission="android.permission.BIND_JOB_SERVICE"
                  android:exported="true"/>
 
-        <receiver android:name=".receivers.BootCompletedReceiver" >
+        <receiver android:name=".receivers.BootCompletedReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".receivers.PackageReplacedReceiver" >
+        <receiver android:name=".receivers.PackageReplacedReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
                 <data android:scheme="package" android:path="com.ae.apps.messagecounter"/>
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".receivers.CounterWidgetReceiver">
+        <receiver android:name=".receivers.CounterWidgetReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -51,6 +62,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider" />
         </receiver>
+        -->
 
         <meta-data
             android:name="preloaded_fonts"

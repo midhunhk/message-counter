@@ -16,8 +16,8 @@
 
 package com.ae.apps.messagecounter
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.ae.apps.messagecounter.core.analytics.AppAnalytics
 import com.ae.apps.messagecounter.fragments.MigrateFragment
 

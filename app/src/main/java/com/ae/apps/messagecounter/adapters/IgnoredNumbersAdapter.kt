@@ -15,47 +15,63 @@
  */
 package com.ae.apps.messagecounter.adapters
 
-import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.ae.apps.messagecounter.R
+import androidx.recyclerview.widget.RecyclerView
 import com.ae.apps.messagecounter.data.listeners.IgnoreContactListener
 import com.ae.apps.messagecounter.data.models.IgnoredNumber
-import kotlinx.android.synthetic.main.list_item_ignore.view.*
+import com.ae.apps.messagecounter.databinding.ListItemIgnoreBinding
 
-class IgnoredNumbersAdapter(var mItems: List<IgnoredNumber>,
-                            private val context: Context,
-                            private val listener: IgnoreContactListener)
-    : RecyclerView.Adapter<IgnoredNumbersAdapter.ViewHolder>() {
+class IgnoredNumbersAdapter(
+    private var items: List<IgnoredNumber>,
+    private val listener: IgnoreContactListener
+) : RecyclerView.Adapter<IgnoredNumbersAdapter.ListItemViewHolder>() {
 
-    fun setItems(items: List<IgnoredNumber>) {
-        mItems = items
-        notifyDataSetChanged()
+    override fun getItemCount() = items.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
+        val binding =
+            ListItemIgnoreBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListItemViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return mItems.size
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context)
-                    .inflate(R.layout.list_item_ignore, parent, false))
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val ignoredNumber = mItems[position]
-        holder.ignoredName.text = ignoredNumber.ignoreName
-        holder.ignoredNumber.text = ignoredNumber.ignoreNumber
-        holder.deleteIgnoredNumber.setOnClickListener {
-            listener.onIgnoredContactRemoved(ignoredNumber)
+    override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
+        with(items[position]) {
+            holder.bind(this)
         }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val ignoredNumber = view.ignoreItemNumber!!
-        val ignoredName = view.ignoreItemName!!
-        val deleteIgnoredNumber = view.btnRemoveIgnoredItem!!
+    inner class ListItemViewHolder(private val binding: ListItemIgnoreBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(ignoredNumber: IgnoredNumber) {
+            binding.ignoreItemName.text = ignoredNumber.ignoreName
+            binding.ignoreItemNumber.text = ignoredNumber.ignoreNumber
+            binding.btnRemoveIgnoredItem.setOnClickListener {
+                listener.onIgnoredContactRemoved(ignoredNumber)
+            }
+        }
     }
+
+    /*
+    class PaymentAdapter(private val paymentList: List<PaymentBean>) : RecyclerView.Adapter<PaymentAdapter.PaymentHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentHolder {
+        val itemBinding = RowPaymentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PaymentHolder(itemBinding)
+    }
+
+    override fun onBindViewHolder(holder: PaymentHolder, position: Int) {
+        val paymentBean: PaymentBean = paymentList[position]
+        holder.bind(paymentBean)
+    }
+
+    override fun getItemCount(): Int = paymentList.size
+
+    class PaymentHolder(private val itemBinding: RowPaymentBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(paymentBean: PaymentBean) {
+            itemBinding.tvPaymentInvoiceNumber.text = paymentBean.invoiceNumber
+            itemBinding.tvPaymentAmount.text = paymentBean.totalAmount
+        }
+    }
+}
+     */
 }

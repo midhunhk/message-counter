@@ -18,12 +18,12 @@ package com.ae.apps.messagecounter.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.ae.apps.messagecounter.R
-import kotlinx.android.synthetic.main.fragment_migrate.*
+import com.ae.apps.messagecounter.databinding.FragmentMigrateBinding
 
 /**
  * Migration Fragment
@@ -35,30 +35,28 @@ class MigrateFragment : Fragment() {
         fun newInstance() = MigrateFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_migrate, container, false)
-    }
+    private lateinit var binding: FragmentMigrateBinding
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initUI()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentMigrateBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     private fun initUI() {
-
-        btnViewAlternates.setOnClickListener {
+        binding.btnViewAlternates.setOnClickListener {
             val alternatesUrl = requireContext().getString(R.string.app_migrate_alternates)
             startActivity(createIntentForURI(alternatesUrl))
         }
 
-        btnMoreDetails.setOnClickListener {
+        binding.btnMoreDetails.setOnClickListener {
             val alternatesUrl = requireContext().getString(R.string.app_migrate_more_details)
             startActivity(createIntentForURI(alternatesUrl))
         }
 
-        btnViewSource.setOnClickListener {
+        binding.btnViewSource.setOnClickListener {
             val viewSourceUrl = requireContext().getString(R.string.app_github_source_url)
             startActivity(createIntentForURI(viewSourceUrl))
         }

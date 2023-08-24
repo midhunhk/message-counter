@@ -29,6 +29,7 @@
     <string name="title_sent_list">Lista</string>
     <string name="title_counter">Contador de</string>
     <string name="title_ignore">Ignore</string>
+    <string name="title_backup">Copia</string>
 
     <!-- Menu Strings -->
     <string name="menu_title_settings">Configuración</string>
@@ -97,4 +98,15 @@
     <string name="str_sms_limit_notification_text">SMS se ha Alcanzado el Límite para este ciclo</string>
     <string name="str_info_review_settings_on_first_run">Revisa tu configuración</string>
     <string name="str_ignore_number_delete">Eliminar</string>
+
+    <!-- 4.2.0 -->
+    <string name="str_sms_backup_btn_backup">Copia De Seguridad Ahora</string>
+    <string name="str_sms_backup_btn_restore">Restaurar</string>
+    <string name="str_sms_backup_title">COPIA de seguridad</string>
+    <string name="str_sms_backup_schedule_backups">PROGRAMACIÓN DE COPIA DE SEGURIDAD</string>
+    <string name="str_sms_backup_schedule_status_none">No Programado</string>
+    <string name="str_sms_backup_status">Estado de la copia : %1$s</string>
+    <string name="str_sms_backup_status_none">No hay copias de seguridad</string>
+    <string name="str_sms_backup_locations">La copia de seguridad : Dispositivo de</string>
+    <string name="str_sms_backup_encryption_note">Los mensajes de información se almacena internamente y cifrados.</string>
 </resources>

@@ -16,49 +16,56 @@
 package com.ae.apps.messagecounter.fragments
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatDialogFragment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDialogFragment
 import com.ae.apps.messagecounter.R
 import com.ae.apps.messagecounter.data.listeners.IgnoreContactListener
 import com.ae.apps.messagecounter.data.models.IgnoredNumber
-import kotlinx.android.synthetic.main.fragment_add_ignored_contact_dialog.*
+import com.ae.apps.messagecounter.databinding.FragmentAddIgnoredContactDialogBinding
 
-class IgnoreDialogFragment : AppCompatDialogFragment() {
+class IgnoreDialogFragment : AppCompatDialogFragment(R.layout.fragment_add_ignored_contact_dialog) {
 
     companion object {
         fun newInstance() = IgnoreDialogFragment()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_add_ignored_contact_dialog, container, false)
+    private lateinit var binding: FragmentAddIgnoredContactDialogBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentAddIgnoredContactDialogBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         setStyle(STYLE_NO_TITLE, 0)
+        initUI()
     }
 
     override fun onStart() {
         super.onStart()
+        /*
         if (null != dialog.window) {
             dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initUI()
+         */
     }
 
     private fun initUI() {
-        btnCancel.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             dismiss()
         }
-        btnIgnoreContact.setOnClickListener {
+        binding.btnIgnoreContact.setOnClickListener {
             try {
                 val ignoredNumber = validateIgnoredNumber()
 
@@ -81,19 +88,20 @@ class IgnoreDialogFragment : AppCompatDialogFragment() {
     }
 
     private fun validateIgnoredNumber(): IgnoredNumber {
-        if (TextUtils.isEmpty(txtIgnoreNumber.text)) {
+        if (TextUtils.isEmpty(binding.txtIgnoreNumber.text)) {
             throw IgnoreDialogValidationException("Number is required")
         }
-        val ignoredName = if (TextUtils.isEmpty(txtIgnoreName.text)) {
-            txtIgnoreNumber.text.toString()
+        val ignoredName = if (TextUtils.isEmpty(binding.txtIgnoreName.text)) {
+            binding.txtIgnoreNumber.text.toString()
         } else {
-            txtIgnoreName.text.toString()
+            binding.txtIgnoreName.text.toString()
         }
-        return IgnoredNumber(ignoredName, txtIgnoreNumber.text.toString())
+        return IgnoredNumber(ignoredName, binding.txtIgnoreNumber.text.toString())
     }
 
     /**
      * Validation class for IgnoreDialog
      */
-    private inner class IgnoreDialogValidationException internal constructor(message: String) : Throwable(message)
+    private inner class IgnoreDialogValidationException internal constructor(message: String) :
+        Throwable(message)
 }

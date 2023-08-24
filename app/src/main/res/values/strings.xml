@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright 2018 Midhun Harikumar
+  ~ Copyright 2020 Midhun Harikumar
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="app_name">Message Counter</string>
-    <string name="app_version">Version 4.1.2</string>
-    <string name="app_code_name">(Xingtian)</string>
-    <string name="app_release_date">May 2019</string>
+    <string name="app_name">Message Counter &amp; Backup</string>
+    <string name="app_version">Version 4.2.0</string>
+    <string name="app_code_name">(Yeti)</string>
+    <string name="app_release_date">May 2020</string>
     <string name="app_desc">Message Counter is an open source app that displays useful statistics about your SMS.</string>
     <string name="app_disclaim">Since this app uses Android standard SMS API, it may not produce correct statistics for all devices. Do not use the data displayed by the app as an accurate measure for SMS counts.</string>
     <string name="app_developer_info">Designed, developed at ae app labs</string>
@@ -32,6 +32,7 @@
     <string name="title_sent_list">List</string>
     <string name="title_counter">Counter</string>
     <string name="title_ignore">Ignore</string>
+    <string name="title_backup">Backup</string>
 
     <!-- Menu Strings -->
     <string name="menu_title_settings">Settings</string>
@@ -86,7 +87,7 @@
     <string name="loading_list">Counting Messages</string>
     <string name="str_require_permissions_title">Need permissions</string>
     <string name="str_require_permissions_description">Message Counter requires permission for reading SMS and Contacts to function</string>
-    <string name="str_require_permissions_request_button">Request Permissions</string>
+    <string name="str_require_permissions_request_button">Grant Permissions</string>
     <string name="str_sent_this_year">Sent this Year</string>
     <string name="str_pref_use_background_service">Use background service</string>
     <string name="str_pref_use_background_service_desc">A background service will be used to monitor sent messages</string>
@@ -100,7 +101,7 @@
     <string name="str_about_view_faq">Frequently Asked Questions</string>
     <string name="str_about_share_feedback">Share Feedback</string>
     <string name="str_about_share_feedback_subject">Feedback for MessageCounter</string>
-    <string name="str_about_share_feedback_body" translatable="false">AppVersion 4.1.1, build 410</string>
+    <string name="str_about_share_feedback_body" translatable="false">AppVersion 4.2.0, build 411</string>
     <string name="str_info_review_settings_on_first_run">Review your settings</string>
     <string name="str_ignore_number_delete">Delete</string>
 
@@ -114,4 +115,16 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</string>
+
+    <!-- 4.2.0 -->
+    <string name="str_sms_backup_method_name" translatable="false">TOBEREPLACEDLA8R</string>
+    <string name="str_sms_backup_btn_backup">Backup Now</string>
+    <string name="str_sms_backup_btn_restore">Restore</string>
+    <string name="str_sms_backup_title">BACKUP</string>
+    <string name="str_sms_backup_schedule_backups">BACKUP SCHEDULE</string>
+    <string name="str_sms_backup_schedule_status_none">Not Scheduled</string>
+    <string name="str_sms_backup_status">Backup Status : %1$s</string>
+    <string name="str_sms_backup_status_none">No backups</string>
+    <string name="str_sms_backup_locations">Backing up to : Device</string>
+    <string name="str_sms_backup_encryption_note">Messages information is stored internally and encrypted.</string>
 </resources>

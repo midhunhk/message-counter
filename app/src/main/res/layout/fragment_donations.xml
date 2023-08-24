@@ -32,49 +32,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/padding_medium"
+            android:layout_margin="@dimen/unit_m"
             android:indeterminate="true"/>
 
-        <android.support.design.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/material_card_radius"
             app:cardElevation="1dp"
             app:cardMaxElevation="1dp"
             app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/padding_small">
+            app:contentPadding="@dimen/unit_m">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_medium">
+                android:padding="@dimen/unit_m">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dip"
-                    android:layout_marginBottom="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:drawablePadding="@dimen/padding_small"
+                    android:layout_marginBottom="@dimen/unit_m"
+                    android:layout_marginTop="@dimen/unit_m"
+                    android:drawablePadding="@dimen/unit_m"
                     android:drawableTop="@drawable/ic_donate"
                     android:text="@string/str_donate_text"/>
             </FrameLayout>
-        </android.support.design.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.design.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/material_card_radius"
             app:cardElevation="1dp"
             app:cardMaxElevation="1dp"
             app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/padding_small">
+            app:contentPadding="@dimen/unit_m">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/padding_medium">
+                android:padding="@dimen/unit_m">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                         android:layout_below="@+id/txtDonateSmall"
                         android:text="@string/empty_text"/>
 
-                    <android.support.design.button.MaterialButton
+                    <Button
                         android:id="@+id/btnDonateSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -129,17 +129,15 @@
                         android:id="@+id/txtDonateMediumPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_below="@+id/txtDonateMedium"
                         android:text="@string/empty_text"/>
 
-                    <android.support.design.button.MaterialButton
+                    <Button
                         android:id="@+id/btnDonateMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:contentDescription="@string/str_donate_medium"
                         android:text="@string/str_donate_title"
                         app:backgroundTint="@color/colorAccent"
@@ -164,36 +162,35 @@
                         android:id="@+id/txtDonateLargePrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_below="@+id/txtDonateLarge"
                         android:text="@string/empty_text"/>
 
-                    <android.support.design.button.MaterialButton
+                    <Button
                         android:id="@+id/btnDonateLarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:contentDescription="@string/str_donate_large"
                         android:text="@string/str_donate_title"
                         app:backgroundTint="@color/colorAccent"
                         app:cornerRadius="@dimen/button_corner_radius"/>
                 </RelativeLayout>
 
-
+                <!--
                 <include layout="@layout/separator_line"/>
+                -->
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dip"
-                    android:layout_marginBottom="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginBottom="@dimen/unit_m"
+                    android:layout_marginTop="@dimen/unit_m"
                     android:text="@string/str_donate_disclaimer"
                     android:textSize="12sp"/>
             </LinearLayout>
-        </android.support.design.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 </ScrollView>
