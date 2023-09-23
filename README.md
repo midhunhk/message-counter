@@ -48,7 +48,8 @@ Open the project in Android Studio
  - [lib-ae-apps](https://github.com/midhunhk/ae-apps-library)
  - [android-support-library](https://developer.android.com/topic/libraries/support-library/)
  - [android-architecture-components](https://developer.android.com/topic/libraries/architecture/)
- - [anko library](https://github.com/Kotlin/anko)
+ - ~~[anko library](https://github.com/Kotlin/anko)~~
+ - [anko-async](https://github.com/ae-app-labs/lib-anko-async)
 
 ## License
  Licensed under the Apache License, Version 2.0 (the "License");
