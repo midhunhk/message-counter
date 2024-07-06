@@ -52,13 +52,13 @@ dependencies {
     //implementation project(path: ':core', configuration: 'default')
     implementation project(':core')
 
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.13.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
-    implementation "androidx.fragment:fragment-ktx:1.6.1"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
+    implementation "androidx.fragment:fragment-ktx:1.8.1"
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
-    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+    implementation 'androidx.work:work-runtime-ktx:2.9.0'
 
     // lib-aeapps
     implementation 'com.github.midhunhk.lib-aeapps:aeapps:v5.0.0-alpha.14'

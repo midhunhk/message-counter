@@ -1,43 +1,14 @@
 ext {
     // Setup
     minSdkVersion = 24
-    targetSdkVersion = 33
-    compileSdkVersion = 33
+    targetSdkVersion = 34
+    compileSdkVersion = 34
     buildToolsVersion = '34.0.1'
 
-    kotlin_version = '1.9.0'
-    support_lib_version = '28.0.0'
-    lifecycle_version = '1.1.1'
-    room_version = '2.5.2'
-    work_version = '1.0.1'
-    hamcrest_version = '2.2'
-
-    supportLibraryVersion = "28.0.0"
-    espressoVersion = "3.1.0-beta02"
-    gradleBuildToolVersion = '3.3.2'
-    androidMavenPluginVersion = "2.1"
-    junitVersion = "4.12"
-    mockitoCoreVersion = "2.8.9"
-    roboElectricVersion = "3.8"
+    kotlin_version = '2.0.0'
 }
 
 ext.appVersions = [
-    versionCode : 423,
-    versionName : "5.0.0-alpha.01"
-]
-
-// Dependencies
-ext.deps = [
-        // compile
-        material            : 'com.google.android.material:material:1.9.0',
-        aeappslib           : 'com.github.midhunhk.lib-aeapps:aeapps:v5.0.0-alpha.14',
-        osslicenses         : 'com.google.android.gms:play-services-oss-licenses:16.0.2',
-        // billingclient       : 'com.android.billingclient:billing-ktx:6.0.1',
-        workRuntime         : "android.arch.work:work-runtime-ktx:$work_version",
-        firebaseCore        : "com.google.firebase:firebase-core:21.1.1",
-
-        // testCompile
-        junit               : "junit:junit:$junitVersion",
-        mockitoCore         : "org.mockito:mockito-core:$mockitoCoreVersion",
-        roboElectric        : "org.robolectric:robolectric:$roboElectricVersion",
+    versionCode : 424,
+    versionName : "5.1.0"
 ]
