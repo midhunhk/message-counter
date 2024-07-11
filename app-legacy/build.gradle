@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId "com.ae.apps.messagecounter"
-        versionCode 424
-        versionName "5.1.0"
+        versionCode 425
+        versionName "5.1.1"
     }
     buildTypes {
         debug {
