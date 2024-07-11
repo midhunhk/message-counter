@@ -39,7 +39,7 @@
         android:layout_gravity="center"
         android:contentDescription="@string/str_migrate_alternate_description"
         android:text="@string/str_migrate_alternate"
-        app:backgroundTint="@color/colorAccent"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:cornerRadius="@dimen/button_corner_radius" />
 
     <Button
@@ -50,6 +50,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="@dimen/unit_xs"
+        android:textColor="@color/colorPrimaryDark"
         android:text="@string/str_migrate_view_details" />
 
     <Button
@@ -59,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
         android:padding="@dimen/unit_xs"
         android:text="@string/str_migrate_view_source" />
 
