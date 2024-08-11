@@ -1,4 +1,4 @@
-<p><strong>Note: This project is currently on hold due to the updated Google Play Policies preventing apps to read from the SMS Database. </strong>
+<p><strong>:warning: This project is currently on hold due to the updated Google Play Policies that restrict apps using the SMS Database on the device from being uploaded to the Google Play Store. </strong>
 <br /><a href="https://github.com/midhunhk/message-counter/wiki/FAQ">Read more on the project's FAQ.</a></p> 
 <br />
 <img alt="message counter" src="https://github.com/midhunhk/message-counter/blob/gh-pages/resources/v4/promo_wyvern.png"/>
