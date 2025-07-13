@@ -1,14 +1,14 @@
 ext {
     // Setup
     minSdkVersion = 24
-    targetSdkVersion = 34
-    compileSdkVersion = 34
-    buildToolsVersion = '34.0.1'
+    targetSdkVersion = 36
+    compileSdkVersion = 36
+    buildToolsVersion = '36.0.0'
 
-    kotlin_version = '2.0.0'
+    kotlin_version = '2.1.0'
 }
 
 ext.appVersions = [
-    versionCode : 424,
-    versionName : "5.1.0"
+    versionCode : 426,
+    versionName : "5.1.2"
 ]

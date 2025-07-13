@@ -30,6 +30,9 @@ android {
     }
 }
 
+kotlin {
+    jvmToolchain(21)
+}
 def build_param = "${build}"
 
 if (build_param != "dev") {
